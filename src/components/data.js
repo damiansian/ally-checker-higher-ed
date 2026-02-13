@@ -1,0 +1,188 @@
+export const categories = [
+  {
+    id: "text-alternatives",
+    name: "Text Alternatives",
+    slug: "text-alternatives",
+    description:
+      "Images, graphics, and non-text content need text descriptions so screen readers can convey meaning to students who can't see them.",
+    likelihood: 5,
+    impact: 5,
+    fileTypes: {
+      docx: "checked",
+      pptx: "checked",
+      pdf: "checked",
+      canvas: "checked",
+      image: "checked",
+    },
+    allyChecks: 3,
+    allyCatches:
+      "Presence of alt text across all file types",
+    allyMisses:
+      "Quality of alt text, whether description is meaningful or accurate",
+    wcag: "1.1.1",
+  },
+  {
+    id: "text-contrast",
+    name: "Text Contrast",
+    slug: "text-contrast",
+    description:
+      "Text must have sufficient contrast against its background. Color alone cannot be the only way to convey information.",
+    likelihood: 4,
+    impact: 4,
+    fileTypes: {
+      docx: "checked",
+      pptx: "checked",
+      pdf: "checked",
+      canvas: "checked",
+      image: "na",
+    },
+    allyChecks: 1,
+    allyCatches:
+      "Contrast ratio below 4.5:1 (or 3:1 for large text)",
+    allyMisses:
+      "Color as sole indicator, contrast in images/charts, branded templates",
+    wcag: "1.4.3",
+  },
+  {
+    id: "semantic-structure",
+    name: "Semantic Structure",
+    slug: "semantic-structure",
+    description:
+      "Headings, titles, and document structure let students navigate and understand content organization. Without them, a 20-page document is a wall of text.",
+    likelihood: 5,
+    impact: 4,
+    fileTypes: {
+      docx: "checked",
+      pptx: "checked",
+      pdf: "checked",
+      canvas: "checked",
+      image: "na",
+    },
+    allyChecks: 7,
+    allyCatches:
+      "Missing headings, skipped levels, missing slide/page titles, untagged PDFs",
+    allyMisses:
+      "Whether heading text is meaningful, logical content order, reading sequence",
+    wcag: "1.3.1 / 2.4.1 / 2.4.6",
+  },
+  {
+    id: "tables",
+    name: "Tables",
+    slug: "tables",
+    description:
+      "Data tables need marked header rows so screen readers can announce column context as students navigate cells.",
+    likelihood: 3,
+    impact: 4,
+    fileTypes: {
+      docx: "checked",
+      pptx: "checked",
+      pdf: "checked",
+      canvas: "checked",
+      image: "na",
+    },
+    allyChecks: 1,
+    allyCatches: "Tables without designated header rows",
+    allyMisses:
+      "Layout tables misused for formatting, overly complex structures, whether a table is the right format at all",
+    wcag: "1.3.1",
+  },
+  {
+    id: "language",
+    name: "Language",
+    slug: "language",
+    description:
+      "Documents need a language set so screen readers know how to pronounce the text. Without it, an English screen reader might try to read Spanish content with English phonetics.",
+    likelihood: 3,
+    impact: 3,
+    fileTypes: {
+      docx: "unreliable",
+      pptx: "unreliable",
+      pdf: "unreliable",
+      canvas: "checked",
+      image: "na",
+    },
+    allyChecks: 2,
+    allyCatches:
+      "Missing or incorrect language attribute (HTML via axe-core)",
+    allyMisses:
+      "In testing, language checks failed to fire for DOCX, PPTX, and PDF despite documentation claiming coverage",
+    wcag: "3.1.1 / 3.1.2",
+    caveat:
+      "Ally's language detection may not work reliably outside of HTML content",
+  },
+  {
+    id: "seizure-risk",
+    name: "Seizure Risk",
+    slug: "seizure-risk",
+    description:
+      "Flashing or rapidly animated content can trigger seizures in students with photosensitive epilepsy. This cannot be demonstrated safely.",
+    likelihood: 1,
+    impact: 5,
+    fileTypes: {
+      docx: "gap",
+      pptx: "gap",
+      pdf: "gap",
+      canvas: "gap",
+      image: "checked",
+    },
+    allyChecks: 1,
+    allyCatches:
+      "Animated images (GIFs) with rapid flashing",
+    allyMisses:
+      "Flashing in embedded video, auto-playing media, PowerPoint animations/transitions, CSS animations",
+    wcag: "2.3.1",
+  },
+];
+
+export const fileTypeMeta = {
+  docx: { label: "Word", slug: "word" },
+  pptx: { label: "PowerPoint", slug: "powerpoint" },
+  pdf: { label: "PDF", slug: "pdf" },
+  canvas: { label: "Canvas", slug: "canvas" },
+  image: { label: "Image", slug: "image" },
+};
+
+export const stateInfo = {
+  checked: { label: "Ally checks", short: "Checked" },
+  gap: { label: "Ally doesn't check", short: "Gap" },
+  unreliable: { label: "Unreliable", short: "Unreliable" },
+  na: { label: "Not applicable", short: "N/A" },
+};
+
+// Ally error messages keyed by category > file type
+export const allyMessages = {
+  "text-alternatives": {
+    docx: "Document has images without alt descriptions",
+    pptx: "Presentation has images without alt descriptions",
+    pdf: "PDF has images without alternative descriptions",
+    canvas: "Images must have alternate text description",
+    image: "Image does not have alternative description",
+  },
+  "text-contrast": {
+    docx: "Document has text with insufficient contrast",
+    pptx: "Presentation has text with insufficient contrast",
+    pdf: "PDF has contrast issues",
+    canvas: "Text must have sufficient color contrast",
+  },
+  "semantic-structure": {
+    docx: "Document does not have any headings",
+    pptx: "Presentation does not have slide titles",
+    pdf: "PDF does not have any headings",
+    canvas: "Headings should be present",
+  },
+  tables: {
+    docx: "Document tables don't have headers",
+    pptx: "Presentation tables don't have headers",
+    pdf: "PDF tables don't have headers",
+    canvas: "Table cells (3x3+) must have associated headers",
+  },
+  language: {
+    docx: "Document does not have a language set",
+    pptx: "Presentation does not have a language set",
+    pdf: "PDF does not have a language set",
+    canvas: "<html> element must have a lang attribute",
+  },
+  "seizure-risk": {
+    image: "Image can induce seizures",
+  },
+};
