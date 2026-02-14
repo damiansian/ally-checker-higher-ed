@@ -21,3 +21,6 @@ npm-debug.log*
 
 # vercel
 .vercel
+
+# IDE
+.vscode/

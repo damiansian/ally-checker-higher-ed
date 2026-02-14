@@ -86,7 +86,7 @@ export function FileTypePills({ categorySlug, activeSlug }) {
               fontWeight: 600,
               fontFamily: "var(--font-display)",
               backgroundColor: active ? t.accent : t.surfaceAlt,
-              color: active ? "#FFFFFF" : t.textSecondary,
+              color: active ? t.accentContrast : t.textSecondary,
               border: `1px solid ${active ? t.accent : t.border}`,
               textDecoration: "none",
               transition: "all 0.2s ease",
@@ -234,7 +234,9 @@ export function TopNav({ activeCategorySlug }) {
           </nav>
         </div>
         <button
+          type="button"
           onClick={() => setDark(!dark)}
+          aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
           style={{
             padding: "6px 14px",
             borderRadius: 6,

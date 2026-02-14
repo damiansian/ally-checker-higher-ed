@@ -98,7 +98,7 @@ export default function TextAlternativesWord() {
         This is the most common Ally error you will see. Every image in your Word
         document needs alternative text -- a short description that conveys the
         meaning of the image to someone who cannot see it. Screen readers read this
-        text aloud. Without it, the student hears "image" and nothing else.
+        text aloud. Without it, the student hears &quot;image&quot; and nothing else.
       </P>
 
       {/* ── Why This Matters ── */}
@@ -148,7 +148,7 @@ export default function TextAlternativesWord() {
       <P>
         Not every image carries meaning. Borders, spacers, and purely decorative
         graphics should be marked as decorative so screen readers skip them entirely.
-        A student does not need to hear "decorative blue line" twelve times in your
+        A student does not need to hear &quot;decorative blue line&quot; twelve times in your
         syllabus.
       </P>
       <Step number="1">Right-click the image.</Step>
@@ -156,12 +156,12 @@ export default function TextAlternativesWord() {
       <Step number="3">Check the box labeled <strong>Mark as decorative</strong>.</Step>
       <Placeholder label="Screenshot: Decorative checkbox in Alt Text pane" />
 
-      <H3>What about "Generate a description for me"?</H3>
+      <H3>What about &quot;Generate a description for me&quot;?</H3>
       <P>
         Word offers an AI-generated alt text option. It is a starting point, not a
-        solution. The generated text describes what the image looks like ("a group of
-        people standing in a room"), not what it means in your content ("Students
-        presenting their final project at the Spring 2025 showcase"). Always review
+        solution. The generated text describes what the image looks like (&quot;a group of
+        people standing in a room&quot;), not what it means in your content (&quot;Students
+        presenting their final project at the Spring 2025 showcase&quot;). Always review
         and rewrite AI-generated descriptions to reflect the purpose of the image in
         context.
       </P>
@@ -176,9 +176,9 @@ export default function TextAlternativesWord() {
       <div style={{ margin: "24px 0" }}>
         {[
           { rule: "Keep it concise.", detail: "One to two sentences for most images. If you need more, the image might need a long description." },
-          { rule: "Describe function, not appearance.", detail: '"Bar chart showing enrollment increased 40% between 2020 and 2024" is useful. "Colorful bar chart" is not.' },
+          { rule: "Describe function, not appearance.", detail: "\"Bar chart showing enrollment increased 40% between 2020 and 2024\" is useful. \"Colorful bar chart\" is not." },
           { rule: "Match the context.", detail: "The same photo might need different alt text in different documents." },
-          { rule: 'Skip "image of" or "picture of."', detail: "Screen readers already announce that the content is an image." },
+          { rule: "Skip \"image of\" or \"picture of.\"", detail: "Screen readers already announce that the content is an image." },
           { rule: "Don't leave it blank.", detail: "If the image is decorative, mark it as decorative. If it carries meaning, describe it." },
         ].map((item, i) => (
           <div key={i} style={{
@@ -230,8 +230,8 @@ export default function TextAlternativesWord() {
           The approach:
         </div>
         <Step number="1">
-          Write short alt text that identifies the type and topic: "Flowchart of the
-          IRB approval process. Full description below."
+          Write short alt text that identifies the type and topic: &quot;Flowchart of the
+          IRB approval process. Full description below.&quot;
         </Step>
         <Step number="2">
           Provide the complete description in the document text immediately before or
@@ -258,9 +258,9 @@ export default function TextAlternativesWord() {
         fontFamily: "var(--font-mono)",
         fontSize: 13.5, lineHeight: 2, color: t.textSecondary,
       }}>
-        "asdf" <span style={{ color: t.green }}>passes</span><br/>
-        "image1.jpg" <span style={{ color: t.green }}>passes</span><br/>
-        "TODO add alt text" <span style={{ color: t.green }}>passes</span><br/>
+        &quot;asdf&quot; <span style={{ color: t.green }}>passes</span><br/>
+        &quot;image1.jpg&quot; <span style={{ color: t.green }}>passes</span><br/>
+        &quot;TODO add alt text&quot; <span style={{ color: t.green }}>passes</span><br/>
         A perfectly written description <span style={{ color: t.green }}>passes</span>
       </div>
       <P>
@@ -340,9 +340,9 @@ export default function TextAlternativesWord() {
         fontFamily: "var(--font-body)", fontStyle: "italic",
         color: t.textSecondary,
       }}>
-        Consider adding to your assignment instructions: "All images in your
+        Consider adding to your assignment instructions: &quot;All images in your
         submission should include alt text. Right-click any image and select Edit Alt
-        Text to add a description."
+        Text to add a description.&quot;
       </div>
 
       {/* ── Quick Reference ── */}
@@ -351,7 +351,7 @@ export default function TextAlternativesWord() {
         ["Add alt text", "Right-click image \u2192 Edit Alt Text \u2192 type description"],
         ["Mark as decorative", "Right-click image \u2192 Edit Alt Text \u2192 check \"Mark as decorative\""],
         ["Check before uploading", "Review tab \u2192 Check Accessibility"],
-        ["Ally error message", "\"Document has images without alt descriptions\""],
+        ["Ally error message", "Document has images without alt descriptions"],
         ["WCAG criterion", "1.1.1 Non-text Content (Level A)"],
         ["Ally severity", "Major"],
       ]} />

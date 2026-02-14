@@ -1,0 +1,13 @@
+---
+description: WCAG 2.2 AA accessibility for UI components and pages
+globs: "**/*.{js,jsx,ts,tsx}"
+alwaysApply: false
+---
+
+# WCAG 2.2 AA
+
+- Use the **wcag-2-2-aa** skill when implementing or reviewing accessibility.
+- Buttons/links need clear names (visible text or `aria-label`); icon-only controls must have `aria-label`.
+- Use `aria-expanded` on expand/collapse toggles. Use `type="button"` on non-submit buttons.
+- Ensure one `<h1>` per page and logical heading order. Set `lang` on `<html>` (already done in layout).
+- Run `npm run lint` and fix any jsx-a11y rules. For full WCAG 2.2 AA, run `npm run dev` then `npm run a11y`.

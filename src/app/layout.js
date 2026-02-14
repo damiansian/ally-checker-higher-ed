@@ -1,5 +1,6 @@
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme";
+import { AxeDev } from "@/components/AxeDev";
 
 export const metadata = {
   title: "Getting to 100 | Fixing Your Ally Accessibility Errors",
@@ -23,7 +24,10 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body suppressHydrationWarning>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <AxeDev />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

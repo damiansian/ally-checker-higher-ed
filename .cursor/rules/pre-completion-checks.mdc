@@ -1,0 +1,43 @@
+---
+description: Run lint and build checks before marking any task complete
+alwaysApply: true
+---
+
+# Pre-Completion Checks
+
+Before finishing ANY task that modifies `.js`, `.jsx`, or `.css` files, you MUST complete this verification gate. Do NOT tell the user "done" until all steps pass.
+
+## Required Steps (in order)
+
+### 1. IDE Linter Check
+- Run `ReadLints` on every file you created or edited.
+- Fix all errors you introduced. Pre-existing warnings may be noted but do not block.
+
+### 2. ESLint
+Run:
+```bash
+npm run lint
+```
+- Fix every error. Warnings should be addressed when straightforward.
+- If a rule is a false positive, explain why and suppress with an inline `// eslint-disable-next-line <rule>` comment (never disable globally).
+
+### 3. Next.js Build
+Run:
+```bash
+npm run build
+```
+- Fix every build error (missing imports, SSR `window`/`document` usage, bad route segments, etc.).
+- A successful build exits with code 0 and prints "Compiled successfully".
+
+## Handling Failures
+
+- If any step fails, fix the issue and **re-run that step and all subsequent steps** before completing the task.
+- If a failure is unrelated to your changes (pre-existing), note it to the user but still pass the gate for your own changes.
+
+## Quick Reference
+
+| Step | Command / Tool | Must Pass |
+|------|---------------|-----------|
+| IDE lints | `ReadLints` on changed files | Yes |
+| ESLint | `npm run lint` | Yes (errors) |
+| Build | `npm run build` | Yes |

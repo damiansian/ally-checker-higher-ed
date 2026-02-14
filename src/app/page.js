@@ -5,20 +5,21 @@ import { useTheme } from "@/components/theme";
 import { categories, fileTypeMeta, stateInfo } from "@/components/data";
 
 // ── Metric Bar ──────────────────────────────────────────────
-function MetricBar({ value, label, color, darkMode }) {
+function MetricBar({ value, label, color }) {
+  const { t } = useTheme();
   return (
     <div style={{ flex: 1 }}>
       <div style={{
         fontSize: 10, fontWeight: 700, textTransform: "uppercase",
         letterSpacing: "0.08em",
-        color: darkMode ? "#94a3b8" : "#64748b",
+        color: t.textTertiary,
         marginBottom: 6, fontFamily: "var(--font-display)",
       }}>{label}</div>
       <div style={{ display: "flex", gap: 4 }}>
         {[1, 2, 3, 4, 5].map(i => (
           <div key={i} style={{
             width: 24, height: 10, borderRadius: 3,
-            backgroundColor: i <= value ? color : (darkMode ? "#1e293b" : "#e2e8f0"),
+            backgroundColor: i <= value ? color : t.surfaceAlt,
             transition: "background-color 0.3s ease",
           }} />
         ))}
@@ -47,7 +48,7 @@ function FileTypeTile({ type, state, darkMode, categorySlug }) {
     statusColor = t.tileCheckedStatus;
     statusBg = t.tileCheckedStatusBg;
     iconEl = (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={statusColor} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={statusColor} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M20 6L9 17l-5-5"/>
       </svg>
     );
@@ -58,7 +59,7 @@ function FileTypeTile({ type, state, darkMode, categorySlug }) {
     statusColor = t.tileGapStatus;
     statusBg = t.tileGapStatusBg;
     iconEl = (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={statusColor} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={statusColor} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/>
       </svg>
     );
@@ -69,7 +70,7 @@ function FileTypeTile({ type, state, darkMode, categorySlug }) {
     statusColor = t.tileUnreliableStatus;
     statusBg = t.tileUnreliableStatusBg;
     iconEl = (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={statusColor} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={statusColor} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M12 9v4"/><path d="M12 17h.01"/>
         <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
       </svg>
@@ -81,7 +82,7 @@ function FileTypeTile({ type, state, darkMode, categorySlug }) {
     statusColor = t.tileNaStatus;
     statusBg = "transparent";
     iconEl = (
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={statusColor} strokeWidth="2" strokeLinecap="round">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={statusColor} strokeWidth="2" strokeLinecap="round" aria-hidden="true">
         <path d="M18 6L6 18"/><path d="M6 6l12 12"/>
       </svg>
     );
@@ -89,29 +90,31 @@ function FileTypeTile({ type, state, darkMode, categorySlug }) {
 
   const inner = (
     <div style={{
-      padding: "10px 8px 8px",
-      borderRadius: 8,
+      padding: "16px 12px 14px",
+      borderRadius: 10,
       backgroundColor: tileBg,
       border: `1.5px ${isGap ? "dashed" : "solid"} ${tileBorder}`,
       textAlign: "center",
-      minWidth: 72,
+      flex: 1,
+      minWidth: 0,
       transition: "all 0.2s ease",
       cursor: isNA ? "default" : "pointer",
-      opacity: isNA ? 0.5 : 1,
     }}>
       <div style={{
-        fontSize: 14, fontWeight: 600, color: labelColor,
-        fontFamily: "var(--font-display)", marginBottom: 6,
+        fontSize: 15, fontWeight: 700, color: labelColor,
+        fontFamily: "var(--font-display)", marginBottom: 10,
       }}>{meta.label}</div>
       <div style={{
-        width: 32, height: 32, borderRadius: 8,
+        width: 40, height: 40, borderRadius: 10,
         backgroundColor: statusBg,
         display: "flex", alignItems: "center", justifyContent: "center",
-        margin: "0 auto 4px",
+        margin: "0 auto 8px",
       }}>{iconEl}</div>
       <div style={{
-        fontSize: 11, fontWeight: 600, color: statusColor,
+        fontSize: 11, fontWeight: 700, color: statusColor,
         fontFamily: "var(--font-display)",
+        textTransform: "uppercase",
+        letterSpacing: "0.04em",
       }}>{si.short}</div>
     </div>
   );
@@ -119,7 +122,7 @@ function FileTypeTile({ type, state, darkMode, categorySlug }) {
   if (isNA) return inner;
 
   return (
-    <Link href={`/${categorySlug}/${meta.slug}`} style={{ textDecoration: "none" }}>
+    <Link href={`/${categorySlug}/${meta.slug}`} style={{ textDecoration: "none", flex: 1, minWidth: 0, display: "flex" }}>
       {inner}
     </Link>
   );
@@ -163,20 +166,24 @@ function CategoryCard({ category, darkMode }) {
           value={category.likelihood}
           label="Likelihood"
           color={t.likelihoodColor}
-          darkMode={darkMode}
         />
         <MetricBar
           value={category.impact}
           label="Impact"
           color={category.impact >= 5 ? t.impactCriticalColor : t.impactColor}
-          darkMode={darkMode}
         />
       </div>
 
       {/* File Type Tiles */}
       <div style={{
-        display: "flex", gap: 8, marginBottom: expanded ? 20 : 0,
-        flexWrap: "wrap",
+        fontSize: 11, fontWeight: 700, textTransform: "uppercase",
+        letterSpacing: "0.08em",
+        color: t.textTertiary,
+        fontFamily: "var(--font-display)",
+        marginBottom: 10,
+      }}>File Types</div>
+      <div style={{
+        display: "flex", gap: 10, marginBottom: expanded ? 20 : 0,
       }}>
         {Object.entries(category.fileTypes).map(([type, state]) => (
           <FileTypeTile
@@ -191,7 +198,10 @@ function CategoryCard({ category, darkMode }) {
 
       {/* Expand toggle */}
       <button
+        type="button"
         onClick={() => setExpanded(!expanded)}
+        aria-expanded={expanded}
+        aria-label={expanded ? "Collapse category detail" : "Expand category detail"}
         style={{
           marginTop: 14, background: "none", border: "none",
           color: t.textTertiary, cursor: "pointer",
@@ -262,10 +272,47 @@ function CategoryCard({ category, darkMode }) {
 function Legend({ darkMode }) {
   const { t } = useTheme();
   const states = [
-    { key: "checked", color: t.tileCheckedStatus, label: "Ally checks this" },
-    { key: "gap", color: t.tileGapStatus, label: "Exists but unchecked" },
-    { key: "unreliable", color: t.tileUnreliableStatus, label: "Unreliable detection" },
-    { key: "na", color: t.tileNaStatus, label: "Not applicable" },
+    {
+      key: "checked",
+      color: t.tileCheckedStatus,
+      label: "Ally checks",
+      icon: (c) => (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M20 6L9 17l-5-5"/>
+        </svg>
+      ),
+    },
+    {
+      key: "gap",
+      color: t.tileGapStatus,
+      label: "Gap \u2013 exists but unchecked",
+      icon: (c) => (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><path d="M12 8v4"/><path d="M12 16h.01"/>
+        </svg>
+      ),
+    },
+    {
+      key: "unreliable",
+      color: t.tileUnreliableStatus,
+      label: "Unreliable detection",
+      icon: (c) => (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M12 9v4"/><path d="M12 17h.01"/>
+          <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+        </svg>
+      ),
+    },
+    {
+      key: "na",
+      color: t.tileNaStatus,
+      label: "Not applicable",
+      icon: (c) => (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+          <path d="M18 6L6 18"/><path d="M6 6l12 12"/>
+        </svg>
+      ),
+    },
   ];
   return (
     <div style={{
@@ -277,10 +324,7 @@ function Legend({ darkMode }) {
     }}>
       {states.map(s => (
         <div key={s.key} style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <div style={{
-            width: 10, height: 10, borderRadius: 3,
-            backgroundColor: s.color,
-          }} />
+          {s.icon(s.color)}
           <span style={{
             fontSize: 13, color: t.textSecondary,
             fontFamily: "var(--font-display)",
@@ -325,7 +369,9 @@ export default function HomePage() {
             letterSpacing: "-0.02em",
           }}>Getting to 100</span>
           <button
+            type="button"
             onClick={() => setDark(!dark)}
+            aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
             style={{
               padding: "6px 14px", borderRadius: 6,
               border: `1px solid ${t.border}`,
@@ -369,7 +415,7 @@ export default function HomePage() {
           </div>
           <div style={{ display: "flex", gap: 6 }}>
             {["impact", "likelihood"].map(s => (
-              <button key={s} onClick={() => setSortBy(s)} style={{
+              <button key={s} type="button" onClick={() => setSortBy(s)} style={{
                 padding: "5px 12px", borderRadius: 6,
                 border: `1px solid ${sortBy === s ? t.accent : t.border}`,
                 backgroundColor: sortBy === s ? t.accentBg : t.surface,
