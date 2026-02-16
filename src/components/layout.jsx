@@ -70,7 +70,7 @@ export function FileTypePills({ categorySlug, activeSlug }) {
   return (
     <div style={{ display: "flex", gap: 8, marginBottom: 40, flexWrap: "wrap" }}>
       <a
-        href={`/${categorySlug}`}
+        href={`/${categorySlug}/`}
         style={{
           display: "inline-flex",
           alignItems: "center",
@@ -258,7 +258,7 @@ export function TopNav({ activeCategorySlug }) {
             {categories.map((cat) => (
               <a
                 key={cat.id}
-                href={`/${cat.slug}`}
+                href={`/${cat.slug}/`}
                 style={{
                   padding: "6px 12px",
                   borderRadius: 6,
@@ -326,7 +326,7 @@ export function ContentPageLayout({
       ]
     : [
         { label: "Home", href: "/" },
-        { label: cat?.name || categorySlug, href: `/${categorySlug}` },
+        { label: cat?.name || categorySlug, href: `/${categorySlug}/` },
         { label: ftMeta?.label || fileTypeSlug, current: true },
       ];
 
