@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>No Language Set – Test File</title>
+  <style>
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      max-width: 680px;
+      margin: 40px auto;
+      padding: 0 24px;
+      line-height: 1.8;
+      color: #1a1a1a;
+    }
+    h2 { font-size: 1.6em; margin-bottom: 0.3em; }
+    h3 { font-size: 1.2em; margin-top: 2em; }
+    .passage {
+      border-left: 4px solid #b0b0b0;
+      padding: 16px 20px;
+      margin: 16px 0;
+      background: #f7f7f7;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Language Test Document</h2>
+  <p>
+    This HTML file has <strong>no <code>lang</code> attribute</strong> on the
+    <code>&lt;html&gt;</code> element. Upload it to Canvas and check whether
+    Ally flags the missing language.
+  </p>
+
+  <h3>English Paragraph</h3>
+  <p>
+    The quick brown fox jumps over the lazy dog. This sentence contains every
+    letter of the English alphabet and is commonly used for testing purposes.
+    A screen reader with no language hint will fall back to the system default,
+    which is usually English — so this paragraph may sound fine even without
+    the attribute.
+  </p>
+
+  <h3>Spanish Paragraph (no lang attribute)</h3>
+  <div class="passage">
+    <p>
+      Julio se despertó con mucho frío. Agarró su abrigo rojo y salió a la
+      calle. El cielo estaba gris y hacía un viento horrible. Qué barbaridad,
+      gritó, mientras caminaba hacia la panadería. Quería comprar churros y un
+      chocolate caliente. La señora de la tienda le dijo: Hijo, hoy no hay
+      churros, pero tengo unas galletas riquísimas. Julio se rió y contestó:
+      Bueno, déjeme cinco galletas y un jugo de naranja. Pagó con unas monedas
+      que llevaba en el bolsillo y se fue silbando bajito por la acera.
+    </p>
+  </div>
+  <p>
+    The passage above is in Spanish but has no <code>lang</code> attribute.
+    A screen reader will apply English pronunciation rules, producing garbled
+    output. This tests WCAG 3.1.2 (Language of Parts) as well.
+  </p>
+
+</body>
+</html>

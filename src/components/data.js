@@ -18,7 +18,7 @@ export const categories = [
     allyCatches:
       "Presence of alt text across all file types",
     allyMisses:
-      "Quality of alt text, whether description is meaningful or accurate",
+      "Quality of alt text, whether description is meaningful or accurate, if image should be decorative",
     wcag: "1.1.1",
   },
   {
@@ -138,7 +138,7 @@ export const fileTypeMeta = {
   docx: { label: "Word", slug: "word" },
   pptx: { label: "PowerPoint", slug: "powerpoint" },
   pdf: { label: "PDF", slug: "pdf" },
-  canvas: { label: "Canvas", slug: "canvas" },
+  canvas: { label: "Canvas editor", slug: "canvas" },
   image: { label: "Image", slug: "image" },
 };
 
@@ -177,9 +177,18 @@ export const allyMessages = {
     canvas: "Table cells (3x3+) must have associated headers",
   },
   language: {
-    docx: "Document does not have a language set",
-    pptx: "Presentation does not have a language set",
-    pdf: "PDF does not have a language set",
+    docx: [
+      "Document does not have a language set",
+      "Document does not have the correct language set",
+    ],
+    pptx: [
+      "Presentation does not have a language set",
+      "Presentation does not have the correct language set",
+    ],
+    pdf: [
+      "PDF does not have a language set",
+      "PDF does not have the correct language set",
+    ],
     canvas: "<html> element must have a lang attribute",
   },
   "seizure-risk": {

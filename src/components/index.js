@@ -1,4 +1,4 @@
-export { ThemeProvider, useTheme } from "./theme";
+export { ThemeProvider, useTheme } from "./theme.jsx";
 export { categories, fileTypeMeta, stateInfo, allyMessages } from "./data";
 export {
   AllyErrorBox,
@@ -8,11 +8,11 @@ export {
   RefTable,
   ResourceLink,
   Callout,
-} from "./content";
+} from "./content.jsx";
 export {
   Breadcrumb,
   FileTypePills,
   TableOfContents,
   TopNav,
   ContentPageLayout,
-} from "./layout";
+} from "./layout.jsx";

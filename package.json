@@ -4,25 +4,26 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev -p 3000",
-    "dev:fresh": "node scripts/kill-port-3000.mjs && next dev -p 3000",
-    "build": "node scripts/check-contrast.mjs && next build",
+    "dev": "astro dev -p 3000",
+    "dev:fresh": "node scripts/kill-port-3000.mjs && astro dev -p 3000",
+    "build": "node scripts/check-contrast.mjs && astro build",
     "contrast-check": "node scripts/check-contrast.mjs",
-    "clean": "rm -rf .next",
-    "start": "next start",
+    "preview": "astro preview",
     "lint": "eslint .",
     "a11y": "axe http://localhost:3000 http://localhost:3000/text-alternatives/word --tags wcag2a,wcag2aa,wcag22aa --load-delay=2000 --exit"
   },
   "dependencies": {
-    "next": "^15.1.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
   },
   "devDependencies": {
+    "astro": "^4.16.0",
+    "@astrojs/react": "^4.0.0",
     "@axe-core/cli": "^4.11.1",
     "@axe-core/react": "^4.11.1",
     "eslint": "^9.39.2",
-    "eslint-config-next": "^16.1.6",
-    "eslint-plugin-jsx-a11y": "^6.10.2"
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.0",
+    "eslint-plugin-react-hooks": "^5.0.0"
   }
 }
