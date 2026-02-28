@@ -154,7 +154,7 @@ export default function TextAlternativesCanvasPage() {
       <figure style={{ margin: "24px 0" }}>
         <img
           src="/images/canvas-rce-upload-image-alt-text.png"
-          alt="Canvas Upload Image dialog showing a drag-and-drop area at top and an Attributes section below with an Alt Text field outlined in red, placeholder text reading Describe the image, and a Decorative Image checkbox beneath it."
+          alt="Canvas upload dialog showing a drag-and-drop area at top and an Attributes section below with an Alt Text field outlined in red, placeholder text reading Describe the content, and a Decorative media checkbox beneath it."
           width={500}
           height={375}
           style={{
@@ -181,7 +181,7 @@ export default function TextAlternativesCanvasPage() {
       <figure style={{ margin: "24px 0" }}>
         <img
           src="/images/canvas-rce-image-selected.png"
-          alt="A grouped bar chart titled Sample data visualization selected in the Canvas Rich Content Editor, with blue selection handles around it and an Image Options tooltip button visible at the top right of the image."
+          alt="A grouped bar chart titled Sample data visualization selected in the Canvas Rich Content Editor, with blue selection handles around it and an Options tooltip button visible at the top right of the graphic."
           width={600}
           height={375}
           style={{
@@ -202,7 +202,7 @@ export default function TextAlternativesCanvasPage() {
       <figure style={{ margin: "24px 0" }}>
         <img
           src="/images/canvas-rce-image-options-tray.png"
-          alt="Canvas Image Options tray showing an Alt Text field filled in with Grouped bar graph comparing Quiz 1 and Quiz 2 averages across three sections. Section 1: 85% and 82%. Section 2: 83% and 81%. Section 3: 85% and 82%. Below it are a Decorative Image checkbox (unchecked) and Display Options set to Embed Image."
+          alt="Canvas Options tray showing an Alt Text field filled in with Grouped bar graph comparing Quiz 1 and Quiz 2 averages across three sections. Section 1: 85% and 82%. Section 2: 83% and 81%. Section 3: 85% and 82%. Below it are a Decorative media checkbox (unchecked) and Display Options set to Embed."
           width={320}
           height={400}
           style={{

@@ -68,7 +68,7 @@ export function FileTypePills({ categorySlug, activeSlug }) {
   const overviewActive = activeSlug === "overview";
 
   return (
-    <div style={{ display: "flex", gap: 8, marginBottom: 40, flexWrap: "wrap" }}>
+    <div className="file-type-pills" style={{ display: "flex", gap: 8, marginBottom: 40, flexWrap: "wrap" }}>
       <a
         href={`/${categorySlug}/`}
         style={{
@@ -193,9 +193,10 @@ export function TableOfContents({ sections }) {
 
 // ── Top Navigation ──────────────────────────────────────────
 export function TopNav({ activeCategorySlug }) {
-  const { dark, setDark, t } = useTheme();
+  const { t } = useTheme();
   return (
     <header
+      className="top-nav-header"
       style={{
         position: "sticky",
         top: 0,
@@ -206,6 +207,7 @@ export function TopNav({ activeCategorySlug }) {
       }}
     >
       <div
+        className="top-nav-inner"
         style={{
           maxWidth: 1200,
           margin: "0 auto",
@@ -215,7 +217,7 @@ export function TopNav({ activeCategorySlug }) {
           height: 56,
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+        <div className="top-nav-brand-nav" style={{ display: "flex", alignItems: "center", gap: 20 }}>
           <a
             href="/"
             style={{
@@ -225,11 +227,13 @@ export function TopNav({ activeCategorySlug }) {
               textDecoration: "none",
               fontFamily: "var(--font-display)",
               letterSpacing: "-0.02em",
+              whiteSpace: "nowrap",
             }}
           >
-            Getting to 100
+            Canvas LMS Accessibility
           </a>
           <nav
+            className="top-nav-nav"
             style={{ display: "flex", gap: 4 }}
             aria-label="Categories"
           >
@@ -282,24 +286,6 @@ export function TopNav({ activeCategorySlug }) {
             ))}
           </nav>
         </div>
-        <button
-          type="button"
-          onClick={() => setDark(!dark)}
-          aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
-          style={{
-            padding: "6px 14px",
-            borderRadius: 6,
-            border: `1px solid ${t.border}`,
-            backgroundColor: t.surface,
-            color: t.textSecondary,
-            cursor: "pointer",
-            fontSize: 12,
-            fontWeight: 600,
-            fontFamily: "var(--font-display)",
-          }}
-        >
-          {dark ? "\u2600 Light" : "\u25CF Dark"}
-        </button>
       </div>
     </header>
   );
@@ -342,6 +328,7 @@ export function ContentPageLayout({
       <TopNav activeCategorySlug={categorySlug} />
 
       <div
+        className="content-layout-grid"
         style={{
           maxWidth: 1200,
           margin: "0 auto",
@@ -351,10 +338,11 @@ export function ContentPageLayout({
           gap: 48,
         }}
       >
-        <main style={{ maxWidth: 760, minWidth: 0 }}>
+        <main className="content-layout-main" style={{ maxWidth: 760, minWidth: 0 }}>
           <Breadcrumb items={breadcrumbItems} />
 
           <h1
+            className="content-page-h1"
             style={{
               fontSize: 36,
               fontWeight: 800,
@@ -369,6 +357,7 @@ export function ContentPageLayout({
           </h1>
           {subtitle && (
             <div
+              className="content-page-subtitle"
               style={{
                 fontSize: 18,
                 color: t.textSecondary,
@@ -386,13 +375,14 @@ export function ContentPageLayout({
         </main>
 
         {tocSections && (
-          <aside style={{ minWidth: 0 }}>
+          <aside className="content-layout-toc" style={{ minWidth: 0 }}>
             <TableOfContents sections={tocSections} />
           </aside>
         )}
       </div>
 
       <footer
+        className="content-page-footer"
         style={{
           borderTop: `1px solid ${t.border}`,
           padding: "24px 32px",
@@ -402,8 +392,7 @@ export function ContentPageLayout({
           fontFamily: "var(--font-display)",
         }}
       >
-        Getting to 100: Fixing Your Ally Accessibility Errors &middot;
-        RUOnlineCon 2026 &middot; Damian Sian
+        Canvas LMS Accessibility &middot; Damian Sian
       </footer>
     </div>
   );

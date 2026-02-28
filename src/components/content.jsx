@@ -5,6 +5,7 @@ export function AllyErrorBox({ message, severity, wcag }) {
   const { t } = useTheme();
   return (
     <div
+      className="ally-error-box"
       style={{
         padding: "20px 24px",
         borderRadius: 10,
@@ -27,6 +28,7 @@ export function AllyErrorBox({ message, severity, wcag }) {
         Ally Error Message
       </div>
       <div
+        className="ally-error-box-message"
         style={{
           fontSize: 18,
           fontWeight: 600,
@@ -103,7 +105,7 @@ export function Step({ number, children }) {
 export function CompareBoxes({ catches, misses }) {
   const { t } = useTheme();
   return (
-    <div style={{ display: "flex", gap: 14, margin: "20px 0", flexWrap: "wrap" }}>
+    <div className="compare-boxes" style={{ display: "flex", gap: 14, margin: "20px 0", flexWrap: "wrap" }}>
       <div
         style={{
           padding: "18px 22px",
@@ -204,6 +206,7 @@ export function RefTable({ rows }) {
   const { t } = useTheme();
   return (
     <table
+      className="ref-table"
       style={{
         width: "100%",
         borderCollapse: "collapse",
@@ -231,6 +234,110 @@ export function RefTable({ rows }) {
         ))}
       </tbody>
     </table>
+  );
+}
+
+// ── Checker detection comparison table ───────────────────────
+// rows: array of { testType, ally, msOffice, acrobat, rce, fileUpload }
+// Use for "Type of test" vs detection by checker / context.
+export function CheckerComparisonTable({ caption, rows }) {
+  const { t } = useTheme();
+  const columns = [
+    { key: "ally", label: "Ally" },
+    { key: "msOffice", label: "MS Office" },
+    { key: "acrobat", label: "Acrobat checker" },
+    { key: "rce", label: "RCE" },
+    { key: "fileUpload", label: "File upload" },
+  ];
+  return (
+    <figure className="table-scroll-wrapper" style={{ margin: "24px 0" }}>
+      <table
+        style={{
+          width: "100%",
+          borderCollapse: "collapse",
+          fontSize: 14,
+          fontFamily: "var(--font-body)",
+          minWidth: 600,
+        }}
+        aria-label={caption || "Checker detection comparison"}
+      >
+        {caption && (
+          <caption
+            style={{
+              textAlign: "left",
+              fontSize: 13,
+              color: t.textTertiary,
+              fontFamily: "var(--font-display)",
+              marginBottom: 10,
+            }}
+          >
+            {caption}
+          </caption>
+        )}
+        <thead>
+          <tr style={{ borderBottom: `2px solid ${t.border}` }}>
+            <th
+              scope="col"
+              style={{
+                padding: "12px 16px 12px 0",
+                fontWeight: 700,
+                color: t.textSecondary,
+                textAlign: "left",
+                fontFamily: "var(--font-display)",
+              }}
+            >
+              Type of test
+            </th>
+            {columns.map((col) => (
+              <th
+                key={col.key}
+                scope="col"
+                style={{
+                  padding: "12px 16px",
+                  fontWeight: 700,
+                  color: t.textSecondary,
+                  textAlign: "left",
+                  fontFamily: "var(--font-display)",
+                }}
+              >
+                {col.label}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, i) => (
+            <tr
+              key={i}
+              style={{ borderBottom: `1px solid ${t.borderLight}` }}
+            >
+              <td
+                style={{
+                  padding: "12px 16px 12px 0",
+                  fontWeight: 600,
+                  color: t.text,
+                  verticalAlign: "top",
+                }}
+              >
+                {row.testType}
+              </td>
+              {columns.map((col) => (
+                <td
+                  key={col.key}
+                  style={{
+                    padding: "12px 16px",
+                    color: t.textSecondary,
+                    verticalAlign: "top",
+                  }}
+                >
+                  {row[col.key]}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </figure>
   );
 }
 

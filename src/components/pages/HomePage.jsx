@@ -15,13 +15,18 @@ function MetricBar({ value, label, color }) {
         marginBottom: 6, fontFamily: "var(--font-display)",
       }}>{label}</div>
       <div style={{ display: "flex", gap: 4 }}>
-        {[1, 2, 3, 4, 5].map(i => (
-          <div key={i} style={{
-            width: 24, height: 10, borderRadius: 3,
-            backgroundColor: i <= value ? color : t.surfaceAlt,
-            transition: "background-color 0.3s ease",
-          }} />
-        ))}
+        {[1, 2, 3, 4, 5].map(i => {
+          const filled = i <= value;
+          return (
+            <div key={i} style={{
+              width: 24, height: 10, borderRadius: 3,
+              backgroundColor: filled ? color : t.surfaceAlt,
+              border: filled ? "none" : `1.5px solid ${color}`,
+              boxSizing: "border-box",
+              transition: "background-color 0.3s ease, border-color 0.3s ease",
+            }} />
+          );
+        })}
       </div>
     </div>
   );
@@ -92,7 +97,7 @@ function FileTypeTile({ type, state, categorySlug }) {
       padding: "16px 12px 14px",
       borderRadius: 10,
       backgroundColor: tileBg,
-      border: `1.5px ${isGap ? "dashed" : "solid"} ${tileBorder}`,
+      border: `1.5px ${isGap || isNA ? "dashed" : "solid"} ${tileBorder}`,
       textAlign: "center",
       flex: 1,
       minWidth: 0,
@@ -133,7 +138,7 @@ function CategoryCard({ category }) {
   const { t } = useTheme();
 
   return (
-    <div style={{
+    <div className="category-card" style={{
       backgroundColor: t.surface,
       border: `1px solid ${t.border}`,
       borderRadius: 14,
@@ -160,7 +165,7 @@ function CategoryCard({ category }) {
       </div>
 
       {/* Metrics */}
-      <div style={{ display: "flex", gap: 28, marginBottom: 20 }}>
+      <div className="category-card-metrics" style={{ display: "flex", gap: 28, marginBottom: 20 }}>
         <MetricBar
           value={category.likelihood}
           label="Likelihood"
@@ -169,7 +174,7 @@ function CategoryCard({ category }) {
         <MetricBar
           value={category.impact}
           label="Impact"
-          color={category.impact >= 5 ? t.impactCriticalColor : t.impactColor}
+          color={t.impactColor}
         />
       </div>
 
@@ -181,7 +186,7 @@ function CategoryCard({ category }) {
         fontFamily: "var(--font-display)",
         marginBottom: 10,
       }}>File Types</div>
-      <div style={{
+      <div className="category-card-file-types" style={{
         display: "flex", gap: 10, marginBottom: expanded ? 20 : 0,
       }}>
         {Object.entries(category.fileTypes).map(([type, state]) => (
@@ -213,7 +218,7 @@ function CategoryCard({ category }) {
 
       {/* Expanded detail */}
       {expanded && (
-        <div style={{
+        <div className="category-card-expanded-detail" style={{
           marginTop: 14,
           display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14,
         }}>
@@ -313,7 +318,7 @@ function Legend() {
     },
   ];
   return (
-    <div style={{
+    <div className="legend-bar" style={{
       display: "flex", gap: 20, flexWrap: "wrap",
       padding: "16px 20px", borderRadius: 10,
       backgroundColor: t.surface,
@@ -352,17 +357,17 @@ export default function HomePage() {
     }}>
       <TopNav activeCategorySlug="home" />
 
-      <main style={{ maxWidth: 900, margin: "0 auto", padding: "40px 32px 80px" }}>
+      <main className="home-main" style={{ maxWidth: 1200, margin: "0 auto", padding: "40px 32px 80px" }}>
         {/* Title */}
-        <h1 style={{
+        <h1 className="home-title" style={{
           fontSize: 40, fontWeight: 800, color: t.text,
           fontFamily: "var(--font-display)",
           letterSpacing: "-0.03em",
           margin: "0 0 12px", lineHeight: 1.1,
         }}>
-          Getting to <span style={{ color: t.accent }}>100</span>%
+          Canvas LMS <span style={{ color: t.accent }}>Accessibility</span>
         </h1>
-        <p style={{
+        <p className="home-intro" style={{
           fontSize: 18, lineHeight: 1.6, color: t.textSecondary,
           fontFamily: "var(--font-body)",
           maxWidth: 600, margin: "0 0 40px",
@@ -371,7 +376,7 @@ export default function HomePage() {
         </p>
 
         {/* Sort + Legend */}
-        <div style={{
+        <div className="home-sort-legend" style={{
           display: "flex", justifyContent: "space-between",
           alignItems: "center", marginBottom: 16, flexWrap: "wrap", gap: 12,
         }}>
@@ -414,18 +419,18 @@ export default function HomePage() {
           fontSize: 14, lineHeight: 1.6, color: t.textSecondary,
           fontFamily: "var(--font-body)",
         }}>
-          Getting to 100% in Ally is the starting line, not the finish. Automated tools catch roughly 57% of accessibility issues. The rest requires human judgment. This site covers what Ally finds, what it misses, and what to do about both.
+          Getting to 100% in Ally is the starting line, not the finish. Automated tools catch roughly 57% of accessibility issues. The rest requires human judgment. This reference covers what Ally finds, what it misses, and what to do about both.
         </div>
       </main>
 
-      <footer style={{
+      <footer className="home-footer" style={{
         borderTop: `1px solid ${t.border}`,
         padding: "24px 32px",
         textAlign: "center",
         fontSize: 12, color: t.textTertiary,
         fontFamily: "var(--font-display)",
       }}>
-        Getting to 100 &middot; RUOnlineCon 2026 &middot; Damian Sian
+        Canvas LMS Accessibility &middot; Damian Sian
       </footer>
     </div>
   );

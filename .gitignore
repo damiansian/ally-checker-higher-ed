@@ -23,5 +23,9 @@ npm-debug.log*
 # vercel
 .vercel
 
+# test artifacts
+playwright-report/
+test-results/
+
 # IDE
 .vscode/

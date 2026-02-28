@@ -187,7 +187,7 @@ export default function TextAlternativesImagePage() {
       <figure style={{ margin: "24px 0" }}>
         <img
           src="/images/ally-image-file-no-description.png"
-          alt="Ally accessibility score panel for a file named ppt-decoration.png showing a 4% score. The heading reads This image is missing a description. Below are buttons for What this means and How to write a good description, an Add image description text field with placeholder text Enter a brief description, an Add button, an Auto-generate description button, and an Indicate image is decorative button at the bottom."
+          alt="Ally accessibility score panel for a file named ppt-decoration.png showing a 4% score. The heading reads This file is missing a description. Below are buttons for What this means and How to write a good description, an Add description text field with placeholder text Enter a brief description, an Add button, an Auto-generate description button, and an Indicate decorative button at the bottom."
           width={390}
           height={780}
           style={{
@@ -222,7 +222,7 @@ export default function TextAlternativesImagePage() {
       <figure style={{ margin: "24px 0" }}>
         <img
           src="/images/ally-image-file-edit-description.png"
-          alt="Ally accessibility score panel showing a 75% score. The heading reads This item contains images without description, with a What this means button. Below is an Edit image description field containing the text Chart-quiz-avg.png, a Save button, and an info message reading The image description can't be a file name. Below that are Auto-generate description and Remove from image buttons, followed by an Indicate image is decorative button."
+          alt="Ally accessibility score panel showing a 75% score. The heading reads This item contains graphics without description, with a What this means button. Below is an Edit description field containing the text Chart-quiz-avg.png, a Save button, and an info message reading The description can't be a file name. Below that are Auto-generate description and Remove description buttons, followed by an Indicate decorative button."
           width={390}
           height={830}
           style={{

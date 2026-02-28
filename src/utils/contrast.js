@@ -78,6 +78,7 @@ export const THEME_PAIRINGS = [
   { fg: "tocActive", bg: "bg", minRatio: 4.5 },
   { fg: "codeText", bg: "codeBg", minRatio: 4.5 },
   { fg: "tileCheckedText", bg: "tileCheckedBg", minRatio: 4.5 },
+  { fg: "tileCheckedStatus", bg: "tileCheckedBg", minRatio: 4.5 },
   { fg: "tileCheckedStatus", bg: "tileCheckedStatusBg", minRatio: 3 },
   { fg: "tileGapText", bg: "tileGapBg", minRatio: 4.5 },
   { fg: "tileGapStatus", bg: "tileGapStatusBg", minRatio: 3 },

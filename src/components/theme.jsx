@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { themes } from "@/theme-data";
 import { checkThemeContrast } from "@/utils/contrast";
 
@@ -7,8 +7,7 @@ export { themes };
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [dark, setDark] = useState(true);
-  const t = dark ? themes.dark : themes.light;
+  const t = themes.dark;
 
   useEffect(() => {
     document.documentElement.style.backgroundColor = t.bg;
@@ -18,23 +17,20 @@ export function ThemeProvider({ children }) {
   useEffect(() => {
     if (import.meta.env.DEV !== true) return;
     const failures = checkThemeContrast(themes);
-    const currentMode = dark ? "dark" : "light";
-    const relevant = failures.filter((f) => f.mode === currentMode);
+    const relevant = failures.filter((f) => f.mode === "dark");
     if (relevant.length > 0) {
       console.warn(
-        "[Contrast] The following theme pairings do not meet WCAG AA in",
-        currentMode,
-        "mode:",
+        "[Contrast] The following theme pairings do not meet WCAG AA:",
         relevant.map(
           (f) =>
             ` ${f.fg} (${f.fgHex}) on ${f.bg} (${f.bgHex}): ${f.ratio}:1 (need ${f.minRatio}:1)`
         )
       );
     }
-  }, [dark]);
+  }, []);
 
   return (
-    <ThemeContext.Provider value={{ dark, setDark, t }}>
+    <ThemeContext.Provider value={{ dark: true, t }}>
       {children}
     </ThemeContext.Provider>
   );

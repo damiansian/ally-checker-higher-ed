@@ -4,8 +4,6 @@ import {
   AllyErrorBox,
   CompareBoxes,
   RefTable,
-  Callout,
-  Placeholder,
 } from "@/components/content.jsx";
 
 const tocSections = [
@@ -45,7 +43,7 @@ export default function TablesOverviewPage() {
     <ContentPageLayout
       categorySlug="tables"
       fileTypeSlug="overview"
-      title="Tables"
+      title="DRAFT — Tables"
       subtitle="Overview"
       tocSections={tocSections}
     >
@@ -62,10 +60,6 @@ export default function TablesOverviewPage() {
         <strong>PowerPoint</strong>, <strong>PDF</strong>, and{" "}
         <strong>Canvas</strong> files.
       </P>
-      <Callout type="info">
-        Detailed file-type pages with testing results, fix instructions, and
-        screenshots are coming soon.
-      </Callout>
 
       <SH id="ally-errors">Ally Error Messages</SH>
       <AllyErrorBox
@@ -73,7 +67,19 @@ export default function TablesOverviewPage() {
         severity="Major"
         wcag="1.3.1 Info and Relationships (Level A)"
       />
-      <Placeholder label="Detailed error messages and testing results by file type coming soon" />
+      <P>
+        Wording varies by file type:
+      </P>
+      <ul style={{ margin: "0 0 18px", paddingLeft: 24, fontFamily: "var(--font-body)", fontSize: 15.5, lineHeight: 1.75, color: "inherit" }}>
+        <li><strong>Word:</strong> &ldquo;Document tables don&apos;t have headers&rdquo;</li>
+        <li><strong>PowerPoint:</strong> &ldquo;Presentation tables don&apos;t have headers&rdquo;</li>
+        <li><strong>PDF:</strong> &ldquo;PDF tables don&apos;t have headers&rdquo;</li>
+        <li><strong>Canvas:</strong> &ldquo;Table cells (3x3+) must have associated headers&rdquo;</li>
+      </ul>
+      <P>
+        Severity is typically <strong>Major</strong>. Use the file-type
+        pages for fix steps.
+      </P>
 
       <SH id="ally-catches">What Ally Catches</SH>
       <CompareBoxes
@@ -82,7 +88,21 @@ export default function TablesOverviewPage() {
       />
 
       <SH id="ally-misses">What Ally Misses</SH>
-      <Placeholder label="Detailed analysis of Ally's table detection gaps coming soon" />
+      <P>
+        Ally focuses on whether data tables have header cells marked. It
+        does not distinguish <strong>data tables</strong> from
+        <strong> layout tables</strong> used for visual alignment (e.g.
+        two columns of text). Layout tables should ideally be avoided or
+        marked so screen readers do not treat them as data; Ally may not
+        flag misuse.
+      </P>
+      <P>
+        <strong>Complex tables</strong> (multiple header rows, merged
+        cells, scope) may not be fully validated. Whether a table is the
+        right way to present the information at all is a design question
+        Ally does not address. Manual review is recommended for any
+        non-simple grid.
+      </P>
 
       <SH id="quick-ref">Quick Reference</SH>
       <RefTable rows={[

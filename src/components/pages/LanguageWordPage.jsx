@@ -176,6 +176,7 @@ function AudioDemo({ src, label, transcriptSummary, transcriptContent }) {
           marginTop: 8,
         }}
       >
+        <track kind="captions" />
         <a href={src} download>Download audio</a>
       </audio>
       {hasTranscript && (

@@ -12,10 +12,24 @@ import LanguageOverviewPage from "./pages/LanguageOverviewPage.jsx";
 import LanguageWordPage from "./pages/LanguageWordPage.jsx";
 import LanguageCanvasPage from "./pages/LanguageCanvasPage.jsx";
 import LanguagePdfPage from "./pages/LanguagePdfPage.jsx";
+import LanguagePowerPointPage from "./pages/LanguagePowerPointPage.jsx";
 import TextContrastOverviewPage from "./pages/TextContrastOverviewPage.jsx";
+import TextContrastWordPage from "./pages/TextContrastWordPage.jsx";
+import TextContrastPowerPointPage from "./pages/TextContrastPowerPointPage.jsx";
+import TextContrastPdfPage from "./pages/TextContrastPdfPage.jsx";
+import TextContrastCanvasPage from "./pages/TextContrastCanvasPage.jsx";
 import SemanticStructureOverviewPage from "./pages/SemanticStructureOverviewPage.jsx";
+import SemanticStructureWordPage from "./pages/SemanticStructureWordPage.jsx";
+import SemanticStructurePowerPointPage from "./pages/SemanticStructurePowerPointPage.jsx";
+import SemanticStructurePdfPage from "./pages/SemanticStructurePdfPage.jsx";
+import SemanticStructureCanvasPage from "./pages/SemanticStructureCanvasPage.jsx";
 import TablesOverviewPage from "./pages/TablesOverviewPage.jsx";
+import TablesWordPage from "./pages/TablesWordPage.jsx";
+import TablesPowerPointPage from "./pages/TablesPowerPointPage.jsx";
+import TablesPdfPage from "./pages/TablesPdfPage.jsx";
+import TablesCanvasPage from "./pages/TablesCanvasPage.jsx";
 import SeizureRiskOverviewPage from "./pages/SeizureRiskOverviewPage.jsx";
+import SeizureRiskImagePage from "./pages/SeizureRiskImagePage.jsx";
 
 const pages = {
   home: HomePage,
@@ -29,10 +43,24 @@ const pages = {
   "language-word": LanguageWordPage,
   "language-canvas": LanguageCanvasPage,
   "language-pdf": LanguagePdfPage,
+  "language-powerpoint": LanguagePowerPointPage,
   "text-contrast-overview": TextContrastOverviewPage,
+  "text-contrast-word": TextContrastWordPage,
+  "text-contrast-powerpoint": TextContrastPowerPointPage,
+  "text-contrast-pdf": TextContrastPdfPage,
+  "text-contrast-canvas": TextContrastCanvasPage,
   "semantic-structure-overview": SemanticStructureOverviewPage,
+  "semantic-structure-word": SemanticStructureWordPage,
+  "semantic-structure-powerpoint": SemanticStructurePowerPointPage,
+  "semantic-structure-pdf": SemanticStructurePdfPage,
+  "semantic-structure-canvas": SemanticStructureCanvasPage,
   "tables-overview": TablesOverviewPage,
+  "tables-word": TablesWordPage,
+  "tables-powerpoint": TablesPowerPointPage,
+  "tables-pdf": TablesPdfPage,
+  "tables-canvas": TablesCanvasPage,
   "seizure-risk-overview": SeizureRiskOverviewPage,
+  "seizure-risk-image": SeizureRiskImagePage,
 };
 
 /**

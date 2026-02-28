@@ -34,6 +34,7 @@ export default defineConfig([
     rules: {
       ...react.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
+      ...jsxA11y.flatConfigs.strict.rules,
       "react/react-in-jsx-scope": "off",
       "react/prop-types": "off",
     },
@@ -47,6 +48,13 @@ export default defineConfig([
     },
   },
   {
-    ignores: ["dist/**", "node_modules/**", ".astro/**", "scripts/**"],
+    ignores: [
+      "dist/**",
+      "node_modules/**",
+      ".astro/**",
+      "scripts/**",
+      "playwright.config.mjs",
+      "tests/**",
+    ],
   },
 ]);

@@ -25,6 +25,7 @@ function AudioDemo({ src, label, transcriptSummary, transcriptContent }) {
           marginTop: 8,
         }}
       >
+        <track kind="captions" />
         <a href={src} download>Download audio</a>
       </audio>
       {hasTranscript && (
@@ -340,7 +341,7 @@ export default function TextAlternativesPdf() {
       <figure style={{ margin: "24px 0" }}>
         <img
           src="/images/acrobat-set-alternate-text.png"
-          alt="Screenshot of the Set Alternate Text dialog in Adobe Acrobat Pro. It shows Image 1 of 1 with navigation arrows, an Alternate text label, a Decorative figure checkbox, and a text field containing Rutgers The State University of New Jersey logo. Save and Close and Cancel buttons are at the bottom."
+          alt="Screenshot of the Set Alternate Text dialog in Adobe Acrobat Pro. It shows Item 1 of 1 with navigation arrows, an Alternate text label, a Decorative figure checkbox, and a text field containing Rutgers The State University of New Jersey logo. Save and Close and Cancel buttons are at the bottom."
           width={320}
           height={240}
           style={{

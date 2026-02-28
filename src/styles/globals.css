@@ -16,6 +16,7 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: var(--font-body);
+  overflow-x: hidden;
 }
 
 :root {
@@ -27,4 +28,221 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* ── Scrollable table wrapper ─────────────────────────────── */
+.table-scroll-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 24px 0;
+}
+
+/* ── Responsive: Tablet (≤ 1024px) ────────────────────────── */
+@media (max-width: 1024px) {
+  .top-nav-brand-nav {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+  }
+
+  .top-nav-inner {
+    flex-wrap: wrap;
+    height: auto !important;
+    min-height: 56px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    gap: 6px;
+  }
+
+  .top-nav-nav {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .content-layout-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+
+  .content-layout-toc {
+    display: none !important;
+  }
+
+  .content-layout-main {
+    max-width: 100% !important;
+  }
+
+  .category-card-file-types {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)) !important;
+  }
+
+  .compare-boxes {
+    flex-direction: column !important;
+  }
+
+  .compare-boxes > div {
+    min-width: 0 !important;
+  }
+
+  .error-msg-list > div {
+    flex-direction: column !important;
+    gap: 4px !important;
+  }
+
+  .error-msg-list > div > span:first-child {
+    min-width: 0 !important;
+  }
+}
+
+/* ── Responsive: Mobile (≤ 768px) ─────────────────────────── */
+@media (max-width: 768px) {
+  .top-nav-header {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .top-nav-inner {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    gap: 8px;
+  }
+
+  .top-nav-nav a {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  .home-main {
+    padding: 24px 16px 60px !important;
+  }
+
+  .home-title {
+    font-size: 28px !important;
+  }
+
+  .home-intro {
+    font-size: 16px !important;
+  }
+
+  .category-card {
+    padding: 18px 16px !important;
+  }
+
+  .category-card-metrics {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .category-card-expanded-detail {
+    grid-template-columns: 1fr !important;
+  }
+
+  .content-layout-grid {
+    padding: 20px 16px 60px !important;
+  }
+
+  .content-page-footer {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .home-footer {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .content-page-h1 {
+    font-size: 26px !important;
+  }
+
+  .content-page-subtitle {
+    font-size: 15px !important;
+  }
+
+  .file-type-pills {
+    gap: 6px !important;
+    margin-bottom: 28px !important;
+  }
+
+  .file-type-pills a {
+    font-size: 12px !important;
+    padding: 4px 10px !important;
+  }
+
+  .ally-error-box {
+    padding: 16px 18px !important;
+  }
+
+  .ally-error-box-message {
+    font-size: 16px !important;
+  }
+
+  .home-sort-legend {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .ref-table td {
+    padding: 10px 8px 10px 0 !important;
+    font-size: 13px !important;
+  }
+
+  .ref-table td:first-child {
+    width: auto !important;
+    min-width: 100px;
+  }
+
+  .legend-bar {
+    gap: 12px !important;
+  }
+
+  .code-style-block {
+    padding: 14px 16px !important;
+    font-size: 12.5px !important;
+  }
+
+  .content-layout-main h2 {
+    margin-top: 40px !important;
+    font-size: 19px !important;
+  }
+
+  .content-layout-main img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* ── Responsive: Small mobile (≤ 480px) ───────────────────── */
+@media (max-width: 480px) {
+  .category-card-file-types {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .home-title {
+    font-size: 24px !important;
+  }
+
+  .legend-bar {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  .top-nav-nav a {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+
+  .file-type-pills a {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+  }
+
+  .content-page-h1 {
+    font-size: 22px !important;
+  }
+
+  .category-card h2 {
+    font-size: 17px !important;
+  }
 }

@@ -1,4 +1,4 @@
-# Getting to 100
+# Canvas LMS Accessibility
 
 A practical reference for higher education instructors using Anthology Ally to improve course accessibility.
 

@@ -25,6 +25,7 @@ function AudioDemo({ src, label, transcriptSummary, transcriptContent }) {
           marginTop: 8,
         }}
       >
+        <track kind="captions" />
         <a href={src} download>Download audio</a>
       </audio>
       {hasTranscript && (
@@ -499,7 +500,7 @@ export default function TextAlternativesPowerPoint() {
         <figure style={{ margin: 0 }}>
           <img
             src="/images/ppt-accessibility-checker-detail.png"
-            alt="Screenshot of the Accessibility Assistant pane in PowerPoint showing 1 of 3 Media and Illustrations issues. The heading reads Missing alt text with a prompt asking How would you describe this object and its context to someone who is blind or low vision, followed by a note recommending 1–2 detailed sentences. Below is an empty text field with placeholder text Enter image description, a Generate description button, and a Mark as decorative button."
+            alt="Screenshot of the Accessibility Assistant pane in PowerPoint showing 1 of 3 Media and Illustrations issues. The heading reads Missing alt text with a prompt asking How would you describe this object and its context to someone who is blind or low vision, followed by a note recommending 1–2 detailed sentences. Below is an empty text field with placeholder text Enter description, a Generate description button, and a Mark as decorative button."
             width={220}
             height={440}
             style={{

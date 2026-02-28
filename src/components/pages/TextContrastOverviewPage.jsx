@@ -4,8 +4,6 @@ import {
   AllyErrorBox,
   CompareBoxes,
   RefTable,
-  Callout,
-  Placeholder,
 } from "@/components/content.jsx";
 
 const tocSections = [
@@ -45,7 +43,7 @@ export default function TextContrastOverviewPage() {
     <ContentPageLayout
       categorySlug="text-contrast"
       fileTypeSlug="overview"
-      title="Text Contrast"
+      title="DRAFT — Text Contrast"
       subtitle="Overview"
       tocSections={tocSections}
     >
@@ -63,10 +61,6 @@ export default function TextContrastOverviewPage() {
         <strong>Canvas</strong> files. Image files are not applicable for
         this check.
       </P>
-      <Callout type="info">
-        Detailed file-type pages with testing results, fix instructions, and
-        screenshots are coming soon.
-      </Callout>
 
       <SH id="ally-errors">Ally Error Messages</SH>
       <AllyErrorBox
@@ -74,7 +68,21 @@ export default function TextContrastOverviewPage() {
         severity="Minor"
         wcag="1.4.3 Contrast (Minimum) (Level AA)"
       />
-      <Placeholder label="Detailed error messages and testing results by file type coming soon" />
+      <P>
+        Ally surfaces one primary contrast check across document types. The
+        wording varies by file type:
+      </P>
+      <ul style={{ margin: "0 0 18px", paddingLeft: 24, fontFamily: "var(--font-body)", fontSize: 15.5, lineHeight: 1.75, color: "inherit" }}>
+        <li><strong>Word:</strong> &ldquo;Document has text with insufficient contrast&rdquo;</li>
+        <li><strong>PowerPoint:</strong> &ldquo;Presentation has text with insufficient contrast&rdquo;</li>
+        <li><strong>PDF:</strong> &ldquo;PDF has contrast issues&rdquo;</li>
+        <li><strong>Canvas:</strong> &ldquo;Text must have sufficient color contrast&rdquo;</li>
+      </ul>
+      <P>
+        Severity is typically <strong>Minor</strong>. Use the file-type
+        pages (Word, PowerPoint, PDF, Canvas) for fix steps and testing
+        notes.
+      </P>
 
       <SH id="ally-catches">What Ally Catches</SH>
       <CompareBoxes
@@ -83,7 +91,25 @@ export default function TextContrastOverviewPage() {
       />
 
       <SH id="ally-misses">What Ally Misses</SH>
-      <Placeholder label="Detailed analysis of Ally's contrast detection gaps coming soon" />
+      <P>
+        Ally focuses on measurable contrast ratios for body text. It does
+        not flag when <strong>color alone</strong> conveys meaning (e.g.
+        &ldquo;items in red are required&rdquo; with no other cue). That
+        overlaps with WCAG 1.4.1 Use of Color; manual review is needed.
+      </P>
+      <P>
+        Contrast inside <strong>images, charts, and diagrams</strong> is
+        generally not evaluated the same way as editable text. Light gray
+        labels on a chart may fail human evaluation but not trigger Ally.
+        Branded slide decks or PDFs with institutional colors that fall
+        just under 4.5:1 can also slip through if Ally&apos;s sampling
+        misses the specific combination.
+      </P>
+      <P>
+        Use the Accessibility Checker in each authoring tool where
+        available, and consider a dedicated contrast checker (e.g. Colour
+        Contrast Analyser) for critical materials.
+      </P>
 
       <SH id="quick-ref">Quick Reference</SH>
       <RefTable rows={[

@@ -6,6 +6,7 @@ import {
   RefTable,
   ResourceLink,
   Callout,
+  CheckerComparisonTable,
 } from "@/components/content.jsx";
 
 const tocSections = [
@@ -13,6 +14,7 @@ const tocSections = [
   { id: "ally-errors", label: "Ally Error Messages" },
   { id: "hear-the-difference", label: "Hear the Difference" },
   { id: "results-by-type", label: "Results by File Type" },
+  { id: "checker-detection-images", label: "Checker Detection: Images (example)" },
   { id: "false-positive", label: "False Positive" },
   { id: "ally-catches", label: "What Ally Catches" },
   { id: "ally-misses", label: "What Ally Misses" },
@@ -71,6 +73,7 @@ function AudioDemo({ src, label, transcriptSummary, transcriptContent }) {
           marginTop: 8,
         }}
       >
+        <track kind="captions" />
         <a href={src} download>Download audio</a>
       </audio>
       {hasTranscript && (
@@ -157,7 +160,7 @@ export default function TextAlternativesOverviewPage() {
         severity="Major"
         wcag="1.1.1 Non-text Content (Level A)"
       />
-      <div style={{
+      <div className="error-msg-list code-style-block" style={{
         padding: "16px 22px", borderRadius: 10,
         backgroundColor: t.surfaceAlt, border: `1px solid ${t.border}`,
         margin: "16px 0 24px",
@@ -315,6 +318,30 @@ export default function TextAlternativesOverviewPage() {
         </div>
       ))}
 
+      {/* ── Checker detection: Images (example) ── */}
+      <SH id="checker-detection-images">Checker Detection: Images (example)</SH>
+      <P>
+        The table below shows whether each checker or context detects specific
+        image issues. <strong>Ally</strong>, <strong>MS Office</strong>, and{" "}
+        <strong>Acrobat</strong> apply to documents (Word, PowerPoint, PDF).{" "}
+        <strong>RCE</strong> is the in-editor checker (e.g. Canvas Rich Content
+        Editor). <strong>File upload</strong> is Ally&apos;s check on standalone
+        image files uploaded to the LMS.
+      </P>
+      <CheckerComparisonTable
+        caption="Images: type of test vs. detection by checker or context"
+        rows={[
+          { testType: "No text alternative", ally: "Detects", msOffice: "Detects", acrobat: "Detects (PDF)", rce: "—", fileUpload: "—" },
+          { testType: "AI-generated text alternative", ally: "Does not detect", msOffice: "May flag (e.g. “Microsoft generated”)", acrobat: "Does not detect", rce: "—", fileUpload: "—" },
+          { testType: "Should be decorative", ally: "Does not detect", msOffice: "Does not detect", acrobat: "Does not detect", rce: "—", fileUpload: "—" },
+          { testType: "Vague alt text", ally: "Does not detect", msOffice: "Does not detect", acrobat: "Does not detect", rce: "—", fileUpload: "—" },
+          { testType: "Dense alt text", ally: "Does not detect", msOffice: "Does not detect", acrobat: "Does not detect", rce: "—", fileUpload: "—" },
+          { testType: "File name as alt text", ally: "Detects", msOffice: "May flag", acrobat: "Does not detect", rce: "—", fileUpload: "—" },
+          { testType: "Gibberish (e.g. akdjhaskdh)", ally: "Does not detect", msOffice: "Does not detect", acrobat: "Does not detect", rce: "—", fileUpload: "—" },
+          { testType: "Placeholder (e.g. alt=\"image\")", ally: "Does not detect", msOffice: "Does not detect", acrobat: "Does not detect", rce: "—", fileUpload: "—" },
+        ]}
+      />
+
       {/* ── False Positive ── */}
       <SH id="false-positive">False Positive</SH>
       <Callout type="warning">
@@ -350,7 +377,7 @@ export default function TextAlternativesOverviewPage() {
         If you encounter this flag, do not shorten your alt text to appease
         the tool. Write the description the image needs. If Ally flags it,
         the flag is wrong &mdash; not your alt text. See the{" "}
-        <a href="/text-alternatives/canvas#false-positive" style={{ color: t.link }}>
+        <a href="/text-alternatives/canvas#false-positive" style={{ color: t.link, textDecoration: "underline" }}>
           Canvas page
         </a>{" "}
         for the full analysis.

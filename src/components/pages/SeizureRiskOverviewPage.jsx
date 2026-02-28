@@ -5,7 +5,6 @@ import {
   CompareBoxes,
   RefTable,
   Callout,
-  Placeholder,
 } from "@/components/content.jsx";
 
 const tocSections = [
@@ -45,7 +44,7 @@ export default function SeizureRiskOverviewPage() {
     <ContentPageLayout
       categorySlug="seizure-risk"
       fileTypeSlug="overview"
-      title="Seizure Risk"
+      title="DRAFT — Seizure Risk"
       subtitle="Overview"
       tocSections={tocSections}
     >
@@ -79,7 +78,13 @@ export default function SeizureRiskOverviewPage() {
         severity="Major"
         wcag="2.3.1 Three Flashes or Below Threshold (Level A)"
       />
-      <Placeholder label="Detailed testing results coming soon" />
+      <P>
+        This is the only seizure-related message Ally surfaces. It applies
+        to <strong>Image</strong> files (e.g. animated GIFs). Word,
+        PowerPoint, PDF, and Canvas are not checked for flashing content,
+        so no Ally error message is shown for those formats even when
+        they contain risky material.
+      </P>
 
       <SH id="ally-catches">What Ally Catches</SH>
       <CompareBoxes
@@ -94,7 +99,15 @@ export default function SeizureRiskOverviewPage() {
         check PowerPoint slide transitions or animation effects, and does
         not evaluate CSS animations in Canvas content.
       </P>
-      <Placeholder label="Detailed analysis of Ally's seizure risk detection gaps coming soon" />
+      <P>
+        In practice, most course materials that could pose a seizure risk
+        are <strong>videos</strong> (e.g. clips with strobe effects) or
+        <strong> PowerPoint</strong> (transitions, animated objects).
+        Neither is covered by Ally&apos;s single image check. Rely on
+        authoring-tool guidance (e.g. avoid rapid flashes in video
+        editing, use subtle PowerPoint transitions) and institutional
+        policy rather than Ally for this criterion.
+      </P>
 
       <SH id="quick-ref">Quick Reference</SH>
       <RefTable rows={[

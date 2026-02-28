@@ -4,8 +4,6 @@ import {
   AllyErrorBox,
   CompareBoxes,
   RefTable,
-  Callout,
-  Placeholder,
 } from "@/components/content.jsx";
 
 const tocSections = [
@@ -45,7 +43,7 @@ export default function SemanticStructureOverviewPage() {
     <ContentPageLayout
       categorySlug="semantic-structure"
       fileTypeSlug="overview"
-      title="Semantic Structure"
+      title="DRAFT — Semantic Structure"
       subtitle="Overview"
       tocSections={tocSections}
     >
@@ -63,10 +61,6 @@ export default function SemanticStructureOverviewPage() {
         <strong>PowerPoint</strong>, <strong>PDF</strong>, and{" "}
         <strong>Canvas</strong> files.
       </P>
-      <Callout type="info">
-        Detailed file-type pages with testing results, fix instructions, and
-        screenshots are coming soon.
-      </Callout>
 
       <SH id="ally-errors">Ally Error Messages</SH>
       <AllyErrorBox
@@ -74,7 +68,19 @@ export default function SemanticStructureOverviewPage() {
         severity="Major"
         wcag="1.3.1 Info and Relationships (Level A)"
       />
-      <Placeholder label="Detailed error messages and testing results by file type coming soon" />
+      <P>
+        Ally runs multiple structure checks; wording varies by file type:
+      </P>
+      <ul style={{ margin: "0 0 18px", paddingLeft: 24, fontFamily: "var(--font-body)", fontSize: 15.5, lineHeight: 1.75, color: "inherit" }}>
+        <li><strong>Word:</strong> &ldquo;Document does not have any headings&rdquo;</li>
+        <li><strong>PowerPoint:</strong> &ldquo;Presentation does not have slide titles&rdquo;</li>
+        <li><strong>PDF:</strong> &ldquo;PDF does not have any headings&rdquo;</li>
+        <li><strong>Canvas:</strong> &ldquo;Headings should be present&rdquo;</li>
+      </ul>
+      <P>
+        Severity is typically <strong>Major</strong>. Use the file-type
+        pages for fix steps and testing notes.
+      </P>
 
       <SH id="ally-catches">What Ally Catches</SH>
       <CompareBoxes
@@ -83,7 +89,20 @@ export default function SemanticStructureOverviewPage() {
       />
 
       <SH id="ally-misses">What Ally Misses</SH>
-      <Placeholder label="Detailed analysis of Ally's structure detection gaps coming soon" />
+      <P>
+        Ally checks for the <em>presence</em> of headings and titles, not
+        whether they are meaningful or in a logical order. A document with
+        &quot;Heading 1&quot; style on every paragraph may pass even though
+        it gives no real structure. Skipped levels (e.g. H1 to H4) are
+        sometimes caught, but not always.
+      </P>
+      <P>
+        <strong>Reading order</strong> and <strong>content order</strong>
+        in complex layouts (multi-column, text boxes, sidebars) are not
+        fully evaluated. Screen reader users may encounter content in an
+        illogical sequence that Ally does not flag. Manual testing with a
+        screen reader is the only way to verify structure and order.
+      </P>
 
       <SH id="quick-ref">Quick Reference</SH>
       <RefTable rows={[
