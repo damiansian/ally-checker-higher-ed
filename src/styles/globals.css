@@ -30,11 +30,34 @@ a {
   text-decoration: none;
 }
 
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -48px;
+  z-index: 1000;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #111827;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 8px;
+}
+
 /* ── Scrollable table wrapper ─────────────────────────────── */
 .table-scroll-wrapper {
+  margin: 24px 0;
+}
+
+.table-scroll-region {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  margin: 24px 0;
 }
 
 /* ── Responsive: Tablet (≤ 1024px) ────────────────────────── */

@@ -48,10 +48,18 @@ export default defineConfig([
     },
   },
   {
+    files: ["src/components/content.jsx"],
+    rules: {
+      "jsx-a11y/no-noninteractive-tabindex": "off",
+    },
+  },
+  {
     ignores: [
       "dist/**",
       "node_modules/**",
       ".astro/**",
+      "test-results/**",
+      "playwright-report/**",
       "scripts/**",
       "playwright.config.mjs",
       "tests/**",

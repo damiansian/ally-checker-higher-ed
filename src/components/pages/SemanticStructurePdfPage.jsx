@@ -9,16 +9,6 @@ import {
   Placeholder,
 } from "@/components/content.jsx";
 
-const tocSections = [
-  { id: "ally-error", label: "The Ally Error" },
-  { id: "why-matters", label: "Why This Matters" },
-  { id: "how-to-fix", label: "How to Fix It" },
-  { id: "ally-catches", label: "What Ally Catches" },
-  { id: "ally-misses", label: "What Ally Misses" },
-  { id: "quick-ref", label: "Quick Reference" },
-  { id: "resources", label: "Resources" },
-];
-
 function SH({ id, children }) {
   const { t } = useTheme();
   return (
@@ -59,9 +49,8 @@ export default function SemanticStructurePdfPage() {
     <ContentPageLayout
       categorySlug="semantic-structure"
       fileTypeSlug="pdf"
-      title="DRAFT — Semantic Structure"
+      title="DRAFT - Semantic Structure"
       subtitle="PDF"
-      tocSections={tocSections}
     >
       <SH id="ally-error">The Ally Error</SH>
       <AllyErrorBox
@@ -103,10 +92,21 @@ export default function SemanticStructurePdfPage() {
       </P>
       <Placeholder label="Screenshot: Acrobat Pro Tags panel or Accessibility checker showing heading tags" />
 
+      <SH id="lists">Lists</SH>
+      <P>
+        Lists in PDFs must be tagged so screen readers can announce list
+        structure. Use proper list styles in the <strong>source document</strong> (Word
+        or PowerPoint) before exporting - Bullets and Numbering, not typed
+        characters - so the PDF export preserves list tags. Ally flags faked
+        lists in PDFs; the Microsoft Accessibility Checker and Acrobat
+        often do not. If the source used list styles, the PDF is more
+        likely to have correct list tags.
+      </P>
+
       <SH id="ally-catches">What Ally Catches</SH>
       <CompareBoxes
-        catches="Untagged PDFs, PDFs with no heading tags"
-        misses="Incorrect heading level order, meaningful heading text, reading order"
+        catches="Untagged PDFs, PDFs with no heading tags, faked lists (no list tags)"
+        misses="Incorrect heading level order, meaningful heading text, reading order, list nesting"
       />
 
       <SH id="ally-misses">What Ally Misses</SH>
@@ -118,9 +118,9 @@ export default function SemanticStructurePdfPage() {
 
       <SH id="quick-ref">Quick Reference</SH>
       <RefTable rows={[
-        ["Ally error", "PDF does not have any headings"],
+        ["Ally errors", "No headings; lists should be formatted as lists"],
         ["WCAG", "1.3.1 Info and Relationships (Level A)"],
-        ["Fix", "Use heading styles in Word, then export; or tag in Acrobat Pro"],
+        ["Fix", "Use heading and list styles in Word, then export; or tag in Acrobat Pro"],
       ]} />
 
       <SH id="resources">Resources</SH>

@@ -9,19 +9,6 @@ import {
   CheckerComparisonTable,
 } from "@/components/content.jsx";
 
-const tocSections = [
-  { id: "overview", label: "Overview" },
-  { id: "ally-errors", label: "Ally Error Messages" },
-  { id: "hear-the-difference", label: "Hear the Difference" },
-  { id: "results-by-type", label: "Results by File Type" },
-  { id: "checker-detection-images", label: "Checker Detection: Images (example)" },
-  { id: "false-positive", label: "False Positive" },
-  { id: "ally-catches", label: "What Ally Catches" },
-  { id: "ally-misses", label: "What Ally Misses" },
-  { id: "quick-ref", label: "Quick Reference" },
-  { id: "resources", label: "Resources" },
-];
-
 function SH({ id, children }) {
   const { t } = useTheme();
   return (
@@ -125,9 +112,8 @@ export default function TextAlternativesOverviewPage() {
       fileTypeSlug="overview"
       title="Text Alternatives"
       subtitle="Overview"
-      tocSections={tocSections}
     >
-      {/* ── Overview ── */}
+      {/* \u2500\u2500 Overview \u2500\u2500 */}
       <SH id="overview">Overview</SH>
       <P>
         Images, graphics, and non-text content need text descriptions so screen
@@ -148,7 +134,7 @@ export default function TextAlternativesOverviewPage() {
         If you fix one thing across your courses, this should be it.
       </Callout>
 
-      {/* ── Ally Error Messages ── */}
+      {/* \u2500\u2500 Ally Error Messages \u2500\u2500 */}
       <SH id="ally-errors">Ally Error Messages</SH>
       <P>
         Ally reports slightly different error messages depending on the file
@@ -189,7 +175,7 @@ export default function TextAlternativesOverviewPage() {
         </div>
       </div>
 
-      {/* ── Hear the Difference ── */}
+      {/* \u2500\u2500 Hear the Difference \u2500\u2500 */}
       <SH id="hear-the-difference">Hear the Difference</SH>
       <P>
         The impact of missing alt text is best understood by hearing it. These
@@ -230,7 +216,7 @@ export default function TextAlternativesOverviewPage() {
         }
       />
 
-      {/* ── Results by File Type ── */}
+      {/* \u2500\u2500 Results by File Type \u2500\u2500 */}
       <SH id="results-by-type">Results by File Type</SH>
       <P>
         Ally reliably detects missing alt text across all five file types. The
@@ -318,31 +304,28 @@ export default function TextAlternativesOverviewPage() {
         </div>
       ))}
 
-      {/* ── Checker detection: Images (example) ── */}
+      {/* \u2500\u2500 Checker detection: Images (example) \u2500\u2500 */}
       <SH id="checker-detection-images">Checker Detection: Images (example)</SH>
       <P>
-        The table below shows whether each checker or context detects specific
+        The table below shows whether each checker detects specific
         image issues. <strong>Ally</strong>, <strong>MS Office</strong>, and{" "}
-        <strong>Acrobat</strong> apply to documents (Word, PowerPoint, PDF).{" "}
-        <strong>RCE</strong> is the in-editor checker (e.g. Canvas Rich Content
-        Editor). <strong>File upload</strong> is Ally&apos;s check on standalone
-        image files uploaded to the LMS.
+        <strong>Acrobat</strong> apply to documents (Word, PowerPoint, PDF).
       </P>
       <CheckerComparisonTable
-        caption="Images: type of test vs. detection by checker or context"
+        caption="Images: type of test vs. detection by checker"
         rows={[
-          { testType: "No text alternative", ally: "Detects", msOffice: "Detects", acrobat: "Detects (PDF)", rce: "—", fileUpload: "—" },
-          { testType: "AI-generated text alternative", ally: "Does not detect", msOffice: "May flag (e.g. “Microsoft generated”)", acrobat: "Does not detect", rce: "—", fileUpload: "—" },
-          { testType: "Should be decorative", ally: "Does not detect", msOffice: "Does not detect", acrobat: "Does not detect", rce: "—", fileUpload: "—" },
-          { testType: "Vague alt text", ally: "Does not detect", msOffice: "Does not detect", acrobat: "Does not detect", rce: "—", fileUpload: "—" },
-          { testType: "Dense alt text", ally: "Does not detect", msOffice: "Does not detect", acrobat: "Does not detect", rce: "—", fileUpload: "—" },
-          { testType: "File name as alt text", ally: "Detects", msOffice: "May flag", acrobat: "Does not detect", rce: "—", fileUpload: "—" },
-          { testType: "Gibberish (e.g. akdjhaskdh)", ally: "Does not detect", msOffice: "Does not detect", acrobat: "Does not detect", rce: "—", fileUpload: "—" },
-          { testType: "Placeholder (e.g. alt=\"image\")", ally: "Does not detect", msOffice: "Does not detect", acrobat: "Does not detect", rce: "—", fileUpload: "—" },
+          { testType: "No text alternative", ally: "Checked", msOffice: "Checked", acrobat: "Checked" },
+          { testType: "AI-generated text alternative", ally: "Not checked", msOffice: "Checked", acrobat: "Not checked" },
+          { testType: "Should be decorative (divider line)", ally: "Not checked", msOffice: "Not checked", acrobat: "Not checked" },
+          { testType: "Vague alt text (2026 sales chart)", ally: "Not checked", msOffice: "Not checked", acrobat: "Not checked" },
+          { testType: "Dense alt text (>120 char)", ally: "False positive", msOffice: "n/a", acrobat: "n/a" },
+          { testType: "File name as alt text (logo.png)", ally: "Checked", msOffice: "Checked", acrobat: "Not checked" },
+          { testType: "Gibberish (alskjshdsflh)", ally: "Not checked", msOffice: "Not checked", acrobat: "Not checked" },
+          { testType: "Placeholder (image)", ally: "Not checked", msOffice: "Not checked", acrobat: "Not checked" },
         ]}
       />
 
-      {/* ── False Positive ── */}
+      {/* \u2500\u2500 False Positive \u2500\u2500 */}
       <SH id="false-positive">False Positive</SH>
       <Callout type="warning">
         <div style={{
@@ -383,7 +366,7 @@ export default function TextAlternativesOverviewPage() {
         for the full analysis.
       </P>
 
-      {/* ── What Ally Catches ── */}
+      {/* \u2500\u2500 What Ally Catches \u2500\u2500 */}
       <SH id="ally-catches">What Ally Catches</SH>
       <P>
         Across all file types, Ally&apos;s alt text check works the same way:
@@ -405,7 +388,7 @@ export default function TextAlternativesOverviewPage() {
         No alt text entered <span style={{ color: t.accent }}>fails</span>
       </div>
 
-      {/* ── What Ally Misses ── */}
+      {/* \u2500\u2500 What Ally Misses \u2500\u2500 */}
       <SH id="ally-misses">What Ally Misses</SH>
       <CompareBoxes
         catches="Presence of alt text across all file types. Any text in the alt text field counts as a pass."
@@ -441,7 +424,7 @@ export default function TextAlternativesOverviewPage() {
         </div>
       ))}
 
-      {/* ── Quick Reference ── */}
+      {/* \u2500\u2500 Quick Reference \u2500\u2500 */}
       <SH id="quick-ref">Quick Reference</SH>
       <RefTable rows={[
         ["Ally checks", "3 checks across all file types"],
@@ -454,7 +437,7 @@ export default function TextAlternativesOverviewPage() {
         ["Known false positive", "Alt text length in Canvas RCE"],
       ]} />
 
-      {/* ── Resources ── */}
+      {/* \u2500\u2500 Resources \u2500\u2500 */}
       <SH id="resources">Resources</SH>
       <ResourceLink
         title="WebAIM Alternative Text Guide"

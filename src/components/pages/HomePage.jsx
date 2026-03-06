@@ -357,7 +357,12 @@ export default function HomePage() {
     }}>
       <TopNav activeCategorySlug="home" />
 
-      <main className="home-main" style={{ maxWidth: 1200, margin: "0 auto", padding: "40px 32px 80px" }}>
+      <main
+        id="main-content"
+        className="home-main"
+        tabIndex={-1}
+        style={{ maxWidth: 1200, margin: "0 auto", padding: "40px 32px 80px" }}
+      >
         {/* Title */}
         <h1 className="home-title" style={{
           fontSize: 40, fontWeight: 800, color: t.text,

@@ -9,18 +9,6 @@ import {
   Callout,
 } from "@/components/content.jsx";
 
-const tocSections = [
-  { id: "ally-error", label: "The Ally Error" },
-  { id: "which-images", label: "Which Images?" },
-  { id: "why-matters", label: "Why This Matters" },
-  { id: "how-to-fix", label: "How to Fix It" },
-  { id: "writing-alt-text", label: "Writing Good Alt Text" },
-  { id: "ally-catches", label: "What Ally Catches" },
-  { id: "ally-misses", label: "What Ally Misses" },
-  { id: "quick-ref", label: "Quick Reference" },
-  { id: "resources", label: "Resources" },
-];
-
 function SH({ id, children }) {
   const { t } = useTheme();
   return (
@@ -65,7 +53,6 @@ export default function TextAlternativesImagePage() {
       fileTypeSlug="image"
       title="Text Alternatives"
       subtitle="Image Files in Canvas Files"
-      tocSections={tocSections}
     >
       {/* ── The Ally Error ── */}
       <SH id="ally-error">The Ally Error</SH>

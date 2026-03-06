@@ -9,16 +9,6 @@ import {
   Placeholder,
 } from "@/components/content.jsx";
 
-const tocSections = [
-  { id: "ally-error", label: "The Ally Error" },
-  { id: "why-matters", label: "Why This Matters" },
-  { id: "how-to-fix", label: "How to Fix It" },
-  { id: "ally-catches", label: "What Ally Catches" },
-  { id: "ally-misses", label: "What Ally Misses" },
-  { id: "quick-ref", label: "Quick Reference" },
-  { id: "resources", label: "Resources" },
-];
-
 function SH({ id, children }) {
   const { t } = useTheme();
   return (
@@ -54,14 +44,13 @@ function P({ children }) {
   );
 }
 
-export default function TextContrastPdfPage() {
+export default function ColorPdfPage() {
   return (
     <ContentPageLayout
-      categorySlug="text-contrast"
+      categorySlug="color"
       fileTypeSlug="pdf"
-      title="DRAFT — Text Contrast"
+      title="DRAFT - Color"
       subtitle="PDF"
-      tocSections={tocSections}
     >
       <SH id="ally-error">The Ally Error</SH>
       <AllyErrorBox
@@ -102,6 +91,15 @@ export default function TextContrastPdfPage() {
         affect tagging. Prefer fixing the source.
       </P>
       <Placeholder label="Screenshot: PDF with contrast issue and Acrobat accessibility tools (if applicable)" />
+
+      <SH id="color-as-sole-means">Color as Sole Means (1.4.1)</SH>
+      <P>
+        Ally does not flag when color alone conveys information in a PDF.
+        WCAG 1.4.1 requires other cues. Fix in the source document: add text
+        labels, legends, or patterns so that charts, rubrics, and
+        color-coded content are understandable in grayscale or without
+        relying on color. Then re-export to PDF.
+      </P>
 
       <SH id="ally-catches">What Ally Catches</SH>
       <CompareBoxes

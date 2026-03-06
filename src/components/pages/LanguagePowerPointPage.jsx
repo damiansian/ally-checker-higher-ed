@@ -9,16 +9,6 @@ import {
   Callout,
 } from "@/components/content.jsx";
 
-const tocSections = [
-  { id: "ally-error", label: "The Ally Error" },
-  { id: "why-matters", label: "Why This Matters" },
-  { id: "unreliable", label: "Unreliable Detection" },
-  { id: "how-to-fix", label: "How to Fix It" },
-  { id: "ally-catches", label: "What Ally Catches and Misses" },
-  { id: "quick-ref", label: "Quick Reference" },
-  { id: "resources", label: "Resources" },
-];
-
 function SH({ id, children }) {
   const { t } = useTheme();
   return (
@@ -59,9 +49,8 @@ export default function LanguagePowerPointPage() {
     <ContentPageLayout
       categorySlug="language"
       fileTypeSlug="powerpoint"
-      title="DRAFT — Language"
+      title="DRAFT - Language"
       subtitle="PowerPoint Presentations"
-      tocSections={tocSections}
     >
       <SH id="ally-error">The Ally Error</SH>
       <AllyErrorBox
@@ -131,7 +120,7 @@ export default function LanguagePowerPointPage() {
       <RefTable rows={[
         ["Ally errors", "Presentation does not have a language set / correct language set"],
         ["WCAG", "3.1.1 Language of Page (A) / 3.1.2 Language of Parts (AA)"],
-        ["Detection", "Unreliable for PPTX — verify in PowerPoint and fix proactively"],
+        ["Detection", "Unreliable for PPTX - verify in PowerPoint and fix proactively"],
         ["Fix", "File → Options → Language; set proofing/document language"],
       ]} />
 

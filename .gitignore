@@ -29,3 +29,6 @@ test-results/
 
 # IDE
 .vscode/
+
+# backup (restore with: mv course-content-accessibility.backup.html course-content-accessibility.html)
+course-content-accessibility.backup.html

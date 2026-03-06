@@ -9,16 +9,6 @@ import {
   Placeholder,
 } from "@/components/content.jsx";
 
-const tocSections = [
-  { id: "ally-error", label: "The Ally Error" },
-  { id: "why-matters", label: "Why This Matters" },
-  { id: "how-to-fix", label: "How to Fix It" },
-  { id: "ally-catches", label: "What Ally Catches" },
-  { id: "ally-misses", label: "What Ally Misses" },
-  { id: "quick-ref", label: "Quick Reference" },
-  { id: "resources", label: "Resources" },
-];
-
 function SH({ id, children }) {
   const { t } = useTheme();
   return (
@@ -59,9 +49,8 @@ export default function SemanticStructureCanvasPage() {
     <ContentPageLayout
       categorySlug="semantic-structure"
       fileTypeSlug="canvas"
-      title="DRAFT — Semantic Structure"
+      title="DRAFT - Semantic Structure"
       subtitle="Canvas editor"
-      tocSections={tocSections}
     >
       <SH id="ally-error">The Ally Error</SH>
       <AllyErrorBox
@@ -92,10 +81,22 @@ export default function SemanticStructureCanvasPage() {
       <Step number="4">Avoid using bold or font size instead of heading styles.</Step>
       <Placeholder label="Screenshot: Canvas RCE Paragraph/Format dropdown with Heading 1, 2, 3" />
 
+      <SH id="lists">Lists</SH>
+      <P>
+        Ally flags <strong>faked lists</strong> in Canvas content - lines that
+        look like a list but are plain paragraphs with typed bullets or
+        numbers. Use the RCE <strong>list tool</strong> (bullet or numbered
+        list button in the toolbar) to create real <code>&lt;ul&gt;</code> or{" "}
+        <code>&lt;ol&gt;</code> structure. Screen readers can then announce
+        &quot;list of X items.&quot; The list error may appear in the
+        editor&apos;s Accessibility Checker but not always on the Course
+        Dashboard; fix in the RCE before publishing.
+      </P>
+
       <SH id="ally-catches">What Ally Catches</SH>
       <CompareBoxes
-        catches="Content with no headings, missing or flat structure"
-        misses="Meaningful heading text, logical level order, reading order of blocks"
+        catches="Content with no headings, missing or flat structure, faked lists in RCE"
+        misses="Meaningful heading text, logical level order, reading order of blocks, list nesting"
       />
 
       <SH id="ally-misses">What Ally Misses</SH>
@@ -107,9 +108,10 @@ export default function SemanticStructureCanvasPage() {
 
       <SH id="quick-ref">Quick Reference</SH>
       <RefTable rows={[
-        ["Ally error", "Headings should be present"],
+        ["Ally errors", "Headings should be present; lists should be formatted as lists"],
         ["WCAG", "1.3.1 Info and Relationships (Level A)"],
-        ["Fix", "Paragraph/Format dropdown → Heading 1, 2, 3; do not skip levels"],
+        ["Headings", "Paragraph/Format dropdown → Heading 1, 2, 3; do not skip levels"],
+        ["Lists", "Use RCE list tool (bullets/numbering), not typed characters"],
       ]} />
 
       <SH id="resources">Resources</SH>

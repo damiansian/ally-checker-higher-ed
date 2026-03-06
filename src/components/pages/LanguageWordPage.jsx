@@ -9,20 +9,6 @@ import {
   Callout,
 } from "@/components/content.jsx";
 
-const tocSections = [
-  { id: "ally-error", label: "The Ally Errors" },
-  { id: "why-matters", label: "Why This Matters" },
-  { id: "how-word-handles", label: "How Word Handles Language" },
-  { id: "hear-the-difference", label: "Hear the Difference" },
-  { id: "testing-results", label: "Testing Results" },
-  { id: "how-to-fix", label: "How to Fix It" },
-  { id: "sample-files", label: "Sample Files to Test in Ally" },
-  { id: "ally-detection", label: "What Ally Catches and Misses" },
-  { id: "other-tools", label: "Other Tools" },
-  { id: "quick-ref", label: "Quick Reference" },
-  { id: "resources", label: "Resources" },
-];
-
 /* ── Shared helpers ────────────────────────────────────────── */
 
 function SH({ id, children }) {
@@ -230,7 +216,6 @@ export default function LanguageWordPage() {
       fileTypeSlug="word"
       title="Language"
       subtitle="Microsoft Word Documents"
-      tocSections={tocSections}
     >
       {/* ── The Ally Errors ── */}
       <SH id="ally-error">The Ally Errors</SH>

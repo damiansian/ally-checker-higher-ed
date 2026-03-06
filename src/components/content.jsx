@@ -245,22 +245,29 @@ export function CheckerComparisonTable({ caption, rows }) {
   const columns = [
     { key: "ally", label: "Ally" },
     { key: "msOffice", label: "MS Office" },
-    { key: "acrobat", label: "Acrobat checker" },
-    { key: "rce", label: "RCE" },
-    { key: "fileUpload", label: "File upload" },
+    { key: "acrobat", label: "Acrobat" },
   ];
   return (
-    <figure className="table-scroll-wrapper" style={{ margin: "24px 0" }}>
-      <table
-        style={{
-          width: "100%",
-          borderCollapse: "collapse",
-          fontSize: 14,
-          fontFamily: "var(--font-body)",
-          minWidth: 600,
-        }}
-        aria-label={caption || "Checker detection comparison"}
+    <figure
+      className="table-scroll-wrapper"
+      style={{ margin: "24px 0" }}
+    >
+      <div
+        className="table-scroll-region"
+        tabIndex={0}
+        role="region"
+        aria-label={caption || "Scrollable comparison table"}
       >
+        <table
+          style={{
+            width: "100%",
+            borderCollapse: "collapse",
+            fontSize: 14,
+            fontFamily: "var(--font-body)",
+            minWidth: 600,
+          }}
+          aria-label={caption || "Checker detection comparison"}
+        >
         {caption && (
           <caption
             style={{
@@ -336,7 +343,8 @@ export function CheckerComparisonTable({ caption, rows }) {
             </tr>
           ))}
         </tbody>
-      </table>
+        </table>
+      </div>
     </figure>
   );
 }

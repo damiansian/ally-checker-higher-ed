@@ -8,18 +8,6 @@ import {
   Callout,
 } from "@/components/content.jsx";
 
-const tocSections = [
-  { id: "overview", label: "Overview" },
-  { id: "ally-errors", label: "Ally Error Messages" },
-  { id: "hear-the-difference", label: "Hear the Difference" },
-  { id: "results-by-type", label: "Results by File Type" },
-  { id: "false-positive", label: "False Positive" },
-  { id: "ally-catches", label: "What Ally Catches" },
-  { id: "ally-misses", label: "What Ally Misses" },
-  { id: "quick-ref", label: "Quick Reference" },
-  { id: "resources", label: "Resources" },
-];
-
 /* ── Spanish passage used for audio demos ──────────────────── */
 
 const spanishPassage =
@@ -141,7 +129,6 @@ export default function LanguageOverviewPage() {
       fileTypeSlug="overview"
       title="Language"
       subtitle="Overview"
-      tocSections={tocSections}
     >
       {/* ── Overview ── */}
       <SH id="overview">Overview</SH>

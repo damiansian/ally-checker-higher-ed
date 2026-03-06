@@ -9,16 +9,6 @@ import {
   Placeholder,
 } from "@/components/content.jsx";
 
-const tocSections = [
-  { id: "ally-error", label: "The Ally Error" },
-  { id: "why-matters", label: "Why This Matters" },
-  { id: "how-to-fix", label: "How to Fix It" },
-  { id: "ally-catches", label: "What Ally Catches" },
-  { id: "ally-misses", label: "What Ally Misses" },
-  { id: "quick-ref", label: "Quick Reference" },
-  { id: "resources", label: "Resources" },
-];
-
 function SH({ id, children }) {
   const { t } = useTheme();
   return (
@@ -59,9 +49,8 @@ export default function SemanticStructureWordPage() {
     <ContentPageLayout
       categorySlug="semantic-structure"
       fileTypeSlug="word"
-      title="DRAFT — Semantic Structure"
+      title="DRAFT - Semantic Structure"
       subtitle="Word Documents"
-      tocSections={tocSections}
     >
       <SH id="ally-error">The Ally Error</SH>
       <AllyErrorBox
@@ -100,10 +89,24 @@ export default function SemanticStructureWordPage() {
         structure.
       </P>
 
+      <SH id="lists">Lists</SH>
+      <P>
+        Ally flags <strong>faked lists</strong> - content that looks like a
+        list but was created by typing bullets (•), dashes, or
+        &quot;1.&quot; &quot;2.&quot; instead of using Word&apos;s list
+        tools. Screen readers need real list structure to announce
+        &quot;list of X items.&quot;
+      </P>
+      <H3>Using list styles</H3>
+      <Step number="1">Select the lines that should be a list (or place the cursor in the first line).</Step>
+      <Step number="2">On the <strong>Home</strong> tab, click <strong>Bullets</strong> or <strong>Numbering</strong> in the Paragraph group. Do not type bullet characters or numbers manually.</Step>
+      <Step number="3">For multi-level lists, use Increase/Decrease Indent with the list style applied so nesting is programmatically correct.</Step>
+      <Placeholder label="Screenshot: Word Home tab Bullets and Numbering buttons" />
+
       <SH id="ally-catches">What Ally Catches</SH>
       <CompareBoxes
-        catches="Missing headings, skipped heading levels, documents with no heading styles"
-        misses="Whether heading text is meaningful, logical order, reading order in complex layouts"
+        catches="Missing headings, skipped heading levels, documents with no heading styles, faked lists (typed bullets/numbers instead of list styles)"
+        misses="Whether heading text is meaningful, logical order, reading order in complex layouts, correct list nesting"
       />
 
       <SH id="ally-misses">What Ally Misses</SH>
@@ -115,9 +118,10 @@ export default function SemanticStructureWordPage() {
 
       <SH id="quick-ref">Quick Reference</SH>
       <RefTable rows={[
-        ["Ally error", "Document does not have any headings"],
+        ["Ally errors", "No headings; lists should be formatted as lists"],
         ["WCAG", "1.3.1 Info and Relationships (Level A)"],
-        ["Fix", "Home → Styles → Heading 1, 2, 3; do not skip levels"],
+        ["Headings", "Home → Styles → Heading 1, 2, 3; do not skip levels"],
+        ["Lists", "Home → Bullets or Numbering; do not type bullets/numbers"],
         ["Check", "View → Navigation Pane → Headings"],
       ]} />
 

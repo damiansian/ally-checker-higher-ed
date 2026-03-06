@@ -68,20 +68,6 @@ function AudioDemo({ src, label, transcriptSummary, transcriptContent }) {
   );
 }
 
-const tocSections = [
-  { id: "ally-error", label: "The Ally Error" },
-  { id: "why-matters", label: "Why This Matters" },
-  { id: "how-to-fix", label: "How to Fix It" },
-  { id: "writing-alt-text", label: "Writing Good Alt Text" },
-  { id: "complex-images", label: "Complex Images" },
-  { id: "ally-catches", label: "What Ally Catches" },
-  { id: "ally-misses", label: "What Ally Misses" },
-  { id: "other-tools", label: "Other Tools" },
-  { id: "student-side", label: "The Student Side" },
-  { id: "quick-ref", label: "Quick Reference" },
-  { id: "resources", label: "Resources" },
-];
-
 function SH({ id, children }) {
   const { t } = useTheme();
   return (
@@ -142,7 +128,6 @@ export default function TextAlternativesPowerPoint() {
       fileTypeSlug="powerpoint"
       title="Text Alternatives"
       subtitle="PowerPoint Presentations"
-      tocSections={tocSections}
     >
       {/* ── The Ally Error ── */}
       <SH id="ally-error">The Ally Error</SH>

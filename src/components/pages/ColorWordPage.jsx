@@ -9,16 +9,6 @@ import {
   Placeholder,
 } from "@/components/content.jsx";
 
-const tocSections = [
-  { id: "ally-error", label: "The Ally Error" },
-  { id: "why-matters", label: "Why This Matters" },
-  { id: "how-to-fix", label: "How to Fix It" },
-  { id: "ally-catches", label: "What Ally Catches" },
-  { id: "ally-misses", label: "What Ally Misses" },
-  { id: "quick-ref", label: "Quick Reference" },
-  { id: "resources", label: "Resources" },
-];
-
 function SH({ id, children }) {
   const { t } = useTheme();
   return (
@@ -54,14 +44,13 @@ function P({ children }) {
   );
 }
 
-export default function TextContrastWordPage() {
+export default function ColorWordPage() {
   return (
     <ContentPageLayout
-      categorySlug="text-contrast"
+      categorySlug="color"
       fileTypeSlug="word"
-      title="DRAFT — Text Contrast"
+      title="DRAFT - Color"
       subtitle="Word Documents"
-      tocSections={tocSections}
     >
       <SH id="ally-error">The Ally Error</SH>
       <AllyErrorBox
@@ -98,6 +87,17 @@ export default function TextContrastWordPage() {
         Word&apos;s built-in <strong>Review → Check Accessibility</strong>
         reports contrast issues and can help you locate problem passages
         before uploading to your LMS.
+      </P>
+
+      <SH id="color-as-sole-means">Color as Sole Means (1.4.1)</SH>
+      <P>
+        Ally does not flag when <strong>color alone</strong> conveys meaning
+        (e.g. &quot;items in red are required&quot; with no other cue).
+        WCAG 1.4.1 requires that information not rely on color only. Ask:
+        would meaning be lost if the document were printed in grayscale? In
+        Word, add text labels, icons, or patterns alongside color - for
+        example, in rubrics use &quot;Needs work&quot; or a symbol in
+        addition to red.
       </P>
 
       <SH id="ally-catches">What Ally Catches</SH>

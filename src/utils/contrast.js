@@ -1,5 +1,5 @@
 /**
- * WCAG 2.x contrast utilities. Pure JS, no React — safe to run in Node at build time.
+ * WCAG 2.x contrast utilities. Pure JS, no React - safe to run in Node at build time.
  * Used to validate theme token pairings (4.5:1 normal text, 3:1 large text/UI).
  */
 

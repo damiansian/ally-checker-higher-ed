@@ -10,19 +10,6 @@ import {
   Callout,
 } from "@/components/content.jsx";
 
-const tocSections = [
-  { id: "ally-error", label: "The Ally Errors" },
-  { id: "why-matters", label: "Why This Matters" },
-  { id: "hear-the-difference", label: "Hear the Difference" },
-  { id: "how-to-fix", label: "How to Fix It" },
-  { id: "fix-in-ally", label: "Fix Language in Ally" },
-  { id: "sample-pdfs", label: "Sample PDFs to Test in Ally" },
-  { id: "ally-detection", label: "What Ally Catches and Misses" },
-  { id: "other-tools", label: "Other Tools" },
-  { id: "quick-ref", label: "Quick Reference" },
-  { id: "resources", label: "Resources" },
-];
-
 /* ── Shared helpers ────────────────────────────────────────── */
 
 function SH({ id, children }) {
@@ -231,7 +218,6 @@ export default function LanguagePdfPage() {
       fileTypeSlug="pdf"
       title="Language"
       subtitle="PDF Documents"
-      tocSections={tocSections}
     >
       {/* ── The Ally Errors ── */}
       <SH id="ally-error">The Ally Errors</SH>

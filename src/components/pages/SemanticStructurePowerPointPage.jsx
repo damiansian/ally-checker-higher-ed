@@ -9,16 +9,6 @@ import {
   Placeholder,
 } from "@/components/content.jsx";
 
-const tocSections = [
-  { id: "ally-error", label: "The Ally Error" },
-  { id: "why-matters", label: "Why This Matters" },
-  { id: "how-to-fix", label: "How to Fix It" },
-  { id: "ally-catches", label: "What Ally Catches" },
-  { id: "ally-misses", label: "What Ally Misses" },
-  { id: "quick-ref", label: "Quick Reference" },
-  { id: "resources", label: "Resources" },
-];
-
 function SH({ id, children }) {
   const { t } = useTheme();
   return (
@@ -59,9 +49,8 @@ export default function SemanticStructurePowerPointPage() {
     <ContentPageLayout
       categorySlug="semantic-structure"
       fileTypeSlug="powerpoint"
-      title="DRAFT — Semantic Structure"
+      title="DRAFT - Semantic Structure"
       subtitle="PowerPoint Presentations"
-      tocSections={tocSections}
     >
       <SH id="ally-error">The Ally Error</SH>
       <AllyErrorBox
@@ -91,10 +80,21 @@ export default function SemanticStructurePowerPointPage() {
       <Step number="4">Use unique, meaningful titles so the slide list is useful for navigation.</Step>
       <Placeholder label="Screenshot: PowerPoint slide with title placeholder filled and Layout menu" />
 
+      <SH id="lists">Lists</SH>
+      <P>
+        Ally flags <strong>faked lists</strong> - content that looks like a
+        list but uses typed bullet characters or numbers instead of
+        PowerPoint&apos;s list tools. Use the <strong>Home</strong> tab
+        <strong> Bullets</strong> or <strong>Numbering</strong> buttons on
+        placeholders or text boxes so the list structure is exposed to
+        screen readers. Do not type • or &quot;1.&quot; &quot;2.&quot;
+        manually.
+      </P>
+
       <SH id="ally-catches">What Ally Catches</SH>
       <CompareBoxes
-        catches="Missing slide titles, slides without a title placeholder"
-        misses="Whether title text is meaningful, logical slide order, reading order of objects"
+        catches="Missing slide titles, slides without a title placeholder, faked lists (manual bullets/numbers)"
+        misses="Whether title text is meaningful, logical slide order, reading order of objects, list nesting"
       />
 
       <SH id="ally-misses">What Ally Misses</SH>
@@ -106,9 +106,10 @@ export default function SemanticStructurePowerPointPage() {
 
       <SH id="quick-ref">Quick Reference</SH>
       <RefTable rows={[
-        ["Ally error", "Presentation does not have slide titles"],
+        ["Ally errors", "No slide titles; lists should be formatted as lists"],
         ["WCAG", "1.3.1 Info and Relationships (Level A)"],
-        ["Fix", "Use title placeholder on every slide; Home → Layout if missing"],
+        ["Titles", "Use title placeholder on every slide; Home → Layout if missing"],
+        ["Lists", "Home → Bullets or Numbering; do not type bullets/numbers"],
       ]} />
 
       <SH id="resources">Resources</SH>

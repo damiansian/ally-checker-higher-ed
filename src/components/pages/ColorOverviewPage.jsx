@@ -6,14 +6,6 @@ import {
   RefTable,
 } from "@/components/content.jsx";
 
-const tocSections = [
-  { id: "overview", label: "Overview" },
-  { id: "ally-errors", label: "Ally Error Messages" },
-  { id: "ally-catches", label: "What Ally Catches" },
-  { id: "ally-misses", label: "What Ally Misses" },
-  { id: "quick-ref", label: "Quick Reference" },
-];
-
 function SH({ id, children }) {
   const { t } = useTheme();
   return (
@@ -38,28 +30,30 @@ function P({ children }) {
   );
 }
 
-export default function TextContrastOverviewPage() {
+export default function ColorOverviewPage() {
   return (
     <ContentPageLayout
-      categorySlug="text-contrast"
+      categorySlug="color"
       fileTypeSlug="overview"
-      title="DRAFT — Text Contrast"
+      title="DRAFT - Color"
       subtitle="Overview"
-      tocSections={tocSections}
     >
       <SH id="overview">Overview</SH>
       <P>
-        Text must have sufficient contrast against its background so that
-        students with low vision or color vision deficiencies can read it.
-        WCAG requires a minimum contrast ratio of 4.5:1 for normal text and
-        3:1 for large text (18pt or 14pt bold). Color alone cannot be the
-        only way to convey information.
+        This category covers two related WCAG criteria. <strong>1.4.3 Contrast
+        (Minimum)</strong> requires text to have sufficient contrast against its
+        background (4.5:1 for normal text, 3:1 for large text) so students with
+        low vision or color vision deficiencies can read it. <strong>1.4.1 Use
+        of Color</strong> requires that color not be the only way to convey
+        information, indicate actions, or distinguish elements - students who
+        cannot perceive color need other cues (text, icons, patterns).
       </P>
       <P>
         Ally checks for contrast issues in <strong>Word</strong>,{" "}
         <strong>PowerPoint</strong>, <strong>PDF</strong>, and{" "}
-        <strong>Canvas</strong> files. Image files are not applicable for
-        this check.
+        <strong>Canvas</strong> files. Ally does <em>not</em> check for color
+        as sole means; that requires manual review. Image files are not
+        applicable for these checks.
       </P>
 
       <SH id="ally-errors">Ally Error Messages</SH>
@@ -82,6 +76,27 @@ export default function TextContrastOverviewPage() {
         Severity is typically <strong>Minor</strong>. Use the file-type
         pages (Word, PowerPoint, PDF, Canvas) for fix steps and testing
         notes.
+      </P>
+
+      <SH id="color-as-sole-means">Color as Sole Means (1.4.1)</SH>
+      <P>
+        WCAG <strong>1.4.1 Use of Color</strong> (Level A) says color must
+        not be the only way to convey information, indicate an action, or
+        distinguish an element. Automated tools like Ally do not check this;
+        it is entirely manual review.
+      </P>
+      <P>
+        Common course-content problems: rubrics that use only red/yellow/green
+        with no text labels; charts where series are distinguished only by
+        color (no patterns or labels); feedback that marks wrong answers in
+        red with no other cue (icon, text, or symbol); schedules with
+        color-coded categories and no legend or text.
+      </P>
+      <P>
+        <strong>Quick check:</strong> Would meaning be lost if the content
+        were viewed in grayscale? Use the grayscale test. Ensure charts use
+        patterns, labels, or shapes in addition to color; rubrics include
+        text labels; and feedback uses icons or text alongside color.
       </P>
 
       <SH id="ally-catches">What Ally Catches</SH>
@@ -113,12 +128,13 @@ export default function TextContrastOverviewPage() {
 
       <SH id="quick-ref">Quick Reference</SH>
       <RefTable rows={[
-        ["Ally checks", "1 check"],
-        ["WCAG criterion", "1.4.3 Contrast (Minimum) (Level AA)"],
+        ["Ally checks", "1 check (contrast only; 1.4.1 not checked)"],
+        ["WCAG criteria", "1.4.1 Use of Color (A), 1.4.3 Contrast (Minimum) (AA)"],
         ["Likelihood", "4 / 5"],
         ["Impact", "4 / 5"],
         ["File types", "Word, PowerPoint, PDF, Canvas"],
-        ["Minimum ratio", "4.5:1 normal text, 3:1 large text"],
+        ["Contrast ratio", "4.5:1 normal text, 3:1 large text"],
+        ["Color as sole means", "Manual review; grayscale test; add patterns/labels/icons"],
       ]} />
     </ContentPageLayout>
   );

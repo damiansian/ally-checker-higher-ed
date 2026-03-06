@@ -22,11 +22,11 @@ export const categories = [
     wcag: "1.1.1",
   },
   {
-    id: "text-contrast",
-    name: "Text Contrast",
-    slug: "text-contrast",
+    id: "color",
+    name: "Color",
+    slug: "color",
     description:
-      "Text must have sufficient contrast against its background. Color alone cannot be the only way to convey information.",
+      "Text must have sufficient contrast against its background (WCAG 1.4.3). Color must not be the only way to convey information (WCAG 1.4.1); students who cannot perceive color need other cues.",
     likelihood: 4,
     impact: 4,
     fileTypes: {
@@ -38,17 +38,17 @@ export const categories = [
     },
     allyChecks: 1,
     allyCatches:
-      "Contrast ratio below 4.5:1 (or 3:1 for large text)",
+      "Contrast ratio below 4.5:1 (or 3:1 for large text). Color-as-sole-means is not checked by Ally.",
     allyMisses:
-      "Color as sole indicator, contrast in images/charts, branded templates",
-    wcag: "1.4.3",
+      "Color as sole indicator (1.4.1), contrast in images/charts, branded templates",
+    wcag: "1.4.1 / 1.4.3",
   },
   {
     id: "semantic-structure",
     name: "Semantic Structure",
     slug: "semantic-structure",
     description:
-      "Headings, titles, and document structure let students navigate and understand content organization. Without them, a 20-page document is a wall of text.",
+      "Headings, titles, lists, and document structure let students navigate and understand content organization. Without them, a 20-page document is a wall of text; faked lists (typed bullets or numbers) are invisible to screen readers.",
     likelihood: 5,
     impact: 4,
     fileTypes: {
@@ -58,11 +58,11 @@ export const categories = [
       canvas: "checked",
       image: "na",
     },
-    allyChecks: 7,
+    allyChecks: 8,
     allyCatches:
-      "Missing headings, skipped levels, missing slide/page titles, untagged PDFs",
+      "Missing headings, skipped levels, missing slide/page titles, untagged PDFs, faked lists (manual bullets/numbers instead of list styles)",
     allyMisses:
-      "Whether heading text is meaningful, logical content order, reading sequence",
+      "Whether heading text is meaningful, logical content order, reading sequence, correct nesting of multi-level lists, whether content should be a list vs paragraphs",
     wcag: "1.3.1 / 2.4.1 / 2.4.6",
   },
   {
@@ -158,17 +158,29 @@ export const allyMessages = {
     canvas: "Images must have alternate text description",
     image: "Image does not have alternative description",
   },
-  "text-contrast": {
+  color: {
     docx: "Document has text with insufficient contrast",
     pptx: "Presentation has text with insufficient contrast",
     pdf: "PDF has contrast issues",
     canvas: "Text must have sufficient color contrast",
   },
   "semantic-structure": {
-    docx: "Document does not have any headings",
-    pptx: "Presentation does not have slide titles",
-    pdf: "PDF does not have any headings",
-    canvas: "Headings should be present",
+    docx: [
+      "Document does not have any headings",
+      "Lists should be formatted as lists",
+    ],
+    pptx: [
+      "Presentation does not have slide titles",
+      "Lists should be formatted as lists",
+    ],
+    pdf: [
+      "PDF does not have any headings",
+      "Lists should be formatted as lists",
+    ],
+    canvas: [
+      "Headings should be present",
+      "Lists should be formatted as lists",
+    ],
   },
   tables: {
     docx: "Document tables don't have headers",

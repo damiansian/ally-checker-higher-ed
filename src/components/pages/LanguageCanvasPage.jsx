@@ -9,22 +9,6 @@ import {
   Callout,
 } from "@/components/content.jsx";
 
-const tocSections = [
-  { id: "ally-error", label: "The Ally Error" },
-  { id: "why-matters", label: "Why This Matters" },
-  { id: "hear-the-difference", label: "Hear the Difference" },
-  { id: "how-canvas-handles", label: "How Canvas Handles Language" },
-  { id: "language-of-parts", label: "Language of Parts in the RCE" },
-  { id: "testing-results", label: "Testing Results" },
-  { id: "how-to-fix", label: "How to Fix It" },
-  { id: "test-file", label: "Test File" },
-  { id: "ally-detection", label: "What Ally Catches and Misses" },
-  { id: "acr-vpat", label: "The ACR / VPAT" },
-  { id: "other-tools", label: "Other Tools" },
-  { id: "quick-ref", label: "Quick Reference" },
-  { id: "resources", label: "Resources" },
-];
-
 /* ── Shared helpers ────────────────────────────────────────── */
 
 function SH({ id, children }) {
@@ -232,7 +216,6 @@ export default function LanguageCanvasPage() {
       fileTypeSlug="canvas"
       title="Language"
       subtitle="Canvas RCE (Rich Content Editor)"
-      tocSections={tocSections}
     >
       {/* ── The Ally Error ── */}
       <SH id="ally-error">The Ally Error</SH>

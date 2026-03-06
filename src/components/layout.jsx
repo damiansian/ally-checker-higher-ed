@@ -119,16 +119,35 @@ export function FileTypePills({ categorySlug, activeSlug }) {
   );
 }
 
-// ── Sidebar Table of Contents ───────────────────────────────
-export function TableOfContents({ sections }) {
+// ── Sidebar Table of Contents (auto-detects h2 elements) ────
+export function TableOfContents() {
   const { t } = useTheme();
-  const [activeId, setActiveId] = useState(sections[0]?.id || "");
+  const [sections, setSections] = useState([]);
+  const [activeId, setActiveId] = useState("");
 
   useEffect(() => {
+    const mainEl = document.querySelector(".content-layout-main");
+    if (!mainEl) return;
+
+    function collectHeadings() {
+      const h2s = mainEl.querySelectorAll("h2[id]");
+      return Array.from(h2s).map((h) => ({ id: h.id, label: h.textContent }));
+    }
+
+    setSections(collectHeadings());
+
+    // eslint-disable-next-line no-undef
+    const observer = new MutationObserver(() => setSections(collectHeadings()));
+    observer.observe(mainEl, { childList: true, subtree: true });
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!sections.length) return;
     const scrollOffset = 100;
 
     function updateActive() {
-      let currentId = sections[0]?.id || "";
+      let currentId = sections[0].id;
       for (const s of sections) {
         const el = document.getElementById(s.id);
         if (el && el.getBoundingClientRect().top <= scrollOffset) {
@@ -140,9 +159,10 @@ export function TableOfContents({ sections }) {
 
     window.addEventListener("scroll", updateActive, { passive: true });
     updateActive();
-
     return () => window.removeEventListener("scroll", updateActive);
   }, [sections]);
+
+  if (!sections.length) return null;
 
   return (
     <nav aria-label="On this page" style={{ position: "sticky", top: 80 }}>
@@ -206,6 +226,9 @@ export function TopNav({ activeCategorySlug }) {
         padding: "0 32px",
       }}
     >
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       <div
         className="top-nav-inner"
         style={{
@@ -297,7 +320,6 @@ export function ContentPageLayout({
   fileTypeSlug,
   title,
   subtitle,
-  tocSections,
   children,
 }) {
   const { t } = useTheme();
@@ -334,11 +356,16 @@ export function ContentPageLayout({
           margin: "0 auto",
           padding: "32px 32px 80px",
           display: "grid",
-          gridTemplateColumns: tocSections ? "1fr 200px" : "1fr",
+          gridTemplateColumns: "1fr 200px",
           gap: 48,
         }}
       >
-        <main className="content-layout-main" style={{ maxWidth: 760, minWidth: 0 }}>
+        <main
+          id="main-content"
+          className="content-layout-main"
+          tabIndex={-1}
+          style={{ maxWidth: 760, minWidth: 0 }}
+        >
           <Breadcrumb items={breadcrumbItems} />
 
           <h1
@@ -374,11 +401,9 @@ export function ContentPageLayout({
           {children}
         </main>
 
-        {tocSections && (
-          <aside className="content-layout-toc" style={{ minWidth: 0 }}>
-            <TableOfContents sections={tocSections} />
-          </aside>
-        )}
+        <aside className="content-layout-toc" style={{ minWidth: 0 }}>
+          <TableOfContents />
+        </aside>
       </div>
 
       <footer

@@ -6,14 +6,6 @@ import {
   RefTable,
 } from "@/components/content.jsx";
 
-const tocSections = [
-  { id: "overview", label: "Overview" },
-  { id: "ally-errors", label: "Ally Error Messages" },
-  { id: "ally-catches", label: "What Ally Catches" },
-  { id: "ally-misses", label: "What Ally Misses" },
-  { id: "quick-ref", label: "Quick Reference" },
-];
-
 function SH({ id, children }) {
   const { t } = useTheme();
   return (
@@ -43,9 +35,8 @@ export default function TablesOverviewPage() {
     <ContentPageLayout
       categorySlug="tables"
       fileTypeSlug="overview"
-      title="DRAFT — Tables"
+      title="DRAFT - Tables"
       subtitle="Overview"
-      tocSections={tocSections}
     >
       <SH id="overview">Overview</SH>
       <P>

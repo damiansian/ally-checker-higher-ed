@@ -9,16 +9,6 @@ import {
   Placeholder,
 } from "@/components/content.jsx";
 
-const tocSections = [
-  { id: "ally-error", label: "The Ally Error" },
-  { id: "why-matters", label: "Why This Matters" },
-  { id: "how-to-fix", label: "How to Fix It" },
-  { id: "ally-catches", label: "What Ally Catches" },
-  { id: "ally-misses", label: "What Ally Misses" },
-  { id: "quick-ref", label: "Quick Reference" },
-  { id: "resources", label: "Resources" },
-];
-
 function SH({ id, children }) {
   const { t } = useTheme();
   return (
@@ -54,14 +44,13 @@ function P({ children }) {
   );
 }
 
-export default function TextContrastPowerPointPage() {
+export default function ColorPowerPointPage() {
   return (
     <ContentPageLayout
-      categorySlug="text-contrast"
+      categorySlug="color"
       fileTypeSlug="powerpoint"
-      title="DRAFT — Text Contrast"
+      title="DRAFT - Color"
       subtitle="PowerPoint Presentations"
-      tocSections={tocSections}
     >
       <SH id="ally-error">The Ally Error</SH>
       <AllyErrorBox
@@ -97,6 +86,16 @@ export default function TextContrastPowerPointPage() {
         If your institution&apos;s template uses colors that fail contrast,
         either override text color on each slide or work with your
         accessibility or design team to get an updated template.
+      </P>
+
+      <SH id="color-as-sole-means">Color as Sole Means (1.4.1)</SH>
+      <P>
+        Ally does not flag when color alone conveys meaning (e.g. &quot;green
+        = go, red = stop&quot; on a slide with no other cue). WCAG 1.4.1
+        requires other cues. Ask: would meaning be lost in grayscale? In
+        PowerPoint, add text labels or icons to charts and diagrams - for
+        example, label chart series or use patterns in addition to color so
+        slide content is understandable without color.
       </P>
 
       <SH id="ally-catches">What Ally Catches</SH>

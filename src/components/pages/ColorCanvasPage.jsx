@@ -9,16 +9,6 @@ import {
   Placeholder,
 } from "@/components/content.jsx";
 
-const tocSections = [
-  { id: "ally-error", label: "The Ally Error" },
-  { id: "why-matters", label: "Why This Matters" },
-  { id: "how-to-fix", label: "How to Fix It" },
-  { id: "ally-catches", label: "What Ally Catches" },
-  { id: "ally-misses", label: "What Ally Misses" },
-  { id: "quick-ref", label: "Quick Reference" },
-  { id: "resources", label: "Resources" },
-];
-
 function SH({ id, children }) {
   const { t } = useTheme();
   return (
@@ -54,14 +44,13 @@ function P({ children }) {
   );
 }
 
-export default function TextContrastCanvasPage() {
+export default function ColorCanvasPage() {
   return (
     <ContentPageLayout
-      categorySlug="text-contrast"
+      categorySlug="color"
       fileTypeSlug="canvas"
-      title="DRAFT — Text Contrast"
+      title="DRAFT - Color"
       subtitle="Canvas editor"
-      tocSections={tocSections}
     >
       <SH id="ally-error">The Ally Error</SH>
       <AllyErrorBox
@@ -96,6 +85,16 @@ export default function TextContrastCanvasPage() {
         Content pasted from Word or the web sometimes brings in
         low-contrast styling. After pasting, select the text and
         re-apply a high-contrast color from the RCE toolbar.
+      </P>
+
+      <SH id="color-as-sole-means">Color as Sole Means (1.4.1)</SH>
+      <P>
+        Ally does not flag when color alone conveys meaning in Canvas
+        content (e.g. &quot;see the red items&quot; with no other cue).
+        WCAG 1.4.1 requires text, icons, or patterns in addition to color.
+        When highlighting important or required items, add a label, icon, or
+        bold text so the content is clear without color. Use the Canvas
+        Accessibility Checker and manual review for critical content.
       </P>
 
       <SH id="ally-catches">What Ally Catches</SH>

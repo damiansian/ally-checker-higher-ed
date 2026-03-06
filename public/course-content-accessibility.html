@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Course Content Accessibility</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap');
+:root {
+  --text: #1a1a2e;
+  --bg: #fafaf8;
+  --accent: #2d5a7b;
+  --accent-light: #e8f0f6;
+  --border: #d4d4d4;
+  --subtle: #6b7280;
+  --callout-bg: #fef3c7;
+  --callout-border: #f59e0b;
+  --max-w: 52rem;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.72;
+  margin: 0;
+  padding: 2rem 1.5rem 4rem;
+  font-size: 1.05rem;
+}
+.content-wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+h1, h2, h3, h4 {
+  font-family: 'Source Sans 3', system-ui, sans-serif;
+  color: var(--accent);
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
+}
+h1 {
+  font-size: 2.2rem;
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-top: 0;
+}
+h2 {
+  font-size: 1.55rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.35rem;
+}
+h3 { font-size: 1.2rem; color: var(--text); }
+h4 { font-size: 1.08rem; }
+p { margin: 0.75rem 0; }
+strong { color: var(--text); }
+blockquote {
+  border-left: 4px solid var(--callout-border);
+  background: var(--callout-bg);
+  margin: 1.25rem 0;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 6px 6px 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  font-size: 0.95rem;
+  font-family: 'Source Sans 3', system-ui, sans-serif;
+}
+th {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  text-align: left;
+  padding: 0.6rem 0.85rem;
+}
+td {
+  padding: 0.55rem 0.85rem;
+  border-bottom: 1px solid var(--border);
+}
+tr:nth-child(even) td { background: var(--accent-light); }
+ul, ol { padding-left: 1.5rem; }
+li { margin: 0.35rem 0; }
+li strong { font-family: 'Source Sans 3', system-ui, sans-serif; }
+code {
+  font-size: 0.9em;
+  background: #f0f0f0;
+  padding: 0.15em 0.35em;
+  border-radius: 3px;
+}
+hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+nav#TOC {
+  background: var(--accent-light);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin: 0 0 2rem;
+}
+nav#TOC > ul { list-style: none; padding-left: 0; }
+nav#TOC ul ul { padding-left: 1.25rem; }
+nav#TOC a { color: var(--accent); text-decoration: none; }
+nav#TOC a:hover { text-decoration: underline; }
+
+/* Callout boxes */
+.callout {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--callout-border);
+  background: var(--callout-bg);
+  border-radius: 0 6px 6px 0;
+  font-family: 'Source Sans 3', system-ui, sans-serif;
+  font-size: 0.95rem;
+}
+.callout p { margin: 0.4rem 0; }
+.callout p:first-child { margin-top: 0; }
+.callout p:last-child { margin-bottom: 0; }
+.callout strong { color: #92400e; }
+
+/* Summary boxes */
+.summary {
+  margin: 1.75rem 0;
+  padding: 1.15rem 1.5rem;
+  background: var(--accent-light);
+  border: 1px solid #b8d4e8;
+  border-radius: 8px;
+  font-family: 'Source Sans 3', system-ui, sans-serif;
+  font-size: 0.93rem;
+  line-height: 1.6;
+}
+.summary p { margin: 0.35rem 0; max-width: none; }
+.summary p:first-child { margin-top: 0; font-weight: 700; color: var(--accent); font-size: 1rem; }
+.summary ul { max-width: none; margin: 0.5rem 0; padding-left: 1.25rem; }
+.summary li { margin: 0.25rem 0; }
+
+/* Quick-check lists */
+.quick-check {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 8px;
+  font-family: 'Source Sans 3', system-ui, sans-serif;
+  font-size: 0.93rem;
+  line-height: 1.6;
+}
+.quick-check p { margin: 0.35rem 0; max-width: none; }
+.quick-check p:first-child { margin-top: 0; font-weight: 700; color: #166534; font-size: 1rem; }
+.quick-check ul { max-width: none; margin: 0.5rem 0; padding-left: 1.25rem; list-style: none; }
+.quick-check li { margin: 0.25rem 0; }
+.quick-check li::before { content: "\2610\0020"; }
+
+/* Lab comparison tables (Broken | Corrected) */
+table.lab-compare th { background: #2d5a7b; color: #fff; }
+table.lab-compare td { vertical-align: top; padding: 1rem; }
+table.lab-compare img { max-width: 100%; height: auto; border: 1px solid #ddd; }
+.content-wrap img { max-width: 100%; height: auto; }
+img.screenshot { border: 1px solid #000; }
+.legend.low { color: #b91c1c; font-weight: 600; }
+.legend.high { color: #15803d; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="content-wrap">
+<h1 id="course-content-accessibility">Course Content Accessibility</h1>
+<nav id="TOC" aria-label="Table of contents">
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#impact-on-students">Impact on Students</a></li>
+<li><a href="#shared-responsibility">Shared Responsibility</a></li>
+<li><a href="#two-types-of-accessibility-issues">Two Types of Accessibility Issues</a></li>
+<li><a href="#automated-testing">Automated Testing</a></li>
+<li><a href="#manual-testing">Manual Testing</a></li>
+<li><a href="#microsoft-accessibility-checker">Microsoft Accessibility Checker</a></li>
+<li><a href="#acrobat-accessibility-checker">Acrobat Accessibility Checker</a></li>
+<li><a href="#text-alternatives">Text Alternatives</a></li>
+<li><a href="#color-contrast">Color Contrast</a></li>
+<li><a href="#color-as-sole-means-of-communication">Color as Sole Means of Communication</a></li>
+<li><a href="#headings">Headings</a></li>
+<li><a href="#tables">Tables</a></li>
+<li><a href="#lists">Lists</a></li>
+<li><a href="#language">Language</a></li>
+<li><a href="#seizure-risk">Seizure Risk</a></li>
+</ul>
+</nav>
+<h2 id="overview">Overview</h2>
+<p>Every document, slide deck, and page published in a course creates an
+opportunity for access, or a barrier to it. Students who use screen
+readers, magnification, voice control, or other assistive technologies
+depend on content that is structured and authored with accessibility in
+mind.</p>
+<p>The Web Content Accessibility Guidelines (WCAG) 2.2 Level AA is the
+standard that governs digital accessibility in higher education. It
+applies not just to websites but to every file uploaded or created in
+the LMS: Word documents, PowerPoint presentations, PDFs, and Canvas
+pages.</p>
+<p>Accessibility checkers like <strong>Anthology Ally</strong>
+(integrated into Canvas LMS), <strong>Microsoft’s built-in Accessibility
+Checker</strong>, and <strong>Adobe Acrobat’s Accessibility
+Check</strong> can help identify issues, but each has significant blind
+spots. Research consistently shows that automated tools catch roughly
+<strong>57% of accessibility barriers</strong>.<a href="#fn1"
+class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The
+rest require human judgment: Is this alt text actually meaningful? Does
+the heading structure reflect the content’s logic? Will a screen reader
+pronounce this passage correctly?</p>
+<p><strong>Getting to 100% in Ally is the starting line, not the
+finish.</strong> A perfect Ally score means the content has passed the
+checks Ally can run. It does not mean the content is free of barriers to
+access for individuals with disabilities. Automated tools detect the
+presence of accessibility features (an alt text field that is not empty,
+a heading tag that exists, a contrast ratio above a threshold) but they
+cannot evaluate whether those features are meaningful. The remaining
+barriers, the ones that determine whether a student can actually use the
+content, require human inspection and manual testing.</p>
+<p>This reference covers the accessibility issues most common in course
+content, organized around seven areas drawn from WCAG success criteria.
+For each, this reference describes what automated tools detect, what
+they miss, and what instructional designers and faculty need to verify
+manually.</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>WCAG</th>
+<th>Likelihood</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Text Alternatives</td>
+<td>1.1.1</td>
+<td>5 / 5</td>
+<td>5 / 5</td>
+</tr>
+<tr>
+<td>Color Contrast</td>
+<td>1.4.3</td>
+<td>4 / 5</td>
+<td>4 / 5</td>
+</tr>
+<tr>
+<td>Color as Sole Means</td>
+<td>1.4.1</td>
+<td>4 / 5</td>
+<td>4 / 5</td>
+</tr>
+<tr>
+<td>Headings &amp; Structure</td>
+<td>1.3.1, 2.4.1, 2.4.6</td>
+<td>5 / 5</td>
+<td>4 / 5</td>
+</tr>
+<tr>
+<td>Tables</td>
+<td>1.3.1</td>
+<td>3 / 5</td>
+<td>4 / 5</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>3.1.1, 3.1.2</td>
+<td>3 / 5</td>
+<td>3 / 5</td>
+</tr>
+<tr>
+<td>Seizure Risk</td>
+<td>2.3.1</td>
+<td>1 / 5</td>
+<td>5 / 5</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Likelihood</strong> reflects how frequently the issue appears
+in typical course content. <strong>Impact</strong> reflects how severely
+the barrier affects students who rely on assistive technology.</p>
+<h2 id="impact-on-students">Impact on Students</h2>
+<p>Behind every accessibility guideline is a student trying to learn.
+The technical language of WCAG and the metrics of automated checkers can
+obscure that reality, so it is worth stating plainly what inaccessible
+content means in practice.</p>
+<p>A student who is blind and uses a screen reader encounters an image
+with no alt text. The screen reader announces “Graphic. IMG_3847.png.”
+The image might be a chart that the rest of the class is discussing, a
+diagram central to the week’s assignment, or a decorative banner that
+could have been skipped entirely. The student has no way to know. They
+must decide whether to ask the instructor, ask a classmate, or move on
+without the information. None of these are equivalent to simply seeing
+the image.</p>
+<p>A student with low vision enlarges their screen to 200%. A PowerPoint
+slide with light gray text on a white background, perfectly readable at
+standard size on the designer’s monitor, becomes a wash of
+near-invisible content. The student can adjust their device settings,
+but only if they know the problem is contrast and not a rendering error.
+Multiply this across a semester of weekly slide decks and the cognitive
+overhead becomes significant.</p>
+<p>A student who is deaf or hard of hearing opens a lecture recording
+with no captions. A student with a motor disability navigates a 40-page
+PDF with no headings, forced to read through the document line by line
+because there is no structure to jump to. These are not edge cases.
+According to the National Center for Education Statistics, roughly 21%
+of undergraduate students report having a disability.<a href="#fn2"
+class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>
+Many do not disclose or register with disability services. Accessible
+content benefits students who never appear in accommodation letters:
+students learning in a second language, students in noisy environments,
+students with temporary injuries, students reading on a phone in poor
+lighting.</p>
+<p>The impact column in the table above is a number. The experience
+behind it is a student deciding whether the course is worth the extra
+labor, or whether to drop it.</p>
+<h2 id="shared-responsibility">Shared Responsibility</h2>
+<p>Accessibility in a course is not the sole responsibility of the
+instructor or the instructional designer. It is a shared obligation
+across everyone who creates or contributes content.</p>
+<h3 id="instructor-and-instructional-designer-responsibility">Instructor
+and instructional designer responsibility</h3>
+<blockquote><p>Instructors and instructional designers own the content they author
+and publish: syllabi, lecture slides, assignments, handouts, Canvas
+pages, and any files uploaded to the LMS. This is the bulk of course
+content and where accessibility efforts have the greatest return.
+Responsibilities include:</p></blockquote>
+<ul>
+<li>Authoring documents, slides, and pages with accessibility built in
+from the start, not remediated after the fact</li>
+<li>Running automated checks (Ally, Microsoft Accessibility Checker,
+Acrobat) before publishing</li>
+<li>Performing manual review for issues automated tools cannot
+catch</li>
+<li>Providing equivalent alternatives when content cannot be made fully
+accessible (e.g., a transcript for audio, a data table for a complex
+chart)</li>
+<li>Responding to student-reported barriers promptly</li>
+</ul>
+<h3 id="student-responsibility">Student responsibility</h3>
+<p>Students are also content creators. In discussion boards, peer review
+assignments, group wikis, student-led presentations, and uploaded
+submissions, students author content that other students must access.
+When a student posts an image in a discussion without alt text, their
+peers who use screen readers are excluded from the conversation.</p>
+<p>Student responsibility for accessibility should be:</p>
+<ul>
+<li><strong>Taught, not assumed.</strong> Most students have never
+encountered alt text, heading structure, or document language settings.
+Accessibility expectations need to be introduced explicitly, ideally
+with brief guidance and examples early in the course.</li>
+<li><strong>Scoped to the tools at hand.</strong> Students can
+reasonably be expected to add alt text to images they post, use heading
+styles instead of bold text for structure, and choose readable color
+combinations. They should not be expected to remediate PDFs in Acrobat
+Pro or write ARIA attributes.</li>
+<li><strong>Modeled by the course itself.</strong> Students are more
+likely to adopt accessible practices when the course content they
+receive is itself accessible. An instructor who adds alt text to every
+image normalizes the practice. An instructor whose slides lack headings
+implicitly signals that structure does not matter.</li>
+<li><strong>Reinforced through feedback.</strong> When accessibility is
+part of assignment criteria, even lightly (such as “include alt text for
+any images in your post”), it becomes part of the learning culture
+rather than an afterthought.</li>
+</ul>
+<h2>Accessibility is not a compliance task delegated to one role. It is a
+baseline expectation for participation in a shared learning
+environment.</h2>
+<h2 id="two-types-of-accessibility-issues">Two Types of Accessibility
+Issues</h2>
+<p>Clearing every issue in Anthology Ally is a great place to start for
+access and inclusion in the classroom. Unfortunately, it is nowhere near
+the full scope of accessible course materials. Ally performs automated
+tests that lack context and are not yet refined enough to catch major
+issues where human review is required.</p>
+<p><strong>Automated testing failures</strong> are issues that tools
+like Ally can detect programmatically: a missing alt text attribute,
+text contrast below 4.5:1, an improperly nested heading tag, a table
+with no designated headers. These are structural, binary checks. The
+attribute exists or it doesn’t. The ratio passes or it doesn’t.
+Automated tools are reliable and efficient at catching these issues, and
+they should always be the first step.</p>
+<p><strong>Manual testing discoveries</strong> are issues that require
+human evaluation: alt text that exists but is meaningless, a heading
+structure that is technically present but logically incoherent, a
+color-coded rubric with no non-color indicator. No automated tool can
+assess whether content is <em>meaningful</em>, <em>clear</em>, or
+<em>instructionally sound</em>. It can only determine whether certain
+technical markers are present. These issues will pass every automated
+check and still create barriers for students. It is possible, for
+example, to create course content that is massively inaccessible but
+still passes all automated checks. Consider a document where every
+paragraph is styled as Heading 2, every image has alt text that reads
+“image,” a layout table forces content into a two-column format, and an
+untranslated Spanish paragraph sits inside an English document with no
+language attribute. That document would score 100% in Ally.</p>
+<p>This reference uses that framework throughout. For each accessibility
+category, it describes what automated tools detect (the first type) and
+what requires manual review (the second type). Both are necessary.
+Neither is sufficient alone.</p>
+<h2 id="automated-testing">Automated Testing</h2>
+<p>Automated accessibility testing tools scan content against a set of
+programmatic rules. They are fast, consistent, and essential, but they
+are also limited to what can be evaluated without human
+interpretation.</p>
+<p><strong>Anthology Ally</strong> runs checks on files uploaded to
+Canvas and on Canvas page content. It produces an accessibility score
+and flags issues with severity levels (Minor, Major, Severe). Ally is
+effective at catching:</p>
+<ul>
+<li>Missing alt text on images</li>
+<li>Insufficient color contrast ratios on text</li>
+<li>Skipping heading levels</li>
+<li>Tables without designated header rows</li>
+</ul>
+<p>Beyond detection, Ally provides two additional features that support
+accessibility workflows:</p>
+<ul>
+<li><strong>Remediation guidance.</strong> When Ally flags an issue, it
+provides specific instructions for fixing it: how to add alt text in
+Word, how to designate a header row in a table, how to set the document
+language. This guidance is practical and file-type-specific, making Ally
+a useful teaching tool for instructors learning to author accessible
+content.</li>
+<li><strong>Alternative format generation.</strong> Ally automatically
+generates accessible alternative formats for uploaded files, including
+HTML, ePub, electronic braille, audio (MP3), and tagged PDF. These
+alternatives give students options when the original file is not fully
+accessible. However, alternative formats are a fallback, not a
+substitute for accessible source content. They inherit the structural
+defects of the original: an HTML alternative generated from a document
+with no headings will also have no headings, an audio format cannot
+compensate for missing structure, braille output depends on correct
+tagging in the source, and none of the alternative formats will fix
+semantic errors like meaningless alt text or incorrect language
+metadata. Accessibility must be built into the source material first.
+<strong>[TODO: Validate these claims about alternative format
+inheritance. Confirm each format’s behavior with test files before
+publishing.]</strong></li>
+</ul>
+<p>To describe Ally’s behavior across file types, this reference uses a
+coverage model with four states:</p>
+<ul>
+<li><strong>Checked:</strong> Ally runs the check and reports
+results</li>
+<li><strong>Gap:</strong> The accessibility issue can exist in this file
+type, but Ally does not check for it</li>
+<li><strong>Unreliable:</strong> The check exists but produces
+inconsistent results</li>
+<li><strong>N/A:</strong> The check does not apply to this file
+type</li>
+</ul>
+<p>The most important limitation of any automated tool is that it checks
+for <strong>presence</strong>, not <strong>quality</strong>. Ally will
+pass an image whose alt text is “asdf” because alt text exists. It will
+pass a document whose every paragraph is tagged as Heading 1 because
+headings exist. <strong>[TODO: Verify this claim by testing a document
+with all paragraphs set to Heading 1 in Ally.]</strong> Reaching a 100%
+Ally score means the content has passed the checks Ally can run. It does
+not mean the content is free of barriers to access for individuals with
+disabilities.</p>
+<h2 id="manual-testing">Manual Testing</h2>
+<p>Manual testing fills the gaps that automated tools cannot reach. At
+minimum, an accessibility review of course content should include:</p>
+<ul>
+<li><strong>Reading alt text in context.</strong> Does each description
+convey the same information a sighted student would get from the image?
+Is decorative content marked as decorative rather than described?</li>
+<li><strong>Navigating by headings.</strong> Using a screen reader’s
+heading list (or the Navigation Pane in Word), can a student understand
+the document’s structure and jump to the section they need?</li>
+<li><strong>Checking reading order.</strong> In PowerPoint and PDF,
+content may appear visually correct but be read in the wrong sequence by
+a screen reader. The reading order pane (PowerPoint) and tags panel
+(Acrobat) reveal the actual order.</li>
+<li><strong>Verifying table structure.</strong> For complex tables with
+merged cells or multiple header rows, a screen reader test confirms
+whether row and column headers are announced correctly.</li>
+<li><strong>Listening to language.</strong> If a document contains
+passages in a language other than the primary language, a screen reader
+test reveals whether pronunciation switches correctly.</li>
+<li><strong>Reviewing color use.</strong> If color is used to indicate
+status, category, or meaning (e.g., red for incorrect, green for
+correct), verify that a non-color indicator is also present.</li>
+</ul>
+<p>Screen reader testing does not require expertise. Even a brief listen
+with VoiceOver (macOS), NVDA (Windows), or JAWS confirms whether content
+is navigable and comprehensible.</p>
+<h3 id="instructional-quality-as-accessibility">Instructional quality as
+accessibility</h3>
+<p>Manual review also extends to a dimension that no automated tool
+addresses: whether the content is instructionally clear enough to be
+usable by all students. A technically accessible document, one with alt
+text, headings, contrast, and language set correctly, can still be
+inaccessible in practice if it is poorly organized, ambiguously written,
+or assumes visual context that is never stated in text. Accessibility
+and instructional clarity are not separate concerns. A confusing
+document is harder to navigate for everyone and disproportionately
+harder for students using assistive technology, who cannot skim, scan,
+or rely on visual layout cues to compensate for unclear writing.</p>
+<h2 id="microsoft-accessibility-checker">Microsoft Accessibility
+Checker</h2>
+<p>Microsoft Word, PowerPoint, and Excel include a built-in
+Accessibility Checker (Review &gt; Check Accessibility). It runs locally
+before content is uploaded to the LMS and catches several issues that
+Ally does not:</p>
+<ul>
+<li><strong>AI-generated alt text.</strong> When Microsoft
+auto-generates a description, its own checker flags it for review. Ally
+does not.</li>
+<li><strong>File name as alt text.</strong> Both the Microsoft checker
+and Ally flag this, but Microsoft also catches cases where the
+description is clearly a file path.</li>
+<li><strong>Missing slide titles.</strong> Both tools flag this.</li>
+<li><strong>Table header rows.</strong> Both tools flag this.</li>
+</ul>
+<p>The Microsoft checker does <strong>not</strong> flag:</p>
+<ul>
+<li>Language issues (missing or incorrect document language)</li>
+<li>Alt text quality (vague, placeholder, or gibberish descriptions
+pass)</li>
+<li>Color contrast in document content</li>
+<li>Reading order problems</li>
+</ul>
+<p><strong>Best practice:</strong> Run the Microsoft Accessibility
+Checker before uploading to Canvas. It complements Ally by catching
+AI-generated descriptions and providing fix-in-place workflows within
+the authoring environment.</p>
+<h2 id="acrobat-accessibility-checker">Acrobat Accessibility
+Checker</h2>
+<p>Adobe Acrobat Pro includes an Accessibility Check (Accessibility &gt;
+Accessibility Check) that evaluates PDF tag structure, reading order,
+and metadata. Here are some of the 29 tests that are run by the
+checker:</p>
+<ul>
+<li><strong>Missing alt text.</strong> Flagged and fixable in the tags
+panel.</li>
+<li><strong>Document language.</strong> Flags missing language
+metadata.</li>
+<li><strong>Tagged PDF structure.</strong> Verifies that the PDF has a
+tag tree (headings, paragraphs, lists, tables).</li>
+<li><strong>Tab and reading order.</strong> Checks whether the tag order
+matches the visual layout.</li>
+</ul>
+<p>Acrobat does <strong>not</strong> flag:</p>
+<ul>
+<li>File name used as alt text</li>
+<li>AI-generated alt text</li>
+<li>Alt text quality</li>
+<li>Incorrect language (only missing language)</li>
+<li>Language of parts (e.g., a Spanish paragraph in an English
+document)</li>
+</ul>
+<div class="callout">
+<p><strong>Fix at the source.</strong> Many PDFs created from Word or
+PowerPoint inherit their accessibility (or lack thereof) from the source
+document. Fixing issues at the source is almost always more efficient
+than remediating in Acrobat after export.</p>
+</div>
+<h2 id="text-alternatives">Text Alternatives</h2>
+<p><strong>WCAG 1.1.1 Non-text Content (Level A).</strong> All non-text
+content must have a text alternative that serves an equivalent
+purpose.</p>
+<p>This is the highest-priority accessibility issue in course content:
+it is the most common (likelihood 5/5) and has the greatest impact (5/5)
+on students using assistive technology. Without alt text, a screen
+reader announces an image as its file name (“Graphic. IMG_3847.png”),
+providing no information about what the image conveys.</p>
+<h3 id="what-automated-tools-detect">What automated tools detect</h3>
+<table>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 16%" />
+<col style="width: 30%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Ally</th>
+<th>MS Office</th>
+<th>Acrobat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No alt text</td>
+<td>Detected</td>
+<td>Detected</td>
+<td>Detected</td>
+</tr>
+<tr>
+<td>AI-generated alt text</td>
+<td>Not detected</td>
+<td>Detected</td>
+<td>Not detected</td>
+</tr>
+<tr>
+<td>File name as alt text</td>
+<td>Detected</td>
+<td>Detected</td>
+<td>Not detected</td>
+</tr>
+<tr>
+<td>Decorative image not marked</td>
+<td>Not detected</td>
+<td>Not detected</td>
+<td>Not detected</td>
+</tr>
+<tr>
+<td>Vague alt text (“Quiz comparison chart”)</td>
+<td>Not detected</td>
+<td>Not detected</td>
+<td>Not detected</td>
+</tr>
+<tr>
+<td>Gibberish alt text (“alskjshdsflh”)</td>
+<td>Not detected</td>
+<td>Not detected</td>
+<td>Not detected</td>
+</tr>
+<tr>
+<td>Placeholder alt text (“image”)</td>
+<td>Not detected</td>
+<td>Not detected</td>
+<td>Not detected</td>
+</tr>
+<tr>
+<td>Alt text over ~120 characters</td>
+<td>False positive (Canvas)</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<h3 id="what-requires-manual-review">What requires manual review</h3>
+<ul>
+<li><strong>Quality and accuracy.</strong> Does the description convey
+the same information a sighted student would receive? A chart captioned
+“Quiz comparison chart” passes every automated check but tells a screen
+reader user nothing about the data.</li>
+<li><strong>Decorative images.</strong> Divider lines, background
+textures, and branding elements should be marked as decorative so screen
+readers skip them. No tool reliably detects images that should be
+decorative.</li>
+<li><strong>Complex images.</strong> Charts, graphs, diagrams, and
+infographics often need extended descriptions beyond what fits in an alt
+text field. Consider a structured text alternative below the image or a
+linked long description.</li>
+<li><strong>SmartArt and grouped shapes.</strong> In Word and
+PowerPoint, SmartArt graphics and grouped shapes may not trigger an alt
+text flag even when they contain meaningful content.</li>
+</ul>
+<h3 id="broken-examples-and-how-to-fix-them">Broken Examples and How to
+Fix Them</h3>
+<p>The following scenarios walk through each test case from the
+detection table above. For each, the “broken” state is described along
+with the Ally error message (where applicable) and step-by-step
+instructions for fixing the issue in each platform.</p>
+<p>Each scenario includes a set of intentionally broken test files that
+can be uploaded to Canvas to demonstrate the error (or lack of
+detection) in Ally, the Microsoft Accessibility Checker, and the Acrobat
+Accessibility Check.</p>
+<div class="summary">
+<p><strong>In this section:</strong></p>
+<ul>
+<li><a href="#scenario-1-no-alt-text">Scenario 1: No alt text</a> —
+Detected by all tools</li>
+<li><a href="#scenario-2-ai-generated-alt-text">Scenario 2: AI-generated
+alt text</a> — Detected by MS Checker only</li>
+<li><a href="#scenario-3-file-name-as-alt-text">Scenario 3: File name as
+alt text</a> — Detected by Ally and MS Checker</li>
+<li><a
+href="#scenario-4-decorative-image-not-marked-as-decorative">Scenario 4:
+Decorative image not marked</a> — Not detected by any tool</li>
+<li><a href="#scenario-5-vague-alt-text">Scenario 5: Vague alt text</a>
+— Not detected by any tool</li>
+<li><a href="#scenario-6-gibberish-or-placeholder-alt-text">Scenario 6:
+Gibberish or placeholder alt text</a> — Not detected by any tool</li>
+<li><a
+href="#scenario-7-alt-text-over-120-characters-canvas-false-positive">Scenario
+7: Alt text over ~120 characters</a> — False positive (Canvas only)</li>
+<li><a href="#complex-images">Complex images</a></li>
+<li><a href="#known-false-positive">Known false positive</a></li>
+</ul>
+</div>
+<hr />
+<h4 id="scenario-1-no-alt-text">Scenario 1: No alt text</h4>
+<p><strong>The broken state.</strong> An image is inserted into a
+document, slide, page, or PDF with no alt text at all. This is the most
+basic and most common text alternative failure.</p>
+<!-- Scenario: Missing alt text | Error ID: E1 -->
+<table class="lab-compare">
+  <thead>
+    <tr><th>Broken</th><th>Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><!-- E1: Missing alt text -->
+        <img src="assets/chart1.png">
+        <p><strong>What happens:</strong> Screen reader announces "Graphic" or the file name — no information conveyed.</p>
+      </td>
+      <td><!-- E1: Corrected artifact (right) -->
+        <img src="assets/chart1.png" alt="Grouped bar chart comparing Quiz 1 and Quiz 2 averages across three sections. Section 1: 85% and 82%. Section 2: 83% and 81%. Section 3: 85% and 82%.">
+        <p><strong>What happens:</strong> Screen reader receives the same data as sighted users.</p>
+      </td>
+    </tr>
+    <tr>
+      <td><em>(no alt attribute)</em></td>
+      <td><code>alt="Grouped bar chart comparing Quiz 1 and Quiz 2 averages across three sections. Section 1: 85% and 82%. Section 2: 83% and 81%. Section 3: 85% and 82%."</code></td>
+    </tr>
+  </tbody>
+</table>
+<!-- Detection: Ally, Microsoft Accessibility Checker, Acrobat -->
+<!-- Scenario: File name as alt text | Error ID: E2 -->
+<table class="lab-compare">
+  <thead>
+    <tr><th>Broken</th><th>Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><!-- E2: File name as alt text -->
+        <img src="assets/enrollment.png" alt="IMG_3847.png">
+        <p><strong>What happens:</strong> Screen reader announces "Graphic. IMG_3847.png" — student gets no data.</p>
+      </td>
+      <td><!-- E2: Corrected artifact (right) -->
+        <img src="assets/enrollment.png" alt="Line graph showing a steady increase in online course enrollment from 12,000 in Fall 2020 to 28,500 in Fall 2025.">
+        <p><strong>What happens:</strong> Screen reader receives the same data as sighted users.</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code>alt="IMG_3847.png"</code></td>
+      <td><code>alt="Line graph showing a steady increase in online course enrollment from 12,000 in Fall 2020 to 28,500 in Fall 2025."</code></td>
+    </tr>
+  </tbody>
+</table>
+<!-- Detection: Ally, Microsoft Accessibility Checker -->
+<p><strong>Ally error messages:</strong></p>
+<ul>
+<li><strong>Word:</strong> “Document has images without alt
+descriptions” (Major)</li>
+<li><strong>PowerPoint:</strong> “Presentation has images without alt
+descriptions” (Major)</li>
+<li><strong>Canvas:</strong> “Images must have alternate text
+description” (Major)</li>
+<li><strong>PDF:</strong> “PDF has images without alternative
+descriptions” (Major)</li>
+</ul>
+<p><strong>Detected by:</strong> Ally, Microsoft Accessibility Checker,
+Acrobat Accessibility Check</p>
+<p><strong>How to fix in Word:</strong></p>
+<ol type="1">
+<li>Right-click the image.</li>
+<li>Select <strong>Edit Alt Text</strong>.</li>
+<li>The Alt Text pane opens on the right side of the screen.</li>
+<li>Type a description that conveys the same information a sighted
+reader would get from the image.</li>
+<li>Close the Alt Text pane.</li>
+</ol>
+<p><img class="screenshot" src="assets/word-alt-text-pane.png" alt="Screenshot of the Word Alt Text pane: prompt asking how to describe the object for someone blind or low vision, guidelines (subject, setting, actions, relevant info), description field with example 'Line graph showing a steady increase in online course enrollment from 12,000 in Fall 2020 to 28,500 in Fall 2025', Generate alt text for me button, and Mark as decorative option with toggle."></p>
+<p><strong>How to fix in PowerPoint:</strong></p>
+<ol type="1">
+<li>Right-click the image.</li>
+<li>Select <strong>Edit Alt Text</strong>.</li>
+<li>The Alt Text pane opens on the right side of the screen.</li>
+<li>Type a description that conveys the same information a sighted
+reader would get from the image.</li>
+<li>Close the Alt Text pane.</li>
+</ol>
+<p><img class="screenshot" src="assets/word-alt-text-pane.png" alt="Screenshot of the PowerPoint Alt Text pane, which matches Word: prompt for describing the object for someone blind or low vision, description field with enrollment chart example, Generate alt text for me button, and Mark as decorative toggle."></p>
+<p><strong>How to fix in Canvas:</strong></p>
+<ol type="1">
+<li>Click the image in the Rich Content Editor.</li>
+<li>Click the <strong>Image Options</strong> button that appears in the
+toolbar above the image.</li>
+<li>In the <strong>Alt Text</strong> field, type a description.</li>
+<li>Click <strong>Done</strong>.</li>
+</ol>
+<p><img class="screenshot" src="assets/canvas-image-options.png" alt="Screenshot of Canvas Image Options modal: Alt Text field with example 'Grouped bar graph comparing Quiz 1 and Quiz 2 averages across three sections. Section 1: 85% and 82%. Section 2: 83% and 81%. Section 3: 85% and 82%' and Decorative Image checkbox."></p>
+<p><strong>How to fix in PDF (Acrobat Pro):</strong></p>
+<ol type="1">
+<li>Open the PDF in Acrobat Pro.</li>
+<li>Go to <strong>All tools &gt; Prepare for accessibility &gt; Check
+for accessibility</strong>.</li>
+<li>Click <strong>Start Checking</strong>.</li>
+<li>In the results, expand <strong>Alternate Text</strong>.</li>
+<li>Right-click the failed item and select <strong>Fix</strong>.</li>
+<li>In the <strong>Set Alternate Text</strong> dialog, type a
+description.</li>
+<li>Click <strong>Save &amp; Close</strong>.</li>
+</ol>
+<p>Alternatively, use the Tags panel directly:</p>
+<ol type="1">
+<li>Open the <strong>Tags</strong> panel (View &gt; Show/Hide &gt;
+Navigation Panes &gt; Tags).</li>
+<li>Locate the <strong>Figure</strong> tag for the image.</li>
+<li>Right-click and select <strong>Properties</strong>.</li>
+<li>Enter the description in the <strong>Alternate Text</strong>
+field.</li>
+<li>Click <strong>Close</strong>.</li>
+</ol>
+<p><em>[PLACEHOLDER: Screenshot — Acrobat Set Alternate Text dialog]</em></p>
+<hr />
+<h4 id="scenario-2-ai-generated-alt-text">Scenario 2: AI-generated alt
+text</h4>
+<p><strong>The broken state.</strong> Microsoft Office auto-generates a
+description when an image is inserted (e.g., “A group of people sitting
+at a table with laptops”). The description may be partially accurate but
+is often generic, vague, or misleading. It has not been reviewed by a
+human.</p>
+<!-- Scenario: AI-generated alt text | Error ID: E3 -->
+<table class="lab-compare">
+  <thead>
+    <tr><th>Broken</th><th>Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><!-- E3: AI-generated alt text (simulated) -->
+        <!-- Simulated AI-generated alt text -->
+        <img src="assets/team.png" alt="A group of people sitting at a table with laptops">
+        <p><strong>What happens:</strong> Generic description; student gets no course-specific context.</p>
+      </td>
+      <td><!-- E3: Corrected artifact (right) -->
+        <img src="assets/team.png" alt="Instructional design team reviewing course accessibility audit results during the Spring 2026 faculty workshop.">
+        <p><strong>What happens:</strong> Screen reader receives who is pictured and why it matters in context.</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code>alt="A group of people sitting at a table with laptops"</code></td>
+      <td><code>alt="Instructional design team reviewing course accessibility audit results during the Spring 2026 faculty workshop."</code></td>
+    </tr>
+  </tbody>
+</table>
+<!-- Detection: Microsoft Accessibility Checker only -->
+<p><strong>Detected by:</strong> Microsoft Accessibility Checker only.
+Ally does not flag AI-generated alt text. Acrobat does not flag it.</p>
+<div class="callout">
+<p><strong>Key point.</strong> This is a gap in Ally. AI-generated alt
+text passes Ally because the alt text field is not empty. The Microsoft
+checker flags it specifically because it can identify its own generated
+descriptions. Always review and revise AI-generated alt text.</p>
+</div>
+<p><strong>How to fix in Word / PowerPoint:</strong></p>
+<ol type="1">
+<li>Run the Accessibility Checker (Review &gt; Check
+Accessibility).</li>
+<li>The checker will flag images with AI-generated descriptions under
+<strong>Verify: Automatic alternative text</strong>.</li>
+<li>Click the flagged item to select the image.</li>
+<li>Open the Alt Text pane (right-click &gt; Edit Alt Text).</li>
+<li>Review the generated description. Revise it to accurately describe
+the image in context, or replace it entirely.</li>
+<li>Close the Alt Text pane.</li>
+</ol>
+<p><img class="screenshot" src="assets/ms-accessibility-checker-ai-alt-text.png" alt="Screenshot of the Alt Text pane showing AI-generated content 'A group of people sitting around a table' with warning 'AI-generated content may be incorrect', Approve alt text toggle, and Mark as decorative option."></p>
+<p><strong>Not applicable to PDF.</strong> PDFs inherit alt text from
+the source document or it is added manually in Acrobat. Canvas does
+have the option to generate alt text in the Dashboard remediation
+process, but not directly in the Rich Content Editor.</p>
+<hr />
+<h4 id="scenario-3-file-name-as-alt-text">Scenario 3: File name as alt
+text</h4>
+<p><strong>The broken state.</strong> The alt text field contains the
+image’s file name (e.g., “IMG_3847.png”, “chart_final_v2.jpg”,
+“C:.png”). This typically happens when an image is inserted and the
+application populates the alt text field with the file name by
+default.</p>
+<p><strong>Detected by:</strong> Ally and Microsoft Accessibility
+Checker. Acrobat does not flag this.</p>
+<p><strong>File name as alt text</strong></p>
+<!-- Scenario: File name as alt text | Error ID: E2 -->
+<table class="lab-compare">
+  <thead>
+    <tr><th>Broken</th><th>Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><!-- E2: File name as alt text -->
+        <img src="assets/enrollment.png" alt="IMG_3847.png">
+        <p><strong>What happens:</strong> Screen reader announces "Graphic. IMG_3847.png" — student gets no data.</p>
+      </td>
+      <td><!-- E2: Corrected artifact (right) -->
+        <img src="assets/enrollment.png" alt="Line graph showing a steady increase in online course enrollment from 12,000 in Fall 2020 to 28,500 in Fall 2025.">
+        <p><strong>What happens:</strong> Screen reader receives the same data as sighted users.</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code>alt="IMG_3847.png"</code></td>
+      <td><code>alt="Line graph showing a steady increase in online course enrollment from 12,000 in Fall 2020 to 28,500 in Fall 2025."</code></td>
+    </tr>
+  </tbody>
+</table>
+<!-- Detection: Ally, Microsoft Accessibility Checker -->
+<p><strong>Ally error messages:</strong></p>
+<ul>
+<li><strong>Word:</strong> “Document has images with their filenames as
+descriptions” (Minor)</li>
+<li><strong>Canvas:</strong> “Alt text should not be the image filename”
+(Minor)</li>
+</ul>
+<p><strong>How to fix:</strong> Follow the same steps as Scenario 1 for
+each platform. Delete the file name and replace it with a meaningful
+description of the image.</p>
+<hr />
+<h4 id="scenario-4-decorative-image-not-marked-as-decorative">Scenario
+4: Decorative image not marked as decorative</h4>
+<p><strong>The broken state.</strong> A decorative image (a divider
+line, a background texture, a branding banner, a purely visual flourish)
+has either no alt text or a description like “decorative line” or
+“banner image.” It should be marked as decorative so screen readers skip
+it entirely.</p>
+<p><strong>Detected by:</strong> No automated tool. Ally, the Microsoft
+checker, and Acrobat cannot determine whether an image <em>should</em>
+be decorative. This is entirely a human judgment call.</p>
+<p><strong>Decorative image not marked as decorative</strong></p>
+<!-- Scenario: Decorative image not marked | Error ID: E6 -->
+<table class="lab-compare">
+  <thead>
+    <tr><th>Broken</th><th>Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><!-- E6: Decorative image NOT marked decorative -->
+        <img src="assets/banner.png" alt="banner image">
+        <p><strong>What happens:</strong> Screen reader announces the decorative image, interrupting the reading flow.</p>
+      </td>
+      <td><!-- E6: Corrected artifact (right) -->
+        <img src="assets/banner.png" alt="">
+        <p><strong>What happens:</strong> Screen reader skips the image entirely.</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code>alt="banner image"</code></td>
+      <td><code>alt=""</code></td>
+    </tr>
+  </tbody>
+</table>
+<!-- Detection: Manual only -->
+<p><strong>How to mark as decorative in Word / PowerPoint:</strong></p>
+<ol type="1">
+<li>Right-click the image.</li>
+<li>Select <strong>Edit Alt Text</strong>.</li>
+<li>Check the <strong>Mark as decorative</strong> checkbox.</li>
+<li>Close the Alt Text pane.</li>
+</ol>
+<p><img class="screenshot" src="assets/word-alt-text-mark-decorative.png" alt="Screenshot of the Word Alt Text pane with Mark as decorative toggle turned on, showing the message 'Content marked as decorative will not expose a description to screen readers' and the decorative-objects explanation."></p>
+<p><strong>How to mark as decorative in Canvas:</strong></p>
+<ol type="1">
+<li>Click the image in the Rich Content Editor.</li>
+<li>Click <strong>Image Options</strong>.</li>
+<li>Check the <strong>Decorative Image</strong> checkbox. This clears
+the Alt Text field and sets <code>alt=""</code> in the HTML.</li>
+<li>Click <strong>Done</strong>.</li>
+</ol>
+<p><img class="screenshot" src="assets/canvas-image-options-decorative.png" alt="Screenshot of Canvas Image Options modal with Decorative Image checkbox checked, showing the Alt Text field with placeholder '(Describe the image)' and the decorative option selected."></p>
+<p><strong>How to mark as decorative in PDF (Acrobat Pro):</strong></p>
+<ol type="1">
+<li>Open the <strong>Tags</strong> panel.</li>
+<li>Locate the <strong>Figure</strong> tag for the decorative
+image.</li>
+<li>Right-click and select <strong>Change Tag to Artifact</strong>. This
+removes the image from the tag tree so screen readers skip it.</li>
+</ol>
+<p>See <a href="https://helpx.adobe.com/acrobat/using/editing-document-structure-content-tags.html">Edit document structure with the Content and Tags panels</a> on Adobe HelpX for full details.</p>
+<p><img class="screenshot" src="assets/acrobat-create-artifact.png" alt="Screenshot of Acrobat Create Artifact dialog: Artifact Type options (Page selected, Pagination, Layout), Attach to Side(s) checkboxes (Left, Top, Right, Bottom), and Cancel/OK buttons. Used when marking a decorative image as artifact so screen readers skip it."></p>
+<hr />
+<h4 id="scenario-5-vague-alt-text">Scenario 5: Vague alt text</h4>
+<p><strong>The broken state.</strong> The alt text field contains a
+description that is technically present but too vague to be useful.
+Examples: “chart,” “Quiz comparison chart,” “photo,” “graph of data.” A
+screen reader user hears the label but receives none of the information
+the image actually conveys.</p>
+<!-- Scenario: Vague alt text | Error ID: E4 -->
+<table class="lab-compare">
+  <thead>
+    <tr><th>Broken</th><th>Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><!-- E4: Vague alt text -->
+        <img src="assets/sales.png" alt="Quiz comparison chart">
+        <p><strong>What happens:</strong> Student hears "Quiz comparison chart" but gets no data.</p>
+      </td>
+      <td><!-- E4: Corrected artifact (right) -->
+        <img src="assets/sales.png" alt="Grouped bar chart comparing Quiz 1 and Quiz 2 averages across three sections. Section 1: 85% and 82%. Section 2: 83% and 81%. Section 3: 85% and 82%.">
+        <p><strong>What happens:</strong> Screen reader receives the same data as sighted users.</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code>alt="Quiz comparison chart"</code></td>
+      <td><code>alt="Grouped bar chart comparing Quiz 1 and Quiz 2 averages across three sections. Section 1: 85% and 82%. Section 2: 83% and 81%. Section 3: 85% and 82%."</code></td>
+    </tr>
+  </tbody>
+</table>
+<!-- Detection: Manual only -->
+<p><strong>Detected by:</strong> No automated tool. All three tools
+check for <em>presence</em>, not <em>quality</em>.</p>
+<p><strong>Vague alt text: Photo</strong></p>
+<table class="lab-compare">
+  <thead>
+    <tr><th>Broken</th><th>Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <img src="assets/old-queens.png" alt="building">
+        <p><strong>What happens:</strong> Student hears “building” but learns nothing about which building, where, or why it matters.</p>
+      </td>
+      <td>
+        <img src="assets/old-queens.png" alt="Old Queens building on the Rutgers University College Avenue campus. A three-story brownstone building with white-trimmed windows, a central cupola with weather vane, and landscaped grounds in the foreground.">
+        <p><strong>What happens:</strong> Student receives a description that identifies the building and its visual details.</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code>alt="building"</code></td>
+      <td><code>alt="Old Queens building on the Rutgers University College Avenue campus. A three-story brownstone building with white-trimmed windows, a central cupola with weather vane, and landscaped grounds in the foreground."</code></td>
+    </tr>
+  </tbody>
+</table>
+<p><strong>Vague alt text: Pie chart</strong></p>
+<table class="lab-compare">
+  <thead>
+    <tr><th>Broken</th><th>Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <img src="assets/pie-chart.png" alt="pie chart">
+        <p><strong>What happens:</strong> Student hears “pie chart” but receives none of the survey data.</p>
+      </td>
+      <td>
+        <img src="assets/pie-chart.png" alt="Pie chart of Fall 2025 student survey: 62% satisfied, 24% neutral, 14% dissatisfied.">
+        <p><strong>What happens:</strong> Student receives the same data as sighted users and can participate in discussion.</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code>alt="pie chart"</code></td>
+      <td><code>alt="Pie chart of Fall 2025 student survey: 62% satisfied, 24% neutral, 14% dissatisfied."</code></td>
+    </tr>
+  </tbody>
+</table>
+<p><strong>How to fix:</strong> Follow the same steps as Scenario 1 for
+each platform. Replace the vague description with one that conveys the
+same information a sighted reader would get from the image. For charts
+and graphs, include the data, not just the chart type.</p>
+<div class="callout">
+<p><strong>Writing good alt text.</strong> Ask: “If I could not see this
+image, what would I need to know?” The answer is the alt text. For data
+visualizations, the alt text should include the data. For photos, it
+should describe what is shown and why it matters in context. Avoid
+starting alt text with words like “graphic,” “image,” or “picture.”
+Screen readers already announce the element as an image, so these labels
+are redundant and add noise without meaning.</p>
+</div>
+<hr />
+<h4 id="scenario-6-gibberish-or-placeholder-alt-text">Scenario 6:
+Gibberish or placeholder alt text</h4>
+<p><strong>Gibberish or placeholder alt text</strong></p>
+<!-- Scenario: Gibberish/placeholder alt | Error ID: E5 -->
+<table class="lab-compare">
+  <thead>
+    <tr><th>Broken</th><th>Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><!-- E5: Gibberish / placeholder alt -->
+        <img src="assets/photo1.png" alt="alskjshdsflh">
+        <p><strong>What happens:</strong> Screen reader announces "alskjshdsflh" — student gains nothing.</p>
+      </td>
+      <td><!-- E5: Corrected artifact (right) -->
+        <img src="assets/photo1.png" alt="Course instructor at podium during workshop session.">
+        <p><strong>What happens:</strong> Student receives a meaningful description (or image marked decorative).</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code>alt="alskjshdsflh"</code></td>
+      <td><code>alt="Course instructor at podium during workshop session."</code></td>
+    </tr>
+  </tbody>
+</table>
+<!-- Detection: Manual only -->
+<p><strong>The broken state.</strong> The alt text field contains
+nonsense (e.g., “alskjshdsflh,” “asdf,” “xxx”) or a generic placeholder
+(e.g., “image,” “photo,” “graphic,” “picture”). This typically results
+from someone filling the field to clear an automated warning without
+writing a real description.</p>
+<p><strong>Detected by:</strong> No automated tool. The alt text field
+is not empty, so all tools consider it a pass.</p>
+<p><strong>How to fix:</strong> Follow the same steps as Scenario 1 for
+each platform. Delete the placeholder and write a meaningful
+description. If the image is decorative, mark it as decorative instead
+of describing it.</p>
+<hr />
+<h4
+id="scenario-7-alt-text-over-120-characters-canvas-false-positive">Scenario
+7: Alt text over ~120 characters (Canvas false positive)</h4>
+<!-- Scenario: Long alt text (Ally false positive) | Error ID: E7 -->
+<table class="lab-compare">
+  <thead>
+    <tr><th>Broken</th><th>Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><!-- E7: Long alt text (semantically correct but flagged by Ally) -->
+        <img src="assets/chart_long.png" alt="Grouped bar chart comparing Quiz 1 and Quiz 2 averages across three sections. Section 1: 85% and 82%. Section 2: 83% and 81%. Section 3: 85% and 82%.">
+        <p><strong>What happens:</strong> Ally flags as too long; the alt is actually correct and complete.</p>
+      </td>
+      <td><!-- E7: Corrected (keep as-is) -->
+        <img src="assets/chart_long.png" alt="Grouped bar chart comparing Quiz 1 and Quiz 2 averages across three sections. Section 1: 85% and 82%. Section 2: 83% and 81%. Section 3: 85% and 82%.">
+        <p><strong>What happens:</strong> Do not shorten to clear Ally flag. The description is accurate and necessary.</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code>alt="Grouped bar chart comparing Quiz 1 and Quiz 2 averages across three sections. Section 1: 85% and 82%. Section 2: 83% and 81%. Section 3: 85% and 82%."</code></td>
+      <td><code>alt="Grouped bar chart comparing Quiz 1 and Quiz 2 averages across three sections. Section 1: 85% and 82%. Section 2: 83% and 81%. Section 3: 85% and 82%."</code></td>
+    </tr>
+  </tbody>
+</table>
+<!-- Detection: Ally (false positive) -->
+<p><strong>The broken state.</strong> This is not actually broken. The
+alt text is accurate and meaningful but exceeds approximately 120
+characters. Ally flags this in the Canvas Rich Content Editor as an
+issue. There is no WCAG basis for a character limit on alt text, nor any detriment for screen reader users.</p>
+<p><strong>Detected by:</strong> Ally (Canvas only). This is a
+<strong>false positive</strong>.</p>
+<p><strong>How to handle:</strong> Do not shorten the description to
+clear the flag. If the description needs to be long to be accurate
+(common for charts, graphs, and complex images), keep it as written.
+Note the Ally flag but do not treat it as a real issue. This will not show up in the Accessibility Dashboard in a way that impacts your overall score.</p>
+<p>For very long descriptions (multiple paragraphs), consider placing a
+brief alt text on the image and providing the full description in the
+body text below the image, or linking to a long description.</p>
+<hr />
+<h3 id="complex-images">Complex images</h3>
+<p>Charts, graphs, diagrams, infographics, and other complex images
+often require descriptions that go beyond what fits naturally in an alt
+text field. For these:</p>
+<ol type="1">
+<li>Provide a brief alt text on the image that identifies what it is
+(e.g., “Bar chart of enrollment trends, 2020 to 2025. Full description
+follows.”).</li>
+<li>Include the full description in the body text immediately below the
+image, or link to a separate long description.</li>
+</ol>
+<p>This ensures the image is not skipped by screen readers and the full
+information is available in context.</p>
+<h3 id="known-false-positive">Known false positive</h3>
+<p>In the Canvas Rich Content Editor, Ally flags alt text exceeding
+approximately 120 characters. There is no WCAG basis for a character
+limit on alt text. Do not shorten a description that needs to be long to
+be accurate.</p>
+<p><img class="screenshot" src="assets/canvas-ally-alt-text-length-warning.png" alt="Screenshot of the Canvas Accessibility Checker showing Issue 1 of 1: 'Alt attribute text should not contain more than 120 characters.' The Change alt text field displays a grouped bar graph description that exceeds the limit. Prev, Next, and Apply buttons appear at the bottom."></p>
+<div class="callout">
+<p><strong>Key point.</strong> Ally checks that alt text
+<em>exists</em>. It does not check that alt text is <em>accurate</em>,
+<em>meaningful</em>, or <em>appropriate</em>. Gibberish, placeholder
+text, and vague labels all pass.</p>
+</div>
+<div class="summary">
+<p><strong>Automated vs. Manual Summary</strong></p>
+<ul>
+<li><strong>Automated tools catch:</strong> Missing alt text, file name
+as alt text</li>
+<li><strong>Manual review required:</strong> Alt text quality,
+decorative image identification, complex image descriptions, SmartArt
+and grouped shapes</li>
+</ul>
+</div>
+<div class="quick-check">
+<p><strong>Quick Check: Text Alternatives</strong></p>
+<ul>
+<li>Does every meaningful image have alt text that conveys equivalent
+information?</li>
+<li>Are decorative images marked as decorative (not described)?</li>
+<li>Do charts and graphs have descriptions that include the data, not
+just the title?</li>
+<li>Has AI-generated alt text been reviewed and revised?</li>
+<li>Are SmartArt graphics and grouped shapes described?</li>
+</ul>
+</div>
+<h2 id="color-contrast">Color Contrast</h2>
+<p><strong>WCAG 1.4.3 Contrast (Minimum) (Level AA).</strong> Text must
+have a contrast ratio of at least <strong>4.5:1</strong> against its
+background. Large text (18pt or 14pt bold) requires at least
+<strong>3:1</strong>.</p>
+<!-- Scenario: Low contrast text | Error ID: E10 -->
+<table class="lab-compare">
+  <thead>
+    <tr><th>Broken</th><th>Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><!-- E10: Low contrast text -->
+        <p style="color:#d1d5db; background:#ffffff;">This text has insufficient contrast.</p>
+        <p><strong>What happens:</strong> Hard to read for low vision or in bright light; fails WCAG contrast ratio.</p>
+      </td>
+      <td><!-- E10: Corrected artifact (right) -->
+        <p style="color:#1a1a2e; background:#ffffff;">This text has sufficient contrast.</p>
+        <p><strong>What happens:</strong> Meets 4.5:1 ratio; readable for more users.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Detection: Ally (HTML contrast) -->
+<p>Contrast issues are common (likelihood 4/5) and meaningfully affect
+students with low vision, color vision deficiencies, or those reading on
+screens in bright environments.</p>
+<h3 id="what-automated-tools-detect-1">What automated tools detect</h3>
+<p>Ally and similar tools measure the contrast ratio between text color
+and background color and flag combinations that fall below the minimum.
+This works well for body text in standard layouts.</p>
+<h3 id="what-requires-manual-review-1">What requires manual review</h3>
+<ul>
+<li><strong>Text in images.</strong> Contrast within screenshots,
+diagrams, or infographics is not evaluated by Ally.</li>
+<li><strong>Near-threshold combinations.</strong> Branded templates with
+ratios of 4.4:1 or 4.3:1 may not be flagged by all tools but still fail
+WCAG.</li>
+<li><strong>Chart labels and annotations.</strong> Light gray axis
+labels, legend text, and data labels frequently fail contrast
+requirements but are overlooked because they are embedded in images or
+chart objects.</li>
+</ul>
+<div class="summary">
+<p><strong>Automated vs. Manual Summary</strong></p>
+<ul>
+<li><strong>Automated tools catch:</strong> Text-on-background contrast
+ratios below 4.5:1 (normal text) or 3:1 (large text)</li>
+<li><strong>Manual review required:</strong> Text embedded in images,
+near-threshold branded templates, chart labels and annotations</li>
+</ul>
+</div>
+<div class="quick-check">
+<p><strong>Quick Check: Color Contrast</strong></p>
+<ul>
+<li>Does all body text meet a 4.5:1 contrast ratio against its
+background?</li>
+<li>Does large text (18pt or 14pt bold) meet at least 3:1?</li>
+<li>Have chart labels, axis text, and legend text been checked
+manually?</li>
+<li>Are branded templates verified, not assumed to pass?</li>
+</ul>
+</div>
+<h2 id="color-as-sole-means-of-communication">Color as Sole Means of
+Communication</h2>
+<p><strong>WCAG 1.4.1 Use of Color (Level A).</strong> Color must not be
+the only visual means of conveying information, indicating an action,
+prompting a response, or distinguishing a visual element.</p>
+<p>This is a separate requirement from contrast and is <strong>not
+checked by Ally or any of the standard automated tools</strong>. It
+requires manual review.</p>
+<h3 id="common-examples-in-course-content">Common examples in course
+content</h3>
+<ul>
+<li>A rubric that uses red/yellow/green to indicate performance levels
+without text labels</li>
+<li>A chart where data series are distinguished only by color without
+patterns or direct labels</li>
+<li>Feedback that marks incorrect answers in red with no other indicator
+(icon, text, symbol)</li>
+<li>A schedule where color-coded categories have no legend or text
+equivalent</li>
+</ul>
+<!-- Scenario: Color as sole means | Error ID: E11 -->
+<table class="lab-compare">
+  <thead>
+    <tr><th>Broken</th><th>Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><!-- E11: Color as sole means -->
+        <p><span style="color: red;">Low</span><br><span style="color: green;">High</span></p>
+        <p><strong>What happens:</strong> Colorblind or grayscale user cannot distinguish meaning from color alone.</p>
+      </td>
+      <td><!-- E11: Corrected artifact (right) -->
+        <p><span class="legend low">Low</span> — <span class="legend high">High</span></p>
+        <p><strong>What happens:</strong> Text labels plus visual distinction; meaning not conveyed by color only.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Detection: Manual only -->
+<h3 id="what-to-look-for">What to look for</h3>
+<p>Any place where removing color would cause a loss of information. If
+a colorblind student printed the content in grayscale, would all the
+meaning still be present?</p>
+<div class="callout">
+<p><strong>Key point.</strong> No automated tool checks for color as the
+sole means of communication. This issue is invisible to Ally, the
+Microsoft checker, and Acrobat. It requires manual review every
+time.</p>
+</div>
+<div class="summary">
+<p><strong>Automated vs. Manual Summary</strong></p>
+<ul>
+<li><strong>Automated tools catch:</strong> Nothing. This is entirely a
+manual review issue.</li>
+<li><strong>Manual review required:</strong> Rubrics, charts, feedback,
+schedules, and any content where color encodes meaning</li>
+</ul>
+</div>
+<div class="quick-check">
+<p><strong>Quick Check: Color as Sole Means</strong></p>
+<ul>
+<li>If the content were printed in grayscale, would all information
+still be conveyed?</li>
+<li>Do charts use patterns, labels, or shapes in addition to color?</li>
+<li>Do rubrics and grading scales include text labels alongside color
+coding?</li>
+<li>Does feedback use icons or text in addition to red/green
+indicators?</li>
+</ul>
+</div>
+<h2 id="headings">Headings</h2>
+<p><strong>WCAG 1.3.1 Info and Relationships (Level A), 2.4.1 Bypass
+Blocks (Level A), 2.4.6 Headings and Labels (Level AA).</strong> Content
+structure must be programmatically determinable. Headings must be
+present and descriptive.</p>
+<p>Heading issues are tied with text alternatives as the most frequently
+occurring accessibility problem (likelihood 5/5) and have high impact
+(4/5). For a student navigating a long document or page by screen
+reader, headings are the primary mechanism for orientation and
+navigation, equivalent to scanning a page visually.</p>
+<h3 id="what-automated-tools-detect-2">What automated tools detect</h3>
+<ul>
+<li>Missing headings entirely (no heading styles used in a Word
+document, no H tags in a Canvas page)</li>
+<li>Missing slide titles in PowerPoint</li>
+<li>Skipped heading levels (e.g., jumping from H1 to H4), though
+detection is inconsistent</li>
+<li>Untagged PDFs (no tag structure at all)</li>
+</ul>
+<h3 id="what-requires-manual-review-2">What requires manual review</h3>
+<ul>
+<li><strong>Heading text quality.</strong> Ally checks that headings
+exist, not that they are descriptive. “Section 1” or “Untitled” as a
+heading passes automated checks but provides no useful navigation.</li>
+<li><strong>Logical hierarchy.</strong> A document where every line is
+Heading 2 will pass automated checks but provides no meaningful
+structure.</li>
+<li><strong>Reading order.</strong> In PowerPoint and PDF, content may
+be visually organized but read in the wrong sequence. The reading order
+must be verified in the slide’s Selection Pane (PowerPoint) or the Tags
+panel (Acrobat).</li>
+<li><strong>Content order in multi-column layouts.</strong> Text boxes,
+sidebars, and multi-column layouts in Word and PowerPoint may not read
+in the intended order.</li>
+</ul>
+<div class="summary">
+<p><strong>Automated vs. Manual Summary</strong></p>
+<ul>
+<li><strong>Automated tools catch:</strong> Missing headings, missing
+slide titles, skipped heading levels (inconsistently), untagged
+PDFs</li>
+<li><strong>Manual review required:</strong> Heading text quality,
+logical hierarchy, reading order, content order in multi-column
+layouts</li>
+</ul>
+</div>
+<div class="quick-check">
+<p><strong>Quick Check: Headings</strong></p>
+<ul>
+<li>Does the document use heading styles (not just bold or large text)
+for structure?</li>
+<li>Do headings follow a logical hierarchy without skipping levels?</li>
+<li>Are heading labels descriptive (not “Section 1” or “Untitled”)?</li>
+<li>Does every PowerPoint slide have a unique title?</li>
+<li>Has reading order been verified in the Selection Pane (PowerPoint)
+or Tags panel (PDF)?</li>
+</ul>
+</div>
+<h2 id="tables">Tables</h2>
+<p><strong>WCAG 1.3.1 Info and Relationships (Level A).</strong>
+Information and relationships conveyed through presentation must be
+programmatically determinable.</p>
+<p>Tables appear less frequently than images or headings (likelihood
+3/5) but have high impact (4/5) when they do appear. Without designated
+header rows, a screen reader reads table cells as raw data with no
+context. A student hears “85” without knowing which column or row it
+belongs to.</p>
+<h3 id="what-automated-tools-detect-3">What automated tools detect</h3>
+<ul>
+<li>Tables without a designated header row (Ally, MS Office,
+Acrobat)</li>
+<li>Tables of 3x3 or larger without headers (Canvas, via axe-core)</li>
+</ul>
+<h3 id="what-requires-manual-review-3">What requires manual review</h3>
+<ul>
+<li><strong>Layout tables.</strong> Tables used for visual alignment
+rather than data presentation create confusing screen reader
+experiences. Automated tools do not reliably distinguish layout tables
+from data tables.</li>
+<li><strong>Complex tables.</strong> Merged cells, multiple header rows,
+and nested tables require manual verification. The <code>scope</code>
+attribute (HTML) or tagged structure (PDF) must correctly associate each
+data cell with its headers.</li>
+<li><strong>Appropriateness.</strong> Some content presented in tables
+would be more accessible as lists or paragraphs. A “table” with one
+column and one row per item is really a list.</li>
+</ul>
+<!-- Scenario: Layout table used for positioning | Error ID: E8 -->
+<table class="lab-compare">
+  <thead>
+    <tr><th>Broken</th><th>Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><!-- E8: Layout table used for positioning -->
+        <table>
+          <tr>
+            <td><img src="assets/sidebar.png" alt="sidebar image"></td>
+            <td><p>This paragraph is laid out using a table for positioning instead of semantic structure.</p></td>
+          </tr>
+        </table>
+        <p><strong>What happens:</strong> Screen reader encounters table structure with no data relationship; confusing for navigation.</p>
+      </td>
+      <td><!-- E8: Corrected artifact (right) -->
+        <div class="two-column-layout">
+          <aside><img src="assets/sidebar.png" alt="Descriptive sidebar image"></aside>
+          <main><p>This paragraph is structured semantically as article content (no layout table).</p></main>
+        </div>
+        <p><strong>What happens:</strong> Semantic structure allows screen reader to understand layout and content roles.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Detection: Manual only -->
+<!-- Scenario: Data table missing header row | Error ID: E9 -->
+<table class="lab-compare">
+  <thead>
+    <tr><th>Broken</th><th>Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><!-- E9: Data table missing header row -->
+        <table>
+          <tr><td>Section 1</td><td>85</td><td>82</td></tr>
+          <tr><td>Section 2</td><td>83</td><td>81</td></tr>
+          <tr><td>Section 3</td><td>85</td><td>82</td></tr>
+        </table>
+        <p><strong>What happens:</strong> Screen reader reads raw cells with no column/row context; student hears "85" without knowing what it means.</p>
+      </td>
+      <td><!-- E9: Corrected artifact (right) -->
+        <table>
+          <thead><tr><th>Section</th><th>Quiz 1</th><th>Quiz 2</th></tr></thead>
+          <tbody>
+            <tr><td>Section 1</td><td>85</td><td>82</td></tr>
+            <tr><td>Section 2</td><td>83</td><td>81</td></tr>
+            <tr><td>Section 3</td><td>85</td><td>82</td></tr>
+          </tbody>
+        </table>
+        <p><strong>What happens:</strong> Screen reader associates each cell with its header; student gets full context.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Detection: Ally, Microsoft Accessibility Checker, Acrobat -->
+<div class="summary">
+<p><strong>Automated vs. Manual Summary</strong></p>
+<ul>
+<li><strong>Automated tools catch:</strong> Tables without a designated
+header row</li>
+<li><strong>Manual review required:</strong> Layout tables misused for
+formatting, complex tables with merged cells, tables that should be
+lists</li>
+</ul>
+</div>
+<div class="quick-check">
+<p><strong>Quick Check: Tables</strong></p>
+<ul>
+<li>Does every data table have a designated header row?</li>
+<li>Are tables used only for data, not for visual layout?</li>
+<li>Do complex tables (merged cells, multiple headers) read correctly in
+a screen reader?</li>
+<li>Would any table be clearer as a list or structured text?</li>
+</ul>
+</div>
+<h2 id="language">Language</h2>
+<p><strong>WCAG 3.1.1 Language of Page (Level A).</strong> The default
+human language of each page or document must be programmatically
+determinable. <strong>WCAG 3.1.2 Language of Parts (Level AA).</strong>
+The language of each passage or phrase that differs from the document’s
+default language must be programmatically determinable.</p>
+<p>Language affects how screen readers pronounce content. When a
+document’s language metadata is missing or incorrect, a screen reader
+applies the wrong pronunciation rules. English phonetics applied to a
+Spanish passage, for example, renders the text incomprehensible.</p>
+<!-- Scenario: Missing language of parts | Error ID: E12 -->
+<table class="lab-compare">
+  <thead>
+    <tr><th>Broken</th><th>Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><!-- E12: Missing language of parts -->
+        <p>Este párrafo está en español y no tiene atributo de idioma.</p>
+        <p><strong>What happens:</strong> Screen reader uses wrong pronunciation; Spanish may be read as English and be incomprehensible.</p>
+      </td>
+      <td><!-- E12: Corrected artifact (right) -->
+        <p><span lang="es">Este párrafo está en español y ahora tiene atributo de idioma.</span></p>
+        <p><strong>What happens:</strong> Screen reader switches to Spanish pronunciation; content is comprehensible.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Detection: Canvas (HTML reliable), Manual -->
+<h3 id="automated-tool-reliability-by-file-type">Automated tool
+reliability by file type</h3>
+<table>
+<thead>
+<tr>
+<th>File type</th>
+<th>Ally</th>
+<th>MS Office</th>
+<th>Acrobat</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Word (.docx)</td>
+<td>Unreliable</td>
+<td>Not checked</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>PowerPoint (.pptx)</td>
+<td>Unreliable</td>
+<td>Not checked</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>PDF</td>
+<td>Unreliable</td>
+<td>N/A</td>
+<td>Checks missing language only</td>
+</tr>
+<tr>
+<td>Canvas (HTML)</td>
+<td>Checked</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<p>Canvas is the only file type where language detection works reliably,
+because Ally uses axe-core to check the <code>lang</code> attribute on
+the HTML element.</p>
+<p>For Word and PowerPoint, Ally’s language detection is inconsistent.
+The Microsoft Accessibility Checker does not flag language issues at
+all. For PDF, Acrobat can detect a missing language attribute but cannot
+detect an incorrect one.</p>
+<h3 id="what-no-automated-tool-detects">What no automated tool
+detects</h3>
+<ul>
+<li><strong>Incorrect document language</strong> (e.g., a document
+tagged as French when the content is English). Ally may flag this in
+some cases but not reliably across file types.</li>
+<li><strong>Language of parts.</strong> No automated tool detects that a
+Spanish paragraph within an English document needs its own language
+attribute. This can only be verified by listening with a screen
+reader.</li>
+</ul>
+<h3 id="setting-language-of-parts">Setting language of parts</h3>
+<ul>
+<li><strong>Word:</strong> Select the text, then set the proofing
+language (Review &gt; Language &gt; Set Proofing Language). This embeds
+the language at the character level.</li>
+<li><strong>Canvas:</strong> In the HTML editor, wrap the passage in a
+<code>span</code> or <code>div</code> with a <code>lang</code> attribute
+(e.g., <code>&lt;span lang="es"&gt;...&lt;/span&gt;</code>).</li>
+<li><strong>PDF:</strong> Use the tags panel in Acrobat Pro to set the
+language attribute on individual content tags.</li>
+</ul>
+<div class="callout">
+<p><strong>Key point.</strong> Language is the least reliably detected
+issue across automated tools. For Word and PowerPoint, Ally’s checks are
+inconsistent. The Microsoft Accessibility Checker does not check
+language at all. Only Canvas HTML is reliably checked.</p>
+</div>
+<div class="summary">
+<p><strong>Automated vs. Manual Summary</strong></p>
+<ul>
+<li><strong>Automated tools catch:</strong> Missing language attribute
+(Canvas HTML only is reliable; Word, PowerPoint, and PDF are
+unreliable)</li>
+<li><strong>Manual review required:</strong> Incorrect document
+language, language of parts, pronunciation accuracy</li>
+</ul>
+</div>
+<div class="quick-check">
+<p><strong>Quick Check: Language</strong></p>
+<ul>
+<li>Is the document language set correctly in the file properties?</li>
+<li>Do passages in other languages have their own language
+attributes?</li>
+<li>Has a screen reader been used to verify pronunciation of
+foreign-language content?</li>
+<li>In Word, is the proofing language set on foreign-language
+selections?</li>
+</ul>
+</div>
+<h2 id="seizure-risk">Seizure Risk</h2>
+<p><strong>WCAG 2.3.1 Three Flashes or Below Threshold (Level
+A).</strong> Content must not contain anything that flashes more than
+three times per second.</p>
+<p>Seizure risk is the least common issue in course content (likelihood
+1/5) but carries the highest possible impact (5/5). A single flashing
+element can trigger a photosensitive seizure.</p>
+<h3 id="what-automated-tools-detect-4">What automated tools detect</h3>
+<p>Ally checks for rapid flashing in <strong>image files only</strong>
+(primarily animated GIFs). This is the only file type where seizure risk
+is evaluated.</p>
+<div class="callout">
+<p><strong>Note.</strong> This document cannot show actual flashing content
+because it could cause direct harm (photosensitive seizure) to readers. The
+illustration below represents the concept of flashing content; in real
+course materials, a rapidly flashing GIF or animation would appear in the
+"Broken" column.</p>
+</div>
+<!-- Scenario: Flashing GIF (seizure risk) | Error ID: E13 -->
+<table class="lab-compare">
+  <thead>
+    <tr><th>Broken</th><th>Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><!-- E13: Flashing GIF (seizure risk) - illustration only, no actual flashing -->
+        <img src="assets/flashing.png" alt="Illustration representing flashing content (e.g., alarm light). Actual flashing cannot be shown due to seizure risk.">
+        <p><strong>What happens:</strong> Content flashes; seizure risk for photosensitive users.</p>
+      </td>
+      <td><!-- E13: Corrected artifact (right) -->
+        <img src="assets/flashing_still.png" alt="Static frame of the animation (flashing removed)">
+        <p><strong>What happens:</strong> No flashing; same information conveyed without seizure risk.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Detection: Ally (GIF check) and Manual -->
+<h3 id="what-is-not-checked">What is not checked</h3>
+<table>
+<thead>
+<tr>
+<th>File type</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Word (.docx)</td>
+<td>Gap: not checked</td>
+</tr>
+<tr>
+<td>PowerPoint (.pptx)</td>
+<td>Gap: not checked</td>
+</tr>
+<tr>
+<td>PDF</td>
+<td>Gap: not checked</td>
+</tr>
+<tr>
+<td>Canvas pages</td>
+<td>Gap: not checked</td>
+</tr>
+<tr>
+<td>Image (GIF)</td>
+<td>Checked</td>
+</tr>
+</tbody>
+</table>
+<p>The most common sources of flashing content in courses
+(<strong>embedded video, PowerPoint transitions and animations, and
+auto-playing media</strong>) are not evaluated by any of the standard
+automated tools.</p>
+<h3 id="guidance">Guidance</h3>
+<ul>
+<li>Avoid strobe effects, rapid transitions, and flashing animations in
+all content.</li>
+<li>Review embedded videos for flashing sequences, especially screen
+recordings with rapid UI changes.</li>
+<li>Use subtle, purposeful animations in PowerPoint rather than
+attention-grabbing transitions.</li>
+<li>When in doubt, the Photosensitive Epilepsy Analysis Tool (PEAT) can
+evaluate video content against the flash threshold.<a href="#fn3"
+class="footnote-ref" id="fnref3"
+role="doc-noteref"><sup>3</sup></a></li>
+</ul>
+<div class="callout">
+<p><strong>Key point.</strong> Seizure risk has the lowest likelihood
+but the highest possible impact. Ally only checks image files (GIFs).
+Video, PowerPoint animations, and auto-playing media are not evaluated
+by any automated tool.</p>
+</div>
+<div class="summary">
+<p><strong>Automated vs. Manual Summary</strong></p>
+<ul>
+<li><strong>Automated tools catch:</strong> Rapid flashing in animated
+GIFs (image files only)</li>
+<li><strong>Manual review required:</strong> Embedded video, PowerPoint
+transitions and animations, auto-playing media, CSS animations</li>
+</ul>
+</div>
+<div class="quick-check">
+<p><strong>Quick Check: Seizure Risk</strong></p>
+<ul>
+<li>Does any content flash more than three times per second?</li>
+<li>Have embedded videos been reviewed for strobe or rapid flashing
+sequences?</li>
+<li>Are PowerPoint transitions subtle and purposeful, not rapid or
+strobing?</li>
+<li>Has auto-playing media been avoided or reviewed?</li>
+</ul>
+</div>
+<hr />
+<div id="presenter-notes" aria-hidden="true" style="display:none;">
+  <ol>
+    <li>E1, E2, E3, E10 (Run Microsoft Accessibility Checker) </li>
+    <li>Export PDF &amp; run Acrobat fixes (E6 artifact tagging, reading order) </li>
+    <li>Upload to Canvas &amp; review Ally (E7 false positive, E9 verification)</li>
+    <li>Manual review &amp; screen reader checks (E4, E5, E8, E11, E12, E13)</li>
+  </ol>
+</div>
+<section id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Faulkner, S., et al. “The WebAIM Million: An Annual
+Accessibility Analysis of the Top 1,000,000 Home Pages.” WebAIM, 2024.
+https://webaim.org/projects/million/<a href="#fnref1"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>National Center for Education Statistics. “Students With
+Disabilities.” Condition of Education, U.S. Department of Education,
+2023. https://nces.ed.gov/programs/coe/indicator/cgg<a href="#fnref2"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Trace Research &amp; Development Center. “Photosensitive
+Epilepsy Analysis Tool (PEAT).” University of Maryland.
+https://trace.umd.edu/peat/<a href="#fnref3" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</div>
+</body>
+</html>

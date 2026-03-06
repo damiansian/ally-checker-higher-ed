@@ -10,9 +10,11 @@
     "contrast-check": "node scripts/check-contrast.mjs",
     "preview": "astro preview",
     "lint": "eslint .",
-    "test:a11y": "playwright test",
+    "test:a11y": "playwright test --project=chromium",
+    "test:a11y:all": "playwright test",
     "test:a11y:report": "playwright show-report",
-    "a11y": "playwright test"
+    "test:a11y:budget": "node scripts/check-a11y-budget.mjs",
+    "a11y": "playwright test --project=chromium"
   },
   "dependencies": {
     "react": "^19.2.4",

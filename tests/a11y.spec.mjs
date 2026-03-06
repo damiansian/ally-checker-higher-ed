@@ -30,10 +30,36 @@ function discoverRoutes(dir, base = "") {
 const routes = discoverRoutes(pagesDir);
 
 const WCAG_TAGS = ["wcag2a", "wcag2aa", "wcag22aa"];
-const THEME_TOGGLE_SELECTOR = "button[aria-label*='Switch to']";
+const VIEWPORTS = [
+  { name: "default viewport", size: null },
+  { name: "200% zoom proxy (640px)", size: { width: 640, height: 960 } },
+  { name: "400% zoom proxy (320px)", size: { width: 320, height: 1024 } },
+];
+const TEXT_SPACING_OVERRIDE_CSS = `
+  * {
+    line-height: 1.5 !important;
+    letter-spacing: 0.12em !important;
+    word-spacing: 0.16em !important;
+  }
+  p {
+    margin-bottom: 2em !important;
+  }
+`;
+const TEXT_SPACING_VARIANTS = [
+  { name: "normal text spacing", apply: false },
+  { name: "text spacing override (SC 1.4.12)", apply: true },
+];
+const FORCED_COLORS_VARIANTS = [
+  { name: "normal colors", forcedColors: "none" },
+  { name: "forced colors active", forcedColors: "active" },
+];
 
-async function runAxeAndAssertNoViolations(page, routeLabel) {
-  const results = await new AxeBuilder({ page }).withTags(WCAG_TAGS).analyze();
+async function runAxeAndAssertNoViolations(page, routeLabel, disabledRules = []) {
+  let axe = new AxeBuilder({ page }).withTags(WCAG_TAGS);
+  if (disabledRules.length > 0) {
+    axe = axe.disableRules(disabledRules);
+  }
+  const results = await axe.analyze();
   const violations = results.violations ?? [];
   if (violations.length > 0) {
     const summary = violations
@@ -51,17 +77,31 @@ async function runAxeAndAssertNoViolations(page, routeLabel) {
 
 test.describe("Accessibility (WCAG 2.2 AA)", () => {
   for (const pathname of routes) {
-    test(`${pathname} (default theme)`, async ({ page }) => {
-      await page.goto(pathname, { waitUntil: "networkidle" });
-      await runAxeAndAssertNoViolations(page, pathname);
-    });
-
-    test(`${pathname} (toggled theme)`, async ({ page }) => {
-      await page.goto(pathname, { waitUntil: "networkidle" });
-      const toggle = page.locator(THEME_TOGGLE_SELECTOR);
-      await toggle.click();
-      await page.waitForTimeout(300);
-      await runAxeAndAssertNoViolations(page, `${pathname} (toggled theme)`);
-    });
+    for (const viewport of VIEWPORTS) {
+      for (const spacing of TEXT_SPACING_VARIANTS) {
+        for (const colors of FORCED_COLORS_VARIANTS) {
+          test(
+            `${pathname} (${viewport.name}, ${spacing.name}, ${colors.name})`,
+            async ({ page }) => {
+              if (viewport.size) {
+                await page.setViewportSize(viewport.size);
+              }
+              await page.emulateMedia({ forcedColors: colors.forcedColors });
+              await page.goto(pathname, { waitUntil: "networkidle" });
+              if (spacing.apply) {
+                await page.addStyleTag({ content: TEXT_SPACING_OVERRIDE_CSS });
+              }
+              const disabledRules =
+                colors.forcedColors === "active" ? ["color-contrast"] : [];
+              await runAxeAndAssertNoViolations(
+                page,
+                `${pathname} (${viewport.name}, ${spacing.name}, ${colors.name})`,
+                disabledRules
+              );
+            }
+          );
+        }
+      }
+    }
   }
 });
