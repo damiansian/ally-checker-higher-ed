@@ -22,7 +22,7 @@ export function Breadcrumb({ items }) {
           <li key={i} style={{ display: "flex", alignItems: "center", gap: 8 }}>
             {i > 0 && (
               <span
-                style={{ color: t.textTertiary, fontSize: 13, userSelect: "none" }}
+                style={{ color: t.textTertiary, fontSize: "var(--fs-sm)", userSelect: "none" }}
               >
                 /
               </span>
@@ -31,7 +31,7 @@ export function Breadcrumb({ items }) {
               <span
                 aria-current="page"
                 style={{
-                  fontSize: 13,
+                  fontSize: "var(--fs-sm)",
                   fontWeight: 600,
                   color: t.text,
                   fontFamily: "var(--font-display)",
@@ -43,7 +43,7 @@ export function Breadcrumb({ items }) {
               <a
                 href={item.href || "#"}
                 style={{
-                  fontSize: 13,
+                  fontSize: "var(--fs-sm)",
                   color: t.textSecondary,
                   textDecoration: "none",
                   fontFamily: "var(--font-display)",
@@ -76,7 +76,7 @@ export function FileTypePills({ categorySlug, activeSlug }) {
           alignItems: "center",
           padding: "5px 14px",
           borderRadius: 6,
-          fontSize: 13,
+          fontSize: "var(--fs-sm)",
           fontWeight: 600,
           fontFamily: "var(--font-display)",
           backgroundColor: overviewActive ? t.accent : t.surfaceAlt,
@@ -101,7 +101,7 @@ export function FileTypePills({ categorySlug, activeSlug }) {
               alignItems: "center",
               padding: "5px 14px",
               borderRadius: 6,
-              fontSize: 13,
+              fontSize: "var(--fs-sm)",
               fontWeight: 600,
               fontFamily: "var(--font-display)",
               backgroundColor: active ? t.accent : t.surfaceAlt,
@@ -168,7 +168,7 @@ export function TableOfContents() {
     <nav aria-label="On this page" style={{ position: "sticky", top: 80 }}>
       <div
         style={{
-          fontSize: 10,
+          fontSize: "var(--fs-xs)",
           fontWeight: 700,
           textTransform: "uppercase",
           letterSpacing: "0.1em",
@@ -190,7 +190,7 @@ export function TableOfContents() {
                 style={{
                   display: "block",
                   padding: "6px 12px",
-                  fontSize: 13,
+                  fontSize: "var(--fs-sm)",
                   fontWeight: active ? 600 : 400,
                   color: active ? t.tocActive : t.textSecondary,
                   textDecoration: "none",
@@ -211,106 +211,144 @@ export function TableOfContents() {
   );
 }
 
-// ── Top Navigation ──────────────────────────────────────────
-export function TopNav({ activeCategorySlug }) {
+// ── Mobile Header Bar (hamburger toggle, shown only on small screens) ──
+export function MobileHeader({ menuOpen, setMenuOpen }) {
   const { t } = useTheme();
   return (
-    <header
-      className="top-nav-header"
+    <div
+      className="mobile-header"
       style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 100,
         backgroundColor: t.navBg,
         borderBottom: `1px solid ${t.border}`,
-        padding: "0 32px",
+        padding: "0 16px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        height: 48,
       }}
     >
-      <a href="#main-content" className="skip-link">
-        Skip to main content
-      </a>
-      <div
-        className="top-nav-inner"
+      <a
+        href="/"
         style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          height: 56,
+          fontSize: "var(--fs-base)",
+          fontWeight: 800,
+          color: t.text,
+          textDecoration: "none",
+          fontFamily: "var(--font-display)",
+          letterSpacing: "-0.02em",
+          whiteSpace: "nowrap",
         }}
       >
-        <div className="top-nav-brand-nav" style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <a
-            href="/"
-            style={{
-              fontSize: 16,
-              fontWeight: 800,
-              color: t.text,
-              textDecoration: "none",
-              fontFamily: "var(--font-display)",
-              letterSpacing: "-0.02em",
-              whiteSpace: "nowrap",
-            }}
-          >
-            Canvas LMS Accessibility
-          </a>
-          <nav
-            className="top-nav-nav"
-            style={{ display: "flex", gap: 4 }}
-            aria-label="Categories"
-          >
-            <a
-              href="/"
-              style={{
-                padding: "6px 12px",
-                borderRadius: 6,
-                fontSize: 13,
-                fontWeight: 500,
-                color:
-                  activeCategorySlug === "home"
-                    ? t.accent
-                    : t.textSecondary,
-                backgroundColor:
-                  activeCategorySlug === "home"
-                    ? t.accentBg
-                    : "transparent",
-                textDecoration: "none",
-                fontFamily: "var(--font-display)",
-                transition: "background-color 0.15s ease",
-              }}
-            >
-              Home
-            </a>
+        Canvas LMS Accessibility
+      </a>
+      <button
+        className="hamburger-btn"
+        type="button"
+        aria-expanded={menuOpen}
+        aria-controls="main-nav"
+        onClick={() => setMenuOpen((prev) => !prev)}
+        style={{
+          background: "none",
+          border: "none",
+          color: t.text,
+          cursor: "pointer",
+          padding: 8,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {menuOpen ? (
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+            <line x1="6" y1="6" x2="18" y2="18" />
+            <line x1="6" y1="18" x2="18" y2="6" />
+          </svg>
+        ) : (
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        )}
+        <span className="sr-only">{menuOpen ? "Close menu" : "Menu"}</span>
+      </button>
+    </div>
+  );
+}
+
+// ── Side Navigation ─────────────────────────────────────────
+export function SideNav({ activeCategorySlug, menuOpen, setMenuOpen }) {
+  const { t } = useTheme();
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e) => { if (e.key === "Escape") setMenuOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen, setMenuOpen]);
+
+  const linkStyle = (active) => ({
+    display: "block",
+    padding: "8px 16px",
+    borderRadius: 6,
+    fontSize: "var(--fs-sm)",
+    fontWeight: active ? 600 : 500,
+    color: active ? t.accent : t.textSecondary,
+    backgroundColor: active ? t.accentBg : "transparent",
+    textDecoration: "none",
+    fontFamily: "var(--font-display)",
+    transition: "background-color 0.15s ease",
+  });
+
+  return (
+    <>
+      {menuOpen && (
+        // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+        <div className="sidebar-backdrop" onClick={() => setMenuOpen(false)} />
+      )}
+      <div
+        className={`sidebar${menuOpen ? " menu-open" : ""}`}
+        style={{
+          backgroundColor: t.navBg,
+          borderRight: `1px solid ${t.border}`,
+        }}
+      >
+        <a
+          href="/"
+          className="sidebar-logo"
+          style={{
+            display: "block",
+            padding: "20px 20px 16px",
+            fontSize: "var(--fs-lg)",
+            fontWeight: 800,
+            color: t.text,
+            textDecoration: "none",
+            fontFamily: "var(--font-display)",
+            letterSpacing: "-0.02em",
+            lineHeight: 1.3,
+          }}
+        >
+          Canvas LMS Accessibility
+        </a>
+
+        <nav id="main-nav">
+          <div className="sidebar-links" style={{ padding: "0 8px 20px", display: "flex", flexDirection: "column", gap: 2 }}>
+            <a href="/" onClick={() => setMenuOpen(false)} style={linkStyle(activeCategorySlug === "home")}>Home</a>
+            <a href="/guide/" onClick={() => setMenuOpen(false)} style={linkStyle(activeCategorySlug === "guide")}>Guide</a>
             {categories.map((cat) => (
               <a
                 key={cat.id}
                 href={`/${cat.slug}/`}
-                style={{
-                  padding: "6px 12px",
-                  borderRadius: 6,
-                  fontSize: 13,
-                  fontWeight: 500,
-                  color:
-                    cat.slug === activeCategorySlug
-                      ? t.accent
-                      : t.textSecondary,
-                  backgroundColor:
-                    cat.slug === activeCategorySlug
-                      ? t.accentBg
-                      : "transparent",
-                  textDecoration: "none",
-                  fontFamily: "var(--font-display)",
-                  transition: "background-color 0.15s ease",
-                }}
+                onClick={() => setMenuOpen(false)}
+                style={linkStyle(cat.slug === activeCategorySlug)}
               >
                 {cat.name}
               </a>
             ))}
-          </nav>
-        </div>
+          </div>
+        </nav>
       </div>
-    </header>
+    </>
   );
 }
 
@@ -323,6 +361,7 @@ export function ContentPageLayout({
   children,
 }) {
   const { t } = useTheme();
+  const [menuOpen, setMenuOpen] = useState(false);
   const cat = categories.find((c) => c.slug === categorySlug);
   const ftMeta = Object.values(fileTypeMeta).find((m) => m.slug === fileTypeSlug);
   const isOverview = fileTypeSlug === "overview";
@@ -340,6 +379,7 @@ export function ContentPageLayout({
 
   return (
     <div
+      className="app-layout"
       style={{
         minHeight: "100vh",
         backgroundColor: t.bg,
@@ -347,78 +387,85 @@ export function ContentPageLayout({
         transition: "background-color 0.3s ease, color 0.3s ease",
       }}
     >
-      <TopNav activeCategorySlug={categorySlug} />
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
 
-      <div
-        className="content-layout-grid"
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "32px 32px 80px",
-          display: "grid",
-          gridTemplateColumns: "1fr 200px",
-          gap: 48,
-        }}
-      >
-        <main
-          id="main-content"
-          className="content-layout-main"
-          tabIndex={-1}
-          style={{ maxWidth: 760, minWidth: 0 }}
+      <SideNav activeCategorySlug={categorySlug} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+
+      <div className="main-area">
+        <MobileHeader menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+
+        <div
+          className="content-layout-grid"
+          style={{
+            maxWidth: 960,
+            padding: "32px 48px 80px",
+            display: "grid",
+            gridTemplateColumns: "1fr 200px",
+            gap: 48,
+          }}
         >
-          <Breadcrumb items={breadcrumbItems} />
-
-          <h1
-            className="content-page-h1"
-            style={{
-              fontSize: 36,
-              fontWeight: 800,
-              color: t.text,
-              fontFamily: "var(--font-display)",
-              letterSpacing: "-0.025em",
-              margin: "0 0 8px",
-              lineHeight: 1.2,
-            }}
+          <main
+            id="main-content"
+            className="content-layout-main"
+            tabIndex={-1}
+            style={{ minWidth: 0 }}
           >
-            {title || cat?.name}
-          </h1>
-          {subtitle && (
-            <div
-              className="content-page-subtitle"
+            <Breadcrumb items={breadcrumbItems} />
+
+            <h1
+              className="content-page-h1"
               style={{
-                fontSize: 18,
-                color: t.textSecondary,
-                fontFamily: "var(--font-body)",
-                marginBottom: 24,
+                fontSize: "var(--fs-3xl)",
+                fontWeight: 800,
+                color: t.text,
+                fontFamily: "var(--font-display)",
+                letterSpacing: "-0.025em",
+                margin: "0 0 8px",
+                lineHeight: 1.2,
               }}
             >
-              {subtitle}
-            </div>
-          )}
+              {title || cat?.name}
+            </h1>
+            {subtitle && (
+              <div
+                className="content-page-subtitle"
+                style={{
+                  fontSize: "var(--fs-xl)",
+                  color: t.textSecondary,
+                  fontFamily: "var(--font-body)",
+                  marginBottom: 24,
+                }}
+              >
+                {subtitle}
+              </div>
+            )}
 
-          <FileTypePills categorySlug={categorySlug} activeSlug={fileTypeSlug} />
+            <FileTypePills categorySlug={categorySlug} activeSlug={fileTypeSlug} />
 
-          {children}
-        </main>
+            {children}
+          </main>
 
-        <aside className="content-layout-toc" style={{ minWidth: 0 }}>
-          <TableOfContents />
-        </aside>
+          <aside className="content-layout-toc" style={{ minWidth: 0 }}>
+            <TableOfContents />
+          </aside>
+        </div>
+
+        <footer
+          className="content-page-footer"
+          style={{
+            borderTop: `1px solid ${t.border}`,
+            padding: "24px 32px",
+            textAlign: "center",
+            fontSize: "var(--fs-sm)",
+            color: t.textTertiary,
+            fontFamily: "var(--font-display)",
+          }}
+        >
+          Canvas LMS Accessibility &middot; Damian Sian
+        </footer>
       </div>
-
-      <footer
-        className="content-page-footer"
-        style={{
-          borderTop: `1px solid ${t.border}`,
-          padding: "24px 32px",
-          textAlign: "center",
-          fontSize: 12,
-          color: t.textTertiary,
-          fontFamily: "var(--font-display)",
-        }}
-      >
-        Canvas LMS Accessibility &middot; Damian Sian
-      </footer>
     </div>
   );
 }

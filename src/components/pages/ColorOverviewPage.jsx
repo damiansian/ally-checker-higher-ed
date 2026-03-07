@@ -12,7 +12,7 @@ function SH({ id, children }) {
   const { t } = useTheme();
   return (
     <h2 id={id} style={{
-      fontSize: 22, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-2xl)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       letterSpacing: "-0.01em",
       marginTop: 56, marginBottom: 16,
@@ -25,7 +25,7 @@ function H3({ children }) {
   const { t } = useTheme();
   return (
     <h3 style={{
-      fontSize: 16, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-lg)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       margin: "28px 0 14px",
     }}>{children}</h3>
@@ -36,16 +36,17 @@ function P({ children }) {
   const { t } = useTheme();
   return (
     <p style={{
-      fontSize: 15.5, lineHeight: 1.75, color: t.text,
+      fontSize: "var(--fs-md)", lineHeight: 1.75, color: t.text,
       fontFamily: "var(--font-body)",
       margin: "0 0 18px",
     }}>{children}</p>
   );
 }
 
-const listStyle = { margin: "0 0 18px", paddingLeft: 24, fontFamily: "var(--font-body)", fontSize: 15.5, lineHeight: 1.75, color: "inherit" };
+const listStyle = { margin: "0 0 18px", paddingLeft: 24, fontFamily: "var(--font-body)", fontSize: "var(--fs-md)", lineHeight: 1.75, color: "inherit" };
 
 export default function ColorOverviewPage() {
+  const { t } = useTheme();
   return (
     <ContentPageLayout
       categorySlug="color"
@@ -81,7 +82,7 @@ export default function ColorOverviewPage() {
         Ally surfaces one primary contrast check across document types. The
         wording varies by file type:
       </P>
-      <ul style={{ margin: "0 0 18px", paddingLeft: 24, fontFamily: "var(--font-body)", fontSize: 15.5, lineHeight: 1.75, color: "inherit" }}>
+      <ul style={{ margin: "0 0 18px", paddingLeft: 24, fontFamily: "var(--font-body)", fontSize: "var(--fs-md)", lineHeight: 1.75, color: "inherit" }}>
         <li><strong>Word:</strong> &ldquo;Document has text with insufficient contrast&rdquo;</li>
         <li><strong>PowerPoint:</strong> &ldquo;Presentation has text with insufficient contrast&rdquo;</li>
         <li><strong>PDF:</strong> &ldquo;PDF has contrast issues&rdquo;</li>
@@ -101,57 +102,79 @@ export default function ColorOverviewPage() {
 
       <H3>Regular text</H3>
       <P><strong>Detected by:</strong> Ally and Microsoft Accessibility Checker.</P>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5em", margin: "1em 0", alignItems: "start" }}>
-        <figure style={{ margin: 0 }}>
-          <div style={{ padding: "12px 16px", borderRadius: 8, border: "1px solid #e0e0e0", marginBottom: 8 }}>
-            <p style={{ color: "#5692FF", background: "#ffffff", fontFamily: "var(--font-body)", fontSize: 15.5, margin: 0 }}>
-              This regular sized text fails the 4.5:1 minimum for normal text.
-            </p>
-          </div>
-          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
-            <strong>Broken.</strong> #5692FF on white produces a 3:1 ratio, failing the 4.5:1 minimum. Students with low vision or in bright environments struggle to read this text.
-          </figcaption>
-          <div style={{ fontSize: 12, fontFamily: "monospace", marginTop: 6, color: "inherit" }}>color: #5692FF (3:1 against white)</div>
-        </figure>
-        <figure style={{ margin: 0 }}>
-          <div style={{ padding: "12px 16px", borderRadius: 8, border: "1px solid #e0e0e0", marginBottom: 8 }}>
-            <p style={{ color: "#2d5a7b", background: "#ffffff", fontFamily: "var(--font-body)", fontSize: 15.5, margin: 0 }}>
-              This regular sized text passes the 4.5:1 minimum.
-            </p>
-          </div>
-          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
-            <strong>Corrected.</strong> #2d5a7b on white produces a 7.3:1 ratio. Exceeds the 4.5:1 minimum; readable across vision abilities.
-          </figcaption>
-          <div style={{ fontSize: 12, fontFamily: "monospace", marginTop: 6, color: "inherit" }}>color: #2d5a7b (7.3:1 against white)</div>
-        </figure>
-      </div>
+      <table style={{ width: "100%", borderCollapse: "collapse", margin: "1em 0", fontSize: "var(--fs-base)", fontFamily: "var(--font-body)" }} aria-label="Regular text contrast comparison: broken vs corrected">
+        <thead>
+          <tr>
+            <th scope="col" style={{ padding: "10px 16px", backgroundColor: t.accentBg, color: t.accent, fontSize: "var(--fs-xs)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", fontFamily: "var(--font-display)", textAlign: "left", width: "50%" }}>Broken</th>
+            <th scope="col" style={{ padding: "10px 16px", backgroundColor: t.greenBg, color: t.green, fontSize: "var(--fs-xs)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", fontFamily: "var(--font-display)", textAlign: "left", width: "50%" }}>Corrected</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style={{ borderBottom: `1px solid ${t.border}` }}>
+            <td style={{ padding: "14px 16px", verticalAlign: "top" }}>
+              {/* Intentional contrast failure for educational demo */}
+              <div data-a11y-demo="intentional-contrast-fail" style={{ padding: "12px 16px", borderRadius: 8, border: "1px solid #e0e0e0", marginBottom: 8 }}>
+                <p style={{ color: "#5692FF", background: "#ffffff", fontFamily: "var(--font-body)", fontSize: "var(--fs-md)", margin: 0 }}>
+                  This regular sized text fails the 4.5:1 minimum for normal text.
+                </p>
+              </div>
+              <p style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)", margin: "8px 0 0" }}>
+                #5692FF on white produces a 3:1 ratio, failing the 4.5:1 minimum. Students with low vision or in bright environments struggle to read this text.
+              </p>
+              <div style={{ fontSize: "var(--fs-xs)", fontFamily: "monospace", marginTop: 6, color: "inherit" }}>color: #5692FF (3:1 against white)</div>
+            </td>
+            <td style={{ padding: "14px 16px", verticalAlign: "top" }}>
+              <div style={{ padding: "12px 16px", borderRadius: 8, border: "1px solid #e0e0e0", marginBottom: 8 }}>
+                <p style={{ color: "#2d5a7b", background: "#ffffff", fontFamily: "var(--font-body)", fontSize: "var(--fs-md)", margin: 0 }}>
+                  This regular sized text passes the 4.5:1 minimum.
+                </p>
+              </div>
+              <p style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)", margin: "8px 0 0" }}>
+                #2d5a7b on white produces a 7.3:1 ratio. Exceeds the 4.5:1 minimum; readable across vision abilities.
+              </p>
+              <div style={{ fontSize: "var(--fs-xs)", fontFamily: "monospace", marginTop: 6, color: "inherit" }}>color: #2d5a7b (7.3:1 against white)</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
       <H3>Large text</H3>
       <P><strong>Detected by:</strong> Ally and Microsoft Accessibility Checker.</P>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5em", margin: "1em 0", alignItems: "start" }}>
-        <figure style={{ margin: 0 }}>
-          <div style={{ padding: "12px 16px", borderRadius: 8, border: "1px solid #e0e0e0", marginBottom: 8 }}>
-            <p style={{ color: "#91BFE1", background: "#ffffff", fontFamily: "var(--font-body)", fontSize: "1.5rem", fontWeight: 700, margin: 0 }}>
-              This large text fails the 3:1 minimum.
-            </p>
-          </div>
-          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
-            <strong>Broken.</strong> #91BFE1 on white produces a 2:1 ratio, failing even the lower threshold for large text (18pt or 14pt bold).
-          </figcaption>
-          <div style={{ fontSize: 12, fontFamily: "monospace", marginTop: 6, color: "inherit" }}>color: #91BFE1 (2:1 against white)</div>
-        </figure>
-        <figure style={{ margin: 0 }}>
-          <div style={{ padding: "12px 16px", borderRadius: 8, border: "1px solid #e0e0e0", marginBottom: 8 }}>
-            <p style={{ color: "#4A8CAD", background: "#ffffff", fontFamily: "var(--font-body)", fontSize: "1.5rem", fontWeight: 700, margin: 0 }}>
-              This large text passes the 3:1 minimum.
-            </p>
-          </div>
-          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
-            <strong>Corrected.</strong> #4A8CAD on white produces a 3.7:1 ratio. Passes the large-text threshold; readable for students with low vision.
-          </figcaption>
-          <div style={{ fontSize: 12, fontFamily: "monospace", marginTop: 6, color: "inherit" }}>color: #4A8CAD (3.7:1 against white)</div>
-        </figure>
-      </div>
+      <table style={{ width: "100%", borderCollapse: "collapse", margin: "1em 0", fontSize: "var(--fs-base)", fontFamily: "var(--font-body)" }} aria-label="Large text contrast comparison: broken vs corrected">
+        <thead>
+          <tr>
+            <th scope="col" style={{ padding: "10px 16px", backgroundColor: t.accentBg, color: t.accent, fontSize: "var(--fs-xs)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", fontFamily: "var(--font-display)", textAlign: "left", width: "50%" }}>Broken</th>
+            <th scope="col" style={{ padding: "10px 16px", backgroundColor: t.greenBg, color: t.green, fontSize: "var(--fs-xs)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", fontFamily: "var(--font-display)", textAlign: "left", width: "50%" }}>Corrected</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style={{ borderBottom: `1px solid ${t.border}` }}>
+            <td style={{ padding: "14px 16px", verticalAlign: "top" }}>
+              {/* Intentional contrast failure for educational demo */}
+              <div data-a11y-demo="intentional-contrast-fail" style={{ padding: "12px 16px", borderRadius: 8, border: "1px solid #e0e0e0", marginBottom: 8 }}>
+                <p style={{ color: "#91BFE1", background: "#ffffff", fontFamily: "var(--font-body)", fontSize: "1.5rem", fontWeight: 700, margin: 0 }}>
+                  This large text fails the 3:1 minimum.
+                </p>
+              </div>
+              <p style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)", margin: "8px 0 0" }}>
+                #91BFE1 on white produces a 2:1 ratio, failing even the lower threshold for large text (18pt or 14pt bold).
+              </p>
+              <div style={{ fontSize: "var(--fs-xs)", fontFamily: "monospace", marginTop: 6, color: "inherit" }}>color: #91BFE1 (2:1 against white)</div>
+            </td>
+            <td style={{ padding: "14px 16px", verticalAlign: "top" }}>
+              <div style={{ padding: "12px 16px", borderRadius: 8, border: "1px solid #e0e0e0", marginBottom: 8 }}>
+                <p style={{ color: "#4A8CAD", background: "#ffffff", fontFamily: "var(--font-body)", fontSize: "1.5rem", fontWeight: 700, margin: 0 }}>
+                  This large text passes the 3:1 minimum.
+                </p>
+              </div>
+              <p style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)", margin: "8px 0 0" }}>
+                #4A8CAD on white produces a 3.7:1 ratio. Passes the large-text threshold; readable for students with low vision.
+              </p>
+              <div style={{ fontSize: "var(--fs-xs)", fontFamily: "monospace", marginTop: 6, color: "inherit" }}>color: #4A8CAD (3.7:1 against white)</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
       <H3>Graphic element</H3>
       <P><strong>Detected by:</strong> No automated tool. Neither Ally nor the Microsoft Accessibility Checker flag graphic element contrast failures.</P>
@@ -162,24 +185,24 @@ export default function ColorOverviewPage() {
             alt="Line chart with three data series across four categories. Series 1 (light pink, #F1B4A4): 4.3, 2.5, 3.5, 4.5. Series 2 (orange): 2.4, 4.4, 1.8, 2.8. Series 3 (dark brown): 2, 2, 3, 5. The Series 1 line color has a contrast ratio of only 1.8:1 against the white background, failing the 3:1 minimum for non-text graphic elements."
             style={{ width: "100%", height: "auto" }}
           />
-          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
             <strong>Broken.</strong> Series 1 uses #F1B4A4 (1.8:1 against white), failing the 3:1 minimum for non-text graphic elements. The light pink line is nearly invisible for users with low vision.
           </figcaption>
-          <div style={{ fontSize: 12, fontFamily: "monospace", marginTop: 6, color: "inherit" }}>Series 1 color: #F1B4A4 (1.8:1 against white)</div>
+          <div style={{ fontSize: "var(--fs-xs)", fontFamily: "monospace", marginTop: 6, color: "inherit" }}>Series 1 color: #F1B4A4 (1.8:1 against white)</div>
         </figure>
         <figure style={{ margin: 0 }}>
           <div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 12 }}>
             <div style={{ width: 48, height: 48, background: "#F1B4A4", border: "1px solid #ccc", borderRadius: 6, flexShrink: 0 }} role="img" aria-label="Color swatch: #F1B4A4, light salmon, failing contrast" />
-            <span style={{ fontFamily: "monospace", fontSize: 13, color: "inherit" }}>#F1B4A4 &rarr; 1.8:1 (fail)</span>
+            <span style={{ fontFamily: "monospace", fontSize: "var(--fs-sm)", color: "inherit" }}>#F1B4A4 &rarr; 1.8:1 (fail)</span>
           </div>
           <div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 12 }}>
             <div style={{ width: 48, height: 48, background: "#C0564B", border: "1px solid #ccc", borderRadius: 6, flexShrink: 0 }} role="img" aria-label="Color swatch: #C0564B, dark red, passing contrast" />
-            <span style={{ fontFamily: "monospace", fontSize: 13, color: "inherit" }}>#C0564B &rarr; 4.5:1 (pass)</span>
+            <span style={{ fontFamily: "monospace", fontSize: "var(--fs-sm)", color: "inherit" }}>#C0564B &rarr; 4.5:1 (pass)</span>
           </div>
-          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
             <strong>Corrected.</strong> Replace with #C0564B (4.5:1). The data series remains visible and distinguishable for all users.
           </figcaption>
-          <div style={{ fontSize: 12, fontFamily: "monospace", marginTop: 6, color: "inherit" }}>Series 1 color: #C0564B (4.5:1 against white)</div>
+          <div style={{ fontSize: "var(--fs-xs)", fontFamily: "monospace", marginTop: 6, color: "inherit" }}>Series 1 color: #C0564B (4.5:1 against white)</div>
         </figure>
       </div>
       <P>
@@ -210,7 +233,7 @@ export default function ColorOverviewPage() {
           alt="Screenshot of the Colour Contrast Analyser (CCA) desktop application. Foreground color is #91BFE1, background is #FFFFFF (white). The contrast ratio is 2:1. WCAG 2.1 results show: 1.4.3 Contrast (Minimum) AA fails for both regular and large text, 1.4.6 Contrast (Enhanced) AAA fails for both, and 1.4.11 Non-text Contrast AA fails for UI components and graphical objects."
           style={{ width: "100%", height: "auto" }}
         />
-        <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+        <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
           The Colour Contrast Analyser (CCA) confirms #91BFE1 fails at 2:1.
         </figcaption>
       </figure>
@@ -236,24 +259,24 @@ export default function ColorOverviewPage() {
         Dashboard, lowering the file&apos;s score with suggested replacement
         colors.
       </P>
-      <div style={{ display: "flex", gap: "1.5em", flexWrap: "wrap", margin: "1em 0" }}>
-        <figure style={{ flex: 1, minWidth: 200, margin: 0 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "1.5em", margin: "1em 0" }}>
+        <figure style={{ margin: 0 }}>
           <img
             src="/assets/canvas-rce-contrast-checker.png"
             alt="Screenshot of the Canvas Rich Content Editor Accessibility Checker showing Issue 1 of 1: Text larger than 18pt (or bold 14pt) should display a minimum contrast ratio of 3:1. A Change text color field shows rgba(145, 191, 225, 1) with a color picker below and Prev, Next, and Apply buttons."
             style={{ width: "100%", height: "auto" }}
           />
-          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
             The Canvas RCE Accessibility Checker flags low-contrast text and offers a color picker to fix it in place.
           </figcaption>
         </figure>
-        <figure style={{ flex: 1, minWidth: 200, margin: 0 }}>
+        <figure style={{ margin: 0 }}>
           <img
             src="/assets/ally-dashboard-contrast-warning.png"
             alt="Screenshot of the Ally accessibility score panel for a file with alt text. The score is 81% with a yellow-green gauge. Below, Ally reports This item contains text with insufficient contrast with a What this means button. Four suggested replacement colors are shown with an Apply button."
             style={{ width: "100%", height: "auto" }}
           />
-          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
             Ally flags the contrast issue on the Dashboard, lowering the file score to 81% and suggesting darker replacement colors.
           </figcaption>
         </figure>
@@ -268,24 +291,24 @@ export default function ColorOverviewPage() {
         in-place remediation: clicking a suggested color applies the fix
         immediately.
       </P>
-      <div style={{ display: "flex", gap: "1.5em", flexWrap: "wrap", margin: "1em 0" }}>
-        <figure style={{ flex: 1, minWidth: 200, margin: 0 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "1.5em", margin: "1em 0" }}>
+        <figure style={{ margin: 0 }}>
           <img
             src="/assets/ms-checker-contrast-overview.png"
             alt="Screenshot of Microsoft's Accessibility Assistant showing a Keep going! message prompting the user to fix remaining issues. Below, the Color and Contrast category lists Hard-to-read text contrast with a count of 1."
             style={{ width: "100%", height: "auto" }}
           />
-          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
             The Accessibility Assistant flags contrast issues under Color and Contrast.
           </figcaption>
         </figure>
-        <figure style={{ flex: 1, minWidth: 200, margin: 0 }}>
+        <figure style={{ margin: 0 }}>
           <img
             src="/assets/ms-checker-contrast-detail.png"
             alt="Screenshot of Microsoft's Accessibility Assistant detail view for Hard-to-read text contrast. The message reads Current text color is hard to see. Consider a high contrast color so that the text is clearly visible. Below are three suggested replacement colors, a More font colors button, and a Text shading button."
             style={{ width: "100%", height: "auto" }}
           />
-          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
             The detail view offers suggested replacement colors, a font color picker, and text shading.
           </figcaption>
         </figure>
@@ -307,24 +330,24 @@ export default function ColorOverviewPage() {
         framed picture hanging on the wall behind the student, which Ally
         appears to have misidentified as text content.
       </P>
-      <div style={{ display: "flex", gap: "1.5em", flexWrap: "wrap", margin: "1em 0" }}>
-        <figure style={{ flex: 1, minWidth: 200, margin: 0 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "1.5em", margin: "1em 0" }}>
+        <figure style={{ margin: 0 }}>
           <img
             src="/assets/student-discussion-photo.png"
             alt="Student used in a Canvas discussion post, wearing a green shirt and standing in front of a gold curtain with a framed item on the wall. Content is based on a real student portrait but has been heavily manipulated with AI to protect privacy."
             style={{ width: "100%", height: "auto" }}
           />
-          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
             Student photo uploaded to a Canvas discussion post. Based on a real student photo, heavily manipulated with AI to protect the student&apos;s privacy.
           </figcaption>
         </figure>
-        <figure style={{ flex: 1, minWidth: 200, margin: 0 }}>
+        <figure style={{ margin: 0 }}>
           <img
             src="/assets/ally-image-contrast-warning.png"
-            alt="Ally accessibility score panel for the student upload. The score is 75% with a contrast-issues message. Below, Ally displays Guidance not available yet — We are updating the guidance for this issue."
+            alt="Ally accessibility score panel for the student upload. The score is 75% with a contrast-issues message. Below, Ally displays Guidance not available yet. We are updating the guidance for this issue."
             style={{ width: "100%", height: "auto" }}
           />
-          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
             Ally flags the photo at 75% with &ldquo;This image has contrast issues.&rdquo; Guidance reads: &ldquo;Guidance not available yet.&rdquo;
           </figcaption>
         </figure>
@@ -364,7 +387,7 @@ export default function ColorOverviewPage() {
             alt="Bar chart titled Performance Status showing four teams. Team A scores 72, Team B scores 95, Team C scores 95, Team D scores 65. Red bars represent below target and green bars represent above target, but no text labels or patterns distinguish the categories. Color is the only indicator of status."
             style={{ width: "100%", height: "auto" }}
           />
-          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
             <strong>Broken.</strong> Color alone distinguishes above-target (green) from below-target (red). No text labels, no patterns, no data values on bars.
           </figcaption>
         </figure>
@@ -374,7 +397,7 @@ export default function ColorOverviewPage() {
             alt="Bar chart titled Performance Status showing four teams with data labels. Team A: 75, Below target. Team B: 95, Above target. Team C: 95, Above target. Team D: 65, Below target. Each bar has a score and a text label indicating above or below target, so meaning does not depend on color alone."
             style={{ width: "100%", height: "auto" }}
           />
-          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
             <strong>Corrected.</strong> Data labels (75, 95, 95, 65) and text labels (&ldquo;Above target&rdquo; / &ldquo;Below target&rdquo;) added to each bar. Meaning is preserved with or without color.
           </figcaption>
         </figure>
@@ -401,7 +424,7 @@ export default function ColorOverviewPage() {
             alt="Deuteranopia simulation of the broken chart. All four bars appear as similar olive and dark gold tones. Without the red-green distinction, the bars are nearly indistinguishable. No text labels are present, so the student cannot determine which teams are above or below target."
             style={{ width: "100%", height: "auto" }}
           />
-          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
             Red and green collapse to similar olive tones. A student with deuteranopia sees four bars of nearly the same color and has no way to determine status.
           </figcaption>
         </figure>
@@ -411,7 +434,7 @@ export default function ColorOverviewPage() {
             alt="Deuteranopia simulation of the corrected chart. Bars appear in similar olive and dark gold tones, but each bar has a data label and text label: Team A 75 Below target, Team B 95 Above target, Team C 95 Above target, Team D 65 Below target. The text labels preserve the meaning despite the color shift."
             style={{ width: "100%", height: "auto" }}
           />
-          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
             Same color shift, but the text labels make color irrelevant. The student reads &ldquo;75, Below target&rdquo; and &ldquo;95, Above target&rdquo; directly from the chart.
           </figcaption>
         </figure>
@@ -424,7 +447,7 @@ export default function ColorOverviewPage() {
             alt="Achromatopsia simulation of the broken chart. All four bars appear as similar medium gray tones. Without any color distinction and no text labels, the student cannot determine which teams are above or below target. All information encoded in color is completely lost."
             style={{ width: "100%", height: "auto" }}
           />
-          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
             Total color loss. Four gray bars of similar brightness. A student with achromatopsia, or anyone viewing a grayscale printout, receives zero status information from this chart.
           </figcaption>
         </figure>
@@ -434,7 +457,7 @@ export default function ColorOverviewPage() {
             alt="Achromatopsia simulation of the corrected chart. All four bars appear as similar gray tones, but each bar has a data label and text label: Team A 75 Below target, Team B 95 Above target, Team C 95 Above target, Team D 65 Below target. Despite total color loss, the text labels preserve the full meaning."
             style={{ width: "100%", height: "auto" }}
           />
-          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
             Same grayscale view, but the text labels are unaffected by color loss. &ldquo;75, Below target&rdquo; and &ldquo;95, Above target&rdquo; are as legible in grayscale as in full color.
           </figcaption>
         </figure>

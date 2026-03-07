@@ -12,7 +12,7 @@ function SH({ id, children }) {
   const { t } = useTheme();
   return (
     <h2 id={id} style={{
-      fontSize: 22, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-2xl)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       letterSpacing: "-0.01em",
       marginTop: 56, marginBottom: 16,
@@ -25,7 +25,7 @@ function H3({ children }) {
   const { t } = useTheme();
   return (
     <h3 style={{
-      fontSize: 16, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-lg)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       margin: "28px 0 14px",
     }}>{children}</h3>
@@ -36,7 +36,7 @@ function P({ children }) {
   const { t } = useTheme();
   return (
     <p style={{
-      fontSize: 15.5, lineHeight: 1.75, color: t.text,
+      fontSize: "var(--fs-md)", lineHeight: 1.75, color: t.text,
       fontFamily: "var(--font-body)",
       margin: "0 0 18px",
     }}>{children}</p>
@@ -87,24 +87,24 @@ export default function ColorWordPage() {
         before uploading to your LMS. For exact contrast ratios, use a free
         desktop tool such as the Colour Contrast Analyser (CCA).
       </P>
-      <div style={{ display: "flex", gap: "1.5em", flexWrap: "wrap", margin: "1em 0" }}>
-        <figure style={{ flex: 1, minWidth: 200, margin: 0 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "1.5em", margin: "1em 0" }}>
+        <figure style={{ margin: 0 }}>
           <img
             src="/assets/ms-checker-contrast-overview.png"
             alt="Screenshot of Microsoft's Accessibility Assistant showing a Keep going! message and the Color and Contrast category listing Hard-to-read text contrast with a count of 1."
             style={{ width: "100%", height: "auto" }}
           />
-          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
             The Accessibility Assistant flags contrast under Color and Contrast.
           </figcaption>
         </figure>
-        <figure style={{ flex: 1, minWidth: 200, margin: 0 }}>
+        <figure style={{ margin: 0 }}>
           <img
             src="/assets/ms-checker-contrast-detail.png"
             alt="Screenshot of Microsoft's Accessibility Assistant detail view for Hard-to-read text contrast with suggested replacement colors, More font colors, and Text shading buttons."
             style={{ width: "100%", height: "auto" }}
           />
-          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
             The detail view offers suggested replacement colors and text shading.
           </figcaption>
         </figure>

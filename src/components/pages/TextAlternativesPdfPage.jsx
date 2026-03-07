@@ -7,6 +7,7 @@ import {
   RefTable,
   ResourceLink,
   Callout,
+  AltTextComparisonTable,
 } from "@/components/content.jsx";
 
 function AudioDemo({ src, label, transcriptSummary, transcriptContent }) {
@@ -41,7 +42,7 @@ function AudioDemo({ src, label, transcriptSummary, transcriptContent }) {
           <summary
             style={{
               padding: "10px 14px",
-              fontSize: 14,
+              fontSize: "var(--fs-sm)",
               fontWeight: 600,
               fontFamily: "var(--font-display)",
               color: t.text,
@@ -54,7 +55,7 @@ function AudioDemo({ src, label, transcriptSummary, transcriptContent }) {
             style={{
               padding: "12px 14px 16px",
               borderTop: `1px solid ${t.border}`,
-              fontSize: 14,
+              fontSize: "var(--fs-base)",
               lineHeight: 1.6,
               color: t.textSecondary,
               fontFamily: "var(--font-body)",
@@ -72,7 +73,7 @@ function SH({ id, children }) {
   const { t } = useTheme();
   return (
     <h2 id={id} style={{
-      fontSize: 22, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-2xl)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       letterSpacing: "-0.01em",
       marginTop: 56, marginBottom: 16,
@@ -85,7 +86,7 @@ function H3({ children }) {
   const { t } = useTheme();
   return (
     <h3 style={{
-      fontSize: 16, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-lg)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       margin: "28px 0 14px",
     }}>{children}</h3>
@@ -96,26 +97,10 @@ function P({ children }) {
   const { t } = useTheme();
   return (
     <p style={{
-      fontSize: 15.5, lineHeight: 1.75, color: t.text,
+      fontSize: "var(--fs-md)", lineHeight: 1.75, color: t.text,
       fontFamily: "var(--font-body)",
       margin: "0 0 18px",
     }}>{children}</p>
-  );
-}
-
-function AltTextExample({ image, poor, better }) {
-  const { t } = useTheme();
-  return (
-    <div style={{
-      display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
-      gap: 1, backgroundColor: t.border,
-      overflow: "hidden", margin: "4px 0",
-      fontSize: 13.5, fontFamily: "var(--font-body)",
-    }}>
-      <div style={{ padding: "14px 16px", backgroundColor: t.surface, color: t.textSecondary }}>{image}</div>
-      <div style={{ padding: "14px 16px", backgroundColor: t.accentBg, color: t.text }}>{poor}</div>
-      <div style={{ padding: "14px 16px", backgroundColor: t.greenBg, color: t.text }}>{better}</div>
-    </div>
   );
 }
 
@@ -164,7 +149,7 @@ export default function TextAlternativesPdf() {
         ].map(([bold, rest], i) => (
           <div key={i} style={{
             padding: "8px 0 8px 16px",
-            fontSize: 15, lineHeight: 1.65,
+            fontSize: "var(--fs-base)", lineHeight: 1.65,
             fontFamily: "var(--font-body)", color: t.text,
           }}>
             <strong>{bold}</strong> {rest}
@@ -254,7 +239,7 @@ export default function TextAlternativesPdf() {
           }}
         />
         <figcaption style={{
-          fontSize: 13, color: t.textTertiary,
+          fontSize: "var(--fs-base)", color: t.textTertiary,
           fontFamily: "var(--font-body)",
           marginTop: 10, lineHeight: 1.5,
         }}>
@@ -283,7 +268,7 @@ export default function TextAlternativesPdf() {
           }}
         />
         <figcaption style={{
-          fontSize: 13, color: t.textTertiary,
+          fontSize: "var(--fs-base)", color: t.textTertiary,
           fontFamily: "var(--font-body)",
           marginTop: 10, lineHeight: 1.5,
         }}>
@@ -308,7 +293,7 @@ export default function TextAlternativesPdf() {
           }}
         />
         <figcaption style={{
-          fontSize: 13, color: t.textTertiary,
+          fontSize: "var(--fs-base)", color: t.textTertiary,
           fontFamily: "var(--font-body)",
           marginTop: 10, lineHeight: 1.5,
         }}>
@@ -338,7 +323,7 @@ export default function TextAlternativesPdf() {
           }}
         />
         <figcaption style={{
-          fontSize: 13, color: t.textTertiary,
+          fontSize: "var(--fs-base)", color: t.textTertiary,
           fontFamily: "var(--font-body)",
           marginTop: 10, lineHeight: 1.5,
         }}>
@@ -386,12 +371,12 @@ export default function TextAlternativesPdf() {
       <Callout>
         <div style={{
           fontWeight: 600, fontFamily: "var(--font-display)",
-          marginBottom: 6, fontSize: 14,
+          marginBottom: 6, fontSize: "var(--fs-sm)",
         }}>
           Two ways to mark as decorative
         </div>
         <div style={{
-          fontSize: 14.5, lineHeight: 1.65,
+          fontSize: "var(--fs-base)", lineHeight: 1.65,
           fontFamily: "var(--font-body)",
         }}>
           <strong>From the checker:</strong> Check the <strong>Decorative
@@ -427,11 +412,11 @@ export default function TextAlternativesPdf() {
             borderRadius: 8, marginBottom: 2,
           }}>
             <div style={{
-              fontSize: 15, fontWeight: 600, color: t.text,
+              fontSize: "var(--fs-base)", fontWeight: 600, color: t.text,
               fontFamily: "var(--font-display)", marginBottom: 4,
             }}>{item.rule}</div>
             <div style={{
-              fontSize: 14.5, color: t.textSecondary, lineHeight: 1.6,
+              fontSize: "var(--fs-base)", color: t.textSecondary, lineHeight: 1.6,
               fontFamily: "var(--font-body)",
             }}>{item.detail}</div>
           </div>
@@ -439,23 +424,12 @@ export default function TextAlternativesPdf() {
       </div>
 
       <H3>Examples</H3>
-      <div style={{
-        display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
-        gap: 1, backgroundColor: t.border, borderRadius: "10px 10px 0 0",
-        overflow: "hidden",
-        fontSize: 11, fontWeight: 700, textTransform: "uppercase",
-        letterSpacing: "0.06em", fontFamily: "var(--font-display)",
-      }}>
-        <div style={{ padding: "10px 16px", backgroundColor: t.surfaceAlt, color: t.textTertiary }}>Image</div>
-        <div style={{ padding: "10px 16px", backgroundColor: t.accentBg, color: t.accent }}>Poor</div>
-        <div style={{ padding: "10px 16px", backgroundColor: t.greenBg, color: t.green }}>Better</div>
-      </div>
-      <div style={{ borderRadius: "0 0 10px 10px", overflow: "hidden", marginBottom: 24 }}>
-        <AltTextExample image="University logo on a PDF flyer" poor='"logo"' better="Rutgers The State University of New Jersey logo" />
-        <AltTextExample image="Line graph in a journal article" poor='"graph"' better="Line graph showing U.S. unemployment rate declining from 14.7% in April 2020 to 3.4% in January 2023" />
-        <AltTextExample image="Decorative header graphic" poor='"banner image"' better="Mark as artifact (decorative -- does not convey content)" />
-        <AltTextExample image="Screenshot of assignment instructions" poor='"screenshot"' better="Canvas assignment settings showing Due Date set to March 15 and Available Until set to March 22" />
-      </div>
+      <AltTextComparisonTable rows={[
+        { image: "University logo on a PDF flyer", poor: '"logo"', better: "Rutgers The State University of New Jersey logo" },
+        { image: "Line graph in a journal article", poor: '"graph"', better: "Line graph showing U.S. unemployment rate declining from 14.7% in April 2020 to 3.4% in January 2023" },
+        { image: "Decorative header graphic", poor: '"banner image"', better: "Mark as artifact (decorative -- does not convey content)" },
+        { image: "Screenshot of assignment instructions", poor: '"screenshot"', better: "Canvas assignment settings showing Due Date set to March 15 and Available Until set to March 22" },
+      ]} />
 
       {/* ── Complex Images ── */}
       <SH id="complex-images">Complex Images</SH>
@@ -466,7 +440,7 @@ export default function TextAlternativesPdf() {
         text.
       </P>
       <Callout>
-        <div style={{ fontWeight: 600, fontFamily: "var(--font-display)", marginBottom: 10, fontSize: 14 }}>
+        <div style={{ fontWeight: 600, fontFamily: "var(--font-display)", marginBottom: 10, fontSize: "var(--fs-sm)" }}>
           The approach:
         </div>
         <Step number="1">
@@ -496,7 +470,7 @@ export default function TextAlternativesPdf() {
         backgroundColor: t.surfaceAlt, border: `1px solid ${t.border}`,
         margin: "16px 0 24px",
         fontFamily: "var(--font-mono)",
-        fontSize: 13.5, lineHeight: 2, color: t.textSecondary,
+        fontSize: "var(--fs-sm)", lineHeight: 2, color: t.textSecondary,
       }}>
         &quot;asdf&quot; <span style={{ color: t.green }}>passes</span><br/>
         &quot;image1.jpg&quot; <span style={{ color: t.accent }}>fails</span><br/>
@@ -520,11 +494,11 @@ export default function TextAlternativesPdf() {
       ].map((item, i) => (
         <div key={i} style={{ marginBottom: 18 }}>
           <div style={{
-            fontSize: 15, fontWeight: 700, color: t.text,
+            fontSize: "var(--fs-base)", fontWeight: 700, color: t.text,
             fontFamily: "var(--font-display)", marginBottom: 4,
           }}>{item.term}</div>
           <div style={{
-            fontSize: 15, lineHeight: 1.7, color: t.textSecondary,
+            fontSize: "var(--fs-base)", lineHeight: 1.7, color: t.textSecondary,
             fontFamily: "var(--font-body)",
           }}>{item.desc}</div>
         </div>
@@ -538,15 +512,15 @@ export default function TextAlternativesPdf() {
         margin: "0 0 14px",
       }}>
         <div style={{
-          fontSize: 15, fontWeight: 700, color: t.text,
+          fontSize: "var(--fs-base)", fontWeight: 700, color: t.text,
           fontFamily: "var(--font-display)", marginBottom: 4,
         }}>Adobe Acrobat Pro Accessibility Checker</div>
         <div style={{
-          fontSize: 13, color: t.textTertiary,
+          fontSize: "var(--fs-base)", color: t.textTertiary,
           fontFamily: "var(--font-display)", marginBottom: 12,
         }}>All tools &rarr; Prepare for accessibility &rarr; Check for accessibility</div>
         <div style={{
-          fontSize: 14.5, lineHeight: 1.65, color: t.textSecondary,
+          fontSize: "var(--fs-base)", lineHeight: 1.65, color: t.textSecondary,
           fontFamily: "var(--font-body)", marginBottom: 14,
         }}>
           The most complete built-in tool for PDF accessibility. Runs locally
@@ -554,7 +528,7 @@ export default function TextAlternativesPdf() {
           will flag:
         </div>
         <div style={{
-          fontSize: 14, lineHeight: 1.75, color: t.textSecondary,
+          fontSize: "var(--fs-base)", lineHeight: 1.75, color: t.textSecondary,
           fontFamily: "var(--font-body)", paddingLeft: 6,
         }}>
           {[
@@ -574,7 +548,7 @@ export default function TextAlternativesPdf() {
               <span>
                 <strong style={{ color: t.text }}>{item.issue}</strong>
                 <span style={{
-                  fontSize: 12.5, color: t.textTertiary,
+                  fontSize: "var(--fs-xs)", color: t.textTertiary,
                   fontStyle: "italic", marginLeft: 8,
                 }}>({item.note})</span>
               </span>
@@ -588,15 +562,15 @@ export default function TextAlternativesPdf() {
         margin: "0 0 20px",
       }}>
         <div style={{
-          fontSize: 15, fontWeight: 700, color: t.text,
+          fontSize: "var(--fs-base)", fontWeight: 700, color: t.text,
           fontFamily: "var(--font-display)", marginBottom: 4,
         }}>PAC (PDF Accessibility Checker)</div>
         <div style={{
-          fontSize: 13, color: t.textTertiary,
+          fontSize: "var(--fs-base)", color: t.textTertiary,
           fontFamily: "var(--font-display)", marginBottom: 12,
         }}>Free &middot; Windows</div>
         <div style={{
-          fontSize: 14.5, lineHeight: 1.65, color: t.textSecondary,
+          fontSize: "var(--fs-base)", lineHeight: 1.65, color: t.textSecondary,
           fontFamily: "var(--font-body)",
         }}>
           A free, standalone tool that checks PDFs against WCAG and PDF/UA
@@ -623,7 +597,7 @@ export default function TextAlternativesPdf() {
         marginBottom: 24,
       }}>
         <div style={{
-          fontSize: 16,
+          fontSize: "var(--fs-lg)",
           fontWeight: 700,
           fontFamily: "var(--font-display)",
           color: t.text,
@@ -632,7 +606,7 @@ export default function TextAlternativesPdf() {
           Image-PDF.pdf
         </div>
         <div style={{
-          fontSize: 14.5, lineHeight: 1.65,
+          fontSize: "var(--fs-base)", lineHeight: 1.65,
           fontFamily: "var(--font-body)",
           color: t.textSecondary,
           marginBottom: 14,
@@ -651,7 +625,7 @@ export default function TextAlternativesPdf() {
             borderRadius: 6,
             backgroundColor: t.accent,
             color: t.accentContrast,
-            fontSize: 14,
+            fontSize: "var(--fs-sm)",
             fontWeight: 600,
             fontFamily: "var(--font-display)",
             textDecoration: "none",

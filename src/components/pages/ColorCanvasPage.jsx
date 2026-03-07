@@ -12,7 +12,7 @@ function SH({ id, children }) {
   const { t } = useTheme();
   return (
     <h2 id={id} style={{
-      fontSize: 22, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-2xl)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       letterSpacing: "-0.01em",
       marginTop: 56, marginBottom: 16,
@@ -25,7 +25,7 @@ function H3({ children }) {
   const { t } = useTheme();
   return (
     <h3 style={{
-      fontSize: 16, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-lg)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       margin: "28px 0 14px",
     }}>{children}</h3>
@@ -36,7 +36,7 @@ function P({ children }) {
   const { t } = useTheme();
   return (
     <p style={{
-      fontSize: 15.5, lineHeight: 1.75, color: t.text,
+      fontSize: "var(--fs-md)", lineHeight: 1.75, color: t.text,
       fontFamily: "var(--font-body)",
       margin: "0 0 18px",
     }}>{children}</p>
@@ -83,7 +83,7 @@ export default function ColorCanvasPage() {
           alt="Screenshot of the Canvas Rich Content Editor Accessibility Checker showing Issue 1 of 1: Text larger than 18pt (or bold 14pt) should display a minimum contrast ratio of 3:1. A Change text color field shows rgba(145, 191, 225, 1) with a color picker below and Prev, Next, and Apply buttons."
           style={{ width: "100%", maxWidth: 520, height: "auto" }}
         />
-        <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+        <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
           The Canvas RCE Accessibility Checker flags low-contrast text and offers a color picker to fix it in place.
         </figcaption>
       </figure>

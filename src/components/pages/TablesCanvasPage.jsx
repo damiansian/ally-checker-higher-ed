@@ -6,14 +6,15 @@ import {
   CompareBoxes,
   RefTable,
   ResourceLink,
-  Placeholder,
+  Callout,
+  CheckerComparisonTable,
 } from "@/components/content.jsx";
 
 function SH({ id, children }) {
   const { t } = useTheme();
   return (
     <h2 id={id} style={{
-      fontSize: 22, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-2xl)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       letterSpacing: "-0.01em",
       marginTop: 56, marginBottom: 16,
@@ -26,7 +27,7 @@ function H3({ children }) {
   const { t } = useTheme();
   return (
     <h3 style={{
-      fontSize: 16, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-lg)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       margin: "28px 0 14px",
     }}>{children}</h3>
@@ -37,83 +38,283 @@ function P({ children }) {
   const { t } = useTheme();
   return (
     <p style={{
-      fontSize: 15.5, lineHeight: 1.75, color: t.text,
+      fontSize: "var(--fs-md)", lineHeight: 1.75, color: t.text,
       fontFamily: "var(--font-body)",
       margin: "0 0 18px",
     }}>{children}</p>
   );
 }
 
+function SampleTable({ headers, rows, caption, highlightHeaders = false }) {
+  const { t } = useTheme();
+  return (
+    <figure style={{ margin: "24px 0" }}>
+      <div
+        className="table-scroll-region"
+        tabIndex={0} // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
+        role="region"
+        aria-label={caption || "Sample table"}
+      >
+        <table
+          style={{
+            width: "100%",
+            borderCollapse: "collapse",
+            fontSize: "var(--fs-base)",
+            fontFamily: "var(--font-body)",
+            minWidth: 400,
+          }}
+          aria-label={caption}
+        >
+          {caption && (
+            <caption style={{
+              textAlign: "left",
+              fontSize: "var(--fs-sm)",
+              color: t.textTertiary,
+              fontFamily: "var(--font-display)",
+              marginBottom: 10,
+            }}>
+              {caption}
+            </caption>
+          )}
+          <thead>
+            <tr style={{ borderBottom: `2px solid ${t.border}` }}>
+              {headers.map((h, i) => (
+                <th
+                  key={i}
+                  scope="col"
+                  style={{
+                    padding: "10px 16px",
+                    fontWeight: 700,
+                    color: highlightHeaders ? t.green : t.textSecondary,
+                    textAlign: "left",
+                    fontFamily: "var(--font-display)",
+                    backgroundColor: highlightHeaders ? t.greenBg : "transparent",
+                  }}
+                >
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, i) => (
+              <tr key={i} style={{ borderBottom: `1px solid ${t.borderLight}` }}>
+                {row.map((cell, j) => (
+                  <td
+                    key={j}
+                    style={{
+                      padding: "10px 16px",
+                      color: t.text,
+                      verticalAlign: "top",
+                    }}
+                  >
+                    {cell}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </figure>
+  );
+}
+
+function CodeBlock({ children }) {
+  const { t } = useTheme();
+  return (
+    <pre style={{
+      padding: "16px 20px",
+      borderRadius: 10,
+      backgroundColor: t.surfaceAlt,
+      border: `1px solid ${t.border}`,
+      margin: "16px 0 24px",
+      fontFamily: "var(--font-mono)",
+      fontSize: "var(--fs-sm)",
+      lineHeight: 1.7,
+      color: t.textSecondary,
+      overflowX: "auto",
+      whiteSpace: "pre",
+    }}>
+      <code>{children}</code>
+    </pre>
+  );
+}
+
 export default function TablesCanvasPage() {
+  const { t } = useTheme();
+
   return (
     <ContentPageLayout
       categorySlug="tables"
       fileTypeSlug="canvas"
-      title="DRAFT - Tables"
-      subtitle="Canvas editor"
+      title="Tables"
+      subtitle="Canvas Editor"
     >
       <SH id="ally-error">The Ally Error</SH>
       <AllyErrorBox
-        message="Table cells (3x3+) must have associated headers"
+        message="This item contains table headers that are missing content"
         severity="Major"
         wcag="1.3.1 Info and Relationships (Level A)"
       />
       <P>
-        Ally flags tables in Canvas Rich Content Editor (RCE) content when
-        tables of 3×3 or larger do not have header cells associated. In
-        HTML, that means using <code>&lt;th&gt;</code> for header cells
-        and proper scope or headers attributes where needed.
+        In Canvas, Ally uses axe-core to check tables in Rich Content
+        Editor (RCE) content. It flags two issues: tables of 3&times;3 or
+        larger without header cells associated, and tables where header
+        cells (<code>&lt;th&gt;</code>) exist but contain no visible text.
+        The second error &mdash; empty headers &mdash; is unique to Canvas
+        HTML tables and is not caught by other tools.
       </P>
 
-      <SH id="why-matters">Why This Matters</SH>
+      <figure style={{ margin: "24px 0" }}>
+        <img
+          src="/assets/ally-dashboard-table-empty-headers.png"
+          alt="Ally accessibility score panel showing 99% for a Tables item. Ally reports: This item contains table headers that are missing content. Table header elements should have visible text that describes the purpose of the row or column."
+          style={{
+            width: "100%",
+            maxWidth: 340,
+            height: "auto",
+            borderRadius: 8,
+            border: `1px solid ${t.border}`,
+          }}
+        />
+        <figcaption style={{
+          fontSize: "var(--fs-base)", color: t.textTertiary,
+          fontFamily: "var(--font-body)",
+          marginTop: 10, lineHeight: 1.5,
+        }}>
+          Ally flags table headers that exist but contain no visible text
+        </figcaption>
+      </figure>
+
+      <SH id="example-missing-headers">Example: Table Without Headers in RCE</SH>
       <P>
-        Screen readers use table headers to announce context for each
-        cell. Without <code>&lt;th&gt;</code> or correct associations,
-        users hear a stream of cell values with no column or row context.
+        When you insert a table in the Canvas RCE and do not set a header
+        row, all cells render as <code>&lt;td&gt;</code> elements. Ally
+        flags this for tables 3&times;3 or larger.
       </P>
+      <SampleTable
+        caption="Events table in Canvas without header cells"
+        headers={["", "", ""]}
+        rows={[
+          ["12 February", "Waltz with Strauss", "Main Hall"],
+          ["24 March", "The Obelisks", "West Wing"],
+          ["14 April", "The What", "Main Hall"],
+        ]}
+      />
+
+      <H3>The HTML before</H3>
+      <CodeBlock>{`<table>
+  <tbody>
+    <tr><td>12 February</td><td>Waltz with Strauss</td><td>Main Hall</td></tr>
+    <tr><td>24 March</td><td>The Obelisks</td><td>West Wing</td></tr>
+    <tr><td>14 April</td><td>The What</td><td>Main Hall</td></tr>
+  </tbody>
+</table>`}</CodeBlock>
+
+      <H3>The HTML after</H3>
+      <CodeBlock>{`<table>
+  <thead>
+    <tr><th scope="col">Date</th><th scope="col">Event</th><th scope="col">Venue</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>12 February</td><td>Waltz with Strauss</td><td>Main Hall</td></tr>
+    <tr><td>24 March</td><td>The Obelisks</td><td>West Wing</td></tr>
+    <tr><td>14 April</td><td>The What</td><td>Main Hall</td></tr>
+  </tbody>
+</table>`}</CodeBlock>
+
+      <SampleTable
+        caption="Events table in Canvas with proper header cells"
+        headers={["Date", "Event", "Venue"]}
+        rows={[
+          ["12 February", "Waltz with Strauss", "Main Hall"],
+          ["24 March", "The Obelisks", "West Wing"],
+          ["14 April", "The What", "Main Hall"],
+        ]}
+        highlightHeaders
+      />
+
+      <SH id="example-empty-headers">Example: Empty Header Cells</SH>
+      <P>
+        This is the error unique to Canvas. A table has{" "}
+        <code>&lt;th&gt;</code> elements in the first row, but they contain
+        no text. The screen reader announces &quot;column header: blank&quot;
+        or skips the association entirely. Ally catches this; no other tool
+        does.
+      </P>
+      <CheckerComparisonTable
+        caption="Detection of empty table headers across tools"
+        rows={[
+          { testType: "Header cells present but empty", ally: "Detected", msOffice: "Not detected", acrobat: "Not detected" },
+        ]}
+      />
+      <Callout type="warning">
+        <strong>Common cause:</strong> empty headers often happen when a
+        table is inserted with a header row but the header text is never
+        filled in, or when the first row is used for spacing above the
+        actual data.
+      </Callout>
 
       <SH id="how-to-fix">How to Fix It</SH>
-      <H3>Using the RCE table tool</H3>
+      <H3>Using the RCE table properties</H3>
+      <Step number="1">Click inside the table in the Rich Content Editor.</Step>
+      <Step number="2">Click the <strong>table icon</strong> in the toolbar and select <strong>Table properties</strong>.</Step>
+      <Step number="3">Under <strong>Header</strong>, select <strong>Header row</strong> (or <strong>Header column</strong> if the table uses row headers).</Step>
+      <Step number="4">Click <strong>Save</strong>. Then type descriptive text into every header cell.</Step>
+
+      <H3>Editing HTML directly</H3>
       <P>
-        When you insert a table in the Canvas RCE, the first row is often
-        rendered as a header row. If you create a table and then change
-        its structure, headers can be lost.
+        If you need more control, switch to the HTML editor in the RCE.
+        Change the first row&apos;s <code>&lt;td&gt;</code> elements to{" "}
+        <code>&lt;th scope=&quot;col&quot;&gt;</code>. For tables with row
+        headers, add <code>scope=&quot;row&quot;</code> to the first cell of
+        each data row.
       </P>
-      <Step number="1">Insert a table via the RCE table menu. When prompted, specify header row (or header column) if the option is offered.</Step>
-      <Step number="2">Put column titles in the first row (or row titles in the first column). Do not use the first row for data only.</Step>
-      <Step number="3">If you need to fix an existing table, switch to the HTML editor and ensure the first row uses <code>&lt;th&gt;</code> instead of <code>&lt;td&gt;</code> for header cells.</Step>
-      <Placeholder label="Screenshot: Canvas RCE table insert with header option or HTML showing th elements" />
+
+      <H3>Schedule tables with row headers</H3>
+      <P>
+        For a schedule with time slots in the first column (like the example
+        in the overview), the HTML should use{" "}
+        <code>&lt;th scope=&quot;row&quot;&gt;</code> for each time cell:
+      </P>
+      <CodeBlock>{`<tr>
+  <th scope="row">9:00 – 10:00 AM</th>
+  <td>Open</td>
+  <td>Closed</td>
+  <td>Open</td>
+</tr>`}</CodeBlock>
 
       <SH id="ally-catches">What Ally Catches</SH>
       <CompareBoxes
-        catches="Tables 3×3 or larger without associated headers in RCE content"
-        misses="Layout tables, complex tables, correct scope for multi-level headers"
+        catches="Tables 3×3 or larger without associated headers; header cells that exist but contain no visible text"
+        misses="Layout tables, complex tables with merged cells, correct scope for multi-level headers, row headers not designated"
       />
-
-      <SH id="ally-misses">What Ally Misses</SH>
-      <P>
-        Ally may not catch every scope or association error in complex
-        tables. Layout tables used for visual alignment may be flagged or
-        not depending on structure.
-      </P>
 
       <SH id="quick-ref">Quick Reference</SH>
       <RefTable rows={[
-        ["Ally error", "Table cells (3x3+) must have associated headers"],
+        ["Ally error (missing)", "Table cells (3x3+) must have associated headers"],
+        ["Ally error (empty)", "This item contains table headers that are missing content"],
         ["WCAG", "1.3.1 Info and Relationships (Level A)"],
-        ["Fix", "First row (or column) as header; use th in HTML if needed"],
+        ["Fix (RCE)", "Table icon \u2192 Table properties \u2192 Header row"],
+        ["Fix (HTML)", "Change <td> to <th scope=\"col\"> or <th scope=\"row\">"],
       ]} />
 
       <SH id="resources">Resources</SH>
+      <ResourceLink
+        title="W3C: Table Concepts"
+        href="https://www.w3.org/WAI/tutorials/tables/"
+        description="Accessible table markup patterns including scope and headers"
+      />
       <ResourceLink
         title="W3C: Understanding Info and Relationships"
         href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html"
         description="WCAG 1.3.1 and tables"
       />
       <ResourceLink
-        title="W3C: Table Concepts"
-        href="https://www.w3.org/WAI/tutorials/tables/"
-        description="Accessible table markup"
+        title="Canvas: Rich Content Editor Accessibility"
+        href="https://community.canvaslms.com/t5/Canvas-Basics-Guide/How-do-I-use-the-Accessibility-Checker-in-the-Rich-Content/ta-p/34"
+        description="Using the RCE accessibility checker"
       />
     </ContentPageLayout>
   );

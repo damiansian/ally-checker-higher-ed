@@ -7,6 +7,7 @@ import {
   RefTable,
   ResourceLink,
   Callout,
+  AltTextComparisonTable,
 } from "@/components/content.jsx";
 
 function AudioDemo({ src, label, transcriptSummary, transcriptContent }) {
@@ -41,7 +42,7 @@ function AudioDemo({ src, label, transcriptSummary, transcriptContent }) {
           <summary
             style={{
               padding: "10px 14px",
-              fontSize: 14,
+              fontSize: "var(--fs-sm)",
               fontWeight: 600,
               fontFamily: "var(--font-display)",
               color: t.text,
@@ -54,7 +55,7 @@ function AudioDemo({ src, label, transcriptSummary, transcriptContent }) {
             style={{
               padding: "12px 14px 16px",
               borderTop: `1px solid ${t.border}`,
-              fontSize: 14,
+              fontSize: "var(--fs-base)",
               lineHeight: 1.6,
               color: t.textSecondary,
               fontFamily: "var(--font-body)",
@@ -72,7 +73,7 @@ function SH({ id, children }) {
   const { t } = useTheme();
   return (
     <h2 id={id} style={{
-      fontSize: 22, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-2xl)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       letterSpacing: "-0.01em",
       marginTop: 56, marginBottom: 16,
@@ -85,7 +86,7 @@ function H3({ children }) {
   const { t } = useTheme();
   return (
     <h3 style={{
-      fontSize: 16, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-lg)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       margin: "28px 0 14px",
     }}>{children}</h3>
@@ -96,26 +97,10 @@ function P({ children }) {
   const { t } = useTheme();
   return (
     <p style={{
-      fontSize: 15.5, lineHeight: 1.75, color: t.text,
+      fontSize: "var(--fs-md)", lineHeight: 1.75, color: t.text,
       fontFamily: "var(--font-body)",
       margin: "0 0 18px",
     }}>{children}</p>
-  );
-}
-
-function AltTextExample({ image, poor, better }) {
-  const { t } = useTheme();
-  return (
-    <div style={{
-      display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
-      gap: 1, backgroundColor: t.border,
-      overflow: "hidden", margin: "4px 0",
-      fontSize: 13.5, fontFamily: "var(--font-body)",
-    }}>
-      <div style={{ padding: "14px 16px", backgroundColor: t.surface, color: t.textSecondary }}>{image}</div>
-      <div style={{ padding: "14px 16px", backgroundColor: t.accentBg, color: t.text }}>{poor}</div>
-      <div style={{ padding: "14px 16px", backgroundColor: t.greenBg, color: t.text }}>{better}</div>
-    </div>
   );
 }
 
@@ -163,7 +148,7 @@ export default function TextAlternativesPowerPoint() {
         ].map(([bold, rest], i) => (
           <div key={i} style={{
             padding: "8px 0 8px 16px",
-            fontSize: 15, lineHeight: 1.65,
+            fontSize: "var(--fs-base)", lineHeight: 1.65,
             fontFamily: "var(--font-body)", color: t.text,
           }}>
             <strong>{bold}</strong> {rest}
@@ -233,7 +218,7 @@ export default function TextAlternativesPowerPoint() {
           }}
         />
         <figcaption style={{
-          fontSize: 13, color: t.textTertiary,
+          fontSize: "var(--fs-base)", color: t.textTertiary,
           fontFamily: "var(--font-body)",
           marginTop: 10, lineHeight: 1.5,
         }}>
@@ -266,7 +251,7 @@ export default function TextAlternativesPowerPoint() {
           }}
         />
         <figcaption style={{
-          fontSize: 13, color: t.textTertiary,
+          fontSize: "var(--fs-base)", color: t.textTertiary,
           fontFamily: "var(--font-body)",
           marginTop: 10, lineHeight: 1.5,
         }}>
@@ -305,11 +290,11 @@ export default function TextAlternativesPowerPoint() {
             borderRadius: 8, marginBottom: 2,
           }}>
             <div style={{
-              fontSize: 15, fontWeight: 600, color: t.text,
+              fontSize: "var(--fs-base)", fontWeight: 600, color: t.text,
               fontFamily: "var(--font-display)", marginBottom: 4,
             }}>{item.rule}</div>
             <div style={{
-              fontSize: 14.5, color: t.textSecondary, lineHeight: 1.6,
+              fontSize: "var(--fs-base)", color: t.textSecondary, lineHeight: 1.6,
               fontFamily: "var(--font-body)",
             }}>{item.detail}</div>
           </div>
@@ -317,23 +302,12 @@ export default function TextAlternativesPowerPoint() {
       </div>
 
       <H3>Examples</H3>
-      <div style={{
-        display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
-        gap: 1, backgroundColor: t.border, borderRadius: "10px 10px 0 0",
-        overflow: "hidden",
-        fontSize: 11, fontWeight: 700, textTransform: "uppercase",
-        letterSpacing: "0.06em", fontFamily: "var(--font-display)",
-      }}>
-        <div style={{ padding: "10px 16px", backgroundColor: t.surfaceAlt, color: t.textTertiary }}>Image</div>
-        <div style={{ padding: "10px 16px", backgroundColor: t.accentBg, color: t.accent }}>Poor</div>
-        <div style={{ padding: "10px 16px", backgroundColor: t.greenBg, color: t.green }}>Better</div>
-      </div>
-      <div style={{ borderRadius: "0 0 10px 10px", overflow: "hidden", marginBottom: 24 }}>
-        <AltTextExample image="Chart on a data slide" poor='"chart"' better="Bar chart showing student enrollment grew from 1,200 in 2020 to 1,680 in 2024" />
-        <AltTextExample image="Decorative background shape" poor='"shape"' better="Mark as decorative (does not convey slide content)" />
-        <AltTextExample image="Screenshot of a software interface" poor='"screenshot"' better="Canvas Gradebook showing assignment columns for Weeks 1 through 4 with the Total column highlighted" />
-        <AltTextExample image="University logo on the title slide" poor='"logo"' better='Mark as decorative, or "Rutgers SCI logo" if identification matters in context' />
-      </div>
+      <AltTextComparisonTable rows={[
+        { image: "Chart on a data slide", poor: '"chart"', better: "Bar chart showing student enrollment grew from 1,200 in 2020 to 1,680 in 2024" },
+        { image: "Decorative background shape", poor: '"shape"', better: "Mark as decorative (does not convey slide content)" },
+        { image: "Screenshot of a software interface", poor: '"screenshot"', better: "Canvas Gradebook showing assignment columns for Weeks 1 through 4 with the Total column highlighted" },
+        { image: "University logo on the title slide", poor: '"logo"', better: 'Mark as decorative, or "Rutgers SCI logo" if identification matters in context' },
+      ]} />
 
       {/* ── Complex Images ── */}
       <SH id="complex-images">Complex Images</SH>
@@ -344,7 +318,7 @@ export default function TextAlternativesPowerPoint() {
         text.
       </P>
       <Callout>
-        <div style={{ fontWeight: 600, fontFamily: "var(--font-display)", marginBottom: 10, fontSize: 14 }}>
+        <div style={{ fontWeight: 600, fontFamily: "var(--font-display)", marginBottom: 10, fontSize: "var(--fs-sm)" }}>
           The approach:
         </div>
         <Step number="1">
@@ -374,7 +348,7 @@ export default function TextAlternativesPowerPoint() {
         backgroundColor: t.surfaceAlt, border: `1px solid ${t.border}`,
         margin: "16px 0 24px",
         fontFamily: "var(--font-mono)",
-        fontSize: 13.5, lineHeight: 2, color: t.textSecondary,
+        fontSize: "var(--fs-sm)", lineHeight: 2, color: t.textSecondary,
       }}>
         &quot;asdf&quot; <span style={{ color: t.green }}>passes</span><br/>
         &quot;image1.jpg&quot; <span style={{ color: t.accent }}>fails</span><br/>
@@ -398,11 +372,11 @@ export default function TextAlternativesPowerPoint() {
       ].map((item, i) => (
         <div key={i} style={{ marginBottom: 18 }}>
           <div style={{
-            fontSize: 15, fontWeight: 700, color: t.text,
+            fontSize: "var(--fs-base)", fontWeight: 700, color: t.text,
             fontFamily: "var(--font-display)", marginBottom: 4,
           }}>{item.term}</div>
           <div style={{
-            fontSize: 15, lineHeight: 1.7, color: t.textSecondary,
+            fontSize: "var(--fs-base)", lineHeight: 1.7, color: t.textSecondary,
             fontFamily: "var(--font-body)",
           }}>{item.desc}</div>
         </div>
@@ -416,22 +390,22 @@ export default function TextAlternativesPowerPoint() {
         margin: "0 0 20px",
       }}>
         <div style={{
-          fontSize: 15, fontWeight: 700, color: t.text,
+          fontSize: "var(--fs-base)", fontWeight: 700, color: t.text,
           fontFamily: "var(--font-display)", marginBottom: 4,
         }}>Microsoft Accessibility Checker</div>
         <div style={{
-          fontSize: 13, color: t.textTertiary,
+          fontSize: "var(--fs-base)", color: t.textTertiary,
           fontFamily: "var(--font-display)", marginBottom: 12,
         }}>Review tab &rarr; Check Accessibility</div>
         <div style={{
-          fontSize: 14.5, lineHeight: 1.65, color: t.textSecondary,
+          fontSize: "var(--fs-base)", lineHeight: 1.65, color: t.textSecondary,
           fontFamily: "var(--font-body)", marginBottom: 14,
         }}>
           Runs locally so you get instant feedback while editing. This is the tool
           to run before you upload to your LMS. It will flag:
         </div>
         <div style={{
-          fontSize: 14, lineHeight: 1.75, color: t.textSecondary,
+          fontSize: "var(--fs-base)", lineHeight: 1.75, color: t.textSecondary,
           fontFamily: "var(--font-body)", paddingLeft: 6,
         }}>
           {[
@@ -451,7 +425,7 @@ export default function TextAlternativesPowerPoint() {
               <span>
                 <strong style={{ color: t.text }}>{item.issue}</strong>
                 <span style={{
-                  fontSize: 12.5, color: t.textTertiary,
+                  fontSize: "var(--fs-xs)", color: t.textTertiary,
                   fontStyle: "italic", marginLeft: 8,
                 }}>({item.note})</span>
               </span>
@@ -459,7 +433,7 @@ export default function TextAlternativesPowerPoint() {
           ))}
         </div>
       </div>
-      <div style={{ display: "flex", gap: 16, flexWrap: "wrap", margin: "24px 0" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 16, margin: "24px 0" }}>
         <figure style={{ margin: 0 }}>
           <img
             src="/images/ppt-accessibility-checker-results.png"
@@ -475,7 +449,7 @@ export default function TextAlternativesPowerPoint() {
             }}
           />
           <figcaption style={{
-            fontSize: 13, color: t.textTertiary,
+            fontSize: "var(--fs-base)", color: t.textTertiary,
             fontFamily: "var(--font-body)",
             marginTop: 10, lineHeight: 1.5,
           }}>
@@ -497,7 +471,7 @@ export default function TextAlternativesPowerPoint() {
             }}
           />
           <figcaption style={{
-            fontSize: 13, color: t.textTertiary,
+            fontSize: "var(--fs-base)", color: t.textTertiary,
             fontFamily: "var(--font-body)",
             marginTop: 10, lineHeight: 1.5,
           }}>
@@ -524,7 +498,7 @@ export default function TextAlternativesPowerPoint() {
         padding: "18px 22px", borderRadius: 10,
         backgroundColor: t.surfaceAlt, border: `1px solid ${t.border}`,
         margin: "20px 0",
-        fontSize: 14.5, lineHeight: 1.65,
+        fontSize: "var(--fs-base)", lineHeight: 1.65,
         fontFamily: "var(--font-body)", fontStyle: "italic",
         color: t.textSecondary,
       }}>

@@ -47,7 +47,7 @@ export function AllyErrorBox({ message, severity, wcag }) {
     >
       <div
         style={{
-          fontSize: 11,
+          fontSize: "var(--fs-xs)",
           fontWeight: 700,
           textTransform: "uppercase",
           letterSpacing: "0.08em",
@@ -61,7 +61,7 @@ export function AllyErrorBox({ message, severity, wcag }) {
       <div
         className="ally-error-box-message"
         style={{
-          fontSize: 18,
+          fontSize: "var(--fs-xl)",
           fontWeight: 600,
           color: t.text,
           fontFamily: "var(--font-body)",
@@ -75,7 +75,7 @@ export function AllyErrorBox({ message, severity, wcag }) {
         <div
           style={{
             marginTop: 10,
-            fontSize: 12,
+            fontSize: "var(--fs-sm)",
             color: t.textSecondary,
             fontFamily: "var(--font-display)",
           }}
@@ -109,7 +109,7 @@ export function Step({ number, children }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontSize: 13,
+          fontSize: "var(--fs-sm)",
           fontWeight: 700,
           color: t.textSecondary,
           fontFamily: "var(--font-display)",
@@ -119,7 +119,7 @@ export function Step({ number, children }) {
       </div>
       <div
         style={{
-          fontSize: 15.5,
+          fontSize: "var(--fs-md)",
           lineHeight: 1.7,
           color: t.text,
           fontFamily: "var(--font-body)",
@@ -149,7 +149,7 @@ export function CompareBoxes({ catches, misses }) {
       >
         <div
           style={{
-            fontSize: 11,
+            fontSize: "var(--fs-xs)",
             fontWeight: 700,
             textTransform: "uppercase",
             letterSpacing: "0.08em",
@@ -162,7 +162,7 @@ export function CompareBoxes({ catches, misses }) {
         </div>
         <div
           style={{
-            fontSize: 14.5,
+            fontSize: "var(--fs-base)",
             lineHeight: 1.65,
             color: t.text,
             fontFamily: "var(--font-body)",
@@ -183,7 +183,7 @@ export function CompareBoxes({ catches, misses }) {
       >
         <div
           style={{
-            fontSize: 11,
+            fontSize: "var(--fs-xs)",
             fontWeight: 700,
             textTransform: "uppercase",
             letterSpacing: "0.08em",
@@ -196,7 +196,7 @@ export function CompareBoxes({ catches, misses }) {
         </div>
         <div
           style={{
-            fontSize: 14.5,
+            fontSize: "var(--fs-base)",
             lineHeight: 1.65,
             color: t.text,
             fontFamily: "var(--font-body)",
@@ -221,7 +221,7 @@ export function Placeholder({ label }) {
         backgroundColor: t.surfaceAlt,
         textAlign: "center",
         color: t.textTertiary,
-        fontSize: 13,
+        fontSize: "var(--fs-sm)",
         fontFamily: "var(--font-display)",
         fontStyle: "italic",
         margin: "24px 0",
@@ -241,7 +241,7 @@ export function RefTable({ rows }) {
       style={{
         width: "100%",
         borderCollapse: "collapse",
-        fontSize: 14,
+        fontSize: "var(--fs-base)",
         fontFamily: "var(--font-display)",
         margin: "20px 0",
       }}
@@ -283,30 +283,23 @@ export function CheckerComparisonTable({ caption, rows }) {
       className="table-scroll-wrapper"
       style={{ margin: "24px 0" }}
     >
-      <div
-        className="table-scroll-region"
-        tabIndex={0}
-        role="region"
-        aria-label={caption || "Scrollable comparison table"}
-      >
         <table
           style={{
             width: "100%",
             borderCollapse: "collapse",
-            fontSize: 14,
+            fontSize: "var(--fs-base)",
             fontFamily: "var(--font-body)",
-            minWidth: 600,
           }}
           aria-label={caption || "Checker detection comparison"}
         >
         {caption && (
           <caption
             style={{
-              textAlign: "left",
-              fontSize: 13,
-              color: t.textTertiary,
-              fontFamily: "var(--font-display)",
-              marginBottom: 10,
+            textAlign: "left",
+            fontSize: "var(--fs-sm)",
+            color: t.textTertiary,
+            fontFamily: "var(--font-display)",
+            marginBottom: 10,
             }}
           >
             {caption}
@@ -375,7 +368,6 @@ export function CheckerComparisonTable({ caption, rows }) {
           ))}
         </tbody>
         </table>
-      </div>
     </figure>
   );
 }
@@ -403,7 +395,7 @@ export function ResourceLink({ title, href, description }) {
     >
       <div
         style={{
-          fontSize: 14,
+          fontSize: "var(--fs-base)",
           fontWeight: 600,
           color: t.link,
           fontFamily: "var(--font-display)",
@@ -415,7 +407,7 @@ export function ResourceLink({ title, href, description }) {
       {description && (
         <div
           style={{
-            fontSize: 13,
+            fontSize: "var(--fs-base)",
             color: t.textSecondary,
             fontFamily: "var(--font-body)",
           }}
@@ -424,6 +416,87 @@ export function ResourceLink({ title, href, description }) {
         </div>
       )}
     </a>
+  );
+}
+
+// ── Alt Text Comparison Table ────────────────────────────────
+// rows: [{ image, poor, better }]
+export function AltTextComparisonTable({ rows }) {
+  const { t } = useTheme();
+  return (
+    <div style={{ margin: "4px 0 24px" }}>
+      <table
+        style={{
+          width: "100%",
+          borderCollapse: "collapse",
+          fontSize: "var(--fs-base)",
+          fontFamily: "var(--font-body)",
+        }}
+        aria-label="Alt text comparison: poor vs better"
+      >
+        <thead>
+          <tr>
+            <th
+              scope="col"
+              style={{
+                padding: "10px 16px",
+                backgroundColor: t.surfaceAlt,
+                color: t.textTertiary,
+                fontSize: "var(--fs-xs)",
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.06em",
+                fontFamily: "var(--font-display)",
+                textAlign: "left",
+              }}
+            >
+              Image
+            </th>
+            <th
+              scope="col"
+              style={{
+                padding: "10px 16px",
+                backgroundColor: t.accentBg,
+                color: t.accent,
+                fontSize: "var(--fs-xs)",
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.06em",
+                fontFamily: "var(--font-display)",
+                textAlign: "left",
+              }}
+            >
+              Poor
+            </th>
+            <th
+              scope="col"
+              style={{
+                padding: "10px 16px",
+                backgroundColor: t.greenBg,
+                color: t.green,
+                fontSize: "var(--fs-xs)",
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.06em",
+                fontFamily: "var(--font-display)",
+                textAlign: "left",
+              }}
+            >
+              Better
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, i) => (
+            <tr key={i} style={{ borderBottom: `1px solid ${t.border}` }}>
+              <td style={{ padding: "14px 16px", color: t.textSecondary, verticalAlign: "top" }}>{row.image}</td>
+              <td style={{ padding: "14px 16px", backgroundColor: t.accentBg, color: t.text, verticalAlign: "top" }}>{row.poor}</td>
+              <td style={{ padding: "14px 16px", backgroundColor: t.greenBg, color: t.text, verticalAlign: "top" }}>{row.better}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
@@ -444,7 +517,7 @@ export function Callout({ type = "info", children }) {
         backgroundColor: c.bg,
         border: `1px solid ${c.border}`,
         margin: "20px 0",
-        fontSize: 14.5,
+        fontSize: "var(--fs-base)",
         lineHeight: 1.65,
         color: t.text,
         fontFamily: "var(--font-body)",

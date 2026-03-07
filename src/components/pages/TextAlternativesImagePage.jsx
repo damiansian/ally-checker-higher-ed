@@ -13,7 +13,7 @@ function SH({ id, children }) {
   const { t } = useTheme();
   return (
     <h2 id={id} style={{
-      fontSize: 22, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-2xl)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       letterSpacing: "-0.01em",
       marginTop: 56, marginBottom: 16,
@@ -26,7 +26,7 @@ function H3({ children }) {
   const { t } = useTheme();
   return (
     <h3 style={{
-      fontSize: 16, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-lg)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       margin: "28px 0 14px",
     }}>{children}</h3>
@@ -37,7 +37,7 @@ function P({ children }) {
   const { t } = useTheme();
   return (
     <p style={{
-      fontSize: 15.5, lineHeight: 1.75, color: t.text,
+      fontSize: "var(--fs-md)", lineHeight: 1.75, color: t.text,
       fontFamily: "var(--font-body)",
       margin: "0 0 18px",
     }}>{children}</p>
@@ -75,7 +75,7 @@ export default function TextAlternativesImagePage() {
       <Callout>
         <div style={{
           fontWeight: 600, fontFamily: "var(--font-display)",
-          marginBottom: 10, fontSize: 14,
+          marginBottom: 10, fontSize: "var(--fs-sm)",
         }}>
           This page covers image files uploaded directly to Canvas Files
         </div>
@@ -111,7 +111,7 @@ export default function TextAlternativesImagePage() {
         backgroundColor: t.surfaceAlt, border: `1px solid ${t.border}`,
         margin: "16px 0 24px",
         fontFamily: "var(--font-mono)",
-        fontSize: 13.5, lineHeight: 2, color: t.textSecondary,
+        fontSize: "var(--fs-sm)", lineHeight: 2, color: t.textSecondary,
       }}>
         Image in Canvas Files &rarr; <strong>fix through Ally (this page)</strong><br />
         Image in the Rich Content Editor &rarr;{" "}
@@ -132,11 +132,11 @@ export default function TextAlternativesImagePage() {
         what the image contains unless a description has been added. They may
         hear the file name -- which is often something
         like <code style={{
-          fontFamily: "var(--font-mono)", fontSize: 13,
+          fontFamily: "var(--font-mono)", fontSize: "var(--fs-sm)",
           backgroundColor: t.codeBg, color: t.codeText,
           padding: "1px 6px", borderRadius: 3,
         }}>IMG_4392.jpg</code> or <code style={{
-          fontFamily: "var(--font-mono)", fontSize: 13,
+          fontFamily: "var(--font-mono)", fontSize: "var(--fs-sm)",
           backgroundColor: t.codeBg, color: t.codeText,
           padding: "1px 6px", borderRadius: 3,
         }}>ppt-decoration.png</code>.
@@ -186,7 +186,7 @@ export default function TextAlternativesImagePage() {
           }}
         />
         <figcaption style={{
-          fontSize: 13, color: t.textTertiary, marginTop: 8,
+          fontSize: "var(--fs-base)", color: t.textTertiary, marginTop: 8,
           fontFamily: "var(--font-body)", fontStyle: "italic",
         }}>
           The Ally panel for an image file with no description, showing a 4%
@@ -221,7 +221,7 @@ export default function TextAlternativesImagePage() {
           }}
         />
         <figcaption style={{
-          fontSize: 13, color: t.textTertiary, marginTop: 8,
+          fontSize: "var(--fs-base)", color: t.textTertiary, marginTop: 8,
           fontFamily: "var(--font-body)", fontStyle: "italic",
         }}>
           Ally flags a file name used as a description and prompts you to
@@ -271,11 +271,11 @@ export default function TextAlternativesImagePage() {
             borderRadius: 8, marginBottom: 2,
           }}>
             <div style={{
-              fontSize: 15, fontWeight: 600, color: t.text,
+              fontSize: "var(--fs-base)", fontWeight: 600, color: t.text,
               fontFamily: "var(--font-display)", marginBottom: 4,
             }}>{item.rule}</div>
             <div style={{
-              fontSize: 14.5, color: t.textSecondary, lineHeight: 1.6,
+              fontSize: "var(--fs-base)", color: t.textSecondary, lineHeight: 1.6,
               fontFamily: "var(--font-body)",
             }}>{item.detail}</div>
           </div>
@@ -285,7 +285,7 @@ export default function TextAlternativesImagePage() {
       <Callout>
         <div style={{
           fontWeight: 600, fontFamily: "var(--font-display)",
-          marginBottom: 6, fontSize: 14,
+          marginBottom: 6, fontSize: "var(--fs-sm)",
         }}>
           Consider whether the file should be in Files at all
         </div>
@@ -318,7 +318,7 @@ export default function TextAlternativesImagePage() {
         backgroundColor: t.surfaceAlt, border: `1px solid ${t.border}`,
         margin: "16px 0 24px",
         fontFamily: "var(--font-mono)",
-        fontSize: 13.5, lineHeight: 2, color: t.textSecondary,
+        fontSize: "var(--fs-sm)", lineHeight: 2, color: t.textSecondary,
       }}>
         No description <span style={{ color: t.accent }}>fails</span><br />
         File name as description <span style={{ color: t.accent }}>fails</span><br />
@@ -359,11 +359,11 @@ export default function TextAlternativesImagePage() {
       ].map((item, i) => (
         <div key={i} style={{ marginBottom: 18 }}>
           <div style={{
-            fontSize: 15, fontWeight: 700, color: t.text,
+            fontSize: "var(--fs-base)", fontWeight: 700, color: t.text,
             fontFamily: "var(--font-display)", marginBottom: 4,
           }}>{item.term}</div>
           <div style={{
-            fontSize: 15, lineHeight: 1.7, color: t.textSecondary,
+            fontSize: "var(--fs-base)", lineHeight: 1.7, color: t.textSecondary,
             fontFamily: "var(--font-body)",
           }}>{item.desc}</div>
         </div>

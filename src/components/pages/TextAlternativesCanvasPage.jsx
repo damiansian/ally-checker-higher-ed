@@ -7,13 +7,14 @@ import {
   RefTable,
   ResourceLink,
   Callout,
+  AltTextComparisonTable,
 } from "@/components/content.jsx";
 
 function SH({ id, children }) {
   const { t } = useTheme();
   return (
     <h2 id={id} style={{
-      fontSize: 22, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-2xl)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       letterSpacing: "-0.01em",
       marginTop: 56, marginBottom: 16,
@@ -26,7 +27,7 @@ function H3({ children }) {
   const { t } = useTheme();
   return (
     <h3 style={{
-      fontSize: 16, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-lg)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       margin: "28px 0 14px",
     }}>{children}</h3>
@@ -37,26 +38,10 @@ function P({ children }) {
   const { t } = useTheme();
   return (
     <p style={{
-      fontSize: 15.5, lineHeight: 1.75, color: t.text,
+      fontSize: "var(--fs-md)", lineHeight: 1.75, color: t.text,
       fontFamily: "var(--font-body)",
       margin: "0 0 18px",
     }}>{children}</p>
-  );
-}
-
-function AltTextExample({ image, poor, better }) {
-  const { t } = useTheme();
-  return (
-    <div style={{
-      display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
-      gap: 1, backgroundColor: t.border,
-      overflow: "hidden", margin: "4px 0",
-      fontSize: 13.5, fontFamily: "var(--font-body)",
-    }}>
-      <div style={{ padding: "14px 16px", backgroundColor: t.surface, color: t.textSecondary }}>{image}</div>
-      <div style={{ padding: "14px 16px", backgroundColor: t.accentBg, color: t.text }}>{poor}</div>
-      <div style={{ padding: "14px 16px", backgroundColor: t.greenBg, color: t.text }}>{better}</div>
-    </div>
   );
 }
 
@@ -95,7 +80,7 @@ export default function TextAlternativesCanvasPage() {
         hears &quot;image&quot; and nothing else -- or worse, the image file
         name, which is often something
         like <code style={{
-          fontFamily: "var(--font-mono)", fontSize: 13,
+          fontFamily: "var(--font-mono)", fontSize: "var(--fs-sm)",
           backgroundColor: t.codeBg, color: t.codeText,
           padding: "1px 6px", borderRadius: 3,
         }}>IMG_4392.jpg</code>.
@@ -112,7 +97,7 @@ export default function TextAlternativesCanvasPage() {
         ].map(([bold, rest], i) => (
           <div key={i} style={{
             padding: "8px 0 8px 16px",
-            fontSize: 15, lineHeight: 1.65,
+            fontSize: "var(--fs-base)", lineHeight: 1.65,
             fontFamily: "var(--font-body)", color: t.text,
           }}>
             <strong>{bold}</strong> {rest}
@@ -149,7 +134,7 @@ export default function TextAlternativesCanvasPage() {
           }}
         />
         <figcaption style={{
-          fontSize: 13, color: t.textTertiary, marginTop: 8,
+          fontSize: "var(--fs-base)", color: t.textTertiary, marginTop: 8,
           fontFamily: "var(--font-body)", fontStyle: "italic",
         }}>
           The Canvas Upload Image dialog with the Alt Text field and
@@ -176,7 +161,7 @@ export default function TextAlternativesCanvasPage() {
           }}
         />
         <figcaption style={{
-          fontSize: 13, color: t.textTertiary, marginTop: 8,
+          fontSize: "var(--fs-base)", color: t.textTertiary, marginTop: 8,
           fontFamily: "var(--font-body)", fontStyle: "italic",
         }}>
           Clicking an image in the Rich Content Editor (RCE) selects it and reveals the Image
@@ -197,7 +182,7 @@ export default function TextAlternativesCanvasPage() {
           }}
         />
         <figcaption style={{
-          fontSize: 13, color: t.textTertiary, marginTop: 8,
+          fontSize: "var(--fs-base)", color: t.textTertiary, marginTop: 8,
           fontFamily: "var(--font-body)", fontStyle: "italic",
         }}>
           The Image Options tray with alt text describing the chart
@@ -208,17 +193,17 @@ export default function TextAlternativesCanvasPage() {
       <P>
         You can also add or edit alt text directly in the Rich Content Editor&apos;s (RCE) HTML
         editor. Click the <code style={{
-          fontFamily: "var(--font-mono)", fontSize: 13,
+          fontFamily: "var(--font-mono)", fontSize: "var(--fs-sm)",
           backgroundColor: t.codeBg, color: t.codeText,
           padding: "1px 6px", borderRadius: 3,
         }}>&lt;/&gt;</code> button to switch to HTML view and edit
         the <code style={{
-          fontFamily: "var(--font-mono)", fontSize: 13,
+          fontFamily: "var(--font-mono)", fontSize: "var(--fs-sm)",
           backgroundColor: t.codeBg, color: t.codeText,
           padding: "1px 6px", borderRadius: 3,
         }}>alt</code> attribute directly on
         the <code style={{
-          fontFamily: "var(--font-mono)", fontSize: 13,
+          fontFamily: "var(--font-mono)", fontSize: "var(--fs-sm)",
           backgroundColor: t.codeBg, color: t.codeText,
           padding: "1px 6px", borderRadius: 3,
         }}>&lt;img&gt;</code> tag.
@@ -230,7 +215,7 @@ export default function TextAlternativesCanvasPage() {
         border: `1px solid ${t.border}`,
         margin: "16px 0 20px",
         fontFamily: "var(--font-mono)",
-        fontSize: 13,
+        fontSize: "var(--fs-sm)",
         lineHeight: 1.8,
         color: t.codeText,
         overflowX: "auto",
@@ -261,7 +246,7 @@ export default function TextAlternativesCanvasPage() {
           }}
         />
         <figcaption style={{
-          fontSize: 13, color: t.textTertiary, marginTop: 8,
+          fontSize: "var(--fs-base)", color: t.textTertiary, marginTop: 8,
           fontFamily: "var(--font-body)", fontStyle: "italic",
         }}>
           The Rich Content Editor&apos;s (RCE) built-in Accessibility Checker (circled) flags an
@@ -274,7 +259,7 @@ export default function TextAlternativesCanvasPage() {
       <Callout type="warning">
         <div style={{
           fontWeight: 600, fontFamily: "var(--font-display)",
-          marginBottom: 6, fontSize: 14,
+          marginBottom: 6, fontSize: "var(--fs-sm)",
         }}>
           Alt text character length is not a WCAG requirement
         </div>
@@ -302,7 +287,7 @@ export default function TextAlternativesCanvasPage() {
           }}
         />
         <figcaption style={{
-          fontSize: 13, color: t.textTertiary, marginTop: 8,
+          fontSize: "var(--fs-base)", color: t.textTertiary, marginTop: 8,
           fontFamily: "var(--font-body)", fontStyle: "italic",
         }}>
           The Canvas Accessibility Checker incorrectly flags alt text over
@@ -322,7 +307,7 @@ export default function TextAlternativesCanvasPage() {
         backgroundColor: t.surfaceAlt, border: `1px solid ${t.border}`,
         margin: "16px 0 24px",
         fontFamily: "var(--font-mono)",
-        fontSize: 13.5, lineHeight: 2, color: t.textSecondary,
+        fontSize: "var(--fs-sm)", lineHeight: 2, color: t.textSecondary,
       }}>
         Same alt text in Word <span style={{ color: t.green }}>passes</span><br />
         Same alt text in Canvas Rich Content Editor (RCE) <span style={{ color: t.accent }}>flagged</span> &mdash; incorrectly
@@ -365,11 +350,11 @@ export default function TextAlternativesCanvasPage() {
             borderRadius: 8, marginBottom: 2,
           }}>
             <div style={{
-              fontSize: 15, fontWeight: 600, color: t.text,
+              fontSize: "var(--fs-base)", fontWeight: 600, color: t.text,
               fontFamily: "var(--font-display)", marginBottom: 4,
             }}>{item.rule}</div>
             <div style={{
-              fontSize: 14.5, color: t.textSecondary, lineHeight: 1.6,
+              fontSize: "var(--fs-base)", color: t.textSecondary, lineHeight: 1.6,
               fontFamily: "var(--font-body)",
             }}>{item.detail}</div>
           </div>
@@ -377,23 +362,12 @@ export default function TextAlternativesCanvasPage() {
       </div>
 
       <H3>Examples</H3>
-      <div style={{
-        display: "grid", gridTemplateColumns: "1fr 1fr 1fr",
-        gap: 1, backgroundColor: t.border, borderRadius: "10px 10px 0 0",
-        overflow: "hidden",
-        fontSize: 11, fontWeight: 700, textTransform: "uppercase",
-        letterSpacing: "0.06em", fontFamily: "var(--font-display)",
-      }}>
-        <div style={{ padding: "10px 16px", backgroundColor: t.surfaceAlt, color: t.textTertiary }}>Image</div>
-        <div style={{ padding: "10px 16px", backgroundColor: t.accentBg, color: t.accent }}>Poor</div>
-        <div style={{ padding: "10px 16px", backgroundColor: t.greenBg, color: t.green }}>Better</div>
-      </div>
-      <div style={{ borderRadius: "0 0 10px 10px", overflow: "hidden", marginBottom: 24 }}>
-        <AltTextExample image="Bar chart on a course home page" poor='"chart"' better="Grouped bar graph of quiz averages across four sections. Quiz 1 scores range from 83% to 87%. Quiz 2 scores range from 79% to 82%." />
-        <AltTextExample image="Photo in a discussion prompt" poor='"photo"' better="Aerial view of the Amazon River basin showing deforestation along tributary boundaries" />
-        <AltTextExample image="Screenshot of Canvas settings" poor='"screenshot"' better="Canvas assignment settings showing Due Date set to March 15 and Available Until set to March 22" />
-        <AltTextExample image="Decorative banner at top of module" poor='"Unit 3 banner"' better='Mark as decorative (does not convey course content)' />
-      </div>
+      <AltTextComparisonTable rows={[
+        { image: "Bar chart on a course home page", poor: '"chart"', better: "Grouped bar graph of quiz averages across four sections. Quiz 1 scores range from 83% to 87%. Quiz 2 scores range from 79% to 82%." },
+        { image: "Photo in a discussion prompt", poor: '"photo"', better: "Aerial view of the Amazon River basin showing deforestation along tributary boundaries" },
+        { image: "Screenshot of Canvas settings", poor: '"screenshot"', better: "Canvas assignment settings showing Due Date set to March 15 and Available Until set to March 22" },
+        { image: "Decorative banner at top of module", poor: '"Unit 3 banner"', better: "Mark as decorative (does not convey course content)" },
+      ]} />
 
       {/* ── Complex Images ── */}
       <SH id="complex-images">Complex Images</SH>
@@ -403,7 +377,7 @@ export default function TextAlternativesCanvasPage() {
         description in addition to brief alt text.
       </P>
       <Callout>
-        <div style={{ fontWeight: 600, fontFamily: "var(--font-display)", marginBottom: 10, fontSize: 14 }}>
+        <div style={{ fontWeight: 600, fontFamily: "var(--font-display)", marginBottom: 10, fontSize: "var(--fs-sm)" }}>
           The approach:
         </div>
         <Step number="1">
@@ -425,7 +399,7 @@ export default function TextAlternativesCanvasPage() {
       <P>
         If the long description would disrupt the page layout, you can place
         it in an HTML <code style={{
-          fontFamily: "var(--font-mono)", fontSize: 13,
+          fontFamily: "var(--font-mono)", fontSize: "var(--fs-sm)",
           backgroundColor: t.codeBg, color: t.codeText,
           padding: "1px 6px", borderRadius: 3,
         }}>&lt;details&gt;</code> element using the HTML editor, creating a
@@ -438,7 +412,7 @@ export default function TextAlternativesCanvasPage() {
         border: `1px solid ${t.border}`,
         margin: "16px 0 20px",
         fontFamily: "var(--font-mono)",
-        fontSize: 13,
+        fontSize: "var(--fs-sm)",
         lineHeight: 1.8,
         color: t.codeText,
         overflowX: "auto",
@@ -454,7 +428,7 @@ export default function TextAlternativesCanvasPage() {
       <P>
         In the Canvas Rich Content Editor (RCE), Ally uses <strong>axe-core</strong> to check
         images. The primary check is whether the <code style={{
-          fontFamily: "var(--font-mono)", fontSize: 13,
+          fontFamily: "var(--font-mono)", fontSize: "var(--fs-sm)",
           backgroundColor: t.codeBg, color: t.codeText,
           padding: "1px 6px", borderRadius: 3,
         }}>alt</code> attribute is present and non-empty. If the image has
@@ -465,7 +439,7 @@ export default function TextAlternativesCanvasPage() {
         backgroundColor: t.surfaceAlt, border: `1px solid ${t.border}`,
         margin: "16px 0 24px",
         fontFamily: "var(--font-mono)",
-        fontSize: 13.5, lineHeight: 2, color: t.textSecondary,
+        fontSize: "var(--fs-sm)", lineHeight: 2, color: t.textSecondary,
       }}>
         &quot;asdf&quot; <span style={{ color: t.green }}>passes</span><br />
         &quot;image1.jpg&quot; <span style={{ color: t.accent }}>fails</span><br />
@@ -506,11 +480,11 @@ export default function TextAlternativesCanvasPage() {
       ].map((item, i) => (
         <div key={i} style={{ marginBottom: 18 }}>
           <div style={{
-            fontSize: 15, fontWeight: 700, color: t.text,
+            fontSize: "var(--fs-base)", fontWeight: 700, color: t.text,
             fontFamily: "var(--font-display)", marginBottom: 4,
           }}>{item.term}</div>
           <div style={{
-            fontSize: 15, lineHeight: 1.7, color: t.textSecondary,
+            fontSize: "var(--fs-base)", lineHeight: 1.7, color: t.textSecondary,
             fontFamily: "var(--font-body)",
           }}>{item.desc}</div>
         </div>
@@ -541,15 +515,15 @@ export default function TextAlternativesCanvasPage() {
           margin: `0 0 ${i < 2 ? 14 : 20}px`,
         }}>
           <div style={{
-            fontSize: 15, fontWeight: 700, color: t.text,
+            fontSize: "var(--fs-base)", fontWeight: 700, color: t.text,
             fontFamily: "var(--font-display)", marginBottom: 4,
           }}>{tool.name}</div>
           <div style={{
-            fontSize: 13, color: t.textTertiary,
+            fontSize: "var(--fs-sm)", color: t.textTertiary,
             fontFamily: "var(--font-display)", marginBottom: 12,
           }}>{tool.meta}</div>
           <div style={{
-            fontSize: 14.5, lineHeight: 1.65, color: t.textSecondary,
+            fontSize: "var(--fs-base)", lineHeight: 1.65, color: t.textSecondary,
             fontFamily: "var(--font-body)",
           }}>{tool.desc}</div>
         </div>
@@ -573,7 +547,7 @@ export default function TextAlternativesCanvasPage() {
         padding: "18px 22px", borderRadius: 10,
         backgroundColor: t.surfaceAlt, border: `1px solid ${t.border}`,
         margin: "20px 0",
-        fontSize: 14.5, lineHeight: 1.65,
+        fontSize: "var(--fs-base)", lineHeight: 1.65,
         fontFamily: "var(--font-body)", fontStyle: "italic",
         color: t.textSecondary,
       }}>

@@ -10,7 +10,7 @@ function SH({ id, children }) {
   const { t } = useTheme();
   return (
     <h2 id={id} style={{
-      fontSize: 22, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-2xl)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       letterSpacing: "-0.01em",
       marginTop: 56, marginBottom: 16,
@@ -23,7 +23,7 @@ function P({ children }) {
   const { t } = useTheme();
   return (
     <p style={{
-      fontSize: 15.5, lineHeight: 1.75, color: t.text,
+      fontSize: "var(--fs-md)", lineHeight: 1.75, color: t.text,
       fontFamily: "var(--font-body)",
       margin: "0 0 18px",
     }}>{children}</p>
@@ -67,7 +67,7 @@ export default function SemanticStructureOverviewPage() {
         Ally runs multiple structure checks; wording varies by file type for
         headings:
       </P>
-      <ul style={{ margin: "0 0 18px", paddingLeft: 24, fontFamily: "var(--font-body)", fontSize: 15.5, lineHeight: 1.75, color: "inherit" }}>
+      <ul style={{ margin: "0 0 18px", paddingLeft: 24, fontFamily: "var(--font-body)", fontSize: "var(--fs-md)", lineHeight: 1.75, color: "inherit" }}>
         <li><strong>Word:</strong> &ldquo;Document does not have any headings&rdquo;</li>
         <li><strong>PowerPoint:</strong> &ldquo;Presentation does not have slide titles&rdquo;</li>
         <li><strong>PDF:</strong> &ldquo;PDF does not have any headings&rdquo;</li>

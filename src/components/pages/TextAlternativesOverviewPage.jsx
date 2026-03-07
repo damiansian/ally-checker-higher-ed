@@ -13,7 +13,7 @@ function SH({ id, children }) {
   const { t } = useTheme();
   return (
     <h2 id={id} style={{
-      fontSize: 22, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-2xl)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       letterSpacing: "-0.01em",
       marginTop: 56, marginBottom: 16,
@@ -26,7 +26,7 @@ function H3({ children }) {
   const { t } = useTheme();
   return (
     <h3 style={{
-      fontSize: 16, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-lg)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       margin: "28px 0 14px",
     }}>{children}</h3>
@@ -37,7 +37,7 @@ function P({ children }) {
   const { t } = useTheme();
   return (
     <p style={{
-      fontSize: 15.5, lineHeight: 1.75, color: t.text,
+      fontSize: "var(--fs-base)", lineHeight: 1.75, color: t.text,
       fontFamily: "var(--font-body)",
       margin: "0 0 18px",
     }}>{children}</p>
@@ -76,7 +76,7 @@ function AudioDemo({ src, label, transcriptSummary, transcriptContent }) {
           <summary
             style={{
               padding: "10px 14px",
-              fontSize: 14,
+              fontSize: "var(--fs-sm)",
               fontWeight: 600,
               fontFamily: "var(--font-display)",
               color: t.text,
@@ -89,7 +89,7 @@ function AudioDemo({ src, label, transcriptSummary, transcriptContent }) {
             style={{
               padding: "12px 14px 16px",
               borderTop: `1px solid ${t.border}`,
-              fontSize: 14,
+              fontSize: "var(--fs-base)",
               lineHeight: 1.6,
               color: t.textSecondary,
               fontFamily: "var(--font-body)",
@@ -151,7 +151,7 @@ export default function TextAlternativesOverviewPage() {
         backgroundColor: t.surfaceAlt, border: `1px solid ${t.border}`,
         margin: "16px 0 24px",
         fontFamily: "var(--font-mono)",
-        fontSize: 13.5, lineHeight: 2.2, color: t.textSecondary,
+        fontSize: "var(--fs-sm)", lineHeight: 2.2, color: t.textSecondary,
       }}>
         <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
           <span style={{ minWidth: 110, fontWeight: 600, color: t.text }}>Word</span>
@@ -272,7 +272,7 @@ export default function TextAlternativesOverviewPage() {
             <a
               href={`/text-alternatives/${item.slug}`}
               style={{
-                fontSize: 16, fontWeight: 700, color: t.link,
+                fontSize: "var(--fs-lg)", fontWeight: 700, color: t.link,
                 fontFamily: "var(--font-display)",
                 textDecoration: "none",
               }}
@@ -283,7 +283,7 @@ export default function TextAlternativesOverviewPage() {
               display: "inline-block",
               padding: "2px 10px",
               borderRadius: 4,
-              fontSize: 11,
+              fontSize: "var(--fs-xs)",
               fontWeight: 700,
               fontFamily: "var(--font-display)",
               textTransform: "uppercase",
@@ -296,7 +296,7 @@ export default function TextAlternativesOverviewPage() {
             </span>
           </div>
           <div style={{
-            fontSize: 14.5, lineHeight: 1.65, color: t.textSecondary,
+            fontSize: "var(--fs-base)", lineHeight: 1.65, color: t.textSecondary,
             fontFamily: "var(--font-body)",
           }}>
             {item.detail}
@@ -330,7 +330,7 @@ export default function TextAlternativesOverviewPage() {
       <Callout type="warning">
         <div style={{
           fontWeight: 600, fontFamily: "var(--font-display)",
-          marginBottom: 6, fontSize: 14,
+          marginBottom: 6, fontSize: "var(--fs-sm)",
         }}>
           Alt text character length flag in Canvas
         </div>
@@ -351,7 +351,7 @@ export default function TextAlternativesOverviewPage() {
         backgroundColor: t.surfaceAlt, border: `1px solid ${t.border}`,
         margin: "16px 0 24px",
         fontFamily: "var(--font-mono)",
-        fontSize: 13.5, lineHeight: 2, color: t.textSecondary,
+        fontSize: "var(--fs-sm)", lineHeight: 2, color: t.textSecondary,
       }}>
         Same alt text in Word <span style={{ color: t.green }}>passes</span><br />
         Same alt text in Canvas RCE <span style={{ color: t.accent }}>flagged</span> &mdash; incorrectly
@@ -378,7 +378,7 @@ export default function TextAlternativesOverviewPage() {
         backgroundColor: t.surfaceAlt, border: `1px solid ${t.border}`,
         margin: "16px 0 24px",
         fontFamily: "var(--font-mono)",
-        fontSize: 13.5, lineHeight: 2, color: t.textSecondary,
+        fontSize: "var(--fs-sm)", lineHeight: 2, color: t.textSecondary,
       }}>
         &quot;asdf&quot; <span style={{ color: t.green }}>passes</span><br/>
         &quot;image1.jpg&quot; <span style={{ color: t.accent }}>fails</span><br/>
@@ -414,11 +414,11 @@ export default function TextAlternativesOverviewPage() {
       ].map((item, i) => (
         <div key={i} style={{ marginBottom: 18 }}>
           <div style={{
-            fontSize: 15, fontWeight: 700, color: t.text,
+            fontSize: "var(--fs-base)", fontWeight: 700, color: t.text,
             fontFamily: "var(--font-display)", marginBottom: 4,
           }}>{item.term}</div>
           <div style={{
-            fontSize: 15, lineHeight: 1.7, color: t.textSecondary,
+            fontSize: "var(--fs-base)", lineHeight: 1.7, color: t.textSecondary,
             fontFamily: "var(--font-body)",
           }}>{item.desc}</div>
         </div>

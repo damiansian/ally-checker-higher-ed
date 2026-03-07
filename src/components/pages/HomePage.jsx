@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTheme } from "@/components/theme.jsx";
-import { TopNav } from "@/components/layout.jsx";
+import { SideNav, MobileHeader } from "@/components/layout.jsx";
 import { categories, fileTypeMeta, stateInfo } from "@/components/data";
 
 // ── Metric Bar ──────────────────────────────────────────────
@@ -9,7 +9,7 @@ function MetricBar({ value, label, color }) {
   return (
     <div style={{ flex: 1 }}>
       <div style={{
-        fontSize: 10, fontWeight: 700, textTransform: "uppercase",
+        fontSize: "var(--fs-xs)", fontWeight: 700, textTransform: "uppercase",
         letterSpacing: "0.08em",
         color: t.textTertiary,
         marginBottom: 6, fontFamily: "var(--font-display)",
@@ -105,7 +105,7 @@ function FileTypeTile({ type, state, categorySlug }) {
       cursor: isNA ? "default" : "pointer",
     }}>
       <div style={{
-        fontSize: 15, fontWeight: 700, color: labelColor,
+        fontSize: "var(--fs-base)", fontWeight: 700, color: labelColor,
         fontFamily: "var(--font-display)", marginBottom: 10,
       }}>{meta.label}</div>
       <div style={{
@@ -115,7 +115,7 @@ function FileTypeTile({ type, state, categorySlug }) {
         margin: "0 auto 8px",
       }}>{iconEl}</div>
       <div style={{
-        fontSize: 11, fontWeight: 700, color: statusColor,
+        fontSize: "var(--fs-xs)", fontWeight: 700, color: statusColor,
         fontFamily: "var(--font-display)",
         textTransform: "uppercase",
         letterSpacing: "0.04em",
@@ -149,17 +149,17 @@ function CategoryCard({ category }) {
       <div style={{ marginBottom: 16 }}>
         <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 4 }}>
           <h2 style={{
-            fontSize: 20, fontWeight: 800, color: t.text,
+            fontSize: "var(--fs-2xl)", fontWeight: 800, color: t.text,
             fontFamily: "var(--font-display)",
             letterSpacing: "-0.01em", margin: 0,
           }}>{category.name}</h2>
           <span style={{
-            fontSize: 11, color: t.textTertiary,
+            fontSize: "var(--fs-xs)", color: t.textTertiary,
             fontFamily: "var(--font-mono)", fontWeight: 500,
           }}>WCAG {category.wcag}</span>
         </div>
         <p style={{
-          fontSize: 14, lineHeight: 1.55, color: t.textSecondary,
+          fontSize: "var(--fs-base)", lineHeight: 1.55, color: t.textSecondary,
           fontFamily: "var(--font-body)", margin: 0,
         }}>{category.description}</p>
       </div>
@@ -180,7 +180,7 @@ function CategoryCard({ category }) {
 
       {/* File Type Tiles */}
       <div style={{
-        fontSize: 11, fontWeight: 700, textTransform: "uppercase",
+        fontSize: "var(--fs-xs)", fontWeight: 700, textTransform: "uppercase",
         letterSpacing: "0.08em",
         color: t.textTertiary,
         fontFamily: "var(--font-display)",
@@ -208,7 +208,7 @@ function CategoryCard({ category }) {
         style={{
           marginTop: 14, background: "none", border: "none",
           color: t.textTertiary, cursor: "pointer",
-          fontSize: 12, fontWeight: 600,
+          fontSize: "var(--fs-xs)", fontWeight: 600,
           fontFamily: "var(--font-display)",
           padding: "4px 0",
         }}
@@ -228,12 +228,12 @@ function CategoryCard({ category }) {
             border: `1px solid ${t.greenBorder}`,
           }}>
             <div style={{
-              fontSize: 11, fontWeight: 700, textTransform: "uppercase",
+              fontSize: "var(--fs-xs)", fontWeight: 700, textTransform: "uppercase",
               letterSpacing: "0.06em", color: t.green,
               marginBottom: 8, fontFamily: "var(--font-display)",
             }}>Ally catches</div>
             <div style={{
-              fontSize: 13.5, lineHeight: 1.55, color: t.text,
+              fontSize: "var(--fs-base)", lineHeight: 1.55, color: t.text,
               fontFamily: "var(--font-body)",
             }}>{category.allyCatches}</div>
           </div>
@@ -243,12 +243,12 @@ function CategoryCard({ category }) {
             border: `1px solid ${t.amberBorder}`,
           }}>
             <div style={{
-              fontSize: 11, fontWeight: 700, textTransform: "uppercase",
+              fontSize: "var(--fs-xs)", fontWeight: 700, textTransform: "uppercase",
               letterSpacing: "0.06em", color: t.amber,
               marginBottom: 8, fontFamily: "var(--font-display)",
             }}>Ally misses</div>
             <div style={{
-              fontSize: 13.5, lineHeight: 1.55, color: t.text,
+              fontSize: "var(--fs-base)", lineHeight: 1.55, color: t.text,
               fontFamily: "var(--font-body)",
             }}>{category.allyMisses}</div>
           </div>
@@ -258,7 +258,7 @@ function CategoryCard({ category }) {
               padding: "12px 18px", borderRadius: 10,
               backgroundColor: t.cyanBg,
               border: `1px solid ${t.cyanBorder}`,
-              fontSize: 13, lineHeight: 1.5, color: t.text,
+              fontSize: "var(--fs-base)", lineHeight: 1.5, color: t.text,
               fontFamily: "var(--font-body)", fontStyle: "italic",
             }}>
               <strong style={{ fontFamily: "var(--font-display)", fontStyle: "normal" }}>Note: </strong>
@@ -329,7 +329,7 @@ function Legend() {
         <div key={s.key} style={{ display: "flex", alignItems: "center", gap: 6 }}>
           {s.icon(s.color)}
           <span style={{
-            fontSize: 13, color: t.textSecondary,
+            fontSize: "var(--fs-sm)", color: t.textSecondary,
             fontFamily: "var(--font-display)",
           }}>{s.label}</span>
         </div>
@@ -342,6 +342,7 @@ function Legend() {
 export default function HomePage() {
   const { t } = useTheme();
   const [sortBy, setSortBy] = useState("impact");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const sorted = [...categories].sort((a, b) =>
     sortBy === "impact"
@@ -350,22 +351,32 @@ export default function HomePage() {
   );
 
   return (
-    <div style={{
-      minHeight: "100vh",
-      backgroundColor: t.bg,
-      transition: "background-color 0.3s ease",
-    }}>
-      <TopNav activeCategorySlug="home" />
+    <div
+      className="app-layout"
+      style={{
+        minHeight: "100vh",
+        backgroundColor: t.bg,
+        transition: "background-color 0.3s ease",
+      }}
+    >
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
 
-      <main
-        id="main-content"
-        className="home-main"
-        tabIndex={-1}
-        style={{ maxWidth: 1200, margin: "0 auto", padding: "40px 32px 80px" }}
-      >
+      <SideNav activeCategorySlug="home" menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+
+      <div className="main-area">
+        <MobileHeader menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+
+        <main
+          id="main-content"
+          className="home-main"
+          tabIndex={-1}
+          style={{ maxWidth: 960, padding: "40px 48px 80px" }}
+        >
         {/* Title */}
         <h1 className="home-title" style={{
-          fontSize: 40, fontWeight: 800, color: t.text,
+          fontSize: "var(--fs-4xl)", fontWeight: 800, color: t.text,
           fontFamily: "var(--font-display)",
           letterSpacing: "-0.03em",
           margin: "0 0 12px", lineHeight: 1.1,
@@ -373,7 +384,7 @@ export default function HomePage() {
           Canvas LMS <span style={{ color: t.accent }}>Accessibility</span>
         </h1>
         <p className="home-intro" style={{
-          fontSize: 18, lineHeight: 1.6, color: t.textSecondary,
+          fontSize: "var(--fs-xl)", lineHeight: 1.6, color: t.textSecondary,
           fontFamily: "var(--font-body)",
           maxWidth: 600, margin: "0 0 40px",
         }}>
@@ -386,7 +397,7 @@ export default function HomePage() {
           alignItems: "center", marginBottom: 16, flexWrap: "wrap", gap: 12,
         }}>
           <div style={{
-            fontSize: 12, fontWeight: 700, textTransform: "uppercase",
+            fontSize: "var(--fs-xs)", fontWeight: 700, textTransform: "uppercase",
             letterSpacing: "0.08em", color: t.textTertiary,
             fontFamily: "var(--font-display)",
           }}>
@@ -399,7 +410,7 @@ export default function HomePage() {
                 border: `1px solid ${sortBy === s ? t.accent : t.border}`,
                 backgroundColor: sortBy === s ? t.accentBg : t.surface,
                 color: sortBy === s ? t.accent : t.textSecondary,
-                cursor: "pointer", fontSize: 12, fontWeight: 600,
+                cursor: "pointer", fontSize: "var(--fs-xs)", fontWeight: 600,
                 fontFamily: "var(--font-display)",
                 textTransform: "capitalize",
               }}>{s}</button>
@@ -423,7 +434,7 @@ export default function HomePage() {
           border: `1px solid ${t.amberBorder}`,
         }}>
           <h2 style={{
-            fontSize: 18, fontWeight: 800, color: t.text,
+            fontSize: "var(--fs-xl)", fontWeight: 800, color: t.text,
             fontFamily: "var(--font-display)",
             letterSpacing: "-0.01em",
             margin: "0 0 12px",
@@ -431,7 +442,7 @@ export default function HomePage() {
             Ally Alternative Formats: Tagged PDF Reliability
           </h2>
           <p style={{
-            fontSize: 14.5, lineHeight: 1.65, color: t.text,
+            fontSize: "var(--fs-base)", lineHeight: 1.65, color: t.text,
             fontFamily: "var(--font-body)",
             margin: "0 0 14px",
           }}>
@@ -439,7 +450,7 @@ export default function HomePage() {
           </p>
           <table style={{
             width: "100%", borderCollapse: "collapse",
-            fontSize: 14, fontFamily: "var(--font-display)",
+            fontSize: "var(--fs-base)", fontFamily: "var(--font-display)",
             margin: "0 0 16px",
           }}>
             <thead>
@@ -468,7 +479,7 @@ export default function HomePage() {
             </tbody>
           </table>
           <div style={{
-            fontSize: 14, lineHeight: 1.65, color: t.text,
+            fontSize: "var(--fs-base)", lineHeight: 1.65, color: t.text,
             fontFamily: "var(--font-body)",
           }}>
             <p style={{ margin: "0 0 10px" }}>
@@ -488,22 +499,23 @@ export default function HomePage() {
           marginTop: 24, padding: "20px 24px", borderRadius: 10,
           backgroundColor: t.surfaceAlt,
           border: `1px solid ${t.border}`,
-          fontSize: 14, lineHeight: 1.6, color: t.textSecondary,
+          fontSize: "var(--fs-base)", lineHeight: 1.6, color: t.textSecondary,
           fontFamily: "var(--font-body)",
         }}>
           Getting to 100% in Ally is the starting line, not the finish. Automated tools catch roughly 57% of accessibility issues. The rest requires human judgment. This reference covers what Ally finds, what it misses, and what to do about both.
         </div>
-      </main>
+        </main>
 
-      <footer className="home-footer" style={{
-        borderTop: `1px solid ${t.border}`,
-        padding: "24px 32px",
-        textAlign: "center",
-        fontSize: 12, color: t.textTertiary,
-        fontFamily: "var(--font-display)",
-      }}>
-        Canvas LMS Accessibility &middot; Damian Sian
-      </footer>
+        <footer className="home-footer" style={{
+          borderTop: `1px solid ${t.border}`,
+          padding: "24px 32px",
+          textAlign: "center",
+          fontSize: "var(--fs-xs)", color: t.textTertiary,
+          fontFamily: "var(--font-display)",
+        }}>
+          Canvas LMS Accessibility &middot; Damian Sian
+        </footer>
+      </div>
     </div>
   );
 }

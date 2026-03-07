@@ -13,6 +13,7 @@ export {
   Breadcrumb,
   FileTypePills,
   TableOfContents,
-  TopNav,
+  SideNav,
+  MobileHeader,
   ContentPageLayout,
 } from "./layout.jsx";

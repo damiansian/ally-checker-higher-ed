@@ -21,8 +21,8 @@ The dev server writes compiled output into `.astro/`. When something gets out of
 
 Use **one terminal** for the dev server. Always use **http://localhost:3000**.
 
-- **Normal start:** `npm run dev` (runs on port 3000; if something is already on 3000, Astro will say "port in use" — close that other terminal or app).
-- **Start fresh (kill whatever is on 3000, then start):** `npm run dev:fresh` — use this when you’re not sure if an old server is still running, so you don’t get 3003, 3004, etc.
+- **Normal start:** `npm run dev` (runs on port 3000; if something is already on 3000, Astro will say "port in use," so close that other terminal or app).
+- **Start fresh (kill whatever is on 3000, then start):** `npm run dev:fresh`. Use this when you’re not sure if an old server is still running, so you don’t get 3003, 3004, etc.
 
 ### When you see random dev/build errors
 
@@ -89,7 +89,7 @@ URL pattern: `/{category-slug}/{file-type-slug}`
 
 ## Accessibility (WCAG 2.2 AA)
 
-- **Lint**: `npm run lint` — ESLint with React + jsx-a11y rules for static checks.
+- **Lint**: `npm run lint`, ESLint with React + jsx-a11y rules for static checks.
 - **Dev**: With `npm run dev`, axe-core runs in the browser and logs WCAG 2.2 AA violations to the console.
 - **CLI**: Start the dev server, then `npm run a11y` to run axe against the home and sample content pages. If you see a Chrome/ChromeDriver version error, run `npx browser-driver-manager install chrome` and try again.
 - **Cursor**: The project includes a WCAG 2.2 AA skill (`.cursor/skills/wcag-2-2-aa/`) and a rule (`.cursor/rules/wcag-a11y.mdc`) for UI files.

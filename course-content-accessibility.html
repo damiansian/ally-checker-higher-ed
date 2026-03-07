@@ -258,7 +258,7 @@ manually.</p>
 <td>4 / 5</td>
 </tr>
 <tr>
-<td>Headings &amp; Structure</td>
+<td>Semantic Structure (Headings &amp; Lists)</td>
 <td>1.3.1, 2.4.1, 2.4.6</td>
 <td>5 / 5</td>
 <td>4 / 5</td>
@@ -268,12 +268,6 @@ manually.</p>
 <td>1.3.1</td>
 <td>3 / 5</td>
 <td>4 / 5</td>
-</tr>
-<tr>
-<td>Lists</td>
-<td>1.3.1</td>
-<td>4 / 5</td>
-<td>3 / 5</td>
 </tr>
 <tr>
 <td>Language</td>
@@ -889,7 +883,7 @@ Navigation Panes &gt; Tags).</li>
 field.</li>
 <li>Click <strong>Close</strong>.</li>
 </ol>
-<p><em>[PLACEHOLDER: Screenshot — Acrobat Set Alternate Text dialog]</em></p>
+<p><em>[PLACEHOLDER: Screenshot, Acrobat Set Alternate Text dialog]</em></p>
 <hr />
 <h4 id="scenario-2-ai-generated-alt-text">Scenario 2: AI-generated alt
 text</h4>
@@ -1290,7 +1284,7 @@ screens in bright environments.</p>
 <p>Three categories of contrast failure, each with the actual ratio and
 whether automated tools detect it.</p>
 <h4 id="regular-text-contrast">Regular text</h4>
-<!-- E10a: Low contrast regular text — detected by Ally and MS Checker -->
+<!-- E10a: Low contrast regular text, detected by Ally and MS Checker -->
 <table class="lab-compare">
   <thead>
     <tr><th>Broken</th><th>Corrected</th></tr>
@@ -1316,7 +1310,7 @@ whether automated tools detect it.</p>
 </table>
 <p><strong>Detected by:</strong> Ally and Microsoft Accessibility Checker.</p>
 <h4 id="large-text-contrast">Large text</h4>
-<!-- E10b: Low contrast large text — detected by Ally and MS Checker -->
+<!-- E10b: Low contrast large text, detected by Ally and MS Checker -->
 <table class="lab-compare">
   <thead>
     <tr><th>Broken</th><th>Corrected</th></tr>
@@ -1342,7 +1336,7 @@ whether automated tools detect it.</p>
 </table>
 <p><strong>Detected by:</strong> Ally and Microsoft Accessibility Checker.</p>
 <h4 id="graphic-element-contrast">Graphic element</h4>
-<!-- E10c: Low contrast graphic element — not detected by any tool -->
+<!-- E10c: Low contrast graphic element, not detected by any tool -->
 <table class="lab-compare">
   <thead>
     <tr><th>Broken</th><th>Corrected</th></tr>
@@ -1460,13 +1454,13 @@ misidentified as text content.</p>
   </figure>
   <figure style="flex: 1; min-width: 200px; margin: 0;">
     <img src="public/assets/ally-image-contrast-warning.png"
-         alt="Screenshot of the Ally accessibility score panel for the student photo. The score is 75% with the message 'This image has contrast issues.' Below, Ally displays 'Guidance not available yet — We are updating the guidance for this issue.'"
+         alt="Screenshot of the Ally accessibility score panel for the student photo. The score is 75% with the message 'This image has contrast issues.' Below, Ally displays 'Guidance not available yet. We are updating the guidance for this issue.'"
          style="width: 100%; height: auto;" />
-    <figcaption>Ally flags the photo at 75% with "This image has contrast issues." Guidance reads: "Guidance not available yet — We are updating the guidance for this issue."</figcaption>
+    <figcaption>Ally flags the photo at 75% with "This image has contrast issues." Guidance reads: "Guidance not available yet. We are updating the guidance for this issue."</figcaption>
   </figure>
 </div>
 <p>Ally's own guidance panel confirms the limitation: it reads
-"Guidance not available yet — We are updating the guidance for
+"Guidance not available yet. We are updating the guidance for
 this issue." This suggests the feature is under active development, but
 in its current state it produces false positives on photographic content.
 <strong>Do not take action on image contrast warnings in the
@@ -1626,17 +1620,26 @@ coding?</li>
 indicators?</li>
 </ul>
 </div>
-<h2 id="headings">Headings</h2>
+<h2 id="semantic-structure">Semantic Structure</h2>
 <p><strong><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html">WCAG 1.3.1 Info and Relationships</a> (Level A), <a href="https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html">2.4.1 Bypass
 Blocks</a> (Level A), <a href="https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels.html">2.4.6 Headings and Labels</a> (Level AA).</strong> Content
 structure must be programmatically determinable. Headings must be
-present and descriptive.</p>
+present and descriptive; lists must use proper list markup.</p>
+<p>Headings, titles, lists, and document structure let students navigate
+and understand content organization. Without them, a 20-page document
+is a wall of text with no way to jump to a section. Screen reader users
+rely on headings to jump between sections and on proper list structure
+to hear &ldquo;list of X items&rdquo; and list type. Content that
+<em>looks</em> like a list (typed bullets, dashes, or &ldquo;1.&rdquo;
+&ldquo;2.&rdquo;) but is not marked as a list is invisible to that
+structure.</p>
+<h3 id="headings">Headings</h3>
 <p>Heading issues are tied with text alternatives as the most frequently
 occurring accessibility problem (likelihood 5/5) and have high impact
 (4/5). For a student navigating a long document or page by screen
 reader, headings are the primary mechanism for orientation and
 navigation, equivalent to scanning a page visually.</p>
-<h3 id="what-automated-tools-detect-2">What automated tools detect</h3>
+<h4 id="what-automated-tools-detect-headings">What automated tools detect</h4>
 <ul>
 <li>Missing headings entirely (no heading styles used in a Word
 document, no H tags in a Canvas page)</li>
@@ -1645,7 +1648,7 @@ document, no H tags in a Canvas page)</li>
 detection is inconsistent</li>
 <li>Untagged PDFs (no tag structure at all)</li>
 </ul>
-<h3 id="what-requires-manual-review-2">What requires manual review</h3>
+<h4 id="what-requires-manual-review-headings">What requires manual review</h4>
 <ul>
 <li><strong>Heading text quality.</strong> Ally checks that headings
 exist, not that they are descriptive. “Section 1” or “Untitled” as a
@@ -1661,144 +1664,15 @@ panel (Acrobat).</li>
 sidebars, and multi-column layouts in Word and PowerPoint may not read
 in the intended order.</li>
 </ul>
-<div class="summary">
-<p><strong>Automated vs. Manual Summary</strong></p>
-<ul>
-<li><strong>Automated tools catch:</strong> Missing headings, missing
-slide titles, skipped heading levels (inconsistently), untagged
-PDFs</li>
-<li><strong>Manual review required:</strong> Heading text quality,
-logical hierarchy, reading order, content order in multi-column
-layouts</li>
-</ul>
-</div>
-<div class="quick-check">
-<p><strong>Quick Check: Headings</strong></p>
-<ul>
-<li>Does the document use heading styles (not just bold or large text)
-for structure?</li>
-<li>Do headings follow a logical hierarchy without skipping levels?</li>
-<li>Are heading labels descriptive (not “Section 1” or “Untitled”)?</li>
-<li>Does every PowerPoint slide have a unique title?</li>
-<li>Has reading order been verified in the Selection Pane (PowerPoint)
-or Tags panel (PDF)?</li>
-</ul>
-</div>
-<h2 id="tables">Tables</h2>
-<p><strong><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html">WCAG 1.3.1 Info and Relationships</a> (Level A).</strong>
-Information and relationships conveyed through presentation must be
-programmatically determinable.</p>
-<p>Tables appear less frequently than images or headings (likelihood
-3/5) but have high impact (4/5) when they do appear. Without designated
-header rows, a screen reader reads table cells as raw data with no
-context. A student hears “85” without knowing which column or row it
-belongs to.</p>
-<h3 id="what-automated-tools-detect-3">What automated tools detect</h3>
-<ul>
-<li>Tables without a designated header row (Ally, MS Office,
-Acrobat)</li>
-<li>Tables of 3x3 or larger without headers (Canvas, via axe-core)</li>
-</ul>
-<h3 id="what-requires-manual-review-3">What requires manual review</h3>
-<ul>
-<li><strong>Layout tables.</strong> Tables used for visual alignment
-rather than data presentation create confusing screen reader
-experiences. Automated tools do not reliably distinguish layout tables
-from data tables.</li>
-<li><strong>Complex tables.</strong> Merged cells, multiple header rows,
-and nested tables require manual verification. The <code>scope</code>
-attribute (HTML) or tagged structure (PDF) must correctly associate each
-data cell with its headers.</li>
-<li><strong>Appropriateness.</strong> Some content presented in tables
-would be more accessible as lists or paragraphs. A “table” with one
-column and one row per item is really a list.</li>
-</ul>
-<!-- Scenario: Layout table used for positioning | Error ID: E8 -->
-<table class="lab-compare">
-  <thead>
-    <tr><th>Broken</th><th>Corrected</th></tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><!-- E8: Layout table used for positioning -->
-        <table>
-          <tr>
-            <td><img src="assets/sidebar.png" alt="sidebar image"></td>
-            <td><p>This paragraph is laid out using a table for positioning instead of semantic structure.</p></td>
-          </tr>
-        </table>
-        <p><strong>What happens:</strong> Screen reader encounters table structure with no data relationship; confusing for navigation.</p>
-      </td>
-      <td><!-- E8: Corrected artifact (right) -->
-        <div class="two-column-layout">
-          <aside><img src="assets/sidebar.png" alt="Descriptive sidebar image"></aside>
-          <main><p>This paragraph is structured semantically as article content (no layout table).</p></main>
-        </div>
-        <p><strong>What happens:</strong> Semantic structure allows screen reader to understand layout and content roles.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<!-- Detection: Manual only -->
-<!-- Scenario: Data table missing header row | Error ID: E9 -->
-<table class="lab-compare">
-  <thead>
-    <tr><th>Broken</th><th>Corrected</th></tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><!-- E9: Data table missing header row -->
-        <table>
-          <tr><td>Section 1</td><td>85</td><td>82</td></tr>
-          <tr><td>Section 2</td><td>83</td><td>81</td></tr>
-          <tr><td>Section 3</td><td>85</td><td>82</td></tr>
-        </table>
-        <p><strong>What happens:</strong> Screen reader reads raw cells with no column/row context; student hears "85" without knowing what it means.</p>
-      </td>
-      <td><!-- E9: Corrected artifact (right) -->
-        <table>
-          <thead><tr><th>Section</th><th>Quiz 1</th><th>Quiz 2</th></tr></thead>
-          <tbody>
-            <tr><td>Section 1</td><td>85</td><td>82</td></tr>
-            <tr><td>Section 2</td><td>83</td><td>81</td></tr>
-            <tr><td>Section 3</td><td>85</td><td>82</td></tr>
-          </tbody>
-        </table>
-        <p><strong>What happens:</strong> Screen reader associates each cell with its header; student gets full context.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<!-- Detection: Ally, Microsoft Accessibility Checker, Acrobat -->
-<div class="summary">
-<p><strong>Automated vs. Manual Summary</strong></p>
-<ul>
-<li><strong>Automated tools catch:</strong> Tables without a designated
-header row</li>
-<li><strong>Manual review required:</strong> Layout tables misused for
-formatting, complex tables with merged cells, tables that should be
-lists</li>
-</ul>
-</div>
-<div class="quick-check">
-<p><strong>Quick Check: Tables</strong></p>
-<ul>
-<li>Does every data table have a designated header row?</li>
-<li>Are tables used only for data, not for visual layout?</li>
-<li>Do complex tables (merged cells, multiple headers) read correctly in
-a screen reader?</li>
-<li>Would any table be clearer as a list or structured text?</li>
-</ul>
-</div>
-<h2 id="lists">Lists</h2>
+<h3 id="lists">Lists</h3>
 <p><strong><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html">WCAG 1.3.1 Info and Relationships</a> (Level A).</strong> When
 content is presented as a list, the list structure must be
 programmatically determinable so that screen readers can announce list
 type and item count (e.g., “List of 5 items”) and allow list-based
 navigation.</p>
 <p>Lists are very common in course content (likelihood 4/5). A
-<strong>faked list</strong> is content that looks like a list - lines
-prefixed with a dash, bullet character, or “1.” “2.” typed by hand - but
+<strong>faked list</strong> is content that looks like a list — lines
+prefixed with a dash, bullet character, or “1.” “2.” typed by hand — but
 is not marked up as a list. In Word, that means using the Bullets or
 Numbering commands (or list styles), not typing characters. In HTML, it
 means using <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, and
@@ -1806,7 +1680,7 @@ means using <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, and
 When a list is faked, a screen reader does not get list structure; it
 reads a series of paragraphs, and the student loses the benefit of list
 semantics and navigation.</p>
-<h3 id="what-automated-tools-detect-lists">What automated tools detect</h3>
+<h4 id="what-automated-tools-detect-lists">What automated tools detect</h4>
 <ul>
 <li><strong>Ally</strong> flags faked lists: content that visually
 appears as a list but lacks proper list markup. Ally detects this in
@@ -1839,7 +1713,7 @@ Checker from the editor) but not on the <strong>Course Dashboard</strong>.
 Fix faked lists when the editor flags them; the Dashboard may not list
 this issue for the same page.</p>
 </div>
-<h3 id="what-requires-manual-review-lists">What requires manual review</h3>
+<h4 id="what-requires-manual-review-lists">What requires manual review</h4>
 <ul>
 <li><strong>Nested and multi-level lists.</strong> Ensure list hierarchy
 is correct in the source (e.g., list-in-list in Word, nested
@@ -1850,17 +1724,28 @@ of short paragraphs may be clearer as a list; a run of numbered steps must
 be a real ordered list, not typed “1.” “2.” in plain text.</li>
 </ul>
 <div class="summary">
-<p><strong>Automated vs. Manual Summary</strong></p>
+<p><strong>Automated vs. Manual Summary</strong></p>
 <ul>
-<li><strong>Automated tools catch:</strong> Faked lists (Ally only;
-Microsoft checker and Acrobat typically do not)</li>
-<li><strong>Manual review required:</strong> Correct nesting of lists,
-appropriateness of list vs. paragraph structure</li>
+<li><strong>Automated tools catch:</strong> Missing headings, missing
+slide titles, skipped heading levels (inconsistently), untagged PDFs,
+faked lists (Ally only; Microsoft checker and Acrobat typically do not
+flag faked lists)</li>
+<li><strong>Manual review required:</strong> Heading text quality,
+logical hierarchy, reading order, content order in multi-column
+layouts, correct nesting of lists, appropriateness of list vs.
+paragraph structure</li>
 </ul>
 </div>
 <div class="quick-check">
-<p><strong>Quick Check: Lists</strong></p>
+<p><strong>Quick Check: Semantic Structure</strong></p>
 <ul>
+<li>Does the document use heading styles (not just bold or large text)
+for structure?</li>
+<li>Do headings follow a logical hierarchy without skipping levels?</li>
+<li>Are heading labels descriptive (not “Section 1” or “Untitled”)?</li>
+<li>Does every PowerPoint slide have a unique title?</li>
+<li>Has reading order been verified in the Selection Pane (PowerPoint)
+or Tags panel (PDF)?</li>
 <li>Are bulleted and numbered lists created with the application’s list
 tools (Bullets / Numbering in Word or PowerPoint, list controls in
 Canvas), not by typing dashes or numbers?</li>
@@ -1869,6 +1754,221 @@ items”) when moving through the content?</li>
 <li>If you only ran the Microsoft checker or Acrobat, have you also
 checked the content in Ally (or verified list markup) so faked lists are
 not missed?</li>
+</ul>
+</div>
+<h2 id="tables">Tables</h2>
+<p><strong><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html">WCAG 1.3.1 Info and Relationships</a> (Level A).</strong>
+Information and relationships conveyed through presentation must be
+programmatically determinable.</p>
+<p>Tables appear less frequently than images or headings (likelihood
+3/5) but have high impact (4/5) when they do appear. Without designated
+header rows, a screen reader reads table cells as raw data with no
+context. A student hears “85” without knowing which column or row it
+belongs to.</p>
+<h3 id="what-automated-tools-detect-3">What automated tools detect</h3>
+<table>
+  <thead>
+    <tr><th scope="col">Scenario</th><th scope="col">Ally</th><th scope="col">MS Office</th><th scope="col">Acrobat</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>No designated header row</td><td>Detected</td><td>Detected</td><td>Detected</td></tr>
+    <tr><td>Table headers with no visible text</td><td>Detected</td><td>Not detected</td><td>Not detected</td></tr>
+    <tr><td>Layout table used for positioning</td><td>Not detected</td><td>Not detected</td><td>Not detected</td></tr>
+    <tr><td>Complex table (merged cells, multiple headers)</td><td>Not detected</td><td>Not detected</td><td>Not detected</td></tr>
+  </tbody>
+</table>
+<ul>
+<li>Tables without a designated header row (Ally, MS Office,
+Acrobat)</li>
+<li>Tables of 3x3 or larger without headers (Canvas, via axe-core)</li>
+<li>Table headers that exist but contain no visible text (Ally only)</li>
+</ul>
+<p><strong>Ally error messages:</strong></p>
+<ul>
+<li><strong>Word:</strong> "This document contains tables that are missing headers" (Major)</li>
+<li><strong>Canvas (HTML):</strong> "This item contains table headers that are missing content" (Major)</li>
+</ul>
+<p>Ally distinguishes two separate table header issues. The first is a table with no designated header row at all. The second is a table where header cells exist but are empty, meaning the <code>&lt;th&gt;</code> elements contain no visible text describing the purpose of the row or column. Both reduce the document's accessibility score.</p>
+<div style="display: flex; gap: 1.5em; flex-wrap: wrap; margin: 1em 0;">
+  <figure style="flex: 1; min-width: 200px; margin: 0;">
+    <img src="public/assets/ally-dashboard-table-missing-headers.png"
+         alt="Screenshot of the Ally accessibility score panel for Course Content Accessibility.docx. The score is 98% with a yellow-green gauge. Below, Ally reports 'This document contains tables that are missing headers' with 'What this means' and 'How to set table headers' buttons. At the bottom, 'Upload a version with table headers' prompt."
+         style="width: 100%; height: auto;" class="screenshot" />
+    <figcaption>Ally flags the document at 98% for tables without designated headers.</figcaption>
+  </figure>
+  <figure style="flex: 1; min-width: 200px; margin: 0;">
+    <img src="public/assets/ally-dashboard-table-empty-headers.png"
+         alt="Screenshot of the Ally accessibility score panel for a Tables item. The score is 99% with a yellow-green gauge. Below, Ally reports 'This item contains table headers that are missing content.' Explanation reads: 'Table header elements should have visible text that describes the purpose of the row or column.'"
+         style="width: 100%; height: auto;" class="screenshot" />
+    <figcaption>Ally flags table headers that exist but contain no visible text.</figcaption>
+  </figure>
+</div>
+<div class="callout">
+<p><strong>Tool gap: empty table headers.</strong> Ally is the only tool that detects table headers with missing content. The Microsoft Accessibility Checker and Acrobat verify that a header row is designated but do not check whether the header cells actually contain text. A table with blank <code>&lt;th&gt;</code> cells passes both tools. A screen reader will announce "column header: blank" or silently skip the header association, leaving the student without context for the data that follows.</p>
+</div>
+<h3 id="broken-examples-tables">Broken Examples and How to Fix Them</h3>
+<h4 id="scenario-missing-table-headers">Scenario: Missing table headers</h4>
+<p><strong>The broken state.</strong> A data table has no designated header row. Every cell is treated as data, and a screen reader provides no column or row context when navigating the table.</p>
+<p><strong>Detected by:</strong> 🔴 Ally · 🔴 MS Checker · 🔴 Acrobat</p>
+<!-- Scenario: Data table missing header row | Error ID: E9 -->
+<table class="lab-compare">
+  <thead>
+    <tr><th scope="col">Broken</th><th scope="col">Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><!-- E9: Data table missing header row -->
+        <table>
+          <tr><td>Section 1</td><td>85</td><td>82</td></tr>
+          <tr><td>Section 2</td><td>83</td><td>81</td></tr>
+          <tr><td>Section 3</td><td>85</td><td>82</td></tr>
+        </table>
+        <p><strong>What happens:</strong> Screen reader reads raw cells with no column/row context; student hears "85" without knowing what it means.</p>
+      </td>
+      <td><!-- E9: Corrected artifact (right) -->
+        <table>
+          <thead><tr><th scope="col">Section</th><th scope="col">Quiz 1</th><th scope="col">Quiz 2</th></tr></thead>
+          <tbody>
+            <tr><td>Section 1</td><td>85</td><td>82</td></tr>
+            <tr><td>Section 2</td><td>83</td><td>81</td></tr>
+            <tr><td>Section 3</td><td>85</td><td>82</td></tr>
+          </tbody>
+        </table>
+        <p><strong>What happens:</strong> Screen reader associates each cell with its header; student hears "Quiz 1: 85" and gets full context.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Detection: Ally, Microsoft Accessibility Checker, Acrobat -->
+<p><strong>How to fix in Word:</strong></p>
+<ol type="1">
+<li>Click anywhere inside the table.</li>
+<li>Go to the <strong>Table Design</strong> tab on the ribbon.</li>
+<li>In the <strong>Table Style Options</strong> group, check <strong>Header Row</strong>.</li>
+<li>Verify the first row contains descriptive text for each column.</li>
+</ol>
+<p><strong>How to fix in PowerPoint:</strong></p>
+<ol type="1">
+<li>Click anywhere inside the table.</li>
+<li>Go to the <strong>Table Design</strong> tab on the ribbon.</li>
+<li>In the <strong>Table Style Options</strong> group, check <strong>Header Row</strong>.</li>
+<li>Verify the first row contains descriptive text for each column.</li>
+</ol>
+<p><strong>How to fix in Canvas:</strong></p>
+<ol type="1">
+<li>Click inside the table in the Rich Content Editor.</li>
+<li>Click the <strong>table icon</strong> in the toolbar and select <strong>Table properties</strong>.</li>
+<li>Under <strong>Header</strong>, select <strong>Header row</strong> (or <strong>Header column</strong> if the table uses row headers).</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<p><strong>How to fix in PDF (Acrobat Pro):</strong></p>
+<ol type="1">
+<li>Open the <strong>Tags</strong> panel (View &gt; Show/Hide &gt; Navigation Panes &gt; Tags).</li>
+<li>Locate the <code>&lt;Table&gt;</code> tag.</li>
+<li>Expand the first <code>&lt;TR&gt;</code> (table row).</li>
+<li>If the cells are tagged as <code>&lt;TD&gt;</code>, right-click each and select <strong>Properties</strong>.</li>
+<li>Change the <strong>Type</strong> from <code>&lt;TD&gt;</code> to <code>&lt;TH&gt;</code>.</li>
+<li>Set the <strong>Scope</strong> attribute to "Column" (or "Row" for row headers).</li>
+</ol>
+<hr />
+<h4 id="scenario-empty-table-headers">Scenario: Empty table headers</h4>
+<p><strong>The broken state.</strong> A table has a designated header row, but the header cells are empty. The <code>&lt;th&gt;</code> elements contain no visible text. This commonly occurs when a table's first row is used for spacing, when header content is conveyed through formatting (bold, color) in data cells instead, or when a layout table is incorrectly given header markup.</p>
+<p><strong>Detected by:</strong> 🔴 Ally · 🟡 MS Checker · 🟡 Acrobat</p>
+<!-- Scenario: Empty table headers | Error ID: E10 -->
+<table class="lab-compare">
+  <thead>
+    <tr><th scope="col">Broken</th><th scope="col">Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><!-- E10: Empty table headers -->
+        <table>
+          <thead><tr><th></th><th></th><th></th></tr></thead>
+          <tbody>
+            <tr><td>Section 1</td><td>85</td><td>82</td></tr>
+            <tr><td>Section 2</td><td>83</td><td>81</td></tr>
+            <tr><td>Section 3</td><td>85</td><td>82</td></tr>
+          </tbody>
+        </table>
+        <p><strong>What happens:</strong> Screen reader announces "column header: blank" or provides no header association. Student hears data without context, same as having no headers at all.</p>
+      </td>
+      <td><!-- E10: Corrected artifact (right) -->
+        <table>
+          <thead><tr><th scope="col">Section</th><th scope="col">Quiz 1</th><th scope="col">Quiz 2</th></tr></thead>
+          <tbody>
+            <tr><td>Section 1</td><td>85</td><td>82</td></tr>
+            <tr><td>Section 2</td><td>83</td><td>81</td></tr>
+            <tr><td>Section 3</td><td>85</td><td>82</td></tr>
+          </tbody>
+        </table>
+        <p><strong>What happens:</strong> Screen reader associates each data cell with its header text. Student hears "Quiz 1: 85."</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Detection: Ally only -->
+<p><strong>How to fix:</strong> Open the table and type descriptive text into each header cell. Every table header element should have visible text that describes the purpose of the row or column. If the table does not need headers because it is a layout table, remove the header designation entirely (or replace the table with semantic layout).</p>
+<h3 id="what-requires-manual-review-3">What requires manual review</h3>
+<ul>
+<li><strong>Layout tables.</strong> Tables used for visual alignment
+rather than data presentation create confusing screen reader
+experiences. Automated tools do not reliably distinguish layout tables
+from data tables.</li>
+<li><strong>Complex tables.</strong> Merged cells, multiple header rows,
+and nested tables require manual verification. The <code>scope</code>
+attribute (HTML) or tagged structure (PDF) must correctly associate each
+data cell with its headers.</li>
+<li><strong>Appropriateness.</strong> Some content presented in tables
+would be more accessible as lists or paragraphs. A “table” with one
+column and one row per item is really a list.</li>
+</ul>
+<!-- Scenario: Layout table used for positioning | Error ID: E8 -->
+<table class="lab-compare">
+  <thead>
+    <tr><th scope="col">Broken</th><th scope="col">Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><!-- E8: Layout table used for positioning -->
+        <table>
+          <tr>
+            <td><img src="assets/sidebar.png" alt="sidebar image"></td>
+            <td><p>This paragraph is laid out using a table for positioning instead of semantic structure.</p></td>
+          </tr>
+        </table>
+        <p><strong>What happens:</strong> Screen reader encounters table structure with no data relationship; confusing for navigation.</p>
+      </td>
+      <td><!-- E8: Corrected artifact (right) -->
+        <div class="two-column-layout">
+          <aside><img src="assets/sidebar.png" alt="Descriptive sidebar image"></aside>
+          <main><p>This paragraph is structured semantically as article content (no layout table).</p></main>
+        </div>
+        <p><strong>What happens:</strong> Semantic structure allows screen reader to understand layout and content roles.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Detection: Manual only -->
+<!-- E9 scenario moved to "Broken Examples and How to Fix Them" section above -->
+<div class="summary">
+<p><strong>Automated vs. Manual Summary</strong></p>
+<ul>
+<li><strong>Automated tools catch:</strong> Tables without a designated
+header row, table headers with empty content (Ally only)</li>
+<li><strong>Manual review required:</strong> Layout tables misused for
+formatting, complex tables with merged cells, tables that should be
+lists</li>
+</ul>
+</div>
+<div class="quick-check">
+<p><strong>Quick Check: Tables</strong></p>
+<ul>
+<li>Does every data table have a designated header row?</li>
+<li>Do all table header cells contain visible, descriptive text?</li>
+<li>Are tables used only for data, not for visual layout?</li>
+<li>Do complex tables (merged cells, multiple headers) read correctly in
+a screen reader?</li>
+<li>Would any table be clearer as a list or structured text?</li>
 </ul>
 </div>
 <h2 id="language">Language</h2>
@@ -1889,12 +1989,12 @@ Spanish passage, for example, renders the text incomprehensible.</p>
   <tbody>
     <tr>
       <td><!-- E12: Missing language of parts -->
-        <p>Este párrafo está en español y no tiene atributo de idioma.</p>
-        <p><strong>What happens:</strong> Screen reader uses wrong pronunciation; Spanish may be read as English and be incomprehensible.</p>
+        <p>Julio se despertó con mucho frío. Agarró su abrigo rojo y salió a la calle. El cielo estaba gris y hacía un viento horrible. Qué barbaridad, gritó, mientras caminaba hacia la panadería. Quería comprar churros y un chocolate caliente. La señora de la tienda le dijo: Hijo, hoy no hay churros, pero tengo unas galletas riquísimas. Julio se rió y contestó: Bueno, déjeme cinco galletas y un jugo de naranja. Pagó con unas monedas que llevaba en el bolsillo y se fue silbando bajito por la acera.</p>
+        <p><strong>What happens:</strong> Screen reader uses wrong pronunciation; Spanish is read with English phonetics ("JOO-lee-oh say des-per-TOE con MOO-cho FREE-oh") and is incomprehensible.</p>
       </td>
       <td><!-- E12: Corrected artifact (right) -->
-        <p><span lang="es">Este párrafo está en español y ahora tiene atributo de idioma.</span></p>
-        <p><strong>What happens:</strong> Screen reader switches to Spanish pronunciation; content is comprehensible.</p>
+        <p><span lang="es">Julio se despertó con mucho frío. Agarró su abrigo rojo y salió a la calle. El cielo estaba gris y hacía un viento horrible. Qué barbaridad, gritó, mientras caminaba hacia la panadería. Quería comprar churros y un chocolate caliente. La señora de la tienda le dijo: Hijo, hoy no hay churros, pero tengo unas galletas riquísimas. Julio se rió y contestó: Bueno, déjeme cinco galletas y un jugo de naranja. Pagó con unas monedas que llevaba en el bolsillo y se fue silbando bajito por la acera.</span></p>
+        <p><strong>What happens:</strong> Screen reader switches to Spanish pronunciation and reads the passage naturally.</p>
       </td>
     </tr>
   </tbody>

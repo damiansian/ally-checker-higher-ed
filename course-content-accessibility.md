@@ -6,9 +6,9 @@ The aim of this workshop is not merely basic accessibility training. The aim is 
 
 Every document, slide deck, and page published in a course creates an opportunity for access, or a barrier to it. Students who use screen readers, magnification, voice control, or other assistive technologies depend on content that is structured and authored with accessibility in mind.
 
-The Web Content Accessibility Guidelines (WCAG) 2.2 Level AA is the standard that governs digital accessibility in higher education. It applies not just to websites but to every file uploaded or created in the LMS: Word documents, PowerPoint presentations, PDFs, and Canvas pages.
+The Web Content Accessibility Guidelines (WCAG) provide the framework for digital accessibility in higher education. The current legal baseline in the United States is **WCAG 2.1 Level AA**, codified by the DOJ's April 2024 ADA Title II final rule (with compliance deadlines in 2026-2027). **WCAG 2.2**, the latest W3C Recommendation, extends 2.1 with additional success criteria and is the standard practitioners should target. Both versions apply not just to websites but to every file uploaded or created in the LMS: Word documents, PowerPoint presentations, PDFs, and Canvas pages.
 
-Accessibility checkers like **Anthology Ally** (integrated into Canvas LMS), **Microsoft's built-in Accessibility Checker**, and **Adobe Acrobat's Accessibility Check** can help identify issues, but each has significant blind spots. Research consistently shows that automated tools catch roughly **57% of accessibility barriers**.[^1] The rest require human judgment: Is this alt text actually meaningful? Does the heading structure reflect the content's logic? Will a screen reader pronounce this passage correctly?
+Accessibility checkers like **Anthology Ally** (integrated into Canvas LMS), **Microsoft's built-in Accessibility Checker**, and **Adobe Acrobat's Accessibility Check** can help identify issues, but each has significant blind spots. Estimates of what automated tools can catch vary widely by methodology: studies have reported figures ranging from roughly **25% to 57%** of accessibility barriers, with the higher end coming from a 2021 Deque Systems analysis of issues detectable by their axe-core engine.[^1] The rest require human judgment: Is this alt text actually meaningful? Does the heading structure reflect the content's logic? Will a screen reader pronounce this passage correctly?
 
 **Getting to 100% in Ally is the starting line, not the finish.** A perfect Ally score means the content has passed the checks Ally can run. It does not mean the content is free of barriers to access for individuals with disabilities. Automated tools detect the presence of accessibility features (an alt text field that is not empty, a heading tag that exists, a contrast ratio above a threshold) but they cannot evaluate whether those features are meaningful. The remaining barriers, the ones that determine whether a student can actually use the content, require human inspection and manual testing.
 
@@ -19,9 +19,8 @@ This reference covers the accessibility issues most common in course content, or
 | Text Alternatives | 1.1.1 | 5 / 5 | 5 / 5 |
 | Color Contrast | 1.4.3 | 4 / 5 | 4 / 5 |
 | Color as Sole Means | 1.4.1 | 4 / 5 | 4 / 5 |
-| Headings & Structure | 1.3.1, 2.4.1, 2.4.6 | 5 / 5 | 4 / 5 |
+| Semantic Structure (Headings & Lists) | 1.3.1, 2.4.1, 2.4.6 | 5 / 5 | 4 / 5 |
 | Tables | 1.3.1 | 3 / 5 | 4 / 5 |
-| Lists | 1.3.1 | 4 / 5 | 3 / 5 |
 | Language | 3.1.1, 3.1.2 | 3 / 5 | 3 / 5 |
 | Seizure Risk | 2.3.1 | 1 / 5 | 5 / 5 |
 
@@ -186,7 +185,7 @@ Acrobat does **not** flag:
 
 > In this workshop, we will intentionally trigger each of the failures described below and fix them live using Microsoft Accessibility Checker, Acrobat Accessibility Check, and Anthology Ally. The goal is not just to clear errors, but to understand why the error exists and what the tool cannot detect.
 
-> **Detection key:** 🔴 Automated failure — tool detects this issue · 🟡 Manual-only — requires human review · 🟢 False positive — tool flags incorrectly
+> **Detection key:** 🔴 Automated failure (tool detects this issue) · 🟡 Manual-only (requires human review) · 🟢 False positive (tool flags incorrectly)
 
 **[WCAG 1.1.1 Non-text Content](https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html) (Level A).** All non-text content must have a text alternative that serves an equivalent purpose.
 
@@ -211,6 +210,7 @@ This is the highest-priority accessibility issue in course content: it is the mo
 - **Decorative images.** Divider lines, background textures, and branding elements should be marked as decorative so screen readers skip them. No tool reliably detects images that should be decorative.
 - **Complex images.** Charts, graphs, diagrams, and infographics often need extended descriptions beyond what fits in an alt text field. Consider a structured text alternative below the image or a linked long description.
 - **SmartArt and grouped shapes.** In Word and PowerPoint, SmartArt graphics and grouped shapes may not be flagged consistently across tools, even when they contain meaningful content.
+- **Images of text.** Screenshots of text-heavy content (slides, PDFs, spreadsheets) will pass Ally once alt text is added, but the image itself is the problem. The fix is usually to present the information as real text rather than an image.
 
 ### Broken Examples and How to Fix Them
 
@@ -221,13 +221,13 @@ Each scenario includes a set of intentionally broken test files that can be uplo
 ::: {.summary}
 **In this section:**
 
-- [Scenario 1: No alt text](#scenario-1-no-alt-text) — 🔴 Ally · 🔴 MS Checker · 🔴 Acrobat
-- [Scenario 2: AI-generated alt text](#scenario-2-ai-generated-alt-text) — 🟡 Ally · 🔴 MS Checker · 🟡 Acrobat
-- [Scenario 3: File name as alt text](#scenario-3-file-name-as-alt-text) — 🔴 Ally · 🔴 MS Checker · 🟡 Acrobat
-- [Scenario 4: Decorative image not marked](#scenario-4-decorative-image-not-marked-as-decorative) — 🟡 Ally · 🟡 MS Checker · 🟡 Acrobat
-- [Scenario 5: Vague alt text](#scenario-5-vague-alt-text) — 🟡 Ally · 🟡 MS Checker · 🟡 Acrobat
-- [Scenario 6: Gibberish or placeholder alt text](#scenario-6-gibberish-or-placeholder-alt-text) — 🟡 Ally · 🟡 MS Checker · 🟡 Acrobat
-- [Scenario 7: Alt text over ~120 characters](#scenario-7-alt-text-over-120-characters-canvas-false-positive) — 🟢 Ally (false positive)
+- [Scenario 1: No alt text](#scenario-1-no-alt-text) · 🔴 Ally · 🔴 MS Checker · 🔴 Acrobat
+- [Scenario 2: AI-generated alt text](#scenario-2-ai-generated-alt-text) · 🟡 Ally · 🔴 MS Checker · 🟡 Acrobat
+- [Scenario 3: File name as alt text](#scenario-3-file-name-as-alt-text) · 🔴 Ally · 🔴 MS Checker · 🟡 Acrobat
+- [Scenario 4: Decorative image not marked](#scenario-4-decorative-image-not-marked-as-decorative) · 🟡 Ally · 🟡 MS Checker · 🟡 Acrobat
+- [Scenario 5: Vague alt text](#scenario-5-vague-alt-text) · 🟡 Ally · 🟡 MS Checker · 🟡 Acrobat
+- [Scenario 6: Gibberish or placeholder alt text](#scenario-6-gibberish-or-placeholder-alt-text) · 🟡 Ally · 🟡 MS Checker · 🟡 Acrobat
+- [Scenario 7: Alt text over ~120 characters](#scenario-7-alt-text-over-120-characters-canvas-false-positive) · 🟢 Ally (false positive)
 - [Complex images](#complex-images)
 - [Known False Positive: Alt Text of 120 Characters](#known-false-positive-alt-text-of-120-characters)
 :::
@@ -238,6 +238,26 @@ Each scenario includes a set of intentionally broken test files that can be uplo
 
 **The broken state.** An image is inserted into a document, slide, page, or PDF with no alt text at all. This is the most basic and most common text alternative failure.
 
+<!-- Scenario: Missing alt text | Error ID: E1 -->
+
+**No alt text (E1)**
+
+| Broken | Corrected |
+|--------|-----------|
+| ![](public/assets/chart1.png) | ![Grouped bar chart comparing Quiz 1 and Quiz 2 averages across three sections. Section 1: 85% and 82%. Section 2: 83% and 81%. Section 3: 85% and 82%.](public/assets/chart1.png) |
+| **What happens:** Screen reader announces "Graphic" or the file name, no information conveyed. | **What happens:** Screen reader receives the same data as sighted users. |
+| *(no alt attribute)* | `alt="Grouped bar chart comparing Quiz 1 and Quiz 2 averages across three sections. Section 1: 85% and 82%. Section 2: 83% and 81%. Section 3: 85% and 82%."` |
+
+<!-- Scenario: File name as alt text | Error ID: E2 -->
+
+**File name as alt text (E2)**
+
+| Broken | Corrected |
+|--------|-----------|
+| ![IMG_3847.png](public/assets/enrollment.png) | ![Line graph showing a steady increase in online course enrollment from 12,000 in Fall 2020 to 28,500 in Fall 2025.](public/assets/enrollment.png) |
+| **What happens:** Screen reader announces "Graphic. IMG_3847.png", student gets no data. | **What happens:** Screen reader receives the same data as sighted users. |
+| `alt="IMG_3847.png"` | `alt="Line graph showing a steady increase in online course enrollment from 12,000 in Fall 2020 to 28,500 in Fall 2025."` |
+
 **Ally error messages:**
 
 - **Word:** "Document has images without alt descriptions" (Major)
@@ -246,13 +266,6 @@ Each scenario includes a set of intentionally broken test files that can be uplo
 - **PDF:** "PDF has images without alternative descriptions" (Major)
 
 **Detected by:** 🔴 Ally · 🔴 MS Checker · 🔴 Acrobat
-
-**No alt text**
-
-| Broken | Corrected |
-|--------|-----------|
-| Alt text field is empty. Screen reader announces "Graphic. IMG_3847.png." | "Grouped bar chart comparing Quiz 1 and Quiz 2 averages across three sections. Section 1: 85% and 82%. Section 2: 83% and 81%. Section 3: 85% and 82%." |
-| The student receives no information about what the image conveys. | The student receives the same data a sighted reader would get from the chart. |
 
 **How to fix in Word:**
 
@@ -367,7 +380,7 @@ Alternatively, use the Tags panel directly:
 
 **The broken state.** A decorative image (a divider line, a background texture, a branding banner, a purely visual flourish) has either no alt text or a description like "decorative line" or "banner image." It should be marked as decorative so screen readers skip it entirely.
 
-**Detected by:** 🟡 Ally · 🟡 MS Checker · 🟡 Acrobat — No automated tool can determine whether an image *should* be decorative. This is entirely a human judgment call.
+**Detected by:** 🟡 Ally · 🟡 MS Checker · 🟡 Acrobat. No automated tool can determine whether an image *should* be decorative. This is entirely a human judgment call.
 
 ::: {.callout}
 **Tool gap.** Deciding whether an image is decorative or meaningful requires understanding the content's purpose. No tool attempts this judgment. Every unmarked decorative image adds noise for screen reader users, and no automated score will reflect it.
@@ -377,7 +390,7 @@ Alternatively, use the Tags panel directly:
 
 | Broken | Corrected |
 |--------|-----------|
-| "decorative line" or "banner image" | *(marked as decorative)* — `alt=""` in HTML, "Mark as decorative" in Office, or artifact in PDF |
+| "decorative line" or "banner image" | *(marked as decorative):* `alt=""` in HTML, "Mark as decorative" in Office, or artifact in PDF |
 | The screen reader announces the decorative image, interrupting the reading flow with meaningless content. | The screen reader skips the image entirely, keeping the student focused on meaningful content. |
 
 **How to mark as decorative in Word / PowerPoint:**
@@ -414,7 +427,7 @@ See [Edit document structure with the Content and Tags panels](https://helpx.ado
 
 **The broken state.** The alt text field contains a description that is technically present but too vague to be useful. Examples: "chart," "Quiz comparison chart," "photo," "graph of data." A screen reader user hears the label but receives none of the information the image actually conveys.
 
-**Detected by:** 🟡 Ally · 🟡 MS Checker · 🟡 Acrobat — All three tools check for *presence*, not *quality*.
+**Detected by:** 🟡 Ally · 🟡 MS Checker · 🟡 Acrobat. All three tools check for *presence*, not *quality*.
 
 ::: {.callout}
 **Tool gap.** All automated tools check only for presence. None evaluate informational equivalence. Alt text that reads "chart" passes every check but gives a screen reader user none of the data the chart conveys.
@@ -464,7 +477,7 @@ See [Edit document structure with the Content and Tags panels](https://helpx.ado
 
 **The broken state.** The alt text field contains nonsense (e.g., "alskjshdsflh," "asdf," "xxx") or a generic placeholder (e.g., "image," "photo," "graphic," "picture"). This typically results from someone filling the field to clear an automated warning without writing a real description.
 
-**Detected by:** 🟡 Ally · 🟡 MS Checker · 🟡 Acrobat — The alt text field is not empty, so all tools consider it a pass.
+**Detected by:** 🟡 Ally · 🟡 MS Checker · 🟡 Acrobat. The alt text field is not empty, so all tools consider it a pass.
 
 ::: {.callout}
 **Tool gap.** Typing "asdf" into an alt text field clears every automated warning. The content scores 100%. The screen reader user hears "asdf." This is the clearest illustration of why automated scores alone are insufficient.
@@ -485,7 +498,7 @@ See [Edit document structure with the Content and Tags panels](https://helpx.ado
 
 **The broken state.** This is not actually broken. The alt text is accurate and meaningful but exceeds approximately 120 characters. Ally flags this in the Canvas Rich Content Editor as an issue. There is no WCAG basis for a character limit on alt text, nor any detriment for screen reader users.
 
-**Detected by:** 🟢 Ally (Canvas only — false positive)
+**Detected by:** 🟢 Ally (Canvas only, false positive)
 
 **How to handle:** Do not shorten the description to clear the flag. If the description needs to be long to be accurate (common for charts, graphs, and complex images), keep it as written. Note the Ally flag but do not treat it as a real issue. This will not show up in the Accessibility Dashboard in a way that impacts your overall score.
 
@@ -535,7 +548,7 @@ In the Canvas Rich Content Editor, Ally flags alt text exceeding approximately 1
 
 - **100% in Ally ≠ accessible.** A perfect score means the content passed the checks Ally can run. It does not mean the content is free of barriers. Gibberish alt text, vague labels, and unmarked decorative images all score 100%.
 - **Tool layering matters.** No single tool catches everything. Ally misses AI-generated alt text that the Microsoft checker flags. Acrobat misses file-name alt text that Ally catches. Running one tool is a start; running all three closes more gaps.
-- **Manual review is non-negotiable.** Scenarios 4, 5, and 6 are invisible to every automated tool. The barriers they create — noise from unmarked decorative images, data withheld by vague descriptions, nonsense read aloud by a screen reader — can only be found by a human reviewing the content.
+- **Manual review is non-negotiable.** Scenarios 4, 5, and 6 are invisible to every automated tool. The barriers they create (noise from unmarked decorative images, data withheld by vague descriptions, nonsense read aloud by a screen reader) can only be found by a human reviewing the content.
 - **Presence ≠ quality.** Every tool checks whether the alt text field contains something. No tool checks whether that something is accurate, meaningful, or equivalent to the visual content. The difference between those two checks is the difference between compliance theater and actual access.
 :::
 
@@ -551,36 +564,39 @@ Three categories of contrast failure, each with the actual ratio and whether aut
 
 #### Regular text
 
-**Detected by:** 🔴 Ally · 🔴 MS Checker
+<!-- E10a: Low contrast regular text, detected by Ally and MS Checker -->
 
-<p style="color:#5692FF; background:#ffffff;">This regular sized text is under the 4.5:1 at 3:1 contrast ratio #5692FF.</p>
+**Detected by:** 🔴 Ally · 🔴 MS Checker
 
 | Broken | Corrected |
 |--------|-----------|
-| Text color #5692FF on white produces a 3:1 contrast ratio, failing the 4.5:1 minimum for normal text. | Use a darker color such as #2d5a7b (7.3:1) to meet the 4.5:1 minimum for normal-sized text. |
-| Students with low vision or in bright environments struggle to read low-contrast body text. This is the most common contrast failure in course content. | Text meets the 4.5:1 threshold, ensuring readability across vision abilities and viewing conditions. |
+| <p style="color:#5692FF; background:#ffffff;">This regular sized text fails the 4.5:1 minimum for normal text.</p> | <p style="color:#2d5a7b; background:#ffffff;">This regular sized text passes the 4.5:1 minimum.</p> |
+| **Contrast ratio:** 3:1 · **Color:** #5692FF · **Required:** 4.5:1 | **Contrast ratio:** 7.3:1 · **Color:** #2d5a7b · **Required:** 4.5:1 |
+| `color: #5692FF` (3:1 against white) | `color: #2d5a7b` (7.3:1 against white) |
 
 #### Large text
 
-**Detected by:** 🔴 Ally · 🔴 MS Checker
+<!-- E10b: Low contrast large text, detected by Ally and MS Checker -->
 
-<p style="color:#91BFE1; background:#ffffff; font-size: 1.5rem; font-weight: bold;">This large sized text is under 3:1 contrast ratio at 2:1 #91BFE1.</p>
+**Detected by:** 🔴 Ally · 🔴 MS Checker
 
 | Broken | Corrected |
 |--------|-----------|
-| Text color #91BFE1 on white produces a 2:1 contrast ratio, failing even the 3:1 minimum for large text (18pt or 14pt bold). | Use a darker color such as #4A8CAD (3.7:1) to meet the 3:1 minimum for large text. |
-| Even large text needs sufficient contrast. A 2:1 ratio fails both the large-text threshold (3:1) and the normal-text threshold (4.5:1). | Large text at or above 3:1 is readable for students with low vision. |
+| <p style="color:#91BFE1; background:#ffffff; font-size: 1.5rem; font-weight: bold;">This large text fails the 3:1 minimum.</p> | <p style="color:#4A8CAD; background:#ffffff; font-size: 1.5rem; font-weight: bold;">This large text passes the 3:1 minimum.</p> |
+| **Contrast ratio:** 2:1 · **Color:** #91BFE1 · **Required:** 3:1 | **Contrast ratio:** 3.7:1 · **Color:** #4A8CAD · **Required:** 3:1 |
+| `color: #91BFE1` (2:1 against white) | `color: #4A8CAD` (3.7:1 against white) |
 
 #### Graphic element
 
-**Detected by:** 🟡 Not detected by Ally · 🟡 Not detected by MS Checker
+<!-- E10c: Low contrast graphic element, not detected by any tool -->
 
-![Line chart with three data series across four categories. Series 1 (light pink, #F1B4A4): 4.3, 2.5, 3.5, 4.5. Series 2 (orange): 2.4, 4.4, 1.8, 2.8. Series 3 (dark brown): 2, 2, 3, 5. The Series 1 line color has a contrast ratio of only 1.8:1 against the white background, failing the 3:1 minimum for non-text graphic elements.](public/assets/chart-contrast-example.png)
+**Detected by:** 🟡 Not detected by Ally · 🟡 Not detected by MS Checker
 
 | Broken | Corrected |
 |--------|-----------|
-| Chart data series uses #F1B4A4 on white, producing a contrast ratio of only 1.8:1. Fails the 3:1 minimum for non-text graphic elements ([WCAG 1.4.11](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html)). | Use a darker color such as #C0564B (4.5:1) for data series to meet the 3:1 minimum for graphic elements. |
-| The light pink data series is nearly invisible against a white background for users with low vision or color deficiencies. No automated tool flags this. | All chart lines, bars, and graphic elements meet at least 3:1 against their background. Verify with the [Colour Contrast Analyser](https://www.tpgi.com/color-contrast-checker/). |
+| ![Line chart with three data series across four categories. Series 1 (light pink, #F1B4A4): 4.3, 2.5, 3.5, 4.5. Series 2 (orange): 2.4, 4.4, 1.8, 2.8. Series 3 (dark brown): 2, 2, 3, 5. The Series 1 line color has a contrast ratio of only 1.8:1 against the white background, failing the 3:1 minimum for non-text graphic elements.](public/assets/chart-contrast-example.png) | #F1B4A4 → 1.8:1 (fail) · #C0564B → 4.5:1 (pass) |
+| **Contrast ratio:** 1.8:1 · **Color:** #F1B4A4 · **Required:** 3:1 | **Contrast ratio:** 4.5:1 · **Color:** #C0564B · **Required:** 3:1 |
+| `Series 1 color: #F1B4A4` (1.8:1 against white) | `Series 1 color: #C0564B` (4.5:1 against white) |
 
 Both Ally and the Microsoft Accessibility Checker detect text contrast failures (regular and large text). Neither detects graphic element contrast failures. [WCAG 1.4.11 Non-text Contrast](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html) (Level AA) requires a minimum 3:1 contrast ratio for meaningful graphic elements such as chart lines, bar fills, and icons. The chart above uses #F1B4A4 (a light salmon) for one of its data series, producing a ratio of only 1.8:1 against white. This gap is invisible to automated tools and requires manual review.
 
@@ -652,13 +668,13 @@ Ally claims to evaluate contrast within image files, but this feature is not wor
   </figure>
   <figure style="flex: 1; min-width: 200px; margin: 0;">
     <img src="public/assets/ally-image-contrast-warning.png"
-         alt="Screenshot of the Ally accessibility score panel for the student photo. The score is 75% with the message 'This image has contrast issues.' Below, Ally displays 'Guidance not available yet — We are updating the guidance for this issue.'"
+         alt="Screenshot of the Ally accessibility score panel for the student photo. The score is 75% with the message 'This image has contrast issues.' Below, Ally displays 'Guidance not available yet. We are updating the guidance for this issue.'"
          style="width: 100%; height: auto;" />
-    <figcaption>Ally flags the photo at 75% with "This image has contrast issues." Guidance reads: "Guidance not available yet — We are updating the guidance for this issue."</figcaption>
+    <figcaption>Ally flags the photo at 75% with "This image has contrast issues." Guidance reads: "Guidance not available yet. We are updating the guidance for this issue."</figcaption>
   </figure>
 </div>
 
-  Ally's own guidance panel confirms the limitation: it reads "Guidance not available yet — We are updating the guidance for this issue." This suggests the feature is under active development, but in its current state it produces false positives on photographic content. **Do not take action on image contrast warnings in the Accessibility Dashboard.** Until Ally can reliably distinguish text from non-text content within images and determine the applicable WCAG threshold, these flags should be noted but not treated as actionable issues.
+  Ally's own guidance panel confirms the limitation: it reads "Guidance not available yet. We are updating the guidance for this issue." This suggests the feature is under active development, but in its current state it produces false positives on photographic content. **Do not take action on image contrast warnings in the Accessibility Dashboard.** Until Ally can reliably distinguish text from non-text content within images and determine the applicable WCAG threshold, these flags should be noted but not treated as actionable issues.
 
 
 ::: {.summary}
@@ -690,11 +706,14 @@ This is a separate requirement from contrast and is **not checked by Ally or any
 - Feedback that marks incorrect answers in red with no other indicator (icon, text, symbol)
 - A schedule where color-coded categories have no legend or text equivalent
 
-**Color as sole means: Bar chart example**
+<!-- Scenario: Color as sole means | Error ID: E11 -->
+
+**Color as sole means: Bar chart example (E11)**
 
 | Broken | Corrected |
 |--------|-----------|
 | ![Bar chart titled Performance Status showing four teams. Team A scores 72, Team B scores 95, Team C scores 95, Team D scores 65. Red bars represent below target and green bars represent above target, but no text labels or patterns distinguish the categories. Color is the only indicator of status.](public/assets/color-sole-means-default.png) | ![Bar chart titled Performance Status showing four teams with data labels. Team A: 75, Below target. Team B: 95, Above target. Team C: 95, Above target. Team D: 65, Below target. Each bar has a score and a text label indicating above or below target, so meaning does not depend on color alone.](public/assets/color-sole-means-remediated.png) |
+| **What happens:** A student with a color vision deficiency cannot determine which teams are above or below target. Red vs. green is the only indicator. | **What happens:** Every bar includes a score and a text label (Above target / Below target). The full meaning is available regardless of color perception. |
 | Color alone distinguishes above-target (green) from below-target (red). No text labels, no patterns, no data values on bars. | Data labels (75, 95, 95, 65) and text labels ("Above target" / "Below target") added to each bar. Meaning is preserved with or without color. |
 
 ### Color vision simulation
@@ -743,83 +762,37 @@ This applies beyond charts. Look for color-coded rubrics, red/green feedback ind
 - Does feedback use icons or text in addition to red/green indicators?
 :::
 
-## Headings
+## Semantic Structure
 
-**[WCAG 1.3.1 Info and Relationships](https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html) (Level A), [2.4.1 Bypass Blocks](https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html) (Level A), [2.4.6 Headings and Labels](https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels.html) (Level AA).** Content structure must be programmatically determinable. Headings must be present and descriptive.
+**[WCAG 1.3.1 Info and Relationships](https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html) (Level A), [2.4.1 Bypass Blocks](https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html) (Level A), [2.4.6 Headings and Labels](https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels.html) (Level AA).** Content structure must be programmatically determinable. Headings must be present and descriptive; lists must use proper list markup.
+
+Headings, titles, lists, and document structure let students navigate and understand content organization. Without them, a 20-page document is a wall of text with no way to jump to a section. Screen reader users rely on headings to jump between sections and on proper list structure to hear "list of X items" and list type. Content that *looks* like a list (typed bullets, dashes, or "1." "2.") but is not marked as a list is invisible to that structure.
+
+### Headings
 
 Heading issues are tied with text alternatives as the most frequently occurring accessibility problem (likelihood 5/5) and have high impact (4/5). For a student navigating a long document or page by screen reader, headings are the primary mechanism for orientation and navigation, equivalent to scanning a page visually.
 
-### What automated tools detect
+#### What automated tools detect
 
 - Missing headings entirely (no heading styles used in a Word document, no H tags in a Canvas page)
 - Missing slide titles in PowerPoint
 - Skipped heading levels (e.g., jumping from H1 to H4), though detection is inconsistent
 - Untagged PDFs (no tag structure at all)
 
-### What requires manual review
+#### What requires manual review
 
 - **Heading text quality.** Ally checks that headings exist, not that they are descriptive. "Section 1" or "Untitled" as a heading passes automated checks but provides no useful navigation.
 - **Logical hierarchy.** A document where every line is Heading 2 will pass automated checks but provides no meaningful structure.
 - **Reading order.** In PowerPoint and PDF, content may be visually organized but read in the wrong sequence. The reading order must be verified in the slide's Selection Pane (PowerPoint) or the Tags panel (Acrobat).
 - **Content order in multi-column layouts.** Text boxes, sidebars, and multi-column layouts in Word and PowerPoint may not read in the intended order.
 
-::: {.summary}
-**Automated vs. Manual Summary**
-
-- **Automated tools catch:** Missing headings, missing slide titles, skipped heading levels (inconsistently), untagged PDFs
-- **Manual review required:** Heading text quality, logical hierarchy, reading order, content order in multi-column layouts
-:::
-
-::: {.quick-check}
-**Quick Check: Headings**
-
-- Does the document use heading styles (not just bold or large text) for structure?
-- Do headings follow a logical hierarchy without skipping levels?
-- Are heading labels descriptive (not "Section 1" or "Untitled")?
-- Does every PowerPoint slide have a unique title?
-- Has reading order been verified in the Selection Pane (PowerPoint) or Tags panel (PDF)?
-:::
-
-## Tables
-
-**[WCAG 1.3.1 Info and Relationships](https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html) (Level A).** Information and relationships conveyed through presentation must be programmatically determinable.
-
-Tables appear less frequently than images or headings (likelihood 3/5) but have high impact (4/5) when they do appear. Without designated header rows, a screen reader reads table cells as raw data with no context. A student hears "85" without knowing which column or row it belongs to.
-
-### What automated tools detect
-
-- Tables without a designated header row (Ally, MS Office, Acrobat)
-- Tables of 3x3 or larger without headers (Canvas, via axe-core)
-
-### What requires manual review
-
-- **Layout tables.** Tables used for visual alignment rather than data presentation create confusing screen reader experiences. Automated tools do not reliably distinguish layout tables from data tables.
-- **Complex tables.** Merged cells, multiple header rows, and nested tables require manual verification. The `scope` attribute (HTML) or tagged structure (PDF) must correctly associate each data cell with its headers.
-- **Appropriateness.** Some content presented in tables would be more accessible as lists or paragraphs. A "table" with one column and one row per item is really a list.
-
-::: {.summary}
-**Automated vs. Manual Summary**
-
-- **Automated tools catch:** Tables without a designated header row
-- **Manual review required:** Layout tables misused for formatting, complex tables with merged cells, tables that should be lists
-:::
-
-::: {.quick-check}
-**Quick Check: Tables**
-
-- Does every data table have a designated header row?
-- Are tables used only for data, not for visual layout?
-- Do complex tables (merged cells, multiple headers) read correctly in a screen reader?
-- Would any table be clearer as a list or structured text?
-:::
-
-## Lists
+### Lists
 
 **[WCAG 1.3.1 Info and Relationships](https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html) (Level A).** When content is presented as a list, the list structure must be programmatically determinable so that screen readers can announce list type and item count (e.g., "List of 5 items") and allow list-based navigation.
 
-Lists are very common in course content (likelihood 4/5). A **faked list** is content that looks like a list—lines prefixed with a dash, bullet character, or "1." "2." typed by hand—but is not marked up as a list. In Word, that means using the Bullets or Numbering commands (or list styles), not typing characters. In HTML, it means using `<ul>`, `<ol>`, and `<li>` (or equivalent list roles), not plain paragraphs. When a list is faked, a screen reader does not get list structure; it reads a series of paragraphs, and the student loses the benefit of list semantics and navigation.
+Lists are very common in course content (likelihood 4/5). A **faked list** is content that looks like a list (lines prefixed with a dash, bullet character, or "1." "2." typed by hand) but is not marked up as a list. In Word, that means using the Bullets or Numbering commands (or list styles), not typing characters. In HTML, it means using `<ul>`, `<ol>`, and `<li>` (or equivalent list roles), not plain paragraphs. When a list is faked, a screen reader does not get list structure; it reads a series of paragraphs, and the student loses the benefit of list semantics and navigation.
 
-### What automated tools detect
+#### What automated tools detect
 
 - **Ally** flags faked lists: content that visually appears as a list but lacks proper list markup. Ally detects this in Word, PowerPoint, PDF, and Canvas content and reports it as an issue to fix (e.g., "Lists should be formatted as lists," with an option to "Format as a list"). For **Canvas pages and content edited in the Rich Content Editor (RCE)**, the list error often appears in the RCE's Accessibility Checker but may not appear on the Course Dashboard. If you see the issue in the editor, fix it there; do not assume the Dashboard will surface it for the same content.
 - **Microsoft Accessibility Checker** and **Adobe Acrobat's Accessibility Check** do not routinely flag faked lists. They may report missing or incorrect list tagging in some contexts (e.g., PDF tag tree), but they do not perform the same "looks like a list but isn't marked as one" check that Ally does. If you rely only on the Microsoft checker or Acrobat, faked lists can pass undetected.
@@ -832,7 +805,7 @@ Lists are very common in course content (likelihood 4/5). A **faked list** is co
 **Where Ally shows the list error.** For Canvas content, the "Lists should be formatted as lists" issue may show up in the **Rich Content Editor** (when you run the Accessibility Checker from the editor) but not on the **Course Dashboard**. Fix faked lists when the editor flags them; the Dashboard may not list this issue for the same page.
 :::
 
-### What requires manual review
+#### What requires manual review
 
 - **Nested and multi-level lists.** Ensure list hierarchy is correct in the source (e.g., list-in-list in Word, nested `<ul>`/`<ol>` in HTML) so reading order and structure make sense.
 - **When a "list" is really something else.** A single run of short paragraphs may be clearer as a list; a run of numbered steps must be a real ordered list, not typed "1." "2." in plain text.
@@ -840,16 +813,151 @@ Lists are very common in course content (likelihood 4/5). A **faked list** is co
 ::: {.summary}
 **Automated vs. Manual Summary**
 
-- **Automated tools catch:** Faked lists (Ally only; Microsoft checker and Acrobat typically do not)
-- **Manual review required:** Correct nesting of lists, appropriateness of list vs. paragraph structure
+- **Automated tools catch:** Missing headings, missing slide titles, skipped heading levels (inconsistently), untagged PDFs, faked lists (Ally only; Microsoft checker and Acrobat typically do not flag faked lists)
+- **Manual review required:** Heading text quality, logical hierarchy, reading order, content order in multi-column layouts, correct nesting of lists, appropriateness of list vs. paragraph structure
 :::
 
 ::: {.quick-check}
-**Quick Check: Lists**
+**Quick Check: Semantic Structure**
 
+- Does the document use heading styles (not just bold or large text) for structure?
+- Do headings follow a logical hierarchy without skipping levels?
+- Are heading labels descriptive (not "Section 1" or "Untitled")?
+- Does every PowerPoint slide have a unique title?
+- Has reading order been verified in the Selection Pane (PowerPoint) or Tags panel (PDF)?
 - Are bulleted and numbered lists created with the application's list tools (Bullets / Numbering in Word or PowerPoint, list controls in Canvas), not by typing dashes or numbers?
 - Would a screen reader user hear list structure (e.g., "List of 4 items") when moving through the content?
 - If you only ran the Microsoft checker or Acrobat, have you also checked the content in Ally (or verified list markup) so faked lists are not missed?
+:::
+
+## Tables
+
+**[WCAG 1.3.1 Info and Relationships](https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html) (Level A).** Information and relationships conveyed through presentation must be programmatically determinable.
+
+Tables appear less frequently than images or headings (likelihood 3/5) but have high impact (4/5) when they do appear. Without designated header rows, a screen reader reads table cells as raw data with no context. A student hears "85" without knowing which column or row it belongs to.
+
+### What automated tools detect
+
+| Scenario | Ally | MS Office | Acrobat |
+|----------|------|-----------|---------|
+| No designated header row | Detected | Detected | Detected |
+| Table headers with no visible text | Detected | Not detected | Not detected |
+| Layout table used for positioning | Not detected | Not detected | Not detected |
+| Complex table (merged cells, multiple headers) | Not detected | Not detected | Not detected |
+
+- Tables without a designated header row (Ally, MS Office, Acrobat)
+- Tables of 3x3 or larger without headers (Canvas, via axe-core)
+- Table headers that exist but contain no visible text (Ally only)
+
+**Ally error messages:**
+
+- **Word:** "This document contains tables that are missing headers" (Major)
+- **Canvas (HTML):** "This item contains table headers that are missing content" (Major)
+
+Ally distinguishes two separate table header issues. The first is a table with no designated header row at all. The second is a table where header cells exist but are empty, meaning the `<th>` elements contain no visible text describing the purpose of the row or column. Both reduce the document's accessibility score.
+
+<div style="display: flex; gap: 1.5em; flex-wrap: wrap; margin: 1em 0;">
+  <figure style="flex: 1; min-width: 200px; margin: 0;">
+    <img src="public/assets/ally-dashboard-table-missing-headers.png"
+         alt="Screenshot of the Ally accessibility score panel for Course Content Accessibility.docx. The score is 98% with a yellow-green gauge. Below, Ally reports 'This document contains tables that are missing headers' with 'What this means' and 'How to set table headers' buttons. At the bottom, 'Upload a version with table headers' prompt."
+         style="width: 100%; height: auto;" />
+    <figcaption>Ally flags the document at 98% for tables without designated headers.</figcaption>
+  </figure>
+  <figure style="flex: 1; min-width: 200px; margin: 0;">
+    <img src="public/assets/ally-dashboard-table-empty-headers.png"
+         alt="Screenshot of the Ally accessibility score panel for a Tables item. The score is 99% with a yellow-green gauge. Below, Ally reports 'This item contains table headers that are missing content.' Explanation reads: 'Table header elements should have visible text that describes the purpose of the row or column.'"
+         style="width: 100%; height: auto;" />
+    <figcaption>Ally flags table headers that exist but contain no visible text.</figcaption>
+  </figure>
+</div>
+
+::: {.callout}
+**Tool gap: empty table headers.** Ally is the only tool that detects table headers with missing content. The Microsoft Accessibility Checker and Acrobat verify that a header row is designated but do not check whether the header cells actually contain text. A table with blank `<th>` cells passes both tools. A screen reader will announce "column header: blank" or silently skip the header association, leaving the student without context for the data that follows.
+:::
+
+### Broken Examples and How to Fix Them
+
+#### Scenario: Missing table headers
+
+**The broken state.** A data table has no designated header row. Every cell is treated as data, and a screen reader provides no column or row context when navigating the table.
+
+**Detected by:** 🔴 Ally · 🔴 MS Checker · 🔴 Acrobat
+
+**Missing table headers**
+
+| Broken | Corrected |
+|--------|-----------|
+| Section 1 / 85 / 82; Section 2 / 83 / 81; Section 3 / 85 / 82 (no header row designated) | Section / Quiz 1 / Quiz 2 (header row) followed by data rows |
+| **What happens:** Screen reader reads raw cells with no column/row context; student hears "85" without knowing what it means. | **What happens:** Screen reader associates each cell with its header; student hears "Quiz 1: 85" and gets full context. |
+
+**How to fix in Word:**
+
+1. Click anywhere inside the table.
+2. Go to the **Table Design** tab on the ribbon.
+3. In the **Table Style Options** group, check **Header Row**.
+4. Verify the first row contains descriptive text for each column.
+
+**How to fix in PowerPoint:**
+
+1. Click anywhere inside the table.
+2. Go to the **Table Design** tab on the ribbon.
+3. In the **Table Style Options** group, check **Header Row**.
+4. Verify the first row contains descriptive text for each column.
+
+**How to fix in Canvas:**
+
+1. Click inside the table in the Rich Content Editor.
+2. Click the **table icon** in the toolbar and select **Table properties**.
+3. Under **Header**, select **Header row** (or **Header column** if the table uses row headers).
+4. Click **Save**.
+
+**How to fix in PDF (Acrobat Pro):**
+
+1. Open the **Tags** panel (View > Show/Hide > Navigation Panes > Tags).
+2. Locate the `<Table>` tag.
+3. Expand the first `<TR>` (table row).
+4. If the cells are tagged as `<TD>`, right-click each and select **Properties**.
+5. Change the **Type** from `<TD>` to `<TH>`.
+6. Set the **Scope** attribute to "Column" (or "Row" for row headers).
+
+---
+
+#### Scenario: Empty table headers
+
+**The broken state.** A table has a designated header row, but the header cells are empty. The `<th>` elements contain no visible text. This commonly occurs when a table's first row is used for spacing, when header content is conveyed through formatting (bold, color) in data cells instead, or when a layout table is incorrectly given header markup.
+
+**Detected by:** 🔴 Ally · 🟡 MS Checker · 🟡 Acrobat
+
+**Empty table headers**
+
+| Broken | Corrected |
+|--------|-----------|
+| Header row exists but all `<th>` cells are blank. Data rows contain "Section 1 / 85 / 82" with no column context. | Header row contains "Section / Quiz 1 / Quiz 2" with matching data below. |
+| **What happens:** Screen reader announces "column header: blank" or provides no header association. Student hears data without context, same as having no headers at all. | **What happens:** Screen reader associates each data cell with its header text. Student hears "Quiz 1: 85." |
+
+**How to fix:** Open the table and type descriptive text into each header cell. Every table header element should have visible text that describes the purpose of the row or column. If the table does not need headers because it is a layout table, remove the header designation entirely (or replace the table with semantic layout).
+
+### What requires manual review
+
+- **Layout tables.** Tables used for visual alignment rather than data presentation create confusing screen reader experiences. Automated tools do not reliably distinguish layout tables from data tables.
+- **Complex tables.** Merged cells, multiple header rows, and nested tables require manual verification. The `scope` attribute (HTML) or tagged structure (PDF) must correctly associate each data cell with its headers.
+- **Appropriateness.** Some content presented in tables would be more accessible as lists or paragraphs. A "table" with one column and one row per item is really a list.
+
+::: {.summary}
+**Automated vs. Manual Summary**
+
+- **Automated tools catch:** Tables without a designated header row, table headers with empty content (Ally only)
+- **Manual review required:** Layout tables misused for formatting, complex tables with merged cells, tables that should be lists
+:::
+
+::: {.quick-check}
+**Quick Check: Tables**
+
+- Does every data table have a designated header row?
+- Do all table header cells contain visible, descriptive text?
+- Are tables used only for data, not for visual layout?
+- Do complex tables (merged cells, multiple headers) read correctly in a screen reader?
+- Would any table be clearer as a list or structured text?
 :::
 
 ## Language
@@ -858,6 +966,15 @@ Lists are very common in course content (likelihood 4/5). A **faked list** is co
 **[WCAG 3.1.2 Language of Parts](https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html) (Level AA).** The language of each passage or phrase that differs from the document's default language must be programmatically determinable.
 
 Language affects how screen readers pronounce content. When a document's language metadata is missing or incorrect, a screen reader applies the wrong pronunciation rules. English phonetics applied to a Spanish passage, for example, renders the text incomprehensible.
+
+<!-- Scenario: Missing language of parts | Error ID: E12 -->
+
+**Missing language of parts (E12)**
+
+| Broken | Corrected |
+|--------|-----------|
+| Julio se despertó con mucho frío. Agarró su abrigo rojo y salió a la calle. El cielo estaba gris y hacía un viento horrible. Qué barbaridad, gritó, mientras caminaba hacia la panadería. Quería comprar churros y un chocolate caliente. La señora de la tienda le dijo: Hijo, hoy no hay churros, pero tengo unas galletas riquísimas. Julio se rió y contestó: Bueno, déjeme cinco galletas y un jugo de naranja. Pagó con unas monedas que llevaba en el bolsillo y se fue silbando bajito por la acera. | <span lang="es">Julio se despertó con mucho frío. Agarró su abrigo rojo y salió a la calle. El cielo estaba gris y hacía un viento horrible. Qué barbaridad, gritó, mientras caminaba hacia la panadería. Quería comprar churros y un chocolate caliente. La señora de la tienda le dijo: Hijo, hoy no hay churros, pero tengo unas galletas riquísimas. Julio se rió y contestó: Bueno, déjeme cinco galletas y un jugo de naranja. Pagó con unas monedas que llevaba en el bolsillo y se fue silbando bajito por la acera.</span> |
+| **What happens:** Screen reader uses wrong pronunciation; Spanish is read with English phonetics ("JOO-lee-oh say des-per-TOE con MOO-cho FREE-oh") and is incomprehensible. | **What happens:** Screen reader switches to Spanish pronunciation and reads the passage naturally. |
 
 ### Automated tool reliability by file type
 
@@ -905,13 +1022,26 @@ For Word and PowerPoint, Ally's language detection is inconsistent. The Microsof
 
 ## Seizure Risk
 
-**[WCAG 2.3.1 Three Flashes or Below Threshold](https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold.html) (Level A).** Content must not contain anything that flashes more than three times per second.
+**[WCAG 2.3.1 Three Flashes or Below Threshold](https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold.html) (Level A).** Content must not contain anything that flashes more than three times per second, *unless* the flashing falls below both the general flash and red flash thresholds (i.e., the flashing area is small enough and the luminance change is low enough to be considered safe). In practice, for course content the simplest guidance is to avoid flashing entirely; the threshold exceptions are relevant mainly to multimedia producers performing formal photosensitive analysis.
 
 Seizure risk is the least common issue in course content (likelihood 1/5) but carries the highest possible impact (5/5). A single flashing element can trigger a photosensitive seizure.
 
 ### What automated tools detect
 
 Ally checks for rapid flashing in **image files only** (primarily animated GIFs). This is the only file type where seizure risk is evaluated.
+
+::: {.callout}
+**Note.** This document cannot show actual flashing content because it could cause direct harm (photosensitive seizure) to readers. The illustration below represents the concept of flashing content; in real course materials, a rapidly flashing GIF or animation would appear in the "Broken" column.
+:::
+
+<!-- Scenario: Flashing GIF (seizure risk) | Error ID: E13 -->
+
+**Flashing content (E13)**
+
+| Broken | Corrected |
+|--------|-----------|
+| ![Illustration representing flashing content (e.g., alarm light). Actual flashing cannot be shown due to seizure risk.](public/assets/flashing.png) | ![Static frame of the animation (flashing removed)](public/assets/flashing_still.png) |
+| **What happens:** Content flashes; seizure risk for photosensitive users. | **What happens:** No flashing; same information conveyed without seizure risk. |
 
 ### What is not checked
 
@@ -954,8 +1084,14 @@ The most common sources of flashing content in courses (**embedded video, PowerP
 
 ---
 
-[^1]: Faulkner, S., et al. "The WebAIM Million: An Annual Accessibility Analysis of the Top 1,000,000 Home Pages." WebAIM, 2024. https://webaim.org/projects/million/
+[^1]: Deque Systems. "What We Found When We Tested Tools on the World's Most Accessible Websites," 2021. https://www.deque.com/blog/automated-testing-study-identifies-57-percent-of-digital-accessibility-issues/ - The 57% figure reflects the upper bound from Deque's axe-core engine analysis. Other research places automated detection lower; see, e.g., the UK Government Digital Service's 2017 audit (~30%) and Power Mapper's WCAG coverage studies (25-40%).
 
 [^2]: National Center for Education Statistics. "Students With Disabilities." Condition of Education, U.S. Department of Education, 2023. https://nces.ed.gov/programs/coe/indicator/cgg
 
 [^3]: Trace Research & Development Center. "Photosensitive Epilepsy Analysis Tool (PEAT)." University of Maryland. https://trace.umd.edu/peat/
+
+<!-- Presenter notes (hidden): Workshop demonstration sequence -->
+<!-- 1. E1, E2, E3, E10 (Run Microsoft Accessibility Checker) -->
+<!-- 2. Export PDF & run Acrobat fixes (E6 artifact tagging, reading order) -->
+<!-- 3. Upload to Canvas & review Ally (E7 false positive, E9 verification) -->
+<!-- 4. Manual review & screen reader checks (E4, E5, E8, E11, E12, E13) -->

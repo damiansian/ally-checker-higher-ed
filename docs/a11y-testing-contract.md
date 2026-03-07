@@ -34,6 +34,28 @@
   - Reduced-motion variant
   - `prefers-contrast: more` variant
 
+## Scripts Reference
+
+| Script | What it runs | When to use |
+|---|---|---|
+| `npm run test:a11y` | Full Chromium axe suite (all routes, all variants) | Pre-merge, CI |
+| `npm run test:a11y:critical` | `/guide` and `/color` routes only (Chromium) | Quick local smoke check before pushing |
+| `npm run test:a11y:all` | Full suite across Chromium + Firefox | Pre-release or when browser-specific issues are suspected |
+| `npm run test:a11y:budget` | Budget checker against last Playwright JSON report | CI (runs after full suite) |
+| `npm run test:a11y:report` | Opens the Playwright HTML report | After any test run to inspect failures |
+
+## Concurrency and Port Handling
+
+Each Playwright run selects a random preview-server port (range 4322-4421) so overlapping local runs do not collide. The port can also be pinned via the `PW_PORT` environment variable:
+
+```bash
+PW_PORT=4500 npm run test:a11y
+```
+
+`reuseExistingServer` is set to `false` unconditionally, so every run builds and launches its own preview server. This avoids silently testing against a stale build from a prior run.
+
+CI is unaffected: each GitHub Actions job runs in an isolated container with no port contention.
+
 ## Browser Matrix
 
 - Local default: Chromium (`npm run test:a11y`)

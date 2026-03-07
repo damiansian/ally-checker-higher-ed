@@ -15,7 +15,7 @@ function SH({ id, children }) {
   const { t } = useTheme();
   return (
     <h2 id={id} style={{
-      fontSize: 22, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-2xl)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       letterSpacing: "-0.01em",
       marginTop: 56, marginBottom: 16,
@@ -28,7 +28,7 @@ function H3({ children }) {
   const { t } = useTheme();
   return (
     <h3 style={{
-      fontSize: 16, fontWeight: 700, color: t.text,
+      fontSize: "var(--fs-base)", fontWeight: 700, color: t.text,
       fontFamily: "var(--font-display)",
       margin: "28px 0 14px",
     }}>{children}</h3>
@@ -39,7 +39,7 @@ function P({ children }) {
   const { t } = useTheme();
   return (
     <p style={{
-      fontSize: 15.5, lineHeight: 1.75, color: t.text,
+      fontSize: "var(--fs-base)", lineHeight: 1.75, color: t.text,
       fontFamily: "var(--font-body)",
       margin: "0 0 18px",
     }}>{children}</p>
@@ -50,7 +50,7 @@ function Code({ children }) {
   const { t } = useTheme();
   return (
     <code style={{
-      fontFamily: "var(--font-mono)", fontSize: 13,
+      fontFamily: "var(--font-mono)", fontSize: "var(--fs-sm)",
       backgroundColor: t.codeBg, color: t.codeText,
       padding: "1px 6px", borderRadius: 3,
     }}>{children}</code>
@@ -88,7 +88,7 @@ function LanguagePassage({ lang, label, labelColor }) {
           display: "inline-block",
           padding: "3px 10px",
           borderRadius: 4,
-          fontSize: 11,
+          fontSize: "var(--fs-xs)",
           fontWeight: 700,
           fontFamily: "var(--font-display)",
           textTransform: "uppercase",
@@ -101,7 +101,7 @@ function LanguagePassage({ lang, label, labelColor }) {
         </span>
         {lang && (
           <code style={{
-            fontSize: 12,
+            fontSize: "var(--fs-xs)",
             fontFamily: "var(--font-mono)",
             color: t.textTertiary,
             backgroundColor: t.codeBg,
@@ -113,7 +113,7 @@ function LanguagePassage({ lang, label, labelColor }) {
         )}
         {!lang && (
           <code style={{
-            fontSize: 12,
+            fontSize: "var(--fs-xs)",
             fontFamily: "var(--font-mono)",
             color: t.textTertiary,
             backgroundColor: t.codeBg,
@@ -132,7 +132,7 @@ function LanguagePassage({ lang, label, labelColor }) {
           borderLeft: `4px solid ${labelColor === "green" ? t.green : labelColor === "amber" ? t.amber : t.accent}`,
           backgroundColor: t.surfaceAlt,
           borderRadius: "0 8px 8px 0",
-          fontSize: 15,
+          fontSize: "var(--fs-base)",
           lineHeight: 1.75,
           color: t.text,
           fontFamily: "var(--font-body)",
@@ -178,7 +178,7 @@ function AudioDemo({ src, label, transcriptSummary, transcriptContent }) {
           <summary
             style={{
               padding: "10px 14px",
-              fontSize: 14,
+              fontSize: "var(--fs-sm)",
               fontWeight: 600,
               fontFamily: "var(--font-display)",
               color: t.text,
@@ -191,7 +191,7 @@ function AudioDemo({ src, label, transcriptSummary, transcriptContent }) {
             style={{
               padding: "12px 14px 16px",
               borderTop: `1px solid ${t.border}`,
-              fontSize: 14,
+              fontSize: "var(--fs-sm)",
               lineHeight: 1.6,
               color: t.textSecondary,
               fontFamily: "var(--font-body)",
@@ -238,7 +238,7 @@ export default function LanguageWordPage() {
       <Callout type="warning">
         <div style={{
           fontWeight: 600, fontFamily: "var(--font-display)",
-          marginBottom: 6, fontSize: 14,
+          marginBottom: 6, fontSize: "var(--fs-sm)",
         }}>
           Unreliable detection
         </div>
@@ -291,7 +291,7 @@ export default function LanguageWordPage() {
       <Callout type="info">
         <div style={{
           fontWeight: 600, fontFamily: "var(--font-display)",
-          marginBottom: 6, fontSize: 14,
+          marginBottom: 6, fontSize: "var(--fs-sm)",
         }}>
           Character-level language vs. document-level language
         </div>
@@ -424,7 +424,7 @@ export default function LanguageWordPage() {
           }}
         />
         <figcaption style={{
-          fontSize: 13, color: t.textTertiary, marginTop: 8,
+          fontSize: "var(--fs-base)", color: t.textTertiary, marginTop: 8,
           fontFamily: "var(--font-body)", fontStyle: "italic",
         }}>
           Spanish text with French as the proofing language &mdash; red
@@ -446,7 +446,7 @@ export default function LanguageWordPage() {
           }}
         />
         <figcaption style={{
-          fontSize: 13, color: t.textTertiary, marginTop: 8,
+          fontSize: "var(--fs-base)", color: t.textTertiary, marginTop: 8,
           fontFamily: "var(--font-body)", fontStyle: "italic",
         }}>
           The Language dialog confirms the selected text is marked as French
@@ -457,7 +457,7 @@ export default function LanguageWordPage() {
         backgroundColor: t.surfaceAlt, border: `1px solid ${t.border}`,
         margin: "16px 0 24px",
         fontFamily: "var(--font-mono)",
-        fontSize: 13.5, lineHeight: 2, color: t.textSecondary,
+        fontSize: "var(--fs-sm)", lineHeight: 2, color: t.textSecondary,
       }}>
         <div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 4 }}>
           <span style={{ minWidth: 180 }}>A11y automated checker</span>
@@ -505,7 +505,7 @@ export default function LanguageWordPage() {
           }}
         />
         <figcaption style={{
-          fontSize: 13, color: t.textTertiary, marginTop: 8,
+          fontSize: "var(--fs-base)", color: t.textTertiary, marginTop: 8,
           fontFamily: "var(--font-body)", fontStyle: "italic",
         }}>
           Spanish text with the correct proofing language &mdash; no
@@ -526,7 +526,7 @@ export default function LanguageWordPage() {
           }}
         />
         <figcaption style={{
-          fontSize: 13, color: t.textTertiary, marginTop: 8,
+          fontSize: "var(--fs-base)", color: t.textTertiary, marginTop: 8,
           fontFamily: "var(--font-body)", fontStyle: "italic",
         }}>
           The Language dialog confirms the selected text is correctly marked
@@ -538,7 +538,7 @@ export default function LanguageWordPage() {
         backgroundColor: t.surfaceAlt, border: `1px solid ${t.border}`,
         margin: "16px 0 24px",
         fontFamily: "var(--font-mono)",
-        fontSize: 13.5, lineHeight: 2, color: t.textSecondary,
+        fontSize: "var(--fs-sm)", lineHeight: 2, color: t.textSecondary,
       }}>
         <div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 4 }}>
           <span style={{ minWidth: 180 }}>A11y automated checker</span>
@@ -569,7 +569,7 @@ export default function LanguageWordPage() {
       <Callout type="tip">
         <div style={{
           fontWeight: 600, fontFamily: "var(--font-display)",
-          marginBottom: 6, fontSize: 14,
+          marginBottom: 6, fontSize: "var(--fs-sm)",
         }}>
           Red underlines are not always a language problem
         </div>
@@ -629,7 +629,7 @@ export default function LanguageWordPage() {
       <Callout type="warning">
         <div style={{
           fontWeight: 600, fontFamily: "var(--font-display)",
-          marginBottom: 6, fontSize: 14,
+          marginBottom: 6, fontSize: "var(--fs-sm)",
         }}>
           Auto-detect is not always correct
         </div>
@@ -689,7 +689,7 @@ export default function LanguageWordPage() {
           backgroundColor: t.surfaceAlt,
         }}>
           <div style={{
-            fontSize: 16,
+            fontSize: "var(--fs-base)",
             fontWeight: 700,
             fontFamily: "var(--font-display)",
             color: t.text,
@@ -713,7 +713,7 @@ export default function LanguageWordPage() {
               borderRadius: 6,
               backgroundColor: t.accent,
               color: t.accentContrast,
-              fontSize: 14,
+              fontSize: "var(--fs-sm)",
               fontWeight: 600,
               fontFamily: "var(--font-display)",
               textDecoration: "none",
@@ -729,7 +729,7 @@ export default function LanguageWordPage() {
           backgroundColor: t.surfaceAlt,
         }}>
           <div style={{
-            fontSize: 16,
+            fontSize: "var(--fs-base)",
             fontWeight: 700,
             fontFamily: "var(--font-display)",
             color: t.text,
@@ -752,7 +752,7 @@ export default function LanguageWordPage() {
               borderRadius: 6,
               backgroundColor: t.accent,
               color: t.accentContrast,
-              fontSize: 14,
+              fontSize: "var(--fs-sm)",
               fontWeight: 600,
               fontFamily: "var(--font-display)",
               textDecoration: "none",
@@ -782,7 +782,7 @@ export default function LanguageWordPage() {
         backgroundColor: t.surfaceAlt, border: `1px solid ${t.border}`,
         margin: "16px 0 24px",
         fontFamily: "var(--font-mono)",
-        fontSize: 13.5, lineHeight: 2, color: t.textSecondary,
+        fontSize: "var(--fs-sm)", lineHeight: 2, color: t.textSecondary,
       }}>
         Spanish text, language = Spanish <span style={{ color: t.green }}>passes</span><br/>
         Spanish text, language = French <span style={{ color: t.amber }}>partially detected</span> &mdash; Ally flags but does not pinpoint<br/>
@@ -820,15 +820,15 @@ export default function LanguageWordPage() {
           margin: `0 0 ${i < 2 ? 14 : 20}px`,
         }}>
           <div style={{
-            fontSize: 15, fontWeight: 700, color: t.text,
+            fontSize: "var(--fs-base)", fontWeight: 700, color: t.text,
             fontFamily: "var(--font-display)", marginBottom: 4,
           }}>{tool.name}</div>
           <div style={{
-            fontSize: 13, color: t.textTertiary,
+            fontSize: "var(--fs-sm)", color: t.textTertiary,
             fontFamily: "var(--font-display)", marginBottom: 12,
           }}>{tool.meta}</div>
           <div style={{
-            fontSize: 14.5, lineHeight: 1.65, color: t.textSecondary,
+            fontSize: "var(--fs-base)", lineHeight: 1.65, color: t.textSecondary,
             fontFamily: "var(--font-body)",
           }}>{tool.desc}</div>
         </div>

@@ -48,7 +48,7 @@ export const categories = [
     name: "Semantic Structure",
     slug: "semantic-structure",
     description:
-      "Headings, titles, lists, and document structure let students navigate and understand content organization. Without them, a 20-page document is a wall of text; faked lists (typed bullets or numbers) are invisible to screen readers.",
+      "Headings, titles, and document structure let students navigate and understand content organization. Without them, a 20-page document is a wall of text with no way to jump to the section a student needs.",
     likelihood: 5,
     impact: 4,
     fileTypes: {
@@ -58,11 +58,11 @@ export const categories = [
       canvas: "checked",
       image: "na",
     },
-    allyChecks: 8,
+    allyChecks: 4,
     allyCatches:
-      "Missing headings, skipped levels, missing slide/page titles, untagged PDFs, faked lists (manual bullets/numbers instead of list styles)",
+      "Missing headings, skipped levels, missing slide/page titles, untagged PDFs",
     allyMisses:
-      "Whether heading text is meaningful, logical content order, reading sequence, correct nesting of multi-level lists, whether content should be a list vs paragraphs",
+      "Whether heading text is meaningful, logical content order, reading sequence in PowerPoint and PDF",
     wcag: "1.3.1 / 2.4.1 / 2.4.6",
   },
   {
@@ -80,10 +80,32 @@ export const categories = [
       canvas: "checked",
       image: "na",
     },
-    allyChecks: 1,
-    allyCatches: "Tables without designated header rows",
+    allyChecks: 2,
+    allyCatches: "Tables without designated header rows; table headers with empty content",
     allyMisses:
-      "Layout tables misused for formatting, overly complex structures, whether a table is the right format at all",
+      "Layout tables misused for formatting, row headers not designated, overly complex structures, whether a table is the right format at all",
+    wcag: "1.3.1",
+  },
+  {
+    id: "lists",
+    name: "Lists",
+    slug: "lists",
+    description:
+      "Bulleted and numbered content must use real list markup so screen readers announce list type and item count. Faked lists (typed dashes, bullets, or numbers) are invisible to assistive technology.",
+    likelihood: 4,
+    impact: 3,
+    fileTypes: {
+      docx: "checked",
+      pptx: "checked",
+      pdf: "checked",
+      canvas: "checked",
+      image: "na",
+    },
+    allyChecks: 1,
+    allyCatches:
+      "Faked lists: content that visually appears as a list but lacks proper list markup",
+    allyMisses:
+      "Correct nesting of multi-level lists, whether content should be a list vs paragraphs. Microsoft checker and Acrobat typically do not flag faked lists.",
     wcag: "1.3.1",
   },
   {
@@ -165,28 +187,22 @@ export const allyMessages = {
     canvas: "Text must have sufficient color contrast",
   },
   "semantic-structure": {
-    docx: [
-      "Document does not have any headings",
-      "Lists should be formatted as lists",
-    ],
-    pptx: [
-      "Presentation does not have slide titles",
-      "Lists should be formatted as lists",
-    ],
-    pdf: [
-      "PDF does not have any headings",
-      "Lists should be formatted as lists",
-    ],
-    canvas: [
-      "Headings should be present",
-      "Lists should be formatted as lists",
-    ],
+    docx: "Document does not have any headings",
+    pptx: "Presentation does not have slide titles",
+    pdf: "PDF does not have any headings",
+    canvas: "Headings should be present",
+  },
+  lists: {
+    docx: "Lists should be formatted as lists",
+    pptx: "Lists should be formatted as lists",
+    pdf: "Lists should be formatted as lists",
+    canvas: "Lists should be formatted as lists",
   },
   tables: {
-    docx: "Document tables don't have headers",
+    docx: "This document contains tables that are missing headers",
     pptx: "Presentation tables don't have headers",
     pdf: "PDF tables don't have headers",
-    canvas: "Table cells (3x3+) must have associated headers",
+    canvas: "This item contains table headers that are missing content",
   },
   language: {
     docx: [

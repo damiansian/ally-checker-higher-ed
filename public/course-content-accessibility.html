@@ -734,22 +734,22 @@ Accessibility Check.</p>
 <div class="summary">
 <p><strong>In this section:</strong></p>
 <ul>
-<li><a href="#scenario-1-no-alt-text">Scenario 1: No alt text</a> —
+<li><a href="#scenario-1-no-alt-text">Scenario 1: No alt text</a> ·
 Detected by all tools</li>
 <li><a href="#scenario-2-ai-generated-alt-text">Scenario 2: AI-generated
-alt text</a> — Detected by MS Checker only</li>
+alt text</a> · Detected by MS Checker only</li>
 <li><a href="#scenario-3-file-name-as-alt-text">Scenario 3: File name as
-alt text</a> — Detected by Ally and MS Checker</li>
+alt text</a> · Detected by Ally and MS Checker</li>
 <li><a
 href="#scenario-4-decorative-image-not-marked-as-decorative">Scenario 4:
-Decorative image not marked</a> — Not detected by any tool</li>
+Decorative image not marked</a> · Not detected by any tool</li>
 <li><a href="#scenario-5-vague-alt-text">Scenario 5: Vague alt text</a>
-— Not detected by any tool</li>
+· Not detected by any tool</li>
 <li><a href="#scenario-6-gibberish-or-placeholder-alt-text">Scenario 6:
-Gibberish or placeholder alt text</a> — Not detected by any tool</li>
+Gibberish or placeholder alt text</a> · Not detected by any tool</li>
 <li><a
 href="#scenario-7-alt-text-over-120-characters-canvas-false-positive">Scenario
-7: Alt text over ~120 characters</a> — False positive (Canvas only)</li>
+7: Alt text over ~120 characters</a> · False positive (Canvas only)</li>
 <li><a href="#complex-images">Complex images</a></li>
 <li><a href="#known-false-positive">Known False Positive: Alt Text of 120 Characters</a></li>
 </ul>
@@ -768,7 +768,7 @@ basic and most common text alternative failure.</p>
     <tr>
       <td><!-- E1: Missing alt text -->
         <img src="assets/chart1.png">
-        <p><strong>What happens:</strong> Screen reader announces "Graphic" or the file name — no information conveyed.</p>
+        <p><strong>What happens:</strong> Screen reader announces "Graphic" or the file name, with no information conveyed.</p>
       </td>
       <td><!-- E1: Corrected artifact (right) -->
         <img src="assets/chart1.png" alt="Grouped bar chart comparing Quiz 1 and Quiz 2 averages across three sections. Section 1: 85% and 82%. Section 2: 83% and 81%. Section 3: 85% and 82%.">
@@ -791,7 +791,7 @@ basic and most common text alternative failure.</p>
     <tr>
       <td><!-- E2: File name as alt text -->
         <img src="assets/enrollment.png" alt="IMG_3847.png">
-        <p><strong>What happens:</strong> Screen reader announces "Graphic. IMG_3847.png" — student gets no data.</p>
+        <p><strong>What happens:</strong> Screen reader announces "Graphic. IMG_3847.png," and the student gets no data.</p>
       </td>
       <td><!-- E2: Corrected artifact (right) -->
         <img src="assets/enrollment.png" alt="Line graph showing a steady increase in online course enrollment from 12,000 in Fall 2020 to 28,500 in Fall 2025.">
@@ -869,7 +869,7 @@ Navigation Panes &gt; Tags).</li>
 field.</li>
 <li>Click <strong>Close</strong>.</li>
 </ol>
-<p><em>[PLACEHOLDER: Screenshot — Acrobat Set Alternate Text dialog]</em></p>
+<p><em>[PLACEHOLDER: Screenshot, Acrobat Set Alternate Text dialog]</em></p>
 <hr />
 <h4 id="scenario-2-ai-generated-alt-text">Scenario 2: AI-generated alt
 text</h4>
@@ -947,7 +947,7 @@ Checker. Acrobat does not flag this.</p>
     <tr>
       <td><!-- E2: File name as alt text -->
         <img src="assets/enrollment.png" alt="IMG_3847.png">
-        <p><strong>What happens:</strong> Screen reader announces "Graphic. IMG_3847.png" — student gets no data.</p>
+        <p><strong>What happens:</strong> Screen reader announces "Graphic. IMG_3847.png," and the student gets no data.</p>
       </td>
       <td><!-- E2: Corrected artifact (right) -->
         <img src="assets/enrollment.png" alt="Line graph showing a steady increase in online course enrollment from 12,000 in Fall 2020 to 28,500 in Fall 2025.">
@@ -1135,7 +1135,7 @@ Gibberish or placeholder alt text</h4>
     <tr>
       <td><!-- E5: Gibberish / placeholder alt -->
         <img src="assets/photo1.png" alt="alskjshdsflh">
-        <p><strong>What happens:</strong> Screen reader announces "alskjshdsflh" — student gains nothing.</p>
+        <p><strong>What happens:</strong> Screen reader announces "alskjshdsflh," and the student gains nothing.</p>
       </td>
       <td><!-- E5: Corrected artifact (right) -->
         <img src="assets/photo1.png" alt="Course instructor at podium during workshop session.">
@@ -1281,7 +1281,7 @@ screens in bright environments.</p>
 <p>Three categories of contrast failure, each with the actual ratio and
 whether automated tools detect it.</p>
 <h4 id="regular-text-contrast">Regular text</h4>
-<!-- E10a: Low contrast regular text — detected by Ally and MS Checker -->
+<!-- E10a: Low contrast regular text, detected by Ally and MS Checker -->
 <table class="lab-compare">
   <thead>
     <tr><th>Broken</th><th>Corrected</th></tr>
@@ -1307,7 +1307,7 @@ whether automated tools detect it.</p>
 </table>
 <p><strong>Detected by:</strong> Ally and Microsoft Accessibility Checker.</p>
 <h4 id="large-text-contrast">Large text</h4>
-<!-- E10b: Low contrast large text — detected by Ally and MS Checker -->
+<!-- E10b: Low contrast large text, detected by Ally and MS Checker -->
 <table class="lab-compare">
   <thead>
     <tr><th>Broken</th><th>Corrected</th></tr>
@@ -1333,7 +1333,7 @@ whether automated tools detect it.</p>
 </table>
 <p><strong>Detected by:</strong> Ally and Microsoft Accessibility Checker.</p>
 <h4 id="graphic-element-contrast">Graphic element</h4>
-<!-- E10c: Low contrast graphic element — not detected by any tool -->
+<!-- E10c: Low contrast graphic element, not detected by any tool -->
 <table class="lab-compare">
   <thead>
     <tr><th>Broken</th><th>Corrected</th></tr>
@@ -1451,13 +1451,13 @@ misidentified as text content.</p>
   </figure>
   <figure style="flex: 1; min-width: 200px; margin: 0;">
     <img src="public/assets/ally-image-contrast-warning.png"
-         alt="Screenshot of the Ally accessibility score panel for the student photo. The score is 75% with the message 'This image has contrast issues.' Below, Ally displays 'Guidance not available yet — We are updating the guidance for this issue.'"
+         alt="Screenshot of the Ally accessibility score panel for the student photo. The score is 75% with the message 'This image has contrast issues.' Below, Ally displays 'Guidance not available yet. We are updating the guidance for this issue.'"
          style="width: 100%; height: auto;" />
-    <figcaption>Ally flags the photo at 75% with "This image has contrast issues." Guidance reads: "Guidance not available yet — We are updating the guidance for this issue."</figcaption>
+    <figcaption>Ally flags the photo at 75% with "This image has contrast issues." Guidance reads: "Guidance not available yet. We are updating the guidance for this issue."</figcaption>
   </figure>
 </div>
 <p>Ally's own guidance panel confirms the limitation: it reads
-"Guidance not available yet — We are updating the guidance for
+"Guidance not available yet. We are updating the guidance for
 this issue." This suggests the feature is under active development, but
 in its current state it produces false positives on photographic content.
 <strong>Do not take action on image contrast warnings in the
