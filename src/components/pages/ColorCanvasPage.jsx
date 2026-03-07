@@ -6,7 +6,6 @@ import {
   CompareBoxes,
   RefTable,
   ResourceLink,
-  Placeholder,
 } from "@/components/content.jsx";
 
 function SH({ id, children }) {
@@ -49,7 +48,7 @@ export default function ColorCanvasPage() {
     <ContentPageLayout
       categorySlug="color"
       fileTypeSlug="canvas"
-      title="DRAFT - Color"
+      title="Color"
       subtitle="Canvas editor"
     >
       <SH id="ally-error">The Ally Error</SH>
@@ -78,7 +77,16 @@ export default function ColorCanvasPage() {
       <Step number="2">Use the <strong>Text color</strong> (font color) control in the toolbar to choose a color that meets 4.5:1 against the background (typically white or light gray). Black or dark gray (#333 or darker) on white is safe.</Step>
       <Step number="3">If you use background or highlight color, ensure the combination of text plus background still meets 4.5:1.</Step>
       <Step number="4">Avoid light gray, yellow, or pastel text on white.</Step>
-      <Placeholder label="Screenshot: Canvas RCE text color picker with a contrast-safe option" />
+      <figure style={{ margin: "16px 0" }}>
+        <img
+          src="/assets/canvas-rce-contrast-checker.png"
+          alt="Screenshot of the Canvas Rich Content Editor Accessibility Checker showing Issue 1 of 1: Text larger than 18pt (or bold 14pt) should display a minimum contrast ratio of 3:1. A Change text color field shows rgba(145, 191, 225, 1) with a color picker below and Prev, Next, and Apply buttons."
+          style={{ width: "100%", maxWidth: 520, height: "auto" }}
+        />
+        <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+          The Canvas RCE Accessibility Checker flags low-contrast text and offers a color picker to fix it in place.
+        </figcaption>
+      </figure>
 
       <H3>Pasted content</H3>
       <P>
@@ -91,7 +99,7 @@ export default function ColorCanvasPage() {
       <P>
         Ally does not flag when color alone conveys meaning in Canvas
         content (e.g. &quot;see the red items&quot; with no other cue).
-        WCAG 1.4.1 requires text, icons, or patterns in addition to color.
+        <a href="https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html" target="_blank" rel="noopener noreferrer">WCAG 1.4.1</a> requires text, icons, or patterns in addition to color.
         When highlighting important or required items, add a label, icon, or
         bold text so the content is clear without color. Use the Canvas
         Accessibility Checker and manual review for critical content.

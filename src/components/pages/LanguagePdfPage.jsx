@@ -390,7 +390,7 @@ export default function LanguagePdfPage() {
       <H3>Setting language for a specific passage</H3>
       <P>
         When your PDF contains passages in a different language than the document
-        default, tag those passages individually (WCAG 3.1.2).
+        default, tag those passages individually (<a href="https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html" target="_blank" rel="noopener noreferrer">WCAG 3.1.2</a>).
       </P>
       <Step number="1">Open the PDF in Adobe Acrobat Pro.</Step>
       <Step number="2">Open the <strong>Accessibility</strong> tags panel (<strong>View &rarr; Show/Hide &rarr; Navigation Panes &rarr; Tags</strong>).</Step>

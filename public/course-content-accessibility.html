@@ -150,8 +150,11 @@ nav#TOC a:hover { text-decoration: underline; }
 .quick-check li::before { content: "\2610\0020"; }
 
 /* Lab comparison tables (Broken | Corrected) */
+table.lab-compare { table-layout: fixed; width: 100%; }
+table.lab-compare th,
+table.lab-compare td { width: 50%; }
 table.lab-compare th { background: #2d5a7b; color: #fff; }
-table.lab-compare td { vertical-align: top; padding: 1rem; }
+table.lab-compare td { vertical-align: top; padding: 1rem; word-wrap: break-word; overflow-wrap: break-word; }
 table.lab-compare img { max-width: 100%; height: auto; border: 1px solid #ddd; }
 .content-wrap img { max-width: 100%; height: auto; }
 img.screenshot { border: 1px solid #000; }
@@ -174,6 +177,7 @@ img.screenshot { border: 1px solid #000; }
 <li><a href="#acrobat-accessibility-checker">Acrobat Accessibility Checker</a></li>
 <li><a href="#text-alternatives">Text Alternatives</a></li>
 <li><a href="#color-contrast">Color Contrast</a></li>
+<li><a href="#color-contrast-false-positive">Known False Positive: Image Contrast in Photographs</a></li>
 <li><a href="#color-as-sole-means-of-communication">Color as Sole Means of Communication</a></li>
 <li><a href="#headings">Headings</a></li>
 <li><a href="#tables">Tables</a></li>
@@ -423,17 +427,87 @@ generates accessible alternative formats for uploaded files, including
 HTML, ePub, electronic braille, audio (MP3), and tagged PDF. These
 alternatives give students options when the original file is not fully
 accessible. However, alternative formats are a fallback, not a
-substitute for accessible source content. They inherit the structural
-defects of the original: an HTML alternative generated from a document
-with no headings will also have no headings, an audio format cannot
-compensate for missing structure, braille output depends on correct
-tagging in the source, and none of the alternative formats will fix
-semantic errors like meaningless alt text or incorrect language
-metadata. Accessibility must be built into the source material first.
-<strong>[TODO: Validate these claims about alternative format
-inheritance. Confirm each format’s behavior with test files before
-publishing.]</strong></li>
+substitute for accessible source content. The quality and reliability of
+the Tagged PDF alternative format is source-format dependent, not just
+source-quality dependent. Word documents generally convert to tagged PDF
+with acceptable fidelity because the document model maps cleanly.
+PowerPoint sources produce unreliable tagged PDF output even when the
+source file is fully accessible and passes Microsoft’s Accessibility
+Checker. Direct testing confirmed that the conversion can introduce
+inaccessible content not present in the source, including raw SVG path
+data exposed as text and empty Figure tags with no alt text.
+PDF-to-tagged-PDF conversion provides no value because no richer source
+data exists to work from. None of the alternative formats will fix
+semantic errors like meaningless alt text or incorrect language metadata.
+Accessibility must be built into the source material first, and
+instructors should understand that alternative formats are not a reliable
+accessibility fallback for all source types.</li>
 </ul>
+<h3 id="alternative-format-reliability">Alternative format reliability by source format</h3>
+<p>The following table summarizes the reliability of Ally’s Tagged PDF
+alternative format based on the source file type. These findings were
+confirmed through direct testing of fully accessible source files.</p>
+<table>
+<thead>
+<tr>
+<th scope="col">Source Format</th>
+<th scope="col">Tagged PDF Reliability</th>
+<th scope="col">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Word (.docx)</td>
+<td>Acceptable</td>
+<td>Document model transfers cleanly to tagged PDF structure</td>
+</tr>
+<tr>
+<td>PowerPoint (.pptx)</td>
+<td>Poor</td>
+<td>Multiple conversion failures confirmed even from fully accessible sources; see known failures below</td>
+</tr>
+<tr>
+<td>PDF</td>
+<td>No value</td>
+<td>No richer source data to work from; the conversion cannot infer structure that is not already present</td>
+</tr>
+</tbody>
+</table>
+<div class="callout">
+<p><strong>Framing note.</strong> Anthology’s documentation states that
+the accessibility of alternative formats depends on the state of the
+original file. The findings below are beyond the scope of what that
+caveat addresses. The source file used for testing was fully accessible
+and passed Microsoft’s Accessibility Checker. The failures documented
+here are conversion fidelity problems: the conversion pipeline itself
+failed and introduced barriers not present in the source.</p>
+</div>
+<div class="summary">
+<p><strong>Empirically tested: PowerPoint to Tagged PDF conversion failures</strong></p>
+<ul>
+<li><strong>Heading structure.</strong> Slide title placeholders were not
+converted to leveled headings consistently. Some slides produced
+&lt;H&gt; tags, others produced &lt;H2&gt;, with no discernible logic
+governing level assignment. An inconsistent heading hierarchy is worse
+for screen reader navigation than no headings at all.</li>
+<li><strong>List and table structure.</strong> Structured lists and
+tables in the source were flattened to bare &lt;P&gt; tags in the
+output. No semantic relationships between items were preserved.</li>
+<li><strong>SVG path data exposure (most severe).</strong> Charts and
+graphs were not rendered, described, or skipped. The conversion
+extracted raw SVG path strings and exposed them as text content inside
+Figure tags (e.g., “PathPathPathPathPathPathPathPathPath”). A screen
+reader will attempt to announce this string. The conversion introduced
+content not present in the source.</li>
+<li><strong>Empty Figure tags.</strong> Some images produced Figure tags
+with no content and no alt text. Screen readers announce “figure” and
+then nothing.</li>
+<li><strong>Document language.</strong> Not assigned in the output
+despite being set in the source file.</li>
+</ul>
+<p><strong>What transferred correctly:</strong> Alt text on images
+carried over to the tagged PDF output.</p>
+</div>
 <p>To describe Ally’s behavior across file types, this reference uses a
 coverage model with four states:</p>
 <ul>
@@ -554,7 +628,7 @@ document. Fixing issues at the source is almost always more efficient
 than remediating in Acrobat after export.</p>
 </div>
 <h2 id="text-alternatives">Text Alternatives</h2>
-<p><strong>WCAG 1.1.1 Non-text Content (Level A).</strong> All non-text
+<p><strong><a href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html">WCAG 1.1.1 Non-text Content</a> (Level A).</strong> All non-text
 content must have a text alternative that serves an equivalent
 purpose.</p>
 <p>This is the highest-priority accessibility issue in course content:
@@ -677,7 +751,7 @@ Gibberish or placeholder alt text</a> — Not detected by any tool</li>
 href="#scenario-7-alt-text-over-120-characters-canvas-false-positive">Scenario
 7: Alt text over ~120 characters</a> — False positive (Canvas only)</li>
 <li><a href="#complex-images">Complex images</a></li>
-<li><a href="#known-false-positive">Known false positive</a></li>
+<li><a href="#known-false-positive">Known False Positive: Alt Text of 120 Characters</a></li>
 </ul>
 </div>
 <hr />
@@ -1140,7 +1214,7 @@ image, or link to a separate long description.</li>
 </ol>
 <p>This ensures the image is not skipped by screen readers and the full
 information is available in context.</p>
-<h3 id="known-false-positive">Known false positive</h3>
+<h2 id="known-false-positive">Known False Positive: Alt Text of 120 Characters</h2>
 <p>In the Canvas Rich Content Editor, Ally flags alt text exceeding
 approximately 120 characters. There is no WCAG basis for a character
 limit on alt text. Do not shorten a description that needs to be long to
@@ -1175,7 +1249,7 @@ just the title?</li>
 </ul>
 </div>
 <h2 id="color-contrast">Color Contrast</h2>
-<p><strong>WCAG 1.4.3 Contrast (Minimum) (Level AA).</strong> Text must
+<p><strong><a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html">WCAG 1.4.3 Contrast (Minimum)</a> (Level AA).</strong> Text must
 have a contrast ratio of at least <strong>4.5:1</strong> against its
 background. Large text (18pt or 14pt bold) requires at least
 <strong>3:1</strong>.</p>
@@ -1187,12 +1261,14 @@ background. Large text (18pt or 14pt bold) requires at least
   <tbody>
     <tr>
       <td><!-- E10: Low contrast text -->
-        <p style="color:#d1d5db; background:#ffffff;">This text has insufficient contrast.</p>
-        <p><strong>What happens:</strong> Hard to read for low vision or in bright light; fails WCAG contrast ratio.</p>
+        <p style="color:#91BFE1; background:#ffffff;">This text has insufficient contrast.</p>
+        <p><strong>Contrast ratio:</strong> 2:1 &middot; <strong>Size:</strong> 12pt (16px) &middot; <strong>Weight:</strong> normal (400)</p>
+        <p><strong>What happens:</strong> Hard to read for low vision or in bright light; fails the 4.5:1 minimum for normal text and the 3:1 minimum for large text.</p>
       </td>
       <td><!-- E10: Corrected artifact (right) -->
         <p style="color:#1a1a2e; background:#ffffff;">This text has sufficient contrast.</p>
-        <p><strong>What happens:</strong> Meets 4.5:1 ratio; readable for more users.</p>
+        <p><strong>Contrast ratio:</strong> 17.06:1 &middot; <strong>Size:</strong> 12pt (16px) &middot; <strong>Weight:</strong> normal (400)</p>
+        <p><strong>What happens:</strong> Exceeds the 4.5:1 minimum; readable for more users.</p>
       </td>
     </tr>
   </tbody>
@@ -1201,29 +1277,200 @@ background. Large text (18pt or 14pt bold) requires at least
 <p>Contrast issues are common (likelihood 4/5) and meaningfully affect
 students with low vision, color vision deficiencies, or those reading on
 screens in bright environments.</p>
+<h3 id="example-errors-contrast">Example error: Contrast</h3>
+<p>Three categories of contrast failure, each with the actual ratio and
+whether automated tools detect it.</p>
+<h4 id="regular-text-contrast">Regular text</h4>
+<!-- E10a: Low contrast regular text — detected by Ally and MS Checker -->
+<table class="lab-compare">
+  <thead>
+    <tr><th>Broken</th><th>Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p style="color:#5692FF; background:#ffffff;">This regular sized text fails the 4.5:1 minimum for normal text.</p>
+        <p><strong>Contrast ratio:</strong> 3:1 &middot; <strong>Color:</strong> #5692FF &middot; <strong>Required:</strong> 4.5:1</p>
+        <p><strong>What happens:</strong> Fails for users with low vision or color deficiencies. Does not meet the minimum for normal-weight text at any size.</p>
+      </td>
+      <td>
+        <p style="color:#2d5a7b; background:#ffffff;">This regular sized text passes the 4.5:1 minimum.</p>
+        <p><strong>Contrast ratio:</strong> 7.3:1 &middot; <strong>Color:</strong> #2d5a7b &middot; <strong>Required:</strong> 4.5:1</p>
+        <p><strong>What happens:</strong> Exceeds the 4.5:1 minimum; readable for more users.</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code>color: #5692FF</code> (3:1 against white)</td>
+      <td><code>color: #2d5a7b</code> (7.3:1 against white)</td>
+    </tr>
+  </tbody>
+</table>
+<p><strong>Detected by:</strong> Ally and Microsoft Accessibility Checker.</p>
+<h4 id="large-text-contrast">Large text</h4>
+<!-- E10b: Low contrast large text — detected by Ally and MS Checker -->
+<table class="lab-compare">
+  <thead>
+    <tr><th>Broken</th><th>Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p style="color:#91BFE1; background:#ffffff; font-size: 1.5rem; font-weight: bold;">This large text fails the 3:1 minimum.</p>
+        <p><strong>Contrast ratio:</strong> 2:1 &middot; <strong>Color:</strong> #91BFE1 &middot; <strong>Required:</strong> 3:1</p>
+        <p><strong>What happens:</strong> Fails even the lower threshold for large text (18pt or 14pt bold). Hard to read on bright screens or for users with low vision.</p>
+      </td>
+      <td>
+        <p style="color:#4A8CAD; background:#ffffff; font-size: 1.5rem; font-weight: bold;">This large text passes the 3:1 minimum.</p>
+        <p><strong>Contrast ratio:</strong> 3.7:1 &middot; <strong>Color:</strong> #4A8CAD &middot; <strong>Required:</strong> 3:1</p>
+        <p><strong>What happens:</strong> Passes the lower threshold for large text; easier to read for more users.</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code>color: #91BFE1</code> (2:1 against white)</td>
+      <td><code>color: #4A8CAD</code> (3.7:1 against white)</td>
+    </tr>
+  </tbody>
+</table>
+<p><strong>Detected by:</strong> Ally and Microsoft Accessibility Checker.</p>
+<h4 id="graphic-element-contrast">Graphic element</h4>
+<!-- E10c: Low contrast graphic element — not detected by any tool -->
+<table class="lab-compare">
+  <thead>
+    <tr><th>Broken</th><th>Corrected</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <img class="screenshot" src="public/assets/chart-contrast-example.png" alt="Line chart with three data series across four categories. Series 1 (light pink, #F1B4A4): 4.3, 2.5, 3.5, 4.5. Series 2 (orange): 2.4, 4.4, 1.8, 2.8. Series 3 (dark brown): 2, 2, 3, 5. The Series 1 line color has a contrast ratio of only 1.8:1 against the white background, failing the 3:1 minimum for non-text graphic elements.">
+        <p><strong>Contrast ratio:</strong> 1.8:1 &middot; <strong>Color:</strong> #F1B4A4 &middot; <strong>Required:</strong> 3:1</p>
+        <p><strong>What happens:</strong> The light pink data series is nearly invisible against a white background for users with low vision or color deficiencies. No automated tool flags it.</p>
+      </td>
+      <td>
+        <div style="display:flex; gap: 1rem; align-items: center; margin-bottom: 0.75rem;">
+          <div style="width: 3rem; height: 3rem; background: #F1B4A4; border: 1px solid #ccc; border-radius: 4px; flex-shrink: 0;" role="img" aria-label="Color swatch: #F1B4A4, light salmon, failing contrast"></div>
+          <span style="font-family: monospace; font-size: 0.9rem;">#F1B4A4 &rarr; 1.8:1 (fail)</span>
+        </div>
+        <div style="display:flex; gap: 1rem; align-items: center; margin-bottom: 0.75rem;">
+          <div style="width: 3rem; height: 3rem; background: #C0564B; border: 1px solid #ccc; border-radius: 4px; flex-shrink: 0;" role="img" aria-label="Color swatch: #C0564B, dark red, passing contrast"></div>
+          <span style="font-family: monospace; font-size: 0.9rem;">#C0564B &rarr; 4.5:1 (pass)</span>
+        </div>
+        <p><strong>Contrast ratio:</strong> 4.5:1 &middot; <strong>Color:</strong> #C0564B &middot; <strong>Required:</strong> 3:1</p>
+        <p><strong>What happens:</strong> The data series remains visible and distinguishable for users with low vision. Use a contrast checker when selecting chart colors.</p>
+      </td>
+    </tr>
+    <tr>
+      <td><code>Series 1 color: #F1B4A4</code> (1.8:1 against white)</td>
+      <td><code>Series 1 color: #C0564B</code> (4.5:1 against white)</td>
+    </tr>
+  </tbody>
+</table>
+<p><strong>Detected by:</strong> No automated tool. Neither Ally nor the Microsoft Accessibility Checker flag graphic element contrast failures. <a href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html">WCAG 1.4.11 Non-text Contrast</a> (Level AA) requires a minimum 3:1 ratio for meaningful graphic elements (chart lines, bar fills, icons). Manual review with a tool like the <a href="https://www.tpgi.com/color-contrast-checker/">Colour Contrast Analyser</a> is required.</p>
+<div class="callout">
+<p><strong>Key point.</strong> Automated tools catch text contrast
+but miss graphic element contrast entirely. Chart lines, bar fills,
+icons, and other non-text elements that fail the 3:1 minimum are
+invisible to both Ally and the Microsoft Accessibility Checker.</p>
+</div>
+<p>The <a href="https://www.tpgi.com/color-contrast-checker/">Colour Contrast Analyser (CCA)</a> is a free desktop tool that
+confirms exact contrast ratios and which WCAG criteria pass or fail.</p>
+<figure style="max-width: 320px; margin: 1em 0;">
+  <img src="public/assets/cca-contrast-check-91bfe1.png"
+       alt="Screenshot of the Colour Contrast Analyser (CCA) desktop application. Foreground color is #91BFE1, background is #FFFFFF (white). The contrast ratio is 2:1. WCAG 2.1 results show: 1.4.3 Contrast (Minimum) AA fails for both regular and large text, 1.4.6 Contrast (Enhanced) AAA fails for both, and 1.4.11 Non-text Contrast AA fails for UI components and graphical objects."
+       style="width: 100%; height: auto;" class="screenshot" />
+  <figcaption>The Colour Contrast Analyser (CCA) confirms #91BFE1 fails at 2:1.</figcaption>
+</figure>
 <h3 id="what-automated-tools-detect-1">What automated tools detect</h3>
 <p>Ally and similar tools measure the contrast ratio between text color
 and background color and flag combinations that fall below the minimum.
 This works well for body text in standard layouts.</p>
-<h3 id="what-requires-manual-review-1">What requires manual review</h3>
-<ul>
-<li><strong>Text in images.</strong> Contrast within screenshots,
-diagrams, or infographics is not evaluated by Ally.</li>
-<li><strong>Near-threshold combinations.</strong> Branded templates with
-ratios of 4.4:1 or 4.3:1 may not be flagged by all tools but still fail
-WCAG.</li>
-<li><strong>Chart labels and annotations.</strong> Light gray axis
-labels, legend text, and data labels frequently fail contrast
-requirements but are overlooked because they are embedded in images or
-chart objects.</li>
-</ul>
+<p>In Canvas, the Rich Content Editor's built-in Accessibility Checker
+flags text contrast issues and provides a color picker to fix them in
+place. Contrast issues also appear on the Ally Accessibility Dashboard,
+lowering the file's score with suggested replacement colors.</p>
+<div style="display: flex; gap: 1.5em; flex-wrap: wrap; margin: 1em 0;">
+  <figure style="flex: 1; min-width: 200px; margin: 0;">
+    <img src="assets/canvas-rce-contrast-checker.png"
+         alt="Screenshot of the Canvas Rich Content Editor Accessibility Checker showing Issue 1 of 1: 'Text larger than 18pt (or bold 14pt) should display a minimum contrast ratio of 3:1.' A 'Change text color' field shows rgba(145, 191, 225, 1) with a color picker below and Prev, Next, and Apply buttons."
+         style="width: 100%; height: auto;" class="screenshot" />
+    <figcaption>The Canvas RCE Accessibility Checker flags low-contrast text and offers a color picker to fix it in place.</figcaption>
+  </figure>
+  <figure style="flex: 1; min-width: 200px; margin: 0;">
+    <img src="assets/ally-dashboard-contrast-warning.png"
+         alt="Screenshot of the Ally accessibility score panel for a file with alt text. The score is 81% with a yellow-green gauge. Below, Ally reports 'This item contains text with insufficient contrast' with a 'What this means' button. Four suggested replacement colors are shown with an Apply button."
+         style="width: 100%; height: auto;" class="screenshot" />
+    <figcaption>Ally flags the contrast issue on the Dashboard, lowering the file score to 81% and suggesting darker replacement colors.</figcaption>
+  </figure>
+</div>
+<h3 id="ms-checker-contrast">Microsoft Accessibility Checker: contrast detection</h3>
+<p>The Microsoft Accessibility Checker (Review &gt; Check Accessibility)
+also detects text contrast issues in Word, PowerPoint, and Excel. When
+it finds text that is hard to read against its background, the
+Accessibility Assistant flags it under <strong>Color and
+Contrast</strong> and offers specific fix suggestions, including
+alternative font colors and text shading options. This is a useful
+complement to Ally, particularly for content authored in Office before
+it reaches Canvas.</p>
+<div style="display: flex; gap: 1.5em; flex-wrap: wrap; margin: 1em 0;">
+  <figure style="flex: 1; min-width: 200px; margin: 0;">
+    <img src="assets/ms-checker-contrast-overview.png"
+         alt="Screenshot of Microsoft's Accessibility Assistant showing a 'Keep going!' message prompting the user to fix remaining issues. Below, the Color and Contrast category lists 'Hard-to-read text contrast' with a count of 1."
+         style="width: 100%; height: auto;" class="screenshot" />
+    <figcaption>The Accessibility Assistant flags contrast issues under Color and Contrast.</figcaption>
+  </figure>
+  <figure style="flex: 1; min-width: 200px; margin: 0;">
+    <img src="assets/ms-checker-contrast-detail.png"
+         alt="Screenshot of Microsoft's Accessibility Assistant detail view for 'Hard-to-read text contrast.' The message reads 'Current text color is hard to see. Consider a high contrast color so that the text is clearly visible.' Below are three suggested replacement colors, a 'More font colors' button, and a 'Text shading' button."
+         style="width: 100%; height: auto;" class="screenshot" />
+    <figcaption>The detail view offers suggested replacement colors, a font color picker, and text shading.</figcaption>
+  </figure>
+</div>
+<p>Unlike Ally, the Microsoft checker provides in-place remediation:
+clicking a suggested color applies the fix immediately. For contrast
+issues discovered before upload to the LMS, this is the most efficient
+fix workflow.</p>
+<h2 id="color-contrast-false-positive">Known False Positive: Image Contrast in Photographs</h2>
+<p>Ally claims to evaluate contrast
+within image files, but this feature is not working as advertised. When
+a photograph is uploaded (for example, a student's profile photo posted
+to a discussion board), Ally may flag it with "This image has contrast
+issues" and a reduced accessibility score. However, Ally cannot make the
+determinations required for a valid WCAG 1.4.3 test: it cannot
+distinguish text from non-text graphic content, and it cannot identify
+the font size or weight needed to determine which threshold applies
+(4.5:1 for normal text vs. 3:1 for large text). In the example below, a
+student uploaded a photo to a discussion post. Ally flagged the image at
+75% with a contrast warning. The likely trigger is the framed picture
+hanging on the wall behind the student, which Ally appears to have
+misidentified as text content.</p>
+<div style="display: flex; gap: 1.5em; flex-wrap: wrap; margin: 1em 0;">
+  <figure style="flex: 1; min-width: 200px; margin: 0;">
+    <img src="public/assets/student-discussion-photo.png"
+         alt="Photo of a student used in a Canvas discussion post. The student is wearing a green shirt and standing in front of a gold curtain with a framed picture on the wall. This image is based on a real student photo but has been heavily manipulated with AI to protect the student's privacy."
+         style="width: 100%; height: auto;" />
+    <figcaption>Student photo uploaded to a Canvas discussion post. Based on a real student photo, heavily manipulated with AI to protect the student's privacy.</figcaption>
+  </figure>
+  <figure style="flex: 1; min-width: 200px; margin: 0;">
+    <img src="public/assets/ally-image-contrast-warning.png"
+         alt="Screenshot of the Ally accessibility score panel for the student photo. The score is 75% with the message 'This image has contrast issues.' Below, Ally displays 'Guidance not available yet — We are updating the guidance for this issue.'"
+         style="width: 100%; height: auto;" />
+    <figcaption>Ally flags the photo at 75% with "This image has contrast issues." Guidance reads: "Guidance not available yet — We are updating the guidance for this issue."</figcaption>
+  </figure>
+</div>
+<p>Ally's own guidance panel confirms the limitation: it reads
+"Guidance not available yet — We are updating the guidance for
+this issue." This suggests the feature is under active development, but
+in its current state it produces false positives on photographic content.
+<strong>Do not take action on image contrast warnings in the
+Accessibility Dashboard.</strong> Until Ally can reliably distinguish
+text from non-text content within images and determine the applicable
+WCAG threshold, these flags should be noted but not treated as
+actionable issues.</p>
 <div class="summary">
 <p><strong>Automated vs. Manual Summary</strong></p>
 <ul>
 <li><strong>Automated tools catch:</strong> Text-on-background contrast
 ratios below 4.5:1 (normal text) or 3:1 (large text)</li>
-<li><strong>Manual review required:</strong> Text embedded in images,
-near-threshold branded templates, chart labels and annotations</li>
+<li><strong>Manual review required:</strong> Text embedded in images</li>
 </ul>
 </div>
 <div class="quick-check">
@@ -1239,7 +1486,7 @@ manually?</li>
 </div>
 <h2 id="color-as-sole-means-of-communication">Color as Sole Means of
 Communication</h2>
-<p><strong>WCAG 1.4.1 Use of Color (Level A).</strong> Color must not be
+<p><strong><a href="https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html">WCAG 1.4.1 Use of Color</a> (Level A).</strong> Color must not be
 the only visual means of conveying information, indicating an action,
 prompting a response, or distinguishing a visual element.</p>
 <p>This is a separate requirement from contrast and is <strong>not
@@ -1260,26 +1507,89 @@ equivalent</li>
 <!-- Scenario: Color as sole means | Error ID: E11 -->
 <table class="lab-compare">
   <thead>
-    <tr><th>Broken</th><th>Corrected</th></tr>
+    <tr><th scope="col">Broken</th><th scope="col">Corrected</th></tr>
   </thead>
   <tbody>
     <tr>
-      <td><!-- E11: Color as sole means -->
-        <p><span style="color: red;">Low</span><br><span style="color: green;">High</span></p>
-        <p><strong>What happens:</strong> Colorblind or grayscale user cannot distinguish meaning from color alone.</p>
+      <td><!-- E11: Color as sole means (default, no labels) -->
+        <img src="assets/color-sole-means-default.png" alt="Bar chart titled Performance Status showing four teams. Team A scores 72, Team B scores 95, Team C scores 95, Team D scores 65. Red bars represent below target and green bars represent above target, but no text labels or patterns distinguish the categories. Color is the only indicator of status.">
+        <p><strong>What happens:</strong> A student with a color vision deficiency cannot determine which teams are above or below target. Red vs. green is the only indicator.</p>
       </td>
-      <td><!-- E11: Corrected artifact (right) -->
-        <p><span class="legend low">Low</span> — <span class="legend high">High</span></p>
-        <p><strong>What happens:</strong> Text labels plus visual distinction; meaning not conveyed by color only.</p>
+      <td><!-- E11: Corrected (remediated, with labels) -->
+        <img src="assets/color-sole-means-remediated.png" alt="Bar chart titled Performance Status showing four teams with data labels. Team A: 75, Below target. Team B: 95, Above target. Team C: 95, Above target. Team D: 65, Below target. Each bar has a score and a text label indicating above or below target, so meaning does not depend on color alone.">
+        <p><strong>What happens:</strong> Every bar includes a score and a text label (Above target / Below target). The full meaning is available regardless of color perception.</p>
       </td>
+    </tr>
+    <tr>
+      <td>Color alone distinguishes above-target (green) from below-target (red). No text labels, no patterns, no data values on bars.</td>
+      <td>Data labels (75, 95, 95, 65) and text labels ("Above target" / "Below target") added to each bar. Meaning is preserved with or without color.</td>
     </tr>
   </tbody>
 </table>
 <!-- Detection: Manual only -->
+<h3 id="color-vision-simulation">Color vision simulation</h3>
+<p>The following simulations show how the broken and corrected charts
+appear to users with two common types of color vision deficiency.
+These are generated using color blindness simulation tools and represent
+what the chart would look like, not an approximation.</p>
+<p><strong>Deuteranopia</strong> (red-green color blindness) affects
+roughly 6% of males and is the most common form of color vision
+deficiency. <strong>Achromatopsia</strong> (total color blindness) is
+rare but represents the extreme case where all color information is
+lost.</p>
+<h4 id="deuteranopia-simulation">Deuteranopia (red-green color blindness)</h4>
+<table class="lab-compare">
+  <thead>
+    <tr><th scope="col">Broken (deuteranopia)</th><th scope="col">Corrected (deuteranopia)</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <img src="assets/color-sole-means-default-deuteranopia.png" alt="Deuteranopia simulation of the broken chart. All four bars appear as similar olive and dark gold tones. Without the red-green distinction, the bars are nearly indistinguishable. No text labels are present, so the student cannot determine which teams are above or below target.">
+        <p><strong>What happens:</strong> The red and green bars shift to similar olive and gold tones. Without labels, the student cannot tell which teams met the target.</p>
+      </td>
+      <td>
+        <img src="assets/color-sole-means-remediated-deuteranopia.png" alt="Deuteranopia simulation of the corrected chart. Bars appear in similar olive and dark gold tones, but each bar has a data label and text label: Team A 75 Below target, Team B 95 Above target, Team C 95 Above target, Team D 65 Below target. The text labels preserve the meaning despite the color shift.">
+        <p><strong>What happens:</strong> Colors shift the same way, but the data labels and "Above target" / "Below target" text still convey the full meaning.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>Red and green collapse to similar olive tones. A student with deuteranopia sees four bars of nearly the same color and has no way to determine status.</td>
+      <td>Same color shift, but the text labels make color irrelevant. The student reads "75, Below target" and "95, Above target" directly from the chart.</td>
+    </tr>
+  </tbody>
+</table>
+<h4 id="achromatopsia-simulation">Achromatopsia (total color blindness)</h4>
+<table class="lab-compare">
+  <thead>
+    <tr><th scope="col">Broken (achromatopsia)</th><th scope="col">Corrected (achromatopsia)</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <img src="assets/color-sole-means-default-achromatopsia.png" alt="Achromatopsia simulation of the broken chart. All four bars appear as similar medium gray tones. Without any color distinction and no text labels, the student cannot determine which teams are above or below target. All information encoded in color is completely lost.">
+        <p><strong>What happens:</strong> All color is gone. The four bars are nearly identical shades of gray. The status information is completely lost.</p>
+      </td>
+      <td>
+        <img src="assets/color-sole-means-remediated-achromatopsia.png" alt="Achromatopsia simulation of the corrected chart. All four bars appear as similar gray tones, but each bar has a data label and text label: Team A 75 Below target, Team B 95 Above target, Team C 95 Above target, Team D 65 Below target. Despite total color loss, the text labels preserve the full meaning.">
+        <p><strong>What happens:</strong> All color is gone, but the labels remain fully readable. The student gets the same information as a sighted user with typical color vision.</p>
+      </td>
+    </tr>
+    <tr>
+      <td>Total color loss. Four gray bars of similar brightness. A student with achromatopsia, or anyone viewing a grayscale printout, receives zero status information from this chart.</td>
+      <td>Same grayscale view, but the text labels are unaffected by color loss. "75, Below target" and "95, Above target" are as legible in grayscale as in full color.</td>
+    </tr>
+  </tbody>
+</table>
 <h3 id="what-to-look-for">What to look for</h3>
-<p>Any place where removing color would cause a loss of information. If
-a colorblind student printed the content in grayscale, would all the
-meaning still be present?</p>
+<p>Any place where removing color would cause a loss of information.
+The simulation above demonstrates the test: if the chart were printed
+in grayscale, would all the meaning still be present? For the broken
+version, the answer is no. For the corrected version, it is yes.</p>
+<p>This applies beyond charts. Look for color-coded rubrics, red/green
+feedback indicators, schedules where categories are distinguished only
+by color, and any visual element where a student who cannot perceive
+color would lose information.</p>
 <div class="callout">
 <p><strong>Key point.</strong> No automated tool checks for color as the
 sole means of communication. This issue is invisible to Ally, the
@@ -1308,8 +1618,8 @@ indicators?</li>
 </ul>
 </div>
 <h2 id="headings">Headings</h2>
-<p><strong>WCAG 1.3.1 Info and Relationships (Level A), 2.4.1 Bypass
-Blocks (Level A), 2.4.6 Headings and Labels (Level AA).</strong> Content
+<p><strong><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html">WCAG 1.3.1 Info and Relationships</a> (Level A), <a href="https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html">2.4.1 Bypass
+Blocks</a> (Level A), <a href="https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels.html">2.4.6 Headings and Labels</a> (Level AA).</strong> Content
 structure must be programmatically determinable. Headings must be
 present and descriptive.</p>
 <p>Heading issues are tied with text alternatives as the most frequently
@@ -1366,7 +1676,7 @@ or Tags panel (PDF)?</li>
 </ul>
 </div>
 <h2 id="tables">Tables</h2>
-<p><strong>WCAG 1.3.1 Info and Relationships (Level A).</strong>
+<p><strong><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html">WCAG 1.3.1 Info and Relationships</a> (Level A).</strong>
 Information and relationships conveyed through presentation must be
 programmatically determinable.</p>
 <p>Tables appear less frequently than images or headings (likelihood
@@ -1472,9 +1782,9 @@ a screen reader?</li>
 </ul>
 </div>
 <h2 id="language">Language</h2>
-<p><strong>WCAG 3.1.1 Language of Page (Level A).</strong> The default
+<p><strong><a href="https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html">WCAG 3.1.1 Language of Page</a> (Level A).</strong> The default
 human language of each page or document must be programmatically
-determinable. <strong>WCAG 3.1.2 Language of Parts (Level AA).</strong>
+determinable. <strong><a href="https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html">WCAG 3.1.2 Language of Parts</a> (Level AA).</strong>
 The language of each passage or phrase that differs from the document’s
 default language must be programmatically determinable.</p>
 <p>Language affects how screen readers pronounce content. When a
@@ -1596,7 +1906,7 @@ selections?</li>
 </ul>
 </div>
 <h2 id="seizure-risk">Seizure Risk</h2>
-<p><strong>WCAG 2.3.1 Three Flashes or Below Threshold (Level
+<p><strong><a href="https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold.html">WCAG 2.3.1 Three Flashes or Below Threshold</a> (Level
 A).</strong> Content must not contain anything that flashes more than
 three times per second.</p>
 <p>Seizure risk is the least common issue in course content (likelihood

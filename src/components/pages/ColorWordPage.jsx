@@ -6,7 +6,6 @@ import {
   CompareBoxes,
   RefTable,
   ResourceLink,
-  Placeholder,
 } from "@/components/content.jsx";
 
 function SH({ id, children }) {
@@ -49,7 +48,7 @@ export default function ColorWordPage() {
     <ContentPageLayout
       categorySlug="color"
       fileTypeSlug="word"
-      title="DRAFT - Color"
+      title="Color"
       subtitle="Word Documents"
     >
       <SH id="ally-error">The Ally Error</SH>
@@ -70,7 +69,7 @@ export default function ColorWordPage() {
         Insufficient contrast makes content exhausting or impossible to read
         for many users. Relying on light gray text on white, or colored text
         on a similar background, excludes students who rely on clear
-        distinction between text and background. WCAG 1.4.3 is Level AA
+        distinction between text and background.         <a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html" target="_blank" rel="noopener noreferrer">WCAG 1.4.3</a> is Level AA
         because of its broad impact.
       </P>
 
@@ -80,20 +79,42 @@ export default function ColorWordPage() {
       <Step number="2">On the <strong>Home</strong> tab, use <strong>Font Color</strong> to choose a darker color for text (or lighter on dark backgrounds).</Step>
       <Step number="3">Avoid using the default &quot;Automatic&quot; or very light grays on white; aim for black or dark gray (#333 or darker) on white for body text.</Step>
       <Step number="4">If you use highlighting, ensure the combination of highlight + text still meets 4.5:1.</Step>
-      <Placeholder label="Screenshot: Word Font Color and highlight options with a contrast-safe choice" />
 
       <H3>Using the Accessibility Checker</H3>
       <P>
         Word&apos;s built-in <strong>Review → Check Accessibility</strong>
         reports contrast issues and can help you locate problem passages
-        before uploading to your LMS.
+        before uploading to your LMS. For exact contrast ratios, use a free
+        desktop tool such as the Colour Contrast Analyser (CCA).
       </P>
+      <div style={{ display: "flex", gap: "1.5em", flexWrap: "wrap", margin: "1em 0" }}>
+        <figure style={{ flex: 1, minWidth: 200, margin: 0 }}>
+          <img
+            src="/assets/ms-checker-contrast-overview.png"
+            alt="Screenshot of Microsoft's Accessibility Assistant showing a Keep going! message and the Color and Contrast category listing Hard-to-read text contrast with a count of 1."
+            style={{ width: "100%", height: "auto" }}
+          />
+          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+            The Accessibility Assistant flags contrast under Color and Contrast.
+          </figcaption>
+        </figure>
+        <figure style={{ flex: 1, minWidth: 200, margin: 0 }}>
+          <img
+            src="/assets/ms-checker-contrast-detail.png"
+            alt="Screenshot of Microsoft's Accessibility Assistant detail view for Hard-to-read text contrast with suggested replacement colors, More font colors, and Text shading buttons."
+            style={{ width: "100%", height: "auto" }}
+          />
+          <figcaption style={{ fontSize: 13, color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+            The detail view offers suggested replacement colors and text shading.
+          </figcaption>
+        </figure>
+      </div>
 
       <SH id="color-as-sole-means">Color as Sole Means (1.4.1)</SH>
       <P>
         Ally does not flag when <strong>color alone</strong> conveys meaning
         (e.g. &quot;items in red are required&quot; with no other cue).
-        WCAG 1.4.1 requires that information not rely on color only. Ask:
+        <a href="https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html" target="_blank" rel="noopener noreferrer">WCAG 1.4.1</a> requires that information not rely on color only. Ask:
         would meaning be lost if the document were printed in grayscale? In
         Word, add text labels, icons, or patterns alongside color - for
         example, in rubrics use &quot;Needs work&quot; or a symbol in

@@ -374,7 +374,7 @@ export default function LanguageCanvasPage() {
         settings.
       </P>
       <P>
-        This means <strong>WCAG 3.1.1 (Language of Page) is handled
+        This means <strong><a href="https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html" target="_blank" rel="noopener noreferrer">WCAG 3.1.1 (Language of Page)</a> is handled
         automatically</strong> for anything authored in the Rich Content
         Editor. You do not need to do anything to satisfy it for regular
         Canvas content.
@@ -397,7 +397,7 @@ export default function LanguageCanvasPage() {
       {/* ── Language of Parts in the RCE ── */}
       <SH id="language-of-parts">Language of Parts in the RCE</SH>
       <P>
-        WCAG 3.1.2 (Language of Parts) requires that passages in a different
+        <a href="https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html" target="_blank" rel="noopener noreferrer">WCAG 3.1.2 (Language of Parts)</a> requires that passages in a different
         language than the page default be marked with their own language
         attribute. For example, a Spanish quotation on an English page should
         be wrapped in an element with <Code>lang=&quot;es&quot;</Code>.
@@ -789,8 +789,8 @@ export default function LanguageCanvasPage() {
       <P>
         The gap between the VPAT&apos;s conformance claim and the actual
         authoring experience is significant. An instructor creating
-        multilingual content in Canvas has no supported path to WCAG 3.1.2
-        compliance without editing raw HTML -- and no automated tool will
+        multilingual content in Canvas has no supported path to <a href="https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html" target="_blank" rel="noopener noreferrer">WCAG 3.1.2</a>
+        {" "}compliance without editing raw HTML -- and no automated tool will
         tell them they need to.
       </P>
       <Callout type="warning">
@@ -806,7 +806,7 @@ export default function LanguageCanvasPage() {
         Editor. As of this writing, the feature has not been implemented.
         If your institution needs to escalate this, contact
         {" "}<Code>accessibility@instructure.com</Code> and reference
-        WCAG 3.1.2.
+        <a href="https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html" target="_blank" rel="noopener noreferrer">WCAG 3.1.2</a>.
       </Callout>
 
       {/* ── Other Tools ── */}

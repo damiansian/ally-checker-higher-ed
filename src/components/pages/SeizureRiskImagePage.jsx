@@ -60,7 +60,7 @@ export default function SeizureRiskImagePage() {
       />
       <P>
         Ally flags image files (typically animated GIFs) that it detects as
-        containing rapid flashing. WCAG 2.3.1 requires that content does
+        containing rapid flashing. <a href="https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold.html" target="_blank" rel="noopener noreferrer">WCAG 2.3.1</a> requires that content does
         not flash more than three times per second, because such content
         can trigger seizures in people with photosensitive epilepsy.
       </P>

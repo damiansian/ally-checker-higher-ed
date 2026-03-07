@@ -102,7 +102,7 @@ export default function LanguagePowerPointPage() {
 
       <H3>Slides with content in another language</H3>
       <P>
-        WCAG 3.1.2 (Language of Parts) applies when a passage is in a
+        <a href="https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html" target="_blank" rel="noopener noreferrer">WCAG 3.1.2 (Language of Parts)</a> applies when a passage is in a
         different language than the page default. PowerPoint does not
         offer a built-in way to tag a selection or slide with a different
         language. Best practice is to note in the speaker notes or in the

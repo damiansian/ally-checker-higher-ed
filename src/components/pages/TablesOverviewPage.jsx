@@ -46,7 +46,7 @@ export default function TablesOverviewPage() {
         they belong to.
       </P>
       <P>
-        This category covers WCAG 1.3.1 (Info and Relationships, Level A).
+        This category covers WCAG <a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html" target="_blank" rel="noopener noreferrer">1.3.1 Info and Relationships</a> (Level A).
         Ally checks for table header issues in <strong>Word</strong>,{" "}
         <strong>PowerPoint</strong>, <strong>PDF</strong>, and{" "}
         <strong>Canvas</strong> files.

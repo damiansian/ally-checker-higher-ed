@@ -122,7 +122,7 @@ export default function TextAlternativesOverviewPage() {
         alternative text that describes its meaning in context.
       </P>
       <P>
-        This category covers WCAG 1.1.1 (Non-text Content, Level A). Ally
+        This category covers WCAG <a href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html" target="_blank" rel="noopener noreferrer">1.1.1 Non-text Content</a> (Level A). Ally
         checks for alt text in <strong>Word</strong>,{" "}
         <strong>PowerPoint</strong>, <strong>PDF</strong>,{" "}
         <strong>Canvas</strong>, and <strong>Image</strong> files. The pages

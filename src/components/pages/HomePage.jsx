@@ -416,9 +416,76 @@ export default function HomePage() {
           ))}
         </div>
 
+        {/* Ally Alternative Formats Guidance */}
+        <div style={{
+          marginTop: 48, padding: "28px 28px 24px", borderRadius: 14,
+          backgroundColor: t.amberBg,
+          border: `1px solid ${t.amberBorder}`,
+        }}>
+          <h2 style={{
+            fontSize: 18, fontWeight: 800, color: t.text,
+            fontFamily: "var(--font-display)",
+            letterSpacing: "-0.01em",
+            margin: "0 0 12px",
+          }}>
+            Ally Alternative Formats: Tagged PDF Reliability
+          </h2>
+          <p style={{
+            fontSize: 14.5, lineHeight: 1.65, color: t.text,
+            fontFamily: "var(--font-body)",
+            margin: "0 0 14px",
+          }}>
+            Ally generates alternative formats (HTML, ePub, braille, audio, Tagged PDF) for uploaded files. The reliability of Tagged PDF output is source-format dependent, not just source-quality dependent. Direct testing of fully accessible source files confirmed the following:
+          </p>
+          <table style={{
+            width: "100%", borderCollapse: "collapse",
+            fontSize: 14, fontFamily: "var(--font-display)",
+            margin: "0 0 16px",
+          }}>
+            <thead>
+              <tr style={{ borderBottom: `2px solid ${t.amberBorder}` }}>
+                <th scope="col" style={{ padding: "10px 14px 10px 0", fontWeight: 700, color: t.text, textAlign: "left" }}>Source Format</th>
+                <th scope="col" style={{ padding: "10px 14px", fontWeight: 700, color: t.text, textAlign: "left" }}>Tagged PDF Reliability</th>
+                <th scope="col" style={{ padding: "10px 14px", fontWeight: 700, color: t.text, textAlign: "left" }}>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: `1px solid ${t.amberBorder}` }}>
+                <td style={{ padding: "10px 14px 10px 0", color: t.text }}>Word (.docx)</td>
+                <td style={{ padding: "10px 14px", color: t.text, fontWeight: 600 }}>Acceptable</td>
+                <td style={{ padding: "10px 14px", color: t.textSecondary }}>Document model transfers cleanly</td>
+              </tr>
+              <tr style={{ borderBottom: `1px solid ${t.amberBorder}` }}>
+                <td style={{ padding: "10px 14px 10px 0", color: t.text }}>PowerPoint (.pptx)</td>
+                <td style={{ padding: "10px 14px", color: t.amber, fontWeight: 700 }}>Poor</td>
+                <td style={{ padding: "10px 14px", color: t.textSecondary }}>Multiple conversion failures even from fully accessible sources</td>
+              </tr>
+              <tr>
+                <td style={{ padding: "10px 14px 10px 0", color: t.text }}>PDF</td>
+                <td style={{ padding: "10px 14px", color: t.textSecondary, fontWeight: 600 }}>No value</td>
+                <td style={{ padding: "10px 14px", color: t.textSecondary }}>No richer source data to work from</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style={{
+            fontSize: 14, lineHeight: 1.65, color: t.text,
+            fontFamily: "var(--font-body)",
+          }}>
+            <p style={{ margin: "0 0 10px" }}>
+              <strong style={{ fontFamily: "var(--font-display)" }}>Practitioner guidance:</strong>
+            </p>
+            <ul style={{ margin: 0, paddingLeft: "1.25em" }}>
+              <li style={{ marginBottom: 6 }}>Tagged PDF is only a reliable alternative format workflow when the source is a Word document.</li>
+              <li style={{ marginBottom: 6 }}>PowerPoint instructors should not rely on Tagged PDF as an accessibility fallback for students. The conversion can introduce inaccessible content not present in the source, including raw SVG path data exposed as text, empty Figure tags, and inconsistent heading structure.</li>
+              <li style={{ marginBottom: 6 }}>PDF-to-tagged-PDF conversion has no value as an alternative format workflow.</li>
+              <li style={{ marginBottom: 6 }}>For PowerPoint content, instructors should fix the source file directly. If an alternative format is needed, Semantic HTML or ePub may be worth evaluating as options with better structural fidelity than Tagged PDF.</li>
+            </ul>
+          </div>
+        </div>
+
         {/* Footer note */}
         <div style={{
-          marginTop: 48, padding: "20px 24px", borderRadius: 10,
+          marginTop: 24, padding: "20px 24px", borderRadius: 10,
           backgroundColor: t.surfaceAlt,
           border: `1px solid ${t.border}`,
           fontSize: 14, lineHeight: 1.6, color: t.textSecondary,

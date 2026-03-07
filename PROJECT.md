@@ -6,6 +6,21 @@ All agent responses must begin with: ♿🧠
 
 # Project: Canvas LMS Accessibility — "Getting to 100"
 
+## In this document
+
+- [Purpose](#purpose)
+- [Audience](#audience)
+- [Three Outputs](#three-outputs)
+- [Writing Style](#writing-style)
+- [Accessibility is Non-Negotiable](#accessibility-is-non-negotiable)
+- [Content Categories](#content-categories)
+- [Tech Stack (Astro site)](#tech-stack-astro-site)
+- [Agent Roles](#agent-roles)
+- [Pre-Completion Gate](#pre-completion-gate)
+- [Known Issues / Constraints](#known-issues--constraints)
+
+---
+
 ## Purpose
 
 A workshop and reference project for higher education instructors on fixing accessibility
@@ -41,6 +56,8 @@ Its CSS styling is irrelevant to the Word output — only the semantic HTML stru
 ---
 
 ## Accessibility is Non-Negotiable
+
+> **In this section:** [Astro site requirements](#astro-site-requirements) · [Workshop HTML doc requirements](#workshop-html-doc-requirements) · [Intentional accessibility issues](#intentional-accessibility-issues)
 
 **Standard: WCAG 2.2 Level AA throughout — in the site, in the workshop doc, in the slide deck.**
 
@@ -93,6 +110,8 @@ Defined in `src/components/data.js`. Six categories in the Astro site; eight in 
 
 ## Tech Stack (Astro site)
 
+> **In this section:** [Key architectural patterns](#key-architectural-patterns) · [Key commands](#key-commands)
+
 - **Framework**: Astro 4 + React 19 (islands, `client:load`)
 - **Styling**: Inline styles via theme tokens from `useTheme()` — no CSS framework
 - **Theming**: `src/components/theme.jsx` — ThemeProvider + light/dark token system
@@ -120,6 +139,8 @@ npm run contrast-check  # standalone contrast validation
 ---
 
 ## Agent Roles
+
+> **In this section:** [Inter-agent rules](#inter-agent-rules)
 
 Multiple AI agents contribute to this project. Respect these lanes:
 

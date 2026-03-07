@@ -49,8 +49,9 @@ export default function SemanticStructureOverviewPage() {
         is not marked as a list is invisible to that structure.
       </P>
       <P>
-        This category covers WCAG 1.3.1 (Info and Relationships), 2.4.1
-        (Bypass Blocks), and 2.4.6 (Headings and Labels). Ally checks for
+        This category covers WCAG <a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html" target="_blank" rel="noopener noreferrer">1.3.1 Info and Relationships</a>,{" "}
+        <a href="https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html" target="_blank" rel="noopener noreferrer">2.4.1 Bypass Blocks</a>, and{" "}
+        <a href="https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels.html" target="_blank" rel="noopener noreferrer">2.4.6 Headings and Labels</a>. Ally checks for
         headings, titles, and list structure in <strong>Word</strong>,{" "}
         <strong>PowerPoint</strong>, <strong>PDF</strong>, and{" "}
         <strong>Canvas</strong> files.

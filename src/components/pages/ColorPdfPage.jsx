@@ -49,7 +49,7 @@ export default function ColorPdfPage() {
     <ContentPageLayout
       categorySlug="color"
       fileTypeSlug="pdf"
-      title="DRAFT - Color"
+      title="Color"
       subtitle="PDF"
     >
       <SH id="ally-error">The Ally Error</SH>
@@ -95,7 +95,7 @@ export default function ColorPdfPage() {
       <SH id="color-as-sole-means">Color as Sole Means (1.4.1)</SH>
       <P>
         Ally does not flag when color alone conveys information in a PDF.
-        WCAG 1.4.1 requires other cues. Fix in the source document: add text
+        <a href="https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html" target="_blank" rel="noopener noreferrer">WCAG 1.4.1</a> requires other cues. Fix in the source document: add text
         labels, legends, or patterns so that charts, rubrics, and
         color-coded content are understandable in grayscale or without
         relying on color. Then re-export to PDF.

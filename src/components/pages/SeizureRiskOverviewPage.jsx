@@ -42,7 +42,7 @@ export default function SeizureRiskOverviewPage() {
       <SH id="overview">Overview</SH>
       <P>
         Flashing or rapidly animated content can trigger seizures in students
-        with photosensitive epilepsy. WCAG 2.3.1 requires that content does
+        with photosensitive epilepsy. WCAG <a href="https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold.html" target="_blank" rel="noopener noreferrer">2.3.1</a> requires that content does
         not flash more than three times per second.
       </P>
       <P>

@@ -296,9 +296,9 @@ export default function LanguageWordPage() {
           Character-level language vs. document-level language
         </div>
         Because Word stores language per text run rather than per document,
-        WCAG 3.1.1 (Language of Page) does not map cleanly to Word documents.
+        <a href="https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html" target="_blank" rel="noopener noreferrer">WCAG 3.1.1 (Language of Page)</a> does not map cleanly to Word documents.
         Ally treats the predominant language of the text as the
-        &quot;document language.&quot; WCAG 3.1.2 (Language of Parts) maps
+        &quot;document language.&quot; <a href="https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html" target="_blank" rel="noopener noreferrer">WCAG 3.1.2 (Language of Parts)</a> maps
         more naturally: each passage in a different language should have the
         correct language assigned to its text run.
       </Callout>
@@ -587,7 +587,7 @@ export default function LanguageWordPage() {
       <P>
         To fix the language of a specific passage in Word, select the text and
         assign the correct proofing language. This is the equivalent of
-        WCAG 3.1.2 (Language of Parts) for Word documents.
+        <a href="https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html" target="_blank" rel="noopener noreferrer">WCAG 3.1.2 (Language of Parts)</a> for Word documents.
       </P>
       <Step number="1">Select the text that is in a different language.</Step>
       <Step number="2">

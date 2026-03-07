@@ -139,8 +139,8 @@ export default function LanguageOverviewPage() {
         incomprehensible string of mangled syllables.
       </P>
       <P>
-        This category covers WCAG 3.1.1 (Language of Page, Level A) and
-        WCAG 3.1.2 (Language of Parts, Level AA). Ally checks for language
+        This category covers WCAG <a href="https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html" target="_blank" rel="noopener noreferrer">3.1.1 Language of Page</a> (Level A) and
+        WCAG <a href="https://www.w3.org/WAI/WCAG22/Understanding/language-of-parts.html" target="_blank" rel="noopener noreferrer">3.1.2 Language of Parts</a> (Level AA). Ally checks for language
         attributes in <strong>Word</strong>, <strong>PDF</strong>, and{" "}
         <strong>Canvas</strong> files, but detection is unreliable for
         Word and PDF. The pages in this section walk through each file type

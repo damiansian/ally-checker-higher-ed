@@ -1,5 +1,36 @@
 import { useTheme } from "./theme";
 
+// WCAG 2.2 Understanding doc slug lookup
+const WCAG_SLUGS = {
+  "1.1.1": "non-text-content",
+  "1.3.1": "info-and-relationships",
+  "1.4.1": "use-of-color",
+  "1.4.3": "contrast-minimum",
+  "1.4.6": "contrast-enhanced",
+  "1.4.11": "non-text-contrast",
+  "2.3.1": "three-flashes-or-below-threshold",
+  "2.4.1": "bypass-blocks",
+  "2.4.6": "headings-and-labels",
+  "3.1.1": "language-of-page",
+  "3.1.2": "language-of-parts",
+};
+
+export function wcagUrl(scNumber) {
+  const slug = WCAG_SLUGS[scNumber];
+  return slug
+    ? `https://www.w3.org/WAI/WCAG22/Understanding/${slug}.html`
+    : null;
+}
+
+function WcagLink({ text }) {
+  const match = typeof text === "string" && text.match(/^(\d+\.\d+\.\d+)/);
+  const url = match && wcagUrl(match[1]);
+  if (!url) return <>WCAG {text}</>;
+  return (
+    <>WCAG <a href={url} target="_blank" rel="noopener noreferrer" style={{ color: "inherit" }}>{text}</a></>
+  );
+}
+
 // ── Ally Error Callout ──────────────────────────────────────
 export function AllyErrorBox({ message, severity, wcag }) {
   const { t } = useTheme();
@@ -55,7 +86,7 @@ export function AllyErrorBox({ message, severity, wcag }) {
             </>
           )}
           {severity && wcag && " · "}
-          {wcag && <>WCAG {wcag}</>}
+          {wcag && <WcagLink text={wcag} />}
         </div>
       )}
     </div>

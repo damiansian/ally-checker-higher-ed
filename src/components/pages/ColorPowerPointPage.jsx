@@ -49,7 +49,7 @@ export default function ColorPowerPointPage() {
     <ContentPageLayout
       categorySlug="color"
       fileTypeSlug="powerpoint"
-      title="DRAFT - Color"
+      title="Color"
       subtitle="PowerPoint Presentations"
     >
       <SH id="ally-error">The Ally Error</SH>
@@ -91,8 +91,8 @@ export default function ColorPowerPointPage() {
       <SH id="color-as-sole-means">Color as Sole Means (1.4.1)</SH>
       <P>
         Ally does not flag when color alone conveys meaning (e.g. &quot;green
-        = go, red = stop&quot; on a slide with no other cue). WCAG 1.4.1
-        requires other cues. Ask: would meaning be lost in grayscale? In
+        = go, red = stop&quot; on a slide with no other cue). <a href="https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html" target="_blank" rel="noopener noreferrer">WCAG 1.4.1</a>
+        {" "}requires other cues. Ask: would meaning be lost in grayscale? In
         PowerPoint, add text labels or icons to charts and diagrams - for
         example, label chart series or use patterns in addition to color so
         slide content is understandable without color.
