@@ -51,6 +51,7 @@ h2 {
 }
 h3 { font-size: 1.2rem; color: var(--text); }
 h4 { font-size: 1.08rem; }
+h5 { font-size: 1rem; color: var(--accent); margin-top: 1.5rem; margin-bottom: 0.5rem; }
 p { margin: 0.75rem 0; }
 strong { color: var(--text); }
 blockquote {
@@ -160,6 +161,16 @@ table.lab-compare img { max-width: 100%; height: auto; border: 1px solid #ddd; }
 img.screenshot { border: 1px solid #000; }
 .legend.low { color: #b91c1c; font-weight: 600; }
 .legend.high { color: #15803d; font-weight: 600; }
+
+/* Sequential example blocks (Broken then Fixed) */
+.example-block { margin: 1em 0; }
+.example-broken { background: #f8f8f8; }
+.example-fixed { background: #f8f8f8; }
+.example-block h5 { margin: 0 0 0.5rem 0; font-family: 'Source Sans 3', system-ui, sans-serif; font-size: 1rem; font-weight: 700; color: #222; }
+.example-block table { margin: 0.5rem 0 0.75rem 0; border-collapse: collapse; font-size: 0.9rem; }
+.example-block table td, .example-block table th { border: 1px solid #000; padding: 4px 8px; }
+.example-block table thead th { background: #d9d9d9; font-weight: 700; color: #000; text-align: left; }
+.example-block table tr td { background: #fff; }
 </style>
 </head>
 <body>
@@ -178,9 +189,11 @@ img.screenshot { border: 1px solid #000; }
 <li><a href="#text-alternatives">Text Alternatives</a></li>
 <li><a href="#color-contrast">Color Contrast</a></li>
 <li><a href="#color-contrast-false-positive">Known False Positive: Image Contrast in Photographs</a></li>
+<li><a href="#known-false-positive">Known False Positive: Alt Text of 120 Characters</a></li>
 <li><a href="#color-as-sole-means-of-communication">Color as Sole Means of Communication</a></li>
 <li><a href="#headings">Headings</a></li>
 <li><a href="#tables">Tables</a></li>
+<li><a href="#table-captions">Known False Positive: Table Captions</a></li>
 <li><a href="#lists">Lists</a></li>
 <li><a href="#language">Language</a></li>
 <li><a href="#seizure-risk">Seizure Risk</a></li>
@@ -192,17 +205,24 @@ opportunity for access, or a barrier to it. Students who use screen
 readers, magnification, voice control, or other assistive technologies
 depend on content that is structured and authored with accessibility in
 mind.</p>
-<p>The Web Content Accessibility Guidelines (WCAG) 2.2 Level AA is the
-standard that governs digital accessibility in higher education. It
-applies not just to websites but to every file uploaded or created in
-the LMS: Word documents, PowerPoint presentations, PDFs, and Canvas
-pages.</p>
+<p>The Web Content Accessibility Guidelines (WCAG) provide the framework
+for digital accessibility in higher education. The current legal
+baseline in the United States is <strong>WCAG 2.1 Level AA</strong>,
+codified by the DOJ's April 2024 ADA Title II final rule (with
+compliance deadlines in 2026–2027). <strong>WCAG 2.2</strong>, the
+latest W3C Recommendation, extends 2.1 with additional success criteria
+and is the standard practitioners should target. Both versions apply
+not just to websites but to every file uploaded or created in the LMS:
+Word documents, PowerPoint presentations, PDFs, and Canvas pages.</p>
 <p>Accessibility checkers like <strong>Anthology Ally</strong>
 (integrated into Canvas LMS), <strong>Microsoft’s built-in Accessibility
 Checker</strong>, and <strong>Adobe Acrobat’s Accessibility
 Check</strong> can help identify issues, but each has significant blind
-spots. Research consistently shows that automated tools catch roughly
-<strong>57% of accessibility barriers</strong>.<a href="#fn1"
+spots. Estimates of what automated tools can catch vary widely by
+methodology: studies have reported figures ranging from roughly
+<strong>25% to 57%</strong> of accessibility barriers, with the higher
+end coming from a 2021 Deque Systems analysis of issues detectable by
+their axe-core engine.<a href="#fn1"
 class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The
 rest require human judgment: Is this alt text actually meaningful? Does
 the heading structure reflect the content’s logic? Will a screen reader
@@ -217,7 +237,7 @@ cannot evaluate whether those features are meaningful. The remaining
 barriers, the ones that determine whether a student can actually use the
 content, require human inspection and manual testing.</p>
 <p>This reference covers the accessibility issues most common in course
-content, organized around seven areas drawn from WCAG success criteria.
+content, organized around eight areas drawn from WCAG success criteria.
 For each, this reference describes what automated tools detect, what
 they miss, and what instructional designers and faculty need to verify
 manually.</p>
@@ -250,7 +270,7 @@ manually.</p>
 <td>4 / 5</td>
 </tr>
 <tr>
-<td>Headings &amp; Structure</td>
+<td>Semantic Structure (Headings &amp; Lists)</td>
 <td>1.3.1, 2.4.1, 2.4.6</td>
 <td>5 / 5</td>
 <td>4 / 5</td>
@@ -363,9 +383,9 @@ part of assignment criteria, even lightly (such as “include alt text for
 any images in your post”), it becomes part of the learning culture
 rather than an afterthought.</li>
 </ul>
-<h2>Accessibility is not a compliance task delegated to one role. It is a
+<p>Accessibility is not a compliance task delegated to one role. It is a
 baseline expectation for participation in a shared learning
-environment.</h2>
+environment.</p>
 <h2 id="two-types-of-accessibility-issues">Two Types of Accessibility
 Issues</h2>
 <p>Clearing every issue in Anthology Ally is a great place to start for
@@ -376,7 +396,8 @@ issues where human review is required.</p>
 <p><strong>Automated testing failures</strong> are issues that tools
 like Ally can detect programmatically: a missing alt text attribute,
 text contrast below 4.5:1, an improperly nested heading tag, a table
-with no designated headers. These are structural, binary checks. The
+with no designated headers, a faked list (dashes or numbers typed
+manually instead of list markup). These are structural, binary checks. The
 attribute exists or it doesn’t. The ratio passes or it doesn’t.
 Automated tools are reliable and efficient at catching these issues, and
 they should always be the first step.</p>
@@ -412,6 +433,8 @@ effective at catching:</p>
 <li>Insufficient color contrast ratios on text</li>
 <li>Skipping heading levels</li>
 <li>Tables without designated header rows</li>
+<li>Faked lists (content that looks like a list but uses manual bullets,
+dashes, or numbers instead of proper list styles)</li>
 </ul>
 <p>Beyond detection, Ally provides two additional features that support
 accessibility workflows:</p>
@@ -432,7 +455,7 @@ the Tagged PDF alternative format is source-format dependent, not just
 source-quality dependent. Word documents generally convert to tagged PDF
 with acceptable fidelity because the document model maps cleanly.
 PowerPoint sources produce unreliable tagged PDF output even when the
-source file is fully accessible and passes Microsoft’s Accessibility
+source file is fully accessible and passes Microsoft's Accessibility
 Checker. Direct testing confirmed that the conversion can introduce
 inaccessible content not present in the source, including raw SVG path
 data exposed as text and empty Figure tags with no alt text.
@@ -591,6 +614,8 @@ description is clearly a file path.</li>
 pass)</li>
 <li>Color contrast in document content</li>
 <li>Reading order problems</li>
+<li>Faked lists (manually typed bullets, dashes, or numbers instead of
+list styles)</li>
 </ul>
 <p><strong>Best practice:</strong> Run the Microsoft Accessibility
 Checker before uploading to Canvas. It complements Ally by catching
@@ -720,6 +745,7 @@ linked long description.</li>
 <li><strong>SmartArt and grouped shapes.</strong> In Word and
 PowerPoint, SmartArt graphics and grouped shapes may not trigger an alt
 text flag even when they contain meaningful content.</li>
+<li><strong>Images of text.</strong> Screenshots of text-heavy content (slides, PDFs, spreadsheets) will pass Ally once alt text is added, but the image itself is the problem. The fix is usually to present the information as real text rather than an image.</li>
 </ul>
 <h3 id="broken-examples-and-how-to-fix-them">Broken Examples and How to
 Fix Them</h3>
@@ -734,28 +760,28 @@ Accessibility Check.</p>
 <div class="summary">
 <p><strong>In this section:</strong></p>
 <ul>
-<li><a href="#scenario-1-no-alt-text">Scenario 1: No alt text</a> ·
+<li><a href="#scenario-1-no-alt-text">Scenario 1: No alt text</a> -
 Detected by all tools</li>
 <li><a href="#scenario-2-ai-generated-alt-text">Scenario 2: AI-generated
-alt text</a> · Detected by MS Checker only</li>
+alt text</a> - Detected by MS Checker only</li>
 <li><a href="#scenario-3-file-name-as-alt-text">Scenario 3: File name as
-alt text</a> · Detected by Ally and MS Checker</li>
+alt text</a> - Detected by Ally and MS Checker</li>
 <li><a
 href="#scenario-4-decorative-image-not-marked-as-decorative">Scenario 4:
-Decorative image not marked</a> · Not detected by any tool</li>
+Decorative image not marked</a> - Not detected by any tool</li>
 <li><a href="#scenario-5-vague-alt-text">Scenario 5: Vague alt text</a>
-· Not detected by any tool</li>
+- Not detected by any tool</li>
 <li><a href="#scenario-6-gibberish-or-placeholder-alt-text">Scenario 6:
-Gibberish or placeholder alt text</a> · Not detected by any tool</li>
+Gibberish or placeholder alt text</a> - Not detected by any tool</li>
 <li><a
 href="#scenario-7-alt-text-over-120-characters-canvas-false-positive">Scenario
-7: Alt text over ~120 characters</a> · False positive (Canvas only)</li>
+7: Alt text over ~120 characters</a> - False positive (Canvas only)</li>
 <li><a href="#complex-images">Complex images</a></li>
 <li><a href="#known-false-positive">Known False Positive: Alt Text of 120 Characters</a></li>
 </ul>
 </div>
 <hr />
-<h4 id="scenario-1-no-alt-text">Scenario 1: No alt text</h4>
+<h4 id="scenario-1-no-alt-text">Scenario 1: No alt text (Ally catches)</h4>
 <p><strong>The broken state.</strong> An image is inserted into a
 document, slide, page, or PDF with no alt text at all. This is the most
 basic and most common text alternative failure.</p>
@@ -768,7 +794,7 @@ basic and most common text alternative failure.</p>
     <tr>
       <td><!-- E1: Missing alt text -->
         <img src="assets/chart1.png">
-        <p><strong>What happens:</strong> Screen reader announces "Graphic" or the file name, with no information conveyed.</p>
+        <p><strong>What happens:</strong> Screen reader announces "Graphic" or the file name - no information conveyed.</p>
       </td>
       <td><!-- E1: Corrected artifact (right) -->
         <img src="assets/chart1.png" alt="Grouped bar chart comparing Quiz 1 and Quiz 2 averages across three sections. Section 1: 85% and 82%. Section 2: 83% and 81%. Section 3: 85% and 82%.">
@@ -791,7 +817,7 @@ basic and most common text alternative failure.</p>
     <tr>
       <td><!-- E2: File name as alt text -->
         <img src="assets/enrollment.png" alt="IMG_3847.png">
-        <p><strong>What happens:</strong> Screen reader announces "Graphic. IMG_3847.png," and the student gets no data.</p>
+        <p><strong>What happens:</strong> Screen reader announces "Graphic. IMG_3847.png" - student gets no data.</p>
       </td>
       <td><!-- E2: Corrected artifact (right) -->
         <img src="assets/enrollment.png" alt="Line graph showing a steady increase in online course enrollment from 12,000 in Fall 2020 to 28,500 in Fall 2025.">
@@ -871,8 +897,7 @@ field.</li>
 </ol>
 <p><em>[PLACEHOLDER: Screenshot, Acrobat Set Alternate Text dialog]</em></p>
 <hr />
-<h4 id="scenario-2-ai-generated-alt-text">Scenario 2: AI-generated alt
-text</h4>
+<h4 id="scenario-2-ai-generated-alt-text">Scenario 2: AI-generated alt text (Ally doesn't catch)</h4>
 <p><strong>The broken state.</strong> Microsoft Office auto-generates a
 description when an image is inserted (e.g., “A group of people sitting
 at a table with laptops”). The description may be partially accurate but
@@ -928,8 +953,7 @@ the source document or it is added manually in Acrobat. Canvas does
 have the option to generate alt text in the Dashboard remediation
 process, but not directly in the Rich Content Editor.</p>
 <hr />
-<h4 id="scenario-3-file-name-as-alt-text">Scenario 3: File name as alt
-text</h4>
+<h4 id="scenario-3-file-name-as-alt-text">Scenario 3: File name as alt text (Ally catches)</h4>
 <p><strong>The broken state.</strong> The alt text field contains the
 image’s file name (e.g., “IMG_3847.png”, “chart_final_v2.jpg”,
 “C:.png”). This typically happens when an image is inserted and the
@@ -947,7 +971,7 @@ Checker. Acrobat does not flag this.</p>
     <tr>
       <td><!-- E2: File name as alt text -->
         <img src="assets/enrollment.png" alt="IMG_3847.png">
-        <p><strong>What happens:</strong> Screen reader announces "Graphic. IMG_3847.png," and the student gets no data.</p>
+        <p><strong>What happens:</strong> Screen reader announces "Graphic. IMG_3847.png" - student gets no data.</p>
       </td>
       <td><!-- E2: Corrected artifact (right) -->
         <img src="assets/enrollment.png" alt="Line graph showing a steady increase in online course enrollment from 12,000 in Fall 2020 to 28,500 in Fall 2025.">
@@ -972,8 +996,7 @@ descriptions” (Minor)</li>
 each platform. Delete the file name and replace it with a meaningful
 description of the image.</p>
 <hr />
-<h4 id="scenario-4-decorative-image-not-marked-as-decorative">Scenario
-4: Decorative image not marked as decorative</h4>
+<h4 id="scenario-4-decorative-image-not-marked-as-decorative">Scenario 4: Decorative image not marked as decorative (Ally doesn't catch)</h4>
 <p><strong>The broken state.</strong> A decorative image (a divider
 line, a background texture, a branding banner, a purely visual flourish)
 has either no alt text or a description like “decorative line” or
@@ -1034,7 +1057,7 @@ removes the image from the tag tree so screen readers skip it.</li>
 <p>See <a href="https://helpx.adobe.com/acrobat/using/editing-document-structure-content-tags.html">Edit document structure with the Content and Tags panels</a> on Adobe HelpX for full details.</p>
 <p><img class="screenshot" src="assets/acrobat-create-artifact.png" alt="Screenshot of Acrobat Create Artifact dialog: Artifact Type options (Page selected, Pagination, Layout), Attach to Side(s) checkboxes (Left, Top, Right, Bottom), and Cancel/OK buttons. Used when marking a decorative image as artifact so screen readers skip it."></p>
 <hr />
-<h4 id="scenario-5-vague-alt-text">Scenario 5: Vague alt text</h4>
+<h4 id="scenario-5-vague-alt-text">Scenario 5: Vague alt text (Ally doesn't catch)</h4>
 <p><strong>The broken state.</strong> The alt text field contains a
 description that is technically present but too vague to be useful.
 Examples: “chart,” “Quiz comparison chart,” “photo,” “graph of data.” A
@@ -1123,8 +1146,7 @@ Screen readers already announce the element as an image, so these labels
 are redundant and add noise without meaning.</p>
 </div>
 <hr />
-<h4 id="scenario-6-gibberish-or-placeholder-alt-text">Scenario 6:
-Gibberish or placeholder alt text</h4>
+<h4 id="scenario-6-gibberish-or-placeholder-alt-text">Scenario 6: Gibberish or placeholder alt text (Ally doesn't catch)</h4>
 <p><strong>Gibberish or placeholder alt text</strong></p>
 <!-- Scenario: Gibberish/placeholder alt | Error ID: E5 -->
 <table class="lab-compare">
@@ -1135,7 +1157,7 @@ Gibberish or placeholder alt text</h4>
     <tr>
       <td><!-- E5: Gibberish / placeholder alt -->
         <img src="assets/photo1.png" alt="alskjshdsflh">
-        <p><strong>What happens:</strong> Screen reader announces "alskjshdsflh," and the student gains nothing.</p>
+        <p><strong>What happens:</strong> Screen reader announces "alskjshdsflh" - student gains nothing.</p>
       </td>
       <td><!-- E5: Corrected artifact (right) -->
         <img src="assets/photo1.png" alt="Course instructor at podium during workshop session.">
@@ -1187,19 +1209,7 @@ id="scenario-7-alt-text-over-120-characters-canvas-false-positive">Scenario
   </tbody>
 </table>
 <!-- Detection: Ally (false positive) -->
-<p><strong>The broken state.</strong> This is not actually broken. The
-alt text is accurate and meaningful but exceeds approximately 120
-characters. Ally flags this in the Canvas Rich Content Editor as an
-issue. There is no WCAG basis for a character limit on alt text, nor any detriment for screen reader users.</p>
-<p><strong>Detected by:</strong> Ally (Canvas only). This is a
-<strong>false positive</strong>.</p>
-<p><strong>How to handle:</strong> Do not shorten the description to
-clear the flag. If the description needs to be long to be accurate
-(common for charts, graphs, and complex images), keep it as written.
-Note the Ally flag but do not treat it as a real issue. This will not show up in the Accessibility Dashboard in a way that impacts your overall score.</p>
-<p>For very long descriptions (multiple paragraphs), consider placing a
-brief alt text on the image and providing the full description in the
-body text below the image, or linking to a long description.</p>
+<p><strong>Detected by:</strong> Ally (Canvas only). This is a <strong>false positive</strong>. The description is accurate and complete; Ally flags it only because it exceeds approximately 120 characters. There is no WCAG basis for this limit. See <a href="#known-false-positive">Known False Positive</a> below for full details.</p>
 <hr />
 <h3 id="complex-images">Complex images</h3>
 <p>Charts, graphs, diagrams, infographics, and other complex images
@@ -1220,6 +1230,7 @@ approximately 120 characters. There is no WCAG basis for a character
 limit on alt text. Do not shorten a description that needs to be long to
 be accurate.</p>
 <p><img class="screenshot" src="assets/canvas-ally-alt-text-length-warning.png" alt="Screenshot of the Canvas Accessibility Checker showing Issue 1 of 1: 'Alt attribute text should not contain more than 120 characters.' The Change alt text field displays a grouped bar graph description that exceeds the limit. Prev, Next, and Apply buttons appear at the bottom."></p>
+<p><strong>How to handle:</strong> Keep the description as written. Note the Ally flag but do not treat it as a real issue. It will not affect your overall score in the Accessibility Dashboard. For very long descriptions (multiple paragraphs), provide a brief identifying alt text on the image and include the full description in the body text immediately below it, or link to a separate long description.</p>
 <div class="callout">
 <p><strong>Key point.</strong> Ally checks that alt text
 <em>exists</em>. It does not check that alt text is <em>accurate</em>,
@@ -1233,7 +1244,7 @@ text, and vague labels all pass.</p>
 as alt text</li>
 <li><strong>Manual review required:</strong> Alt text quality,
 decorative image identification, complex image descriptions, SmartArt
-and grouped shapes</li>
+and grouped shapes, images of text</li>
 </ul>
 </div>
 <div class="quick-check">
@@ -1341,7 +1352,7 @@ whether automated tools detect it.</p>
   <tbody>
     <tr>
       <td>
-        <img class="screenshot" src="public/assets/chart-contrast-example.png" alt="Line chart with three data series across four categories. Series 1 (light pink, #F1B4A4): 4.3, 2.5, 3.5, 4.5. Series 2 (orange): 2.4, 4.4, 1.8, 2.8. Series 3 (dark brown): 2, 2, 3, 5. The Series 1 line color has a contrast ratio of only 1.8:1 against the white background, failing the 3:1 minimum for non-text graphic elements.">
+        <img class="screenshot" src="assets/chart-contrast-example.png" alt="Line chart with three data series across four categories. Series 1 (light pink, #F1B4A4): 4.3, 2.5, 3.5, 4.5. Series 2 (orange): 2.4, 4.4, 1.8, 2.8. Series 3 (dark brown): 2, 2, 3, 5. The Series 1 line color has a contrast ratio of only 1.8:1 against the white background, failing the 3:1 minimum for non-text graphic elements.">
         <p><strong>Contrast ratio:</strong> 1.8:1 &middot; <strong>Color:</strong> #F1B4A4 &middot; <strong>Required:</strong> 3:1</p>
         <p><strong>What happens:</strong> The light pink data series is nearly invisible against a white background for users with low vision or color deficiencies. No automated tool flags it.</p>
       </td>
@@ -1364,7 +1375,7 @@ whether automated tools detect it.</p>
     </tr>
   </tbody>
 </table>
-<p><strong>Detected by:</strong> No automated tool. Neither Ally nor the Microsoft Accessibility Checker flag graphic element contrast failures. <a href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html">WCAG 1.4.11 Non-text Contrast</a> (Level AA) requires a minimum 3:1 ratio for meaningful graphic elements (chart lines, bar fills, icons). Manual review with a tool like the <a href="https://www.tpgi.com/color-contrast-checker/">Colour Contrast Analyser</a> is required.</p>
+<p><strong>Detected by:</strong> No automated tool. Neither Ally nor the Microsoft Accessibility Checker flag graphic element contrast failures. <a href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html">WCAG 1.4.11 Non-text Contrast</a> (Level AA) requires a minimum 3:1 ratio for meaningful graphic elements (chart lines, bar fills, icons). Manual review with a tool like the Colour Contrast Analyser is required.</p>
 <div class="callout">
 <p><strong>Key point.</strong> Automated tools catch text contrast
 but miss graphic element contrast entirely. Chart lines, bar fills,
@@ -1374,7 +1385,7 @@ invisible to both Ally and the Microsoft Accessibility Checker.</p>
 <p>The <a href="https://www.tpgi.com/color-contrast-checker/">Colour Contrast Analyser (CCA)</a> is a free desktop tool that
 confirms exact contrast ratios and which WCAG criteria pass or fail.</p>
 <figure style="max-width: 320px; margin: 1em 0;">
-  <img src="public/assets/cca-contrast-check-91bfe1.png"
+  <img src="assets/cca-contrast-check-91bfe1.png"
        alt="Screenshot of the Colour Contrast Analyser (CCA) desktop application. Foreground color is #91BFE1, background is #FFFFFF (white). The contrast ratio is 2:1. WCAG 2.1 results show: 1.4.3 Contrast (Minimum) AA fails for both regular and large text, 1.4.6 Contrast (Enhanced) AAA fails for both, and 1.4.11 Non-text Contrast AA fails for UI components and graphical objects."
        style="width: 100%; height: auto;" class="screenshot" />
   <figcaption>The Colour Contrast Analyser (CCA) confirms #91BFE1 fails at 2:1.</figcaption>
@@ -1444,13 +1455,13 @@ hanging on the wall behind the student, which Ally appears to have
 misidentified as text content.</p>
 <div style="display: flex; gap: 1.5em; flex-wrap: wrap; margin: 1em 0;">
   <figure style="flex: 1; min-width: 200px; margin: 0;">
-    <img src="public/assets/student-discussion-photo.png"
+    <img src="assets/student-discussion-photo.png"
          alt="Photo of a student used in a Canvas discussion post. The student is wearing a green shirt and standing in front of a gold curtain with a framed picture on the wall. This image is based on a real student photo but has been heavily manipulated with AI to protect the student's privacy."
          style="width: 100%; height: auto;" />
     <figcaption>Student photo uploaded to a Canvas discussion post. Based on a real student photo, heavily manipulated with AI to protect the student's privacy.</figcaption>
   </figure>
   <figure style="flex: 1; min-width: 200px; margin: 0;">
-    <img src="public/assets/ally-image-contrast-warning.png"
+    <img src="assets/ally-image-contrast-warning.png"
          alt="Screenshot of the Ally accessibility score panel for the student photo. The score is 75% with the message 'This image has contrast issues.' Below, Ally displays 'Guidance not available yet. We are updating the guidance for this issue.'"
          style="width: 100%; height: auto;" />
     <figcaption>Ally flags the photo at 75% with "This image has contrast issues." Guidance reads: "Guidance not available yet. We are updating the guidance for this issue."</figcaption>
@@ -1617,17 +1628,26 @@ coding?</li>
 indicators?</li>
 </ul>
 </div>
-<h2 id="headings">Headings</h2>
+<h2 id="semantic-structure">Semantic Structure</h2>
 <p><strong><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html">WCAG 1.3.1 Info and Relationships</a> (Level A), <a href="https://www.w3.org/WAI/WCAG22/Understanding/bypass-blocks.html">2.4.1 Bypass
 Blocks</a> (Level A), <a href="https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels.html">2.4.6 Headings and Labels</a> (Level AA).</strong> Content
 structure must be programmatically determinable. Headings must be
-present and descriptive.</p>
+present and descriptive; lists must use proper list markup.</p>
+<p>Headings, titles, lists, and document structure let students navigate
+and understand content organization. Without them, a 20-page document
+is a wall of text with no way to jump to a section. Screen reader users
+rely on headings to jump between sections and on proper list structure
+to hear &ldquo;list of X items&rdquo; and list type. Content that
+<em>looks</em> like a list (typed bullets, dashes, or &ldquo;1.&rdquo;
+&ldquo;2.&rdquo;) but is not marked as a list is invisible to that
+structure.</p>
+<h3 id="headings">Headings</h3>
 <p>Heading issues are tied with text alternatives as the most frequently
 occurring accessibility problem (likelihood 5/5) and have high impact
 (4/5). For a student navigating a long document or page by screen
 reader, headings are the primary mechanism for orientation and
 navigation, equivalent to scanning a page visually.</p>
-<h3 id="what-automated-tools-detect-2">What automated tools detect</h3>
+<h4 id="what-automated-tools-detect-headings">What automated tools detect</h4>
 <ul>
 <li>Missing headings entirely (no heading styles used in a Word
 document, no H tags in a Canvas page)</li>
@@ -1636,7 +1656,7 @@ document, no H tags in a Canvas page)</li>
 detection is inconsistent</li>
 <li>Untagged PDFs (no tag structure at all)</li>
 </ul>
-<h3 id="what-requires-manual-review-2">What requires manual review</h3>
+<h4 id="what-requires-manual-review-headings">What requires manual review</h4>
 <ul>
 <li><strong>Heading text quality.</strong> Ally checks that headings
 exist, not that they are descriptive. “Section 1” or “Untitled” as a
@@ -1652,19 +1672,80 @@ panel (Acrobat).</li>
 sidebars, and multi-column layouts in Word and PowerPoint may not read
 in the intended order.</li>
 </ul>
+<h3 id="lists">Lists</h3>
+<p><strong><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html">WCAG 1.3.1 Info and Relationships</a> (Level A).</strong> When
+content is presented as a list, the list structure must be
+programmatically determinable so that screen readers can announce list
+type and item count (e.g., “List of 5 items”) and allow list-based
+navigation.</p>
+<p>Lists are very common in course content (likelihood 4/5). A
+<strong>faked list</strong> is content that looks like a list — lines
+prefixed with a dash, bullet character, or “1.” “2.” typed by hand — but
+is not marked up as a list. In Word, that means using the Bullets or
+Numbering commands (or list styles), not typing characters. In HTML, it
+means using <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, and
+<code>&lt;li&gt;</code> (or equivalent list roles), not plain paragraphs.
+When a list is faked, a screen reader does not get list structure; it
+reads a series of paragraphs, and the student loses the benefit of list
+semantics and navigation.</p>
+<h4 id="what-automated-tools-detect-lists">What automated tools detect</h4>
+<ul>
+<li><strong>Ally</strong> flags faked lists: content that visually
+appears as a list but lacks proper list markup. Ally detects this in
+Word, PowerPoint, PDF, and Canvas content and reports it as an issue to
+fix (e.g., “Lists should be formatted as lists,” with an option to
+“Format as a list”). For <strong>Canvas pages and content edited in the
+Rich Content Editor (RCE)</strong>, the list error often appears in the
+RCE’s Accessibility Checker but may not appear on the Course Dashboard.
+If you see the issue in the editor, fix it there; do not assume the
+Dashboard will surface it for the same content.</li>
+<li><strong>Microsoft Accessibility Checker</strong> and <strong>Adobe
+Acrobat’s Accessibility Check</strong> do not routinely flag faked
+lists. They may report missing or incorrect list tagging in some
+contexts (e.g., PDF tag tree), but they do not perform the same “looks
+like a list but isn’t marked as one” check that Ally does. If you rely
+only on the Microsoft checker or Acrobat, faked lists can pass
+undetected.</li>
+</ul>
+<div class="callout">
+<p><strong>Tool gap.</strong> Ally catches faked lists; the other common
+checkers generally do not. Content that passes the Microsoft
+Accessibility Checker or Acrobat can still contain faked lists that
+create barriers for screen reader users.</p>
+</div>
+<div class="callout">
+<p><strong>Where Ally shows the list error.</strong> For Canvas content,
+the “Lists should be formatted as lists” issue may show up in the
+<strong>Rich Content Editor</strong> (when you run the Accessibility
+Checker from the editor) but not on the <strong>Course Dashboard</strong>.
+Fix faked lists when the editor flags them; the Dashboard may not list
+this issue for the same page.</p>
+</div>
+<h4 id="what-requires-manual-review-lists">What requires manual review</h4>
+<ul>
+<li><strong>Nested and multi-level lists.</strong> Ensure list hierarchy
+is correct in the source (e.g., list-in-list in Word, nested
+<code>&lt;ul&gt;</code>/<code>&lt;ol&gt;</code> in HTML) so reading order
+and structure make sense.</li>
+<li><strong>When a “list” is really something else.</strong> A single run
+of short paragraphs may be clearer as a list; a run of numbered steps must
+be a real ordered list, not typed “1.” “2.” in plain text.</li>
+</ul>
 <div class="summary">
 <p><strong>Automated vs. Manual Summary</strong></p>
 <ul>
 <li><strong>Automated tools catch:</strong> Missing headings, missing
-slide titles, skipped heading levels (inconsistently), untagged
-PDFs</li>
+slide titles, skipped heading levels (inconsistently), untagged PDFs,
+faked lists (Ally only; Microsoft checker and Acrobat typically do not
+flag faked lists)</li>
 <li><strong>Manual review required:</strong> Heading text quality,
 logical hierarchy, reading order, content order in multi-column
-layouts</li>
+layouts, correct nesting of lists, appropriateness of list vs.
+paragraph structure</li>
 </ul>
 </div>
 <div class="quick-check">
-<p><strong>Quick Check: Headings</strong></p>
+<p><strong>Quick Check: Semantic Structure</strong></p>
 <ul>
 <li>Does the document use heading styles (not just bold or large text)
 for structure?</li>
@@ -1673,6 +1754,14 @@ for structure?</li>
 <li>Does every PowerPoint slide have a unique title?</li>
 <li>Has reading order been verified in the Selection Pane (PowerPoint)
 or Tags panel (PDF)?</li>
+<li>Are bulleted and numbered lists created with the application’s list
+tools (Bullets / Numbering in Word or PowerPoint, list controls in
+Canvas), not by typing dashes or numbers?</li>
+<li>Would a screen reader user hear list structure (e.g., “List of 4
+items”) when moving through the content?</li>
+<li>If you only ran the Microsoft checker or Acrobat, have you also
+checked the content in Ally (or verified list markup) so faked lists are
+not missed?</li>
 </ul>
 </div>
 <h2 id="tables">Tables</h2>
@@ -1685,11 +1774,346 @@ header rows, a screen reader reads table cells as raw data with no
 context. A student hears “85” without knowing which column or row it
 belongs to.</p>
 <h3 id="what-automated-tools-detect-3">What automated tools detect</h3>
+<table>
+  <thead>
+    <tr><th scope="col">Scenario</th><th scope="col">Ally</th><th scope="col">MS Office</th><th scope="col">Acrobat</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>No designated header row</td><td>Detected</td><td>Detected</td><td>Detected</td></tr>
+    <tr><td>Table headers with no visible text</td><td>Detected</td><td>Not detected</td><td>Not detected</td></tr>
+    <tr><td>Layout table used for positioning</td><td>Not detected</td><td>Not detected</td><td>Not detected</td></tr>
+    <tr><td>Complex table (merged cells, multiple headers)</td><td>Not detected</td><td>Not detected</td><td>Not detected</td></tr>
+  </tbody>
+</table>
 <ul>
 <li>Tables without a designated header row (Ally, MS Office,
 Acrobat)</li>
 <li>Tables of 3x3 or larger without headers (Canvas, via axe-core)</li>
+<li>Table headers that exist but contain no visible text (Ally only)</li>
 </ul>
+<p><strong>Ally error messages:</strong></p>
+<ul>
+<li><strong>Word:</strong> "This document contains tables that are missing headers" (Major)</li>
+<li><strong>Canvas (HTML):</strong> "This item contains table headers that are missing content" (Major)</li>
+</ul>
+<p>Ally distinguishes two separate table header issues. The first is a table with no designated header row at all. The second is a table where header cells exist but are empty, meaning the <code>&lt;th&gt;</code> elements contain no visible text describing the purpose of the row or column. Both reduce the document's accessibility score.</p>
+<div style="display: flex; gap: 1.5em; flex-wrap: wrap; margin: 1em 0;">
+  <figure style="flex: 1; min-width: 200px; margin: 0;">
+    <img src="assets/ally-dashboard-table-missing-headers.png"
+         alt="Screenshot of the Ally accessibility score panel for Course Content Accessibility.docx. The score is 98% with a yellow-green gauge. Below, Ally reports 'This document contains tables that are missing headers' with 'What this means' and 'How to set table headers' buttons. At the bottom, 'Upload a version with table headers' prompt."
+         style="width: 100%; height: auto;" class="screenshot" />
+    <figcaption>Ally flags the document at 98% for tables without designated headers.</figcaption>
+  </figure>
+  <figure style="flex: 1; min-width: 200px; margin: 0;">
+    <img src="assets/ally-dashboard-table-empty-headers.png"
+         alt="Screenshot of the Ally accessibility score panel for a Tables item. The score is 99% with a yellow-green gauge. Below, Ally reports 'This item contains table headers that are missing content.' Explanation reads: 'Table header elements should have visible text that describes the purpose of the row or column.'"
+         style="width: 100%; height: auto;" class="screenshot" />
+    <figcaption>Ally flags table headers that exist but contain no visible text.</figcaption>
+  </figure>
+</div>
+<div class="callout">
+<p><strong>Tool gap: empty table headers.</strong> Ally is the only tool that detects table headers with missing content. The Microsoft Accessibility Checker and Acrobat verify that a header row is designated but do not check whether the header cells actually contain text. A table with blank <code>&lt;th&gt;</code> cells passes both tools. A screen reader will announce "column header: blank" or silently skip the header association, leaving the student without context for the data that follows.</p>
+</div>
+<h3 id="broken-examples-tables">Broken Examples and How to Fix Them</h3>
+<h4 id="scenario-1-missing-table-headers">Scenario 1: Missing table headers (Ally catches)</h4>
+<div class="example-block example-broken">
+  <h5>Broken</h5>
+  <table>
+    <tr>
+      <td style="background:#d9d9d9; font-weight:700;" id="t1-date">Date</td>
+      <td style="background:#d9d9d9; font-weight:700;" id="t1-event">Event</td>
+      <td style="background:#d9d9d9; font-weight:700;" id="t1-venue">Venue</td>
+    </tr>
+    <tr><td headers="t1-date">12 February</td><td headers="t1-event">Waltz with Strauss</td><td headers="t1-venue">Main Hall</td></tr>
+    <tr><td headers="t1-date">24 March</td><td headers="t1-event">The Obelisks</td><td headers="t1-venue">West Wing</td></tr>
+    <tr><td headers="t1-date">14 April</td><td headers="t1-event">The What</td><td headers="t1-venue">Main Hall</td></tr>
+  </table>
+  <p>This table looks identical to the corrected version. The first row is styled to appear as a header, but uses <code>&lt;td&gt;</code> instead of <code>&lt;th&gt;</code>. The data cells reference those cells via the <code>headers</code> attribute, but because the referenced cells are <code>&lt;td&gt;</code> not <code>&lt;th&gt;</code>, the association is invalid. Axe flags this as a <code>td-headers-attr</code> violation (WCAG 1.3.1).</p>
+</div>
+<div class="example-block example-fixed">
+  <h5>Corrected</h5>
+  <table>
+    <thead><tr><th scope="col">Date</th><th scope="col">Event</th><th scope="col">Venue</th></tr></thead>
+    <tbody>
+      <tr><td>12 February</td><td>Waltz with Strauss</td><td>Main Hall</td></tr>
+      <tr><td>24 March</td><td>The Obelisks</td><td>West Wing</td></tr>
+      <tr><td>14 April</td><td>The What</td><td>Main Hall</td></tr>
+    </tbody>
+  </table>
+  <p>The first row is designated as a header row using <code>&lt;th scope="col"&gt;</code> for each column. The screen reader announces the header with each cell (e.g., "Venue: Main Hall"), giving the student full context.</p>
+</div>
+<h5>How to fix in Microsoft Word</h5>
+<p>[Placeholder: step-by-step instructions for designating a header row in Word.]</p>
+<p>[Placeholder: screenshot of Word Table Design tab showing Header Row checkbox checked.]</p>
+<h5>How to fix in Ally</h5>
+<p>[Placeholder: explanation of Ally's error message and guidance for this scenario.]</p>
+<p>[Placeholder: screenshot of Ally feedback panel for missing table headers.]</p>
+<h4 id="scenario-2-missing-row-headers">Scenario 2: Table with column and row headers (Ally doesn't catch)</h4>
+<p>The following table has content that should be column headers and content that should be row headers per the visual affordances. But only the column headers are marked up programmatically. No automated tool catches this.</p>
+<div class="example-block example-broken">
+  <h5>Broken</h5>
+  <table>
+    <thead>
+      <tr><th scope="col">Time</th><th scope="col">Monday</th><th scope="col">Wednesday</th><th scope="col">Friday</th></tr>
+    </thead>
+    <tbody>
+      <tr><td style="font-weight:700; background:#d9d9d9;">8:00 – 9:00 AM</td><td>Closed</td><td>Open</td><td>Open</td></tr>
+      <tr><td style="font-weight:700; background:#d9d9d9;">9:00 – 10:00 AM</td><td>Open</td><td>Closed</td><td>Open</td></tr>
+      <tr><td style="font-weight:700; background:#d9d9d9;">10:00 – 11:00 AM</td><td>Open</td><td>Open</td><td>Closed</td></tr>
+    </tbody>
+  </table>
+  <p>The column headers are correctly marked up as <code>&lt;th scope="col"&gt;</code>. But the time slots in the first column are styled to look like row headers and function as row headers visually, yet are marked as <code>&lt;td&gt;</code>. A screen reader has no way to associate each row with its time slot. No automated tool detects this.</p>
+</div>
+<div class="example-block example-fixed">
+  <h5>Corrected</h5>
+  <table>
+    <thead>
+      <tr><th scope="col">Time</th><th scope="col">Monday</th><th scope="col">Wednesday</th><th scope="col">Friday</th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row" style="font-weight:700; text-align:left; background:#d9d9d9; color:inherit;">8:00 – 9:00 AM</th><td>Closed</td><td>Open</td><td>Open</td></tr>
+      <tr><th scope="row" style="font-weight:700; text-align:left; background:#d9d9d9; color:inherit;">9:00 – 10:00 AM</th><td>Open</td><td>Closed</td><td>Open</td></tr>
+      <tr><th scope="row" style="font-weight:700; text-align:left; background:#d9d9d9; color:inherit;">10:00 – 11:00 AM</th><td>Open</td><td>Open</td><td>Closed</td></tr>
+    </tbody>
+  </table>
+  <p>The first column cells are changed to <code>&lt;th scope="row"&gt;</code>. A screen reader now announces both the column and row header for each cell (e.g., "Monday, 9:00 – 10:00 AM: Open"), giving the student full context.</p>
+</div>
+<h5>How to fix in Microsoft Word</h5>
+<p>[Placeholder: step-by-step instructions for marking a first column as row headers in Word.]</p>
+<p>[Placeholder: screenshot of Word table properties or Table Design tab showing the First Column checkbox checked.]</p>
+<h5>How to fix in Ally</h5>
+<p>[Placeholder: explanation of how Ally surfaces this issue or guidance on remediating it within Ally's feedback panel.]</p>
+<p>[Placeholder: screenshot of Ally feedback panel for this scenario.]</p>
+<h4 id="scenario-3-irregular-table">Scenario 3: Irregular table with merged headers (Ally doesn't catch)</h4>
+<p>This table uses <code>colspan</code> to group columns under two planet headers. No automated tool flags it, but a screen reader cannot reliably associate each data cell with both its column group header ("Mars" or "Venus") and its sub-header ("Produced" or "Sold"). The fix is to simplify: split the table into two smaller, straightforward tables.</p>
+<div class="example-block example-broken">
+  <h5>Broken</h5>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col" rowspan="2"></th>
+        <th scope="colgroup" colspan="2">Mars</th>
+        <th scope="colgroup" colspan="2">Venus</th>
+      </tr>
+      <tr>
+        <th scope="col">Produced</th>
+        <th scope="col">Sold</th>
+        <th scope="col">Produced</th>
+        <th scope="col">Sold</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Teddy Bears</th>
+        <td>50,000</td><td>30,000</td><td>100,000</td><td>80,000</td>
+      </tr>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Board Games</th>
+        <td>10,000</td><td>5,000</td><td>12,000</td><td>9,000</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>The table uses <code>colspan</code> to span "Mars" and "Venus" across two sub-columns each. Even with <code>scope="colgroup"</code>, screen readers handle multi-level column headers inconsistently. No automated tool detects the navigation problem.</p>
+</div>
+<div class="example-block example-fixed">
+  <h5>Corrected</h5>
+  <p>Split the complex table into two simple tables, each covering one planet. A two-column layout places them side by side visually.</p>
+  <div style="display:flex; gap:2em; flex-wrap:wrap; align-items:flex-start;">
+    <div>
+      <p style="font-style:italic; margin:0 0 0.4em 0;">Mars</p>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Produced</th>
+            <th scope="col">Sold</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" style="background:#d9d9d9; color:inherit;">Teddy Bears</th>
+            <td>50,000</td><td>30,000</td>
+          </tr>
+          <tr>
+            <th scope="row" style="background:#d9d9d9; color:inherit;">Board Games</th>
+            <td>10,000</td><td>5,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <p style="font-style:italic; margin:0 0 0.4em 0;">Venus</p>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Produced</th>
+            <th scope="col">Sold</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" style="background:#d9d9d9; color:inherit;">Teddy Bears</th>
+            <td>100,000</td><td>80,000</td>
+          </tr>
+          <tr>
+            <th scope="row" style="background:#d9d9d9; color:inherit;">Board Games</th>
+            <td>12,000</td><td>9,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <p>Each table has a single header row and a single header column. A screen reader announces each cell cleanly (for example, "Mars, Produced, Teddy Bears: 50,000"), with no ambiguity about which group a value belongs to.</p>
+</div>
+<h5>How to fix in Microsoft Word</h5>
+<p>Word does not provide a control for marking cells as column-group headers. The best remediation is to split the merged table into two separate Word tables, one per group, placed side by side using a two-column section layout or a borderless layout table. Each split table should have its Header Row checkbox checked on the Table Design tab.</p>
+<h5>How to fix in Ally</h5>
+<p>Ally does not detect irregular or multi-level header tables. The document may score 100% while the table remains inaccessible. Remediation requires restructuring the table manually, either in the source document or in HTML for Canvas pages. This is a manual-review-only gap.</p>
+<h4 id="scenario-4-multiple-headers">Scenario 4: Table with repeated header rows (Ally doesn't catch)</h4>
+<p>This table combines two logical data sets into one table by repeating the header row mid-table. Visually it looks organized, but a screen reader cannot associate the second set of column headers with the rows below them. No automated tool detects this.</p>
+<div class="example-block example-broken">
+  <h5>Broken</h5>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Details</th>
+        <th scope="col">Example 2 Ltd</th>
+        <th scope="col">Example 2 Co</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Contact</th>
+        <td>James Phillips</td><td>Marie Beauchamp</td>
+      </tr>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Position</th>
+        <td>Sales Director</td><td>Sales Manager</td>
+      </tr>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Email</th>
+        <td>jp@1ltd.example.com</td><td>marie@2co.example.com</td>
+      </tr>
+      <tr>
+        <td style="background:#d9d9d9; font-weight:700;">Details</td>
+        <td style="background:#d9d9d9; font-weight:700;">Example 3 Ltd</td>
+        <td style="background:#d9d9d9; font-weight:700;">Example 4 Inc</td>
+      </tr>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Contact</th>
+        <td>Suzette Jones</td><td>Alex Howe</td>
+      </tr>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Position</th>
+        <td>Sales Officer</td><td>Sales Director</td>
+      </tr>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Email</th>
+        <td>Suz@ltd3.example.com</td><td>howe@4inc.example.com</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>The first section's column headers are in <code>&lt;thead&gt;</code> and work correctly. The second section's header row is in <code>&lt;tbody&gt;</code> using <code>&lt;td&gt;</code> elements styled to look like headers. A screen reader has no way to associate "Example 3 Ltd" or "Example 4 Inc" with the rows below them. No automated tool detects this problem.</p>
+</div>
+<div class="example-block example-fixed">
+  <h5>Corrected</h5>
+  <p>Split the stacked table into two separate tables, each covering one set of companies.</p>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Details</th>
+        <th scope="col">Example 2 Ltd</th>
+        <th scope="col">Example 2 Co</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Contact</th>
+        <td>James Phillips</td><td>Marie Beauchamp</td>
+      </tr>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Position</th>
+        <td>Sales Director</td><td>Sales Manager</td>
+      </tr>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Email</th>
+        <td>jp@1ltd.example.com</td><td>marie@2co.example.com</td>
+      </tr>
+    </tbody>
+  </table>
+  <table style="margin-top:1em;">
+    <thead>
+      <tr>
+        <th scope="col">Details</th>
+        <th scope="col">Example 3 Ltd</th>
+        <th scope="col">Example 4 Inc</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Contact</th>
+        <td>Suzette Jones</td><td>Alex Howe</td>
+      </tr>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Position</th>
+        <td>Sales Officer</td><td>Sales Director</td>
+      </tr>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Email</th>
+        <td>Suz@ltd3.example.com</td><td>howe@4inc.example.com</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Each table has its own <code>&lt;thead&gt;</code> with proper <code>&lt;th scope="col"&gt;</code> headers. A screen reader now correctly associates each data row with both its column header and its row header (for example, "Example 3 Ltd, Contact: Suzette Jones").</p>
+</div>
+<h5>How to fix in Microsoft Word</h5>
+<p>In Word, the merged table must be split into two separate tables. Place the cursor in the row where the second section begins, then use Table Tools to split the table. Designate the first row of each new table as a header row using the Header Row checkbox on the Table Design tab. If a side-by-side layout is needed, place the two tables in a two-column section or in a borderless layout table.</p>
+<h5>How to fix in Ally</h5>
+<p>Ally does not detect repeated mid-table header rows. A document with this structure may score 100% while remaining inaccessible. Remediation requires restructuring the source document. There is no automated fix available in Ally's feedback panel for this issue.</p>
+<h4 id="scenario-5-layout-table">Scenario 5: Table used for layout (Ally doesn't catch)</h4>
+<p>Tables are for data, not for positioning content on a page. A table used purely for visual layout carries false semantic meaning: a screen reader announces row and column counts, navigates cell by cell, and may announce "row 1, column 1" for content that has no tabular relationship. No automated tool reliably detects layout tables.</p>
+<div class="example-block example-broken">
+  <h5>Broken</h5>
+  <table style="border-collapse:collapse; font-size:0.9rem; margin:0.5rem 0; width:auto;">
+    <tr>
+      <th scope="row" style="border:none; padding:0.125em 1.5em 0.125em 0; font-weight:700; background:transparent; color:inherit; text-align:left; white-space:nowrap;">First name</th>
+      <td style="border:none; padding:0.125em 0; background:transparent;">Damian</td>
+    </tr>
+    <tr>
+      <th scope="row" style="border:none; padding:0.125em 1.5em 0.125em 0; font-weight:700; background:transparent; color:inherit; text-align:left; white-space:nowrap;">Last name</th>
+      <td style="border:none; padding:0.125em 0; background:transparent;">Sian</td>
+    </tr>
+    <tr>
+      <th scope="row" style="border:none; padding:0.125em 1.5em 0.125em 0; font-weight:700; background:transparent; color:inherit; text-align:left; white-space:nowrap;">Title</th>
+      <td style="border:none; padding:0.125em 0; background:transparent;">Adjunct professor</td>
+    </tr>
+    <tr>
+      <th scope="row" style="border:none; padding:0.125em 1.5em 0.125em 0; font-weight:700; background:transparent; color:inherit; text-align:left; white-space:nowrap;">Department</th>
+      <td style="border:none; padding:0.125em 0; background:transparent;">School of Communication and Information</td>
+    </tr>
+    <tr>
+      <th scope="row" style="border:none; padding:0.125em 1.5em 0.125em 0; font-weight:700; background:transparent; color:inherit; text-align:left; white-space:nowrap;">Group</th>
+      <td style="border:none; padding:0.125em 0; background:transparent;">Library Sciences</td>
+    </tr>
+  </table>
+  <p>The first column uses <code>&lt;th scope="row"&gt;</code>, which satisfies automated accessibility checkers. Ally reports no error. But the table is being used purely for visual layout: the labels and values have no genuine tabular relationship, and a screen reader still announces "table with 5 rows and 2 columns" and navigates cell by cell. No automated tool detects that a table is being misused for positioning.</p>
+</div>
+<div class="example-block example-fixed">
+  <h5>Corrected</h5>
+  <dl style="font-size:0.9rem; display:grid; grid-template-columns:max-content 1fr; gap:0.25em 1.5em; margin:0.5rem 0;">
+    <dt style="font-weight:700;">First name</dt><dd style="margin:0;">Damian</dd>
+    <dt style="font-weight:700;">Last name</dt><dd style="margin:0;">Sian</dd>
+    <dt style="font-weight:700;">Title</dt><dd style="margin:0;">Adjunct professor</dd>
+    <dt style="font-weight:700;">Department</dt><dd style="margin:0;">School of Communication and Information</dd>
+    <dt style="font-weight:700;">Group</dt><dd style="margin:0;">Library Sciences</dd>
+  </dl>
+  <p>A <code>&lt;dl&gt;</code> (description list) conveys the label/value relationship semantically without implying a table structure. A screen reader reads each term and its description in sequence with no false row or column announcements.</p>
+</div>
+<h5>How to fix in Microsoft Word</h5>
+<p>Use tab stops instead of a table. In the ruler, set a left tab stop at the position where values should begin (for example, 1.5 inches). Type the label, press Tab, then type the value. Repeat for each row. This creates the same two-column visual appearance using paragraph formatting rather than a table, so no tabular semantics are applied.</p>
+<h5>How to fix in Ally</h5>
+<p>Ally does not detect layout tables. A document using tables for positioning may score 100% while creating unnecessary navigation overhead for screen reader users. Remediation requires restructuring the content in the source document. There is no automated fix available in Ally's feedback panel for this issue.</p>
 <h3 id="what-requires-manual-review-3">What requires manual review</h3>
 <ul>
 <li><strong>Layout tables.</strong> Tables used for visual alignment
@@ -1704,68 +2128,11 @@ data cell with its headers.</li>
 would be more accessible as lists or paragraphs. A “table” with one
 column and one row per item is really a list.</li>
 </ul>
-<!-- Scenario: Layout table used for positioning | Error ID: E8 -->
-<table class="lab-compare">
-  <thead>
-    <tr><th>Broken</th><th>Corrected</th></tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><!-- E8: Layout table used for positioning -->
-        <table>
-          <tr>
-            <td><img src="assets/sidebar.png" alt="sidebar image"></td>
-            <td><p>This paragraph is laid out using a table for positioning instead of semantic structure.</p></td>
-          </tr>
-        </table>
-        <p><strong>What happens:</strong> Screen reader encounters table structure with no data relationship; confusing for navigation.</p>
-      </td>
-      <td><!-- E8: Corrected artifact (right) -->
-        <div class="two-column-layout">
-          <aside><img src="assets/sidebar.png" alt="Descriptive sidebar image"></aside>
-          <main><p>This paragraph is structured semantically as article content (no layout table).</p></main>
-        </div>
-        <p><strong>What happens:</strong> Semantic structure allows screen reader to understand layout and content roles.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<!-- Detection: Manual only -->
-<!-- Scenario: Data table missing header row | Error ID: E9 -->
-<table class="lab-compare">
-  <thead>
-    <tr><th>Broken</th><th>Corrected</th></tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><!-- E9: Data table missing header row -->
-        <table>
-          <tr><td>Section 1</td><td>85</td><td>82</td></tr>
-          <tr><td>Section 2</td><td>83</td><td>81</td></tr>
-          <tr><td>Section 3</td><td>85</td><td>82</td></tr>
-        </table>
-        <p><strong>What happens:</strong> Screen reader reads raw cells with no column/row context; student hears "85" without knowing what it means.</p>
-      </td>
-      <td><!-- E9: Corrected artifact (right) -->
-        <table>
-          <thead><tr><th>Section</th><th>Quiz 1</th><th>Quiz 2</th></tr></thead>
-          <tbody>
-            <tr><td>Section 1</td><td>85</td><td>82</td></tr>
-            <tr><td>Section 2</td><td>83</td><td>81</td></tr>
-            <tr><td>Section 3</td><td>85</td><td>82</td></tr>
-          </tbody>
-        </table>
-        <p><strong>What happens:</strong> Screen reader associates each cell with its header; student gets full context.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<!-- Detection: Ally, Microsoft Accessibility Checker, Acrobat -->
 <div class="summary">
 <p><strong>Automated vs. Manual Summary</strong></p>
 <ul>
 <li><strong>Automated tools catch:</strong> Tables without a designated
-header row</li>
+header row, table headers with empty content (Ally only)</li>
 <li><strong>Manual review required:</strong> Layout tables misused for
 formatting, complex tables with merged cells, tables that should be
 lists</li>
@@ -1775,11 +2142,18 @@ lists</li>
 <p><strong>Quick Check: Tables</strong></p>
 <ul>
 <li>Does every data table have a designated header row?</li>
+<li>Do all table header cells contain visible, descriptive text?</li>
 <li>Are tables used only for data, not for visual layout?</li>
 <li>Do complex tables (merged cells, multiple headers) read correctly in
 a screen reader?</li>
 <li>Would any table be clearer as a list or structured text?</li>
 </ul>
+</div>
+<h2 id="table-captions">Known False Positive: Table Captions</h2>
+<p>The Canvas Rich Content Editor flags tables without captions as accessibility errors. However, this flag does not appear in the Accessibility Dashboard and does not affect the document's accessibility score. More importantly, table captions are not required by WCAG. The relevant success criterion, <a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html">WCAG 1.3.1 Info and Relationships</a>, requires that structural relationships be programmatically determinable, but a <code>&lt;caption&gt;</code> element is not part of that requirement for basic data tables. The Canvas RCE is applying a stricter standard than WCAG demands.</p>
+<p><strong>How to handle:</strong> You may add a caption if it genuinely helps users understand the table's purpose, particularly for complex tables where the surrounding context does not make the subject clear. For simple tables in a well-structured document, a caption is not necessary. Do not add captions solely to clear the Canvas RCE warning.</p>
+<div class="callout">
+<p><strong>Key point.</strong> The Canvas Rich Content Editor flags missing table captions, but this warning does not appear in the Accessibility Dashboard and has no effect on the document's accessibility score or WCAG conformance. It is a best practice recommendation, not a WCAG requirement.</p>
 </div>
 <h2 id="language">Language</h2>
 <p><strong><a href="https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html">WCAG 3.1.1 Language of Page</a> (Level A).</strong> The default
@@ -1799,12 +2173,12 @@ Spanish passage, for example, renders the text incomprehensible.</p>
   <tbody>
     <tr>
       <td><!-- E12: Missing language of parts -->
-        <p>Este párrafo está en español y no tiene atributo de idioma.</p>
-        <p><strong>What happens:</strong> Screen reader uses wrong pronunciation; Spanish may be read as English and be incomprehensible.</p>
+        <p>Julio se despertó con mucho frío. Agarró su abrigo rojo y salió a la calle. El cielo estaba gris y hacía un viento horrible. Qué barbaridad, gritó, mientras caminaba hacia la panadería. Quería comprar churros y un chocolate caliente. La señora de la tienda le dijo: Hijo, hoy no hay churros, pero tengo unas galletas riquísimas. Julio se rió y contestó: Bueno, déjeme cinco galletas y un jugo de naranja. Pagó con unas monedas que llevaba en el bolsillo y se fue silbando bajito por la acera.</p>
+        <p><strong>What happens:</strong> Screen reader uses wrong pronunciation; Spanish is read with English phonetics ("JOO-lee-oh say des-per-TOE con MOO-cho FREE-oh") and is incomprehensible.</p>
       </td>
       <td><!-- E12: Corrected artifact (right) -->
-        <p><span lang="es">Este párrafo está en español y ahora tiene atributo de idioma.</span></p>
-        <p><strong>What happens:</strong> Screen reader switches to Spanish pronunciation; content is comprehensible.</p>
+        <p><span lang="es">Julio se despertó con mucho frío. Agarró su abrigo rojo y salió a la calle. El cielo estaba gris y hacía un viento horrible. Qué barbaridad, gritó, mientras caminaba hacia la panadería. Quería comprar churros y un chocolate caliente. La señora de la tienda le dijo: Hijo, hoy no hay churros, pero tengo unas galletas riquísimas. Julio se rió y contestó: Bueno, déjeme cinco galletas y un jugo de naranja. Pagó con unas monedas que llevaba en el bolsillo y se fue silbando bajito por la acera.</span></p>
+        <p><strong>What happens:</strong> Screen reader switches to Spanish pronunciation and reads the passage naturally.</p>
       </td>
     </tr>
   </tbody>
@@ -1908,7 +2282,12 @@ selections?</li>
 <h2 id="seizure-risk">Seizure Risk</h2>
 <p><strong><a href="https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold.html">WCAG 2.3.1 Three Flashes or Below Threshold</a> (Level
 A).</strong> Content must not contain anything that flashes more than
-three times per second.</p>
+three times per second, <em>unless</em> the flashing falls below both
+the general flash and red flash thresholds (i.e., the flashing area is
+small enough and the luminance change is low enough to be considered
+safe). In practice, for course content the simplest guidance is to avoid
+flashing entirely; the threshold exceptions are relevant mainly to
+multimedia producers performing formal photosensitive analysis.</p>
 <p>Seizure risk is the least common issue in course content (likelihood
 1/5) but carries the highest possible impact (5/5). A single flashing
 element can trigger a photosensitive seizure.</p>
@@ -1916,12 +2295,26 @@ element can trigger a photosensitive seizure.</p>
 <p>Ally checks for rapid flashing in <strong>image files only</strong>
 (primarily animated GIFs). This is the only file type where seizure risk
 is evaluated.</p>
+<div style="display: flex; gap: 1.5em; flex-wrap: wrap; margin: 1em 0;">
+  <figure style="flex: 1; min-width: 200px; margin: 0;">
+    <img src="assets/ally-seizure-dashboard.png"
+         alt="Ally accessibility score dialog for bright_red_fast_strobe.gif showing 0%, red banner stating 'This image can induce seizures' and 'Potentially very harmful', with options to keep or remove the image."
+         style="width: 100%; height: auto;" class="screenshot" />
+    <figcaption>Ally flags a flashing GIF with a 0% score and recommends removal.</figcaption>
+  </figure>
+  <figure style="flex: 1; min-width: 200px; margin: 0;">
+    <img src="assets/seizure-warning-bypass.png"
+         alt="Warning screen: red circle with lightning bolt icon, text 'Potentially seizure-inducing', and 'Show image anyway' button."
+         style="width: 100%; height: auto;" class="screenshot" />
+    <figcaption>Warning shown before displaying seizure-inducing content, with option to bypass.</figcaption>
+  </figure>
+</div>
 <div class="callout">
 <p><strong>Note.</strong> This document cannot show actual flashing content
 because it could cause direct harm (photosensitive seizure) to readers. The
 illustration below represents the concept of flashing content; in real
 course materials, a rapidly flashing GIF or animation would appear in the
-"Broken" column.</p>
+“Broken” column.</p>
 </div>
 <!-- Scenario: Flashing GIF (seizure risk) | Error ID: E13 -->
 <table class="lab-compare">
@@ -2029,13 +2422,19 @@ strobing?</li>
 role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1"><p>Faulkner, S., et al. “The WebAIM Million: An Annual
-Accessibility Analysis of the Top 1,000,000 Home Pages.” WebAIM, 2024.
-https://webaim.org/projects/million/<a href="#fnref1"
+<li id="fn1"><p>Deque Systems. “What We Found When We Tested Tools on
+the World’s Most Accessible Websites,” 2021.
+https://www.deque.com/blog/automated-testing-study-identifies-57-percent-of-digital-accessibility-issues/
+- The 57% figure reflects the upper bound from Deque’s axe-core engine
+analysis. Other research places automated detection lower; see, e.g.,
+the UK Government Digital Service’s 2017 audit (~30%) and Power
+Mapper’s WCAG coverage studies (25–40%).<a href="#fnref1"
 class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>National Center for Education Statistics. “Students With
-Disabilities.” Condition of Education, U.S. Department of Education,
-2023. https://nces.ed.gov/programs/coe/indicator/cgg<a href="#fnref2"
+Disabilities.” NCES Table 311.10: Number and Percentage Distribution of
+Students Enrolled in Postsecondary Institutions, by Level, Disability
+Status, and Selected Student Characteristics, 2019–2020.
+https://nces.ed.gov/programs/digest/d22/tables/dt22_311.10.asp<a href="#fnref2"
 class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Trace Research &amp; Development Center. “Photosensitive
 Epilepsy Analysis Tool (PEAT).” University of Maryland.

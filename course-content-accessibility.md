@@ -1,3 +1,15 @@
+<!--
+  INTENTIONAL ACCESSIBILITY ISSUES (workshop exercises, do not fix without checking):
+  E1: Missing alt text (Scenario 1)
+  E2: File name as alt text (Scenario 2)
+  E3: AI-generated alt text (Scenario 3)
+  E10: Low contrast text (Color Contrast section); Empty table headers (Tables section)
+  E11: Color as sole means (bar chart example)
+  E12: Missing language of parts (Spanish passage)
+  E13: Flashing content (seizure risk illustration)
+  These seeded errors are used during the hands-on workshop for participants to detect and fix.
+-->
+
 # Course Content Accessibility
 
 ## Overview
@@ -113,7 +125,9 @@ The following table summarizes the reliability of Ally’s Tagged PDF alternativ
 - **Empty Figure tags.** Some images produced Figure tags with no content and no alt text. Screen readers announce “figure” and then nothing.
 - **Document language.** Not assigned in the output despite being set in the source file.
 
-**What transferred correctly:** Alt text on images carried over to the tagged PDF output.
+##### What transferred correctly
+
+Alt text on images carried over to the tagged PDF output.
 
 To describe Ally's behavior across file types, this reference uses a coverage model with four states:
 
@@ -158,7 +172,9 @@ The Microsoft checker does **not** flag:
 - Reading order problems
 - Faked lists (manually typed bullets, dashes, or numbers instead of list styles)
 
-**Best practice:** Run the Microsoft Accessibility Checker before uploading to Canvas. It complements Ally by catching AI-generated descriptions and providing fix-in-place workflows within the authoring environment.
+##### Best practice
+
+Run the Microsoft Accessibility Checker before uploading to Canvas. It complements Ally by catching AI-generated descriptions and providing fix-in-place workflows within the authoring environment.
 
 ## Acrobat Accessibility Checker
 
@@ -219,7 +235,7 @@ The following scenarios walk through each test case from the detection table abo
 Each scenario includes a set of intentionally broken test files that can be uploaded to Canvas to demonstrate the error (or lack of detection) in Ally, the Microsoft Accessibility Checker, and the Acrobat Accessibility Check.
 
 ::: {.summary}
-**In this section:**
+##### In this section
 
 - [Scenario 1: No alt text](#scenario-1-no-alt-text) · 🔴 Ally · 🔴 MS Checker · 🔴 Acrobat
 - [Scenario 2: AI-generated alt text](#scenario-2-ai-generated-alt-text) · 🟡 Ally · 🔴 MS Checker · 🟡 Acrobat
@@ -227,16 +243,18 @@ Each scenario includes a set of intentionally broken test files that can be uplo
 - [Scenario 4: Decorative image not marked](#scenario-4-decorative-image-not-marked-as-decorative) · 🟡 Ally · 🟡 MS Checker · 🟡 Acrobat
 - [Scenario 5: Vague alt text](#scenario-5-vague-alt-text) · 🟡 Ally · 🟡 MS Checker · 🟡 Acrobat
 - [Scenario 6: Gibberish or placeholder alt text](#scenario-6-gibberish-or-placeholder-alt-text) · 🟡 Ally · 🟡 MS Checker · 🟡 Acrobat
-- [Scenario 7: Alt text over ~120 characters](#scenario-7-alt-text-over-120-characters-canvas-false-positive) · 🟢 Ally (false positive)
+- [Scenario 7: Alt text over ~120 characters](#scenario-7-alt-text-over-120-characters-ally-false-positive) · 🟢 Ally (false positive)
 - [Complex images](#complex-images)
 - [Known False Positive: Alt Text of 120 Characters](#known-false-positive-alt-text-of-120-characters)
 :::
 
 ---
 
-#### Scenario 1: No alt text
+#### Scenario 1: No alt text (Ally catches)
 
-**The broken state.** An image is inserted into a document, slide, page, or PDF with no alt text at all. This is the most basic and most common text alternative failure.
+##### The broken state
+
+An image is inserted into a document, slide, page, or PDF with no alt text at all. This is the most basic and most common text alternative failure.
 
 <!-- Scenario: Missing alt text | Error ID: E1 -->
 
@@ -258,16 +276,18 @@ Each scenario includes a set of intentionally broken test files that can be uplo
 | **What happens:** Screen reader announces "Graphic. IMG_3847.png", student gets no data. | **What happens:** Screen reader receives the same data as sighted users. |
 | `alt="IMG_3847.png"` | `alt="Line graph showing a steady increase in online course enrollment from 12,000 in Fall 2020 to 28,500 in Fall 2025."` |
 
-**Ally error messages:**
+##### Ally error messages
 
 - **Word:** "Document has images without alt descriptions" (Major)
 - **PowerPoint:** "Presentation has images without alt descriptions" (Major)
 - **Canvas:** "Images must have alternate text description" (Major)
 - **PDF:** "PDF has images without alternative descriptions" (Major)
 
-**Detected by:** 🔴 Ally · 🔴 MS Checker · 🔴 Acrobat
+##### Detected by
 
-**How to fix in Word:**
+🔴 Ally · 🔴 MS Checker · 🔴 Acrobat
+
+##### How to fix in Word
 
 1. Right-click the image.
 2. Select **Edit Alt Text**.
@@ -277,7 +297,7 @@ Each scenario includes a set of intentionally broken test files that can be uplo
 
 ![Screenshot of the Word Alt Text pane: prompt asking how to describe the object for someone blind or low vision, guidelines (subject, setting, actions, relevant info), description field with example "Line graph showing a steady increase in online course enrollment from 12,000 in Fall 2020 to 28,500 in Fall 2025", Generate alt text for me button, and Mark as decorative option with toggle.](public/assets/word-alt-text-pane.png)
 
-**How to fix in PowerPoint:**
+##### How to fix in PowerPoint
 
 1. Right-click the image.
 2. Select **Edit Alt Text**.
@@ -287,7 +307,7 @@ Each scenario includes a set of intentionally broken test files that can be uplo
 
 ![Screenshot of the PowerPoint Alt Text pane, which matches Word: prompt for describing the object for someone blind or low vision, description field with enrollment chart example, Generate alt text for me button, and Mark as decorative toggle.](public/assets/word-alt-text-pane.png)
 
-**How to fix in Canvas:**
+##### How to fix in Canvas
 
 1. Click the image in the Rich Content Editor.
 2. Click the **Image Options** button that appears in the toolbar above the image.
@@ -296,7 +316,7 @@ Each scenario includes a set of intentionally broken test files that can be uplo
 
 ![Screenshot of Canvas Image Options modal: Alt Text field with example "Grouped bar graph comparing Quiz 1 and Quiz 2 averages across three sections. Section 1: 85% and 82%. Section 2: 83% and 81%. Section 3: 85% and 82%" and Decorative Image checkbox.](public/assets/canvas-image-options.png)
 
-**How to fix in PDF (Acrobat Pro):**
+##### How to fix in PDF (Acrobat Pro)
 
 1. Open the PDF in Acrobat Pro.
 2. Go to **All tools > Prepare for accessibility > Check for accessibility**.
@@ -318,11 +338,13 @@ Alternatively, use the Tags panel directly:
 
 ---
 
-#### Scenario 2: AI-generated alt text
+#### Scenario 2: AI-generated alt text (Ally does not catch)
 
-**The broken state.** Microsoft Office auto-generates a description when an image is inserted (e.g., "A group of people sitting at a table with laptops"). The description may be partially accurate but is often generic, vague, or misleading. It has not been reviewed by a human.
+**The broken state.** Microsoft Office auto-generates a description when an image is inserted (e.g., "A group of people sitting at a table"). The description may be partially accurate but is often generic, vague, or misleading. It has not been reviewed by a human.
 
-**Detected by:** 🟡 Ally · 🔴 MS Checker · 🟡 Acrobat
+##### Detected by
+
+🟡 Ally · 🔴 MS Checker · 🟡 Acrobat
 
 ::: {.callout}
 **Tool gap.** Only Microsoft's checker flags its own AI-generated descriptions. Ally and Acrobat see a non-empty alt text field and move on. A 100% Ally score does not mean the alt text has been reviewed by a human.
@@ -332,14 +354,14 @@ Alternatively, use the Tags panel directly:
 
 | Broken | Corrected |
 |--------|-----------|
-| "A group of people sitting at a table with laptops" *(AI-generated, unreviewed)* | "Instructional design team reviewing course accessibility audit results during the Spring 2026 faculty workshop." |
+| "A group of people sitting at a table" *(AI-generated, unreviewed)*. *AI-generated content may be incorrect.* | "Instructional design team reviewing course accessibility audit results during the Spring 2026 faculty workshop." |
 | The description is generic and misses the context of the image within the course. | The description identifies who is pictured, what they are doing, and why it matters in context. |
 
 ::: {.callout}
 **Key point.** This is a gap in Ally. AI-generated alt text passes Ally because the alt text field is not empty. The Microsoft checker flags it specifically because it can identify its own generated descriptions. Always review and revise AI-generated alt text.
 :::
 
-**How to fix in Word / PowerPoint:**
+##### How to fix in Word / PowerPoint
 
 1. Run the Accessibility Checker (Review > Check Accessibility).
 2. The checker will flag images with AI-generated descriptions under **Verify: Automatic alternative text**.
@@ -354,11 +376,13 @@ Alternatively, use the Tags panel directly:
 
 ---
 
-#### Scenario 3: File name as alt text
+#### Scenario 3: File name as alt text (Ally catches)
 
 **The broken state.** The alt text field contains the image's file name (e.g., "IMG_3847.png", "chart_final_v2.jpg", "C:\Users\instructor\Desktop\logo.png"). This typically happens when an image is inserted and the application populates the alt text field with the file name by default.
 
-**Detected by:** 🔴 Ally · 🔴 MS Checker · 🟡 Acrobat
+##### Detected by
+
+🔴 Ally · 🔴 MS Checker · 🟡 Acrobat
 
 **File name as alt text**
 
@@ -367,20 +391,24 @@ Alternatively, use the Tags panel directly:
 | "IMG_3847.png" | "Line graph showing a steady increase in online course enrollment from 12,000 in Fall 2020 to 28,500 in Fall 2025." |
 | A file name tells the student nothing about the image content. | The description conveys what the image shows and the data it contains. |
 
-**Ally error messages:**
+##### Ally error messages
 
 - **Word:** "Document has images with their filenames as descriptions" (Minor)
 - **Canvas:** "Alt text should not be the image filename" (Minor)
 
-**How to fix:** Follow the same steps as Scenario 1 for each platform. Delete the file name and replace it with a meaningful description of the image.
+##### How to fix
+
+Follow the same steps as Scenario 1 for each platform. Delete the file name and replace it with a meaningful description of the image.
 
 ---
 
-#### Scenario 4: Decorative image not marked as decorative
+#### Scenario 4: Decorative image not marked as decorative (Ally does not catch)
 
 **The broken state.** A decorative image (a divider line, a background texture, a branding banner, a purely visual flourish) has either no alt text or a description like "decorative line" or "banner image." It should be marked as decorative so screen readers skip it entirely.
 
-**Detected by:** 🟡 Ally · 🟡 MS Checker · 🟡 Acrobat. No automated tool can determine whether an image *should* be decorative. This is entirely a human judgment call.
+##### Detected by
+
+🟡 Ally · 🟡 MS Checker · 🟡 Acrobat. No automated tool can determine whether an image *should* be decorative. This is entirely a human judgment call.
 
 ::: {.callout}
 **Tool gap.** Deciding whether an image is decorative or meaningful requires understanding the content's purpose. No tool attempts this judgment. Every unmarked decorative image adds noise for screen reader users, and no automated score will reflect it.
@@ -393,7 +421,7 @@ Alternatively, use the Tags panel directly:
 | "decorative line" or "banner image" | *(marked as decorative):* `alt=""` in HTML, "Mark as decorative" in Office, or artifact in PDF |
 | The screen reader announces the decorative image, interrupting the reading flow with meaningless content. | The screen reader skips the image entirely, keeping the student focused on meaningful content. |
 
-**How to mark as decorative in Word / PowerPoint:**
+##### How to mark as decorative in Word / PowerPoint
 
 1. Right-click the image.
 2. Select **Edit Alt Text**.
@@ -402,7 +430,7 @@ Alternatively, use the Tags panel directly:
 
 ![Screenshot of the Word Alt Text pane with Mark as decorative toggle turned on, showing the message "Content marked as decorative will not expose a description to screen readers" and the decorative-objects explanation.](public/assets/word-alt-text-mark-decorative.png)
 
-**How to mark as decorative in Canvas:**
+##### How to mark as decorative in Canvas
 
 1. Click the image in the Rich Content Editor.
 2. Click **Image Options**.
@@ -411,7 +439,7 @@ Alternatively, use the Tags panel directly:
 
 ![Screenshot of Canvas Image Options modal with Decorative Image checkbox checked, showing the Alt Text field with placeholder "(Describe the image)" and the decorative option selected.](public/assets/canvas-image-options-decorative.png)
 
-**How to mark as decorative in PDF (Acrobat Pro):**
+##### How to mark as decorative in PDF (Acrobat Pro)
 
 1. Open the **Tags** panel.
 2. Locate the **Figure** tag for the decorative image.
@@ -423,11 +451,13 @@ See [Edit document structure with the Content and Tags panels](https://helpx.ado
 
 ---
 
-#### Scenario 5: Vague alt text
+#### Scenario 5: Vague alt text (Ally does not catch)
 
 **The broken state.** The alt text field contains a description that is technically present but too vague to be useful. Examples: "chart," "Quiz comparison chart," "photo," "graph of data." A screen reader user hears the label but receives none of the information the image actually conveys.
 
-**Detected by:** 🟡 Ally · 🟡 MS Checker · 🟡 Acrobat. All three tools check for *presence*, not *quality*.
+##### Detected by
+
+🟡 Ally · 🟡 MS Checker · 🟡 Acrobat. All three tools check for *presence*, not *quality*.
 
 ::: {.callout}
 **Tool gap.** All automated tools check only for presence. None evaluate informational equivalence. Alt text that reads "chart" passes every check but gives a screen reader user none of the data the chart conveys.
@@ -458,7 +488,9 @@ See [Edit document structure with the Content and Tags panels](https://helpx.ado
 | "pie chart" | "Pie chart of Fall 2025 student survey: 62% satisfied, 24% neutral, 14% dissatisfied." |
 | Identifies the chart type but not the data. The student cannot participate in discussion about the results. | Includes the data so the student can engage with the content on equal terms. |
 
-**How to fix:** Follow the same steps as Scenario 1 for each platform. Replace the vague description with one that conveys the same information a sighted reader would get from the image. For charts and graphs, include the data, not just the chart type.
+##### How to fix
+
+Follow the same steps as Scenario 1 for each platform. Replace the vague description with one that conveys the same information a sighted reader would get from the image. For charts and graphs, include the data, not just the chart type.
 
 ::: {.callout}
 **Writing good alt text.** Ask: "If I could not see this image, what would I need to know?" The answer is the alt text. For data visualizations, the alt text should include the data. For photos, it should describe what is shown and why it matters in context. Avoid starting alt text with words like "graphic," "image," or "picture." Screen readers already announce the element as an image, so these labels are redundant and add noise without meaning.
@@ -466,7 +498,7 @@ See [Edit document structure with the Content and Tags panels](https://helpx.ado
 
 ---
 
-#### Scenario 6: Gibberish or placeholder alt text
+#### Scenario 6: Gibberish or placeholder alt text (Ally does not catch)
 
 **Gibberish or placeholder alt text**
 
@@ -477,30 +509,38 @@ See [Edit document structure with the Content and Tags panels](https://helpx.ado
 
 **The broken state.** The alt text field contains nonsense (e.g., "alskjshdsflh," "asdf," "xxx") or a generic placeholder (e.g., "image," "photo," "graphic," "picture"). This typically results from someone filling the field to clear an automated warning without writing a real description.
 
-**Detected by:** 🟡 Ally · 🟡 MS Checker · 🟡 Acrobat. The alt text field is not empty, so all tools consider it a pass.
+##### Detected by
+
+🟡 Ally · 🟡 MS Checker · 🟡 Acrobat. The alt text field is not empty, so all tools consider it a pass.
 
 ::: {.callout}
 **Tool gap.** Typing "asdf" into an alt text field clears every automated warning. The content scores 100%. The screen reader user hears "asdf." This is the clearest illustration of why automated scores alone are insufficient.
 :::
 
-**How to fix:** Follow the same steps as Scenario 1 for each platform. Delete the placeholder and write a meaningful description. If the image is decorative, mark it as decorative instead of describing it.
+##### How to fix
+
+Follow the same steps as Scenario 1 for each platform. Delete the placeholder and write a meaningful description. If the image is decorative, mark it as decorative instead of describing it.
 
 ---
 
-#### Scenario 7: Alt text over ~120 characters (Canvas false positive)
+#### Scenario 7: Alt text over ~120 characters (Ally false positive)
 
 **Alt text over ~120 characters (false positive)**
 
-| Broken (per Ally) | Corrected |
+| Not actually broken | No need for correction |
 |--------------------|-----------|
-| "Grouped bar chart comparing Quiz 1 and Quiz 2 averages across three sections. Section 1: 85% and 82%. Section 2: 83% and 81%. Section 3: 85% and 82%." *(flagged as too long)* | Keep the description as written. Do not shorten. |
+| "Grouped bar chart comparing Quiz 1 and Quiz 2 averages across three sections. Section 1: 85% and 82%. Section 2: 83% and 81%. Section 3: 85% and 82%." *(flagged as too long)* | no need to change, fine as is |
 | Ally flags alt text exceeding ~120 characters in Canvas. | There is no WCAG basis for a character limit. The description is accurate and necessary. Shortening it to clear the flag removes information the student needs. |
 
 **The broken state.** This is not actually broken. The alt text is accurate and meaningful but exceeds approximately 120 characters. Ally flags this in the Canvas Rich Content Editor as an issue. There is no WCAG basis for a character limit on alt text, nor any detriment for screen reader users.
 
-**Detected by:** 🟢 Ally (Canvas only, false positive)
+##### Detected by
 
-**How to handle:** Do not shorten the description to clear the flag. If the description needs to be long to be accurate (common for charts, graphs, and complex images), keep it as written. Note the Ally flag but do not treat it as a real issue. This will not show up in the Accessibility Dashboard in a way that impacts your overall score.
+🟢 Ally (Canvas only, false positive)
+
+##### How to handle
+
+Do not shorten the description to clear the flag. If the description needs to be long to be accurate (common for charts, graphs, and complex images), keep it as written. Note the Ally flag but do not treat it as a real issue. This will not show up in the Accessibility Dashboard in a way that impacts your overall score.
 
 For very long descriptions (multiple paragraphs), consider placing a brief alt text on the image and providing the full description in the body text below the image, or linking to a long description.
 
@@ -544,7 +584,7 @@ In the Canvas Rich Content Editor, Ally flags alt text exceeding approximately 1
 :::
 
 ::: {.callout}
-**Now we know that:**
+##### Now we know that
 
 - **100% in Ally ≠ accessible.** A perfect score means the content passed the checks Ally can run. It does not mean the content is free of barriers. Gibberish alt text, vague labels, and unmarked decorative images all score 100%.
 - **Tool layering matters.** No single tool catches everything. Ally misses AI-generated alt text that the Microsoft checker flags. Acrobat misses file-name alt text that Ally catches. Running one tool is a start; running all three closes more gaps.
@@ -558,15 +598,11 @@ In the Canvas Rich Content Editor, Ally flags alt text exceeding approximately 1
 
 Contrast issues are common (likelihood 4/5) and meaningfully affect students with low vision, color vision deficiencies, or those reading on screens in bright environments.
 
-### Example error: Contrast
+#### Scenario 1: Regular text (Ally catches)
 
-Three categories of contrast failure, each with the actual ratio and whether automated tools detect it.
+**The broken state.** Regular-weight text uses a color that fails the 4.5:1 minimum against its background. Users with low vision or color deficiencies, or anyone reading in bright light, struggle to read it.
 
-#### Regular text
-
-<!-- E10a: Low contrast regular text, detected by Ally and MS Checker -->
-
-**Detected by:** 🔴 Ally · 🔴 MS Checker
+<!-- E10a: Low contrast regular text | Error ID: E10a -->
 
 | Broken | Corrected |
 |--------|-----------|
@@ -574,11 +610,45 @@ Three categories of contrast failure, each with the actual ratio and whether aut
 | **Contrast ratio:** 3:1 · **Color:** #5692FF · **Required:** 4.5:1 | **Contrast ratio:** 7.3:1 · **Color:** #2d5a7b · **Required:** 4.5:1 |
 | `color: #5692FF` (3:1 against white) | `color: #2d5a7b` (7.3:1 against white) |
 
-#### Large text
+##### Ally error messages
 
-<!-- E10b: Low contrast large text, detected by Ally and MS Checker -->
+- **Word:** "Hard-to-read text contrast" (Color and Contrast)
+- **PowerPoint:** "Hard-to-read text contrast" (Color and Contrast)
+- **Canvas:** "Text should display a minimum contrast ratio of 4.5:1" (Major)
+- **PDF:** Contrast issues appear on the Ally Accessibility Dashboard with suggested replacement colors.
 
-**Detected by:** 🔴 Ally · 🔴 MS Checker
+##### Detected by
+
+🔴 Ally · 🔴 MS Checker
+
+##### How to fix in Word
+
+1. Select the low-contrast text.
+2. Go to **Home > Font Color** (or right-click > Font).
+3. Choose a darker color that meets 4.5:1 against the background. Use the [Colour Contrast Analyser (CCA)](https://www.tpgi.com/color-contrast-checker/) to verify.
+4. Run the Accessibility Checker (Review > Check Accessibility) to confirm the issue is resolved.
+
+##### How to fix in PowerPoint
+
+1. Select the low-contrast text.
+2. Go to **Home > Font Color** and choose a darker color.
+3. When the Microsoft checker flags the issue, click a suggested replacement color to fix it in place.
+
+##### How to fix in Canvas
+
+1. Select the low-contrast text in the Rich Content Editor.
+2. Run the Accessibility Checker from the editor toolbar.
+3. Use the color picker to choose a darker color that meets the minimum, then click **Apply**.
+
+![Screenshot of the Canvas Rich Content Editor Accessibility Checker showing contrast issue with color picker.](assets/canvas-rce-contrast-checker.png)
+
+---
+
+#### Scenario 2: Large text (Ally catches)
+
+**The broken state.** Large text (18pt or 14pt bold) uses a color that fails the 3:1 minimum. Even though large text has a lower threshold than regular text, this example still fails.
+
+<!-- E10b: Low contrast large text | Error ID: E10b -->
 
 | Broken | Corrected |
 |--------|-----------|
@@ -586,19 +656,46 @@ Three categories of contrast failure, each with the actual ratio and whether aut
 | **Contrast ratio:** 2:1 · **Color:** #91BFE1 · **Required:** 3:1 | **Contrast ratio:** 3.7:1 · **Color:** #4A8CAD · **Required:** 3:1 |
 | `color: #91BFE1` (2:1 against white) | `color: #4A8CAD` (3.7:1 against white) |
 
-#### Graphic element
+##### Ally error messages
 
-<!-- E10c: Low contrast graphic element, not detected by any tool -->
+- **Word/PowerPoint:** "Hard-to-read text contrast" (Color and Contrast)
+- **Canvas:** "Text larger than 18pt (or bold 14pt) should display a minimum contrast ratio of 3:1" (Major)
 
-**Detected by:** 🟡 Not detected by Ally · 🟡 Not detected by MS Checker
+##### Detected by
+
+🔴 Ally · 🔴 MS Checker
+
+##### How to fix
+
+Follow the same steps as Scenario 1 for each platform. Use a darker color that meets the 3:1 minimum for large text.
+
+---
+
+#### Scenario 3: Graphic element (Ally does not catch)
+
+**The broken state.** A chart line, bar fill, or icon uses a color that fails the 3:1 minimum against its background. [WCAG 1.4.11 Non-text Contrast](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html) (Level AA) requires at least 3:1. No automated tool flags this.
+
+<!-- E10c: Low contrast graphic element | Error ID: E10c -->
 
 | Broken | Corrected |
 |--------|-----------|
-| ![Line chart with three data series across four categories. Series 1 (light pink, #F1B4A4): 4.3, 2.5, 3.5, 4.5. Series 2 (orange): 2.4, 4.4, 1.8, 2.8. Series 3 (dark brown): 2, 2, 3, 5. The Series 1 line color has a contrast ratio of only 1.8:1 against the white background, failing the 3:1 minimum for non-text graphic elements.](public/assets/chart-contrast-example.png) | #F1B4A4 → 1.8:1 (fail) · #C0564B → 4.5:1 (pass) |
+| ![Line chart with three data series across four categories. Series 1 (light pink, #F1B4A4): 4.3, 2.5, 3.5, 4.5. Series 2 (orange): 2.4, 4.4, 1.8, 2.8. Series 3 (dark brown): 2, 2, 3, 5. The Series 1 line color has a contrast ratio of only 1.8:1 against the white background, failing the 3:1 minimum for non-text graphic elements.](assets/chart-contrast-example.png) | #F1B4A4 → 1.8:1 (fail) · #C0564B → 4.5:1 (pass) |
 | **Contrast ratio:** 1.8:1 · **Color:** #F1B4A4 · **Required:** 3:1 | **Contrast ratio:** 4.5:1 · **Color:** #C0564B · **Required:** 3:1 |
 | `Series 1 color: #F1B4A4` (1.8:1 against white) | `Series 1 color: #C0564B` (4.5:1 against white) |
 
-Both Ally and the Microsoft Accessibility Checker detect text contrast failures (regular and large text). Neither detects graphic element contrast failures. [WCAG 1.4.11 Non-text Contrast](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html) (Level AA) requires a minimum 3:1 contrast ratio for meaningful graphic elements such as chart lines, bar fills, and icons. The chart above uses #F1B4A4 (a light salmon) for one of its data series, producing a ratio of only 1.8:1 against white. This gap is invisible to automated tools and requires manual review.
+##### Ally error messages
+
+None. Ally does not check graphic element contrast.
+
+##### Detected by
+
+🟡 Not detected by Ally · 🟡 Not detected by MS Checker
+
+##### How to fix
+
+1. Use the [Colour Contrast Analyser (CCA)](https://www.tpgi.com/color-contrast-checker/) to check chart line colors, bar fills, and icons against their backgrounds.
+2. Replace any color that fails the 3:1 minimum with a darker or lighter alternative that passes.
+3. When creating charts in Excel or PowerPoint, verify data series colors before publishing.
 
 ::: {.callout}
 **Key point.** Automated tools catch text contrast but miss graphic element contrast entirely. Chart lines, bar fills, icons, and other non-text elements that fail the 3:1 minimum are invisible to both Ally and the Microsoft Accessibility Checker.
@@ -699,7 +796,11 @@ Ally claims to evaluate contrast within image files, but this feature is not wor
 
 This is a separate requirement from contrast and is **not checked by Ally or any of the standard automated tools**. It requires manual review.
 
-### Common examples in course content
+### Scenario: Color as sole means (Ally does not catch)
+
+**The broken state.** Information is conveyed by color alone: a chart uses red vs. green to indicate status, a rubric uses red/yellow/green without text labels, or feedback marks wrong answers in red with no other indicator. A student with a color vision deficiency cannot access the information.
+
+Common examples in course content:
 
 - A rubric that uses red/yellow/green to indicate performance levels without text labels
 - A chart where data series are distinguished only by color without patterns or direct labels
@@ -707,8 +808,6 @@ This is a separate requirement from contrast and is **not checked by Ally or any
 - A schedule where color-coded categories have no legend or text equivalent
 
 <!-- Scenario: Color as sole means | Error ID: E11 -->
-
-**Color as sole means: Bar chart example (E11)**
 
 | Broken | Corrected |
 |--------|-----------|
@@ -849,7 +948,7 @@ Tables appear less frequently than images or headings (likelihood 3/5) but have 
 - Tables of 3x3 or larger without headers (Canvas, via axe-core)
 - Table headers that exist but contain no visible text (Ally only)
 
-**Ally error messages:**
+##### Ally error messages
 
 - **Word:** "This document contains tables that are missing headers" (Major)
 - **Canvas (HTML):** "This item contains table headers that are missing content" (Major)
@@ -877,41 +976,54 @@ Ally distinguishes two separate table header issues. The first is a table with n
 
 ### Broken Examples and How to Fix Them
 
-#### Scenario: Missing table headers
+#### Scenario 1: Missing table headers (Ally catches)
 
-**The broken state.** A data table has no designated header row. Every cell is treated as data, and a screen reader provides no column or row context when navigating the table.
+##### The broken state
 
-**Detected by:** 🔴 Ally · 🔴 MS Checker · 🔴 Acrobat
+A data table has no designated header row. The first row may contain labels (Date, Event, Venue) or data (Section, Quiz scores), but if those cells are `<td>` instead of `<th scope="col">`, they are not programmatically headers. Every cell is treated as data; a screen reader provides no column or row context.
 
-**Missing table headers**
+##### Detected by
 
-| Broken | Corrected |
-|--------|-----------|
-| Section 1 / 85 / 82; Section 2 / 83 / 81; Section 3 / 85 / 82 (no header row designated) | Section / Quiz 1 / Quiz 2 (header row) followed by data rows |
-| **What happens:** Screen reader reads raw cells with no column/row context; student hears "85" without knowing what it means. | **What happens:** Screen reader associates each cell with its header; student hears "Quiz 1: 85" and gets full context. |
+🔴 Ally · 🔴 MS Checker · 🔴 Acrobat
 
-**How to fix in Word:**
+##### Example: Missing header row
+
+| Broken | Fixed |
+|--------|-------|
+| Section 1 / 85 / 82; Section 2 / 83 / 81; Section 3 / 85 / 82 (all cells `<td>`) | Section / Quiz 1 / Quiz 2 (header row with `<th scope="col">`) plus data rows |
+
+**Issue:** In the broken table, every cell is marked as `<td>`. A screen reader reads the cells as a flat stream with no column association. The student hears "85" without knowing it is a Quiz 1 score. **Fix:** Designate the first row as a header row using `<th scope="col">` for each column. The screen reader then announces the header with each cell (e.g., "Quiz 1: 85"), giving the student full context.
+
+##### Example: Empty table headers
+
+| Broken | Fixed |
+|--------|-------|
+| Header row exists but all `<th>` cells are blank. Data: Section 1/85/82, etc. | Header row contains Section / Quiz 1 / Quiz 2 with data rows below. |
+
+**Issue:** The broken table has a designated header row, but the `<th>` cells are empty. A screen reader announces "column header: blank" or provides no association. The student hears data without context, same as having no headers at all. **Fix:** Type descriptive text into each header cell. Every `<th>` must contain visible text that describes the purpose of the row or column.
+
+##### How to fix in Word
 
 1. Click anywhere inside the table.
 2. Go to the **Table Design** tab on the ribbon.
 3. In the **Table Style Options** group, check **Header Row**.
 4. Verify the first row contains descriptive text for each column.
 
-**How to fix in PowerPoint:**
+##### How to fix in PowerPoint
 
 1. Click anywhere inside the table.
 2. Go to the **Table Design** tab on the ribbon.
 3. In the **Table Style Options** group, check **Header Row**.
 4. Verify the first row contains descriptive text for each column.
 
-**How to fix in Canvas:**
+##### How to fix in Canvas
 
 1. Click inside the table in the Rich Content Editor.
 2. Click the **table icon** in the toolbar and select **Table properties**.
 3. Under **Header**, select **Header row** (or **Header column** if the table uses row headers).
 4. Click **Save**.
 
-**How to fix in PDF (Acrobat Pro):**
+##### How to fix in PDF (Acrobat Pro)
 
 1. Open the **Tags** panel (View > Show/Hide > Navigation Panes > Tags).
 2. Locate the `<Table>` tag.
@@ -922,25 +1034,64 @@ Ally distinguishes two separate table header issues. The first is a table with n
 
 ---
 
-#### Scenario: Empty table headers
+#### Scenario 2: Empty table headers (Ally catches)
 
-**The broken state.** A table has a designated header row, but the header cells are empty. The `<th>` elements contain no visible text. This commonly occurs when a table's first row is used for spacing, when header content is conveyed through formatting (bold, color) in data cells instead, or when a layout table is incorrectly given header markup.
+##### The broken state
 
-**Detected by:** 🔴 Ally · 🟡 MS Checker · 🟡 Acrobat
+A table has a designated header row, but the header cells are empty. The `<th>` elements contain no visible text. This commonly occurs when a table's first row is used for spacing, when header content is conveyed through formatting (bold, color) in data cells instead, or when a layout table is incorrectly given header markup.
 
-**Empty table headers**
+##### Detected by
 
-| Broken | Corrected |
-|--------|-----------|
-| Header row exists but all `<th>` cells are blank. Data rows contain "Section 1 / 85 / 82" with no column context. | Header row contains "Section / Quiz 1 / Quiz 2" with matching data below. |
-| **What happens:** Screen reader announces "column header: blank" or provides no header association. Student hears data without context, same as having no headers at all. | **What happens:** Screen reader associates each data cell with its header text. Student hears "Quiz 1: 85." |
+🔴 Ally · 🟡 MS Checker · 🟡 Acrobat
 
-**How to fix:** Open the table and type descriptive text into each header cell. Every table header element should have visible text that describes the purpose of the row or column. If the table does not need headers because it is a layout table, remove the header designation entirely (or replace the table with semantic layout).
+##### How to fix
+
+Open the table and type descriptive text into each header cell. Every table header element should have visible text that describes the purpose of the row or column. If the table does not need headers because it is a layout table, remove the header designation entirely (or replace the table with semantic layout).
+
+---
+
+#### Scenario 3: Schedule table missing row headers (Ally does not catch)
+
+##### The broken state
+
+A schedule or matrix table has column headers in the top row (Time, Monday, Wednesday, Friday) and a first column with time slots. The top row is correctly marked with `<th scope="col">`, but the first column uses `<td>` instead of `<th scope="row">`. Automated tools pass because a header row exists. A screen reader user navigating a data cell (e.g., "Room 201" at 9:00 AM Monday) gets the column context ("Monday") but not the row context ("9:00–10:00 AM").
+
+##### Detected by
+
+🟡 Ally · 🟡 MS Checker · 🟡 Acrobat (all pass; manual verification required)
+
+##### How to fix in Word / PowerPoint
+
+Select the first column, then in Table Design > Table Style Options, check **First Column** so the first column is designated as a header column.
+
+##### How to fix in Canvas
+
+In Table properties, under **Header**, select both **Header row** and **Header column** if the table has both.
+
+##### How to fix in PDF (Acrobat Pro)
+
+In the Tags panel, expand the first column cells. For each cell that is a row header, change the tag from `<TD>` to `<TH>` and set Scope to "Row."
+
+::: {.callout}
+**Finding.** Ally, the Microsoft Accessibility Checker, and Acrobat do not flag schedule tables that have column headers but lack row header markup. Screen reader testing is the only reliable verification for this pattern.
+:::
+
+---
+
+#### Scenario 4: Layout table used for positioning (Ally does not catch)
+
+##### The broken state
+
+A table is used for visual layout (e.g., two-column page design) rather than data. The table has no real header relationship; it forces content into columns. Screen readers announce table structure (rows, columns) with no meaningful associations.
+
+##### Detected by
+
+🟡 Ally · 🟡 MS Checker · 🟡 Acrobat (all pass if header row is designated; tools cannot distinguish layout from data tables)
 
 ### What requires manual review
 
 - **Layout tables.** Tables used for visual alignment rather than data presentation create confusing screen reader experiences. Automated tools do not reliably distinguish layout tables from data tables.
-- **Complex tables.** Merged cells, multiple header rows, and nested tables require manual verification. The `scope` attribute (HTML) or tagged structure (PDF) must correctly associate each data cell with its headers.
+- **Complex tables.** Merged cells, multiple header rows, and nested tables require manual verification. For tables with both column headers (top row) and row headers (first column), use `<th scope="col">` for the top row and `<th scope="row">` for the first column. The `scope` attribute (HTML) or tagged structure (PDF) must correctly associate each data cell with its headers.
 - **Appropriateness.** Some content presented in tables would be more accessible as lists or paragraphs. A "table" with one column and one row per item is really a list.
 
 ::: {.summary}
@@ -1029,6 +1180,14 @@ Seizure risk is the least common issue in course content (likelihood 1/5) but ca
 ### What automated tools detect
 
 Ally checks for rapid flashing in **image files only** (primarily animated GIFs). This is the only file type where seizure risk is evaluated.
+
+![Ally accessibility score dialog for bright_red_fast_strobe.gif showing 0%, red banner stating 'This image can induce seizures' and 'Potentially very harmful', with options to keep or remove the image.](public/assets/ally-seizure-dashboard.png)
+
+*Ally flags a flashing GIF with a 0% score and recommends removal.*
+
+![Warning screen: red circle with lightning bolt icon, text 'Potentially seizure-inducing', and 'Show image anyway' button.](public/assets/seizure-warning-bypass.png)
+
+*Warning shown before displaying seizure-inducing content, with option to bypass.*
 
 ::: {.callout}
 **Note.** This document cannot show actual flashing content because it could cause direct harm (photosensitive seizure) to readers. The illustration below represents the concept of flashing content; in real course materials, a rapidly flashing GIF or animation would appear in the "Broken" column.

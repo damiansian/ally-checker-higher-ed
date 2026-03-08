@@ -51,6 +51,7 @@ h2 {
 }
 h3 { font-size: 1.2rem; color: var(--text); }
 h4 { font-size: 1.08rem; }
+h5 { font-size: 1rem; color: var(--accent); margin-top: 1.5rem; margin-bottom: 0.5rem; }
 p { margin: 0.75rem 0; }
 strong { color: var(--text); }
 blockquote {
@@ -160,6 +161,16 @@ table.lab-compare img { max-width: 100%; height: auto; border: 1px solid #ddd; }
 img.screenshot { border: 1px solid #000; }
 .legend.low { color: #b91c1c; font-weight: 600; }
 .legend.high { color: #15803d; font-weight: 600; }
+
+/* Sequential example blocks (Broken then Fixed) */
+.example-block { margin: 1em 0; }
+.example-broken { background: #f8f8f8; }
+.example-fixed { background: #f8f8f8; }
+.example-block h5 { margin: 0 0 0.5rem 0; font-family: 'Source Sans 3', system-ui, sans-serif; font-size: 1rem; font-weight: 700; color: #222; }
+.example-block table { margin: 0.5rem 0 0.75rem 0; border-collapse: collapse; font-size: 0.9rem; }
+.example-block table td, .example-block table th { border: 1px solid #000; padding: 4px 8px; }
+.example-block table thead th { background: #d9d9d9; font-weight: 700; color: #000; text-align: left; }
+.example-block table tr td { background: #fff; }
 </style>
 </head>
 <body>
@@ -182,6 +193,7 @@ img.screenshot { border: 1px solid #000; }
 <li><a href="#color-as-sole-means-of-communication">Color as Sole Means of Communication</a></li>
 <li><a href="#headings">Headings</a></li>
 <li><a href="#tables">Tables</a></li>
+<li><a href="#table-captions">Known False Positive: Table Captions</a></li>
 <li><a href="#lists">Lists</a></li>
 <li><a href="#language">Language</a></li>
 <li><a href="#seizure-risk">Seizure Risk</a></li>
@@ -769,7 +781,7 @@ href="#scenario-7-alt-text-over-120-characters-canvas-false-positive">Scenario
 </ul>
 </div>
 <hr />
-<h4 id="scenario-1-no-alt-text">Scenario 1: No alt text</h4>
+<h4 id="scenario-1-no-alt-text">Scenario 1: No alt text (Ally catches)</h4>
 <p><strong>The broken state.</strong> An image is inserted into a
 document, slide, page, or PDF with no alt text at all. This is the most
 basic and most common text alternative failure.</p>
@@ -885,8 +897,7 @@ field.</li>
 </ol>
 <p><em>[PLACEHOLDER: Screenshot, Acrobat Set Alternate Text dialog]</em></p>
 <hr />
-<h4 id="scenario-2-ai-generated-alt-text">Scenario 2: AI-generated alt
-text</h4>
+<h4 id="scenario-2-ai-generated-alt-text">Scenario 2: AI-generated alt text (Ally doesn't catch)</h4>
 <p><strong>The broken state.</strong> Microsoft Office auto-generates a
 description when an image is inserted (e.g., “A group of people sitting
 at a table with laptops”). The description may be partially accurate but
@@ -942,8 +953,7 @@ the source document or it is added manually in Acrobat. Canvas does
 have the option to generate alt text in the Dashboard remediation
 process, but not directly in the Rich Content Editor.</p>
 <hr />
-<h4 id="scenario-3-file-name-as-alt-text">Scenario 3: File name as alt
-text</h4>
+<h4 id="scenario-3-file-name-as-alt-text">Scenario 3: File name as alt text (Ally catches)</h4>
 <p><strong>The broken state.</strong> The alt text field contains the
 image’s file name (e.g., “IMG_3847.png”, “chart_final_v2.jpg”,
 “C:.png”). This typically happens when an image is inserted and the
@@ -986,8 +996,7 @@ descriptions” (Minor)</li>
 each platform. Delete the file name and replace it with a meaningful
 description of the image.</p>
 <hr />
-<h4 id="scenario-4-decorative-image-not-marked-as-decorative">Scenario
-4: Decorative image not marked as decorative</h4>
+<h4 id="scenario-4-decorative-image-not-marked-as-decorative">Scenario 4: Decorative image not marked as decorative (Ally doesn't catch)</h4>
 <p><strong>The broken state.</strong> A decorative image (a divider
 line, a background texture, a branding banner, a purely visual flourish)
 has either no alt text or a description like “decorative line” or
@@ -1048,7 +1057,7 @@ removes the image from the tag tree so screen readers skip it.</li>
 <p>See <a href="https://helpx.adobe.com/acrobat/using/editing-document-structure-content-tags.html">Edit document structure with the Content and Tags panels</a> on Adobe HelpX for full details.</p>
 <p><img class="screenshot" src="assets/acrobat-create-artifact.png" alt="Screenshot of Acrobat Create Artifact dialog: Artifact Type options (Page selected, Pagination, Layout), Attach to Side(s) checkboxes (Left, Top, Right, Bottom), and Cancel/OK buttons. Used when marking a decorative image as artifact so screen readers skip it."></p>
 <hr />
-<h4 id="scenario-5-vague-alt-text">Scenario 5: Vague alt text</h4>
+<h4 id="scenario-5-vague-alt-text">Scenario 5: Vague alt text (Ally doesn't catch)</h4>
 <p><strong>The broken state.</strong> The alt text field contains a
 description that is technically present but too vague to be useful.
 Examples: “chart,” “Quiz comparison chart,” “photo,” “graph of data.” A
@@ -1137,8 +1146,7 @@ Screen readers already announce the element as an image, so these labels
 are redundant and add noise without meaning.</p>
 </div>
 <hr />
-<h4 id="scenario-6-gibberish-or-placeholder-alt-text">Scenario 6:
-Gibberish or placeholder alt text</h4>
+<h4 id="scenario-6-gibberish-or-placeholder-alt-text">Scenario 6: Gibberish or placeholder alt text (Ally doesn't catch)</h4>
 <p><strong>Gibberish or placeholder alt text</strong></p>
 <!-- Scenario: Gibberish/placeholder alt | Error ID: E5 -->
 <table class="lab-compare">
@@ -1344,7 +1352,7 @@ whether automated tools detect it.</p>
   <tbody>
     <tr>
       <td>
-        <img class="screenshot" src="public/assets/chart-contrast-example.png" alt="Line chart with three data series across four categories. Series 1 (light pink, #F1B4A4): 4.3, 2.5, 3.5, 4.5. Series 2 (orange): 2.4, 4.4, 1.8, 2.8. Series 3 (dark brown): 2, 2, 3, 5. The Series 1 line color has a contrast ratio of only 1.8:1 against the white background, failing the 3:1 minimum for non-text graphic elements.">
+        <img class="screenshot" src="assets/chart-contrast-example.png" alt="Line chart with three data series across four categories. Series 1 (light pink, #F1B4A4): 4.3, 2.5, 3.5, 4.5. Series 2 (orange): 2.4, 4.4, 1.8, 2.8. Series 3 (dark brown): 2, 2, 3, 5. The Series 1 line color has a contrast ratio of only 1.8:1 against the white background, failing the 3:1 minimum for non-text graphic elements.">
         <p><strong>Contrast ratio:</strong> 1.8:1 &middot; <strong>Color:</strong> #F1B4A4 &middot; <strong>Required:</strong> 3:1</p>
         <p><strong>What happens:</strong> The light pink data series is nearly invisible against a white background for users with low vision or color deficiencies. No automated tool flags it.</p>
       </td>
@@ -1377,7 +1385,7 @@ invisible to both Ally and the Microsoft Accessibility Checker.</p>
 <p>The <a href="https://www.tpgi.com/color-contrast-checker/">Colour Contrast Analyser (CCA)</a> is a free desktop tool that
 confirms exact contrast ratios and which WCAG criteria pass or fail.</p>
 <figure style="max-width: 320px; margin: 1em 0;">
-  <img src="public/assets/cca-contrast-check-91bfe1.png"
+  <img src="assets/cca-contrast-check-91bfe1.png"
        alt="Screenshot of the Colour Contrast Analyser (CCA) desktop application. Foreground color is #91BFE1, background is #FFFFFF (white). The contrast ratio is 2:1. WCAG 2.1 results show: 1.4.3 Contrast (Minimum) AA fails for both regular and large text, 1.4.6 Contrast (Enhanced) AAA fails for both, and 1.4.11 Non-text Contrast AA fails for UI components and graphical objects."
        style="width: 100%; height: auto;" class="screenshot" />
   <figcaption>The Colour Contrast Analyser (CCA) confirms #91BFE1 fails at 2:1.</figcaption>
@@ -1392,13 +1400,13 @@ place. Contrast issues also appear on the Ally Accessibility Dashboard,
 lowering the file's score with suggested replacement colors.</p>
 <div style="display: flex; gap: 1.5em; flex-wrap: wrap; margin: 1em 0;">
   <figure style="flex: 1; min-width: 200px; margin: 0;">
-    <img src="public/assets/canvas-rce-contrast-checker.png"
+    <img src="assets/canvas-rce-contrast-checker.png"
          alt="Screenshot of the Canvas Rich Content Editor Accessibility Checker showing Issue 1 of 1: 'Text larger than 18pt (or bold 14pt) should display a minimum contrast ratio of 3:1.' A 'Change text color' field shows rgba(145, 191, 225, 1) with a color picker below and Prev, Next, and Apply buttons."
          style="width: 100%; height: auto;" class="screenshot" />
     <figcaption>The Canvas RCE Accessibility Checker flags low-contrast text and offers a color picker to fix it in place.</figcaption>
   </figure>
   <figure style="flex: 1; min-width: 200px; margin: 0;">
-    <img src="public/assets/ally-dashboard-contrast-warning.png"
+    <img src="assets/ally-dashboard-contrast-warning.png"
          alt="Screenshot of the Ally accessibility score panel for a file with alt text. The score is 81% with a yellow-green gauge. Below, Ally reports 'This item contains text with insufficient contrast' with a 'What this means' button. Four suggested replacement colors are shown with an Apply button."
          style="width: 100%; height: auto;" class="screenshot" />
     <figcaption>Ally flags the contrast issue on the Dashboard, lowering the file score to 81% and suggesting darker replacement colors.</figcaption>
@@ -1415,13 +1423,13 @@ complement to Ally, particularly for content authored in Office before
 it reaches Canvas.</p>
 <div style="display: flex; gap: 1.5em; flex-wrap: wrap; margin: 1em 0;">
   <figure style="flex: 1; min-width: 200px; margin: 0;">
-    <img src="public/assets/ms-checker-contrast-overview.png"
+    <img src="assets/ms-checker-contrast-overview.png"
          alt="Screenshot of Microsoft's Accessibility Assistant showing a 'Keep going!' message prompting the user to fix remaining issues. Below, the Color and Contrast category lists 'Hard-to-read text contrast' with a count of 1."
          style="width: 100%; height: auto;" class="screenshot" />
     <figcaption>The Accessibility Assistant flags contrast issues under Color and Contrast.</figcaption>
   </figure>
   <figure style="flex: 1; min-width: 200px; margin: 0;">
-    <img src="public/assets/ms-checker-contrast-detail.png"
+    <img src="assets/ms-checker-contrast-detail.png"
          alt="Screenshot of Microsoft's Accessibility Assistant detail view for 'Hard-to-read text contrast.' The message reads 'Current text color is hard to see. Consider a high contrast color so that the text is clearly visible.' Below are three suggested replacement colors, a 'More font colors' button, and a 'Text shading' button."
          style="width: 100%; height: auto;" class="screenshot" />
     <figcaption>The detail view offers suggested replacement colors, a font color picker, and text shading.</figcaption>
@@ -1447,13 +1455,13 @@ hanging on the wall behind the student, which Ally appears to have
 misidentified as text content.</p>
 <div style="display: flex; gap: 1.5em; flex-wrap: wrap; margin: 1em 0;">
   <figure style="flex: 1; min-width: 200px; margin: 0;">
-    <img src="public/assets/student-discussion-photo.png"
+    <img src="assets/student-discussion-photo.png"
          alt="Photo of a student used in a Canvas discussion post. The student is wearing a green shirt and standing in front of a gold curtain with a framed picture on the wall. This image is based on a real student photo but has been heavily manipulated with AI to protect the student's privacy."
          style="width: 100%; height: auto;" />
     <figcaption>Student photo uploaded to a Canvas discussion post. Based on a real student photo, heavily manipulated with AI to protect the student's privacy.</figcaption>
   </figure>
   <figure style="flex: 1; min-width: 200px; margin: 0;">
-    <img src="public/assets/ally-image-contrast-warning.png"
+    <img src="assets/ally-image-contrast-warning.png"
          alt="Screenshot of the Ally accessibility score panel for the student photo. The score is 75% with the message 'This image has contrast issues.' Below, Ally displays 'Guidance not available yet. We are updating the guidance for this issue.'"
          style="width: 100%; height: auto;" />
     <figcaption>Ally flags the photo at 75% with "This image has contrast issues." Guidance reads: "Guidance not available yet. We are updating the guidance for this issue."</figcaption>
@@ -1515,11 +1523,11 @@ equivalent</li>
   <tbody>
     <tr>
       <td><!-- E11: Color as sole means (default, no labels) -->
-        <img src="public/assets/color-sole-means-default.png" alt="Bar chart titled Performance Status showing four teams. Team A scores 72, Team B scores 95, Team C scores 95, Team D scores 65. Red bars represent below target and green bars represent above target, but no text labels or patterns distinguish the categories. Color is the only indicator of status.">
+        <img src="assets/color-sole-means-default.png" alt="Bar chart titled Performance Status showing four teams. Team A scores 72, Team B scores 95, Team C scores 95, Team D scores 65. Red bars represent below target and green bars represent above target, but no text labels or patterns distinguish the categories. Color is the only indicator of status.">
         <p><strong>What happens:</strong> A student with a color vision deficiency cannot determine which teams are above or below target. Red vs. green is the only indicator.</p>
       </td>
       <td><!-- E11: Corrected (remediated, with labels) -->
-        <img src="public/assets/color-sole-means-remediated.png" alt="Bar chart titled Performance Status showing four teams with data labels. Team A: 75, Below target. Team B: 95, Above target. Team C: 95, Above target. Team D: 65, Below target. Each bar has a score and a text label indicating above or below target, so meaning does not depend on color alone.">
+        <img src="assets/color-sole-means-remediated.png" alt="Bar chart titled Performance Status showing four teams with data labels. Team A: 75, Below target. Team B: 95, Above target. Team C: 95, Above target. Team D: 65, Below target. Each bar has a score and a text label indicating above or below target, so meaning does not depend on color alone.">
         <p><strong>What happens:</strong> Every bar includes a score and a text label (Above target / Below target). The full meaning is available regardless of color perception.</p>
       </td>
     </tr>
@@ -1548,11 +1556,11 @@ lost.</p>
   <tbody>
     <tr>
       <td>
-        <img src="public/assets/color-sole-means-default-deuteranopia.png" alt="Deuteranopia simulation of the broken chart. All four bars appear as similar olive and dark gold tones. Without the red-green distinction, the bars are nearly indistinguishable. No text labels are present, so the student cannot determine which teams are above or below target.">
+        <img src="assets/color-sole-means-default-deuteranopia.png" alt="Deuteranopia simulation of the broken chart. All four bars appear as similar olive and dark gold tones. Without the red-green distinction, the bars are nearly indistinguishable. No text labels are present, so the student cannot determine which teams are above or below target.">
         <p><strong>What happens:</strong> The red and green bars shift to similar olive and gold tones. Without labels, the student cannot tell which teams met the target.</p>
       </td>
       <td>
-        <img src="public/assets/color-sole-means-remediated-deuteranopia.png" alt="Deuteranopia simulation of the corrected chart. Bars appear in similar olive and dark gold tones, but each bar has a data label and text label: Team A 75 Below target, Team B 95 Above target, Team C 95 Above target, Team D 65 Below target. The text labels preserve the meaning despite the color shift.">
+        <img src="assets/color-sole-means-remediated-deuteranopia.png" alt="Deuteranopia simulation of the corrected chart. Bars appear in similar olive and dark gold tones, but each bar has a data label and text label: Team A 75 Below target, Team B 95 Above target, Team C 95 Above target, Team D 65 Below target. The text labels preserve the meaning despite the color shift.">
         <p><strong>What happens:</strong> Colors shift the same way, but the data labels and "Above target" / "Below target" text still convey the full meaning.</p>
       </td>
     </tr>
@@ -1570,11 +1578,11 @@ lost.</p>
   <tbody>
     <tr>
       <td>
-        <img src="public/assets/color-sole-means-default-achromatopsia.png" alt="Achromatopsia simulation of the broken chart. All four bars appear as similar medium gray tones. Without any color distinction and no text labels, the student cannot determine which teams are above or below target. All information encoded in color is completely lost.">
+        <img src="assets/color-sole-means-default-achromatopsia.png" alt="Achromatopsia simulation of the broken chart. All four bars appear as similar medium gray tones. Without any color distinction and no text labels, the student cannot determine which teams are above or below target. All information encoded in color is completely lost.">
         <p><strong>What happens:</strong> All color is gone. The four bars are nearly identical shades of gray. The status information is completely lost.</p>
       </td>
       <td>
-        <img src="public/assets/color-sole-means-remediated-achromatopsia.png" alt="Achromatopsia simulation of the corrected chart. All four bars appear as similar gray tones, but each bar has a data label and text label: Team A 75 Below target, Team B 95 Above target, Team C 95 Above target, Team D 65 Below target. Despite total color loss, the text labels preserve the full meaning.">
+        <img src="assets/color-sole-means-remediated-achromatopsia.png" alt="Achromatopsia simulation of the corrected chart. All four bars appear as similar gray tones, but each bar has a data label and text label: Team A 75 Below target, Team B 95 Above target, Team C 95 Above target, Team D 65 Below target. Despite total color loss, the text labels preserve the full meaning.">
         <p><strong>What happens:</strong> All color is gone, but the labels remain fully readable. The student gets the same information as a sighted user with typical color vision.</p>
       </td>
     </tr>
@@ -1791,13 +1799,13 @@ Acrobat)</li>
 <p>Ally distinguishes two separate table header issues. The first is a table with no designated header row at all. The second is a table where header cells exist but are empty, meaning the <code>&lt;th&gt;</code> elements contain no visible text describing the purpose of the row or column. Both reduce the document's accessibility score.</p>
 <div style="display: flex; gap: 1.5em; flex-wrap: wrap; margin: 1em 0;">
   <figure style="flex: 1; min-width: 200px; margin: 0;">
-    <img src="public/assets/ally-dashboard-table-missing-headers.png"
+    <img src="assets/ally-dashboard-table-missing-headers.png"
          alt="Screenshot of the Ally accessibility score panel for Course Content Accessibility.docx. The score is 98% with a yellow-green gauge. Below, Ally reports 'This document contains tables that are missing headers' with 'What this means' and 'How to set table headers' buttons. At the bottom, 'Upload a version with table headers' prompt."
          style="width: 100%; height: auto;" class="screenshot" />
     <figcaption>Ally flags the document at 98% for tables without designated headers.</figcaption>
   </figure>
   <figure style="flex: 1; min-width: 200px; margin: 0;">
-    <img src="public/assets/ally-dashboard-table-empty-headers.png"
+    <img src="assets/ally-dashboard-table-empty-headers.png"
          alt="Screenshot of the Ally accessibility score panel for a Tables item. The score is 99% with a yellow-green gauge. Below, Ally reports 'This item contains table headers that are missing content.' Explanation reads: 'Table header elements should have visible text that describes the purpose of the row or column.'"
          style="width: 100%; height: auto;" class="screenshot" />
     <figcaption>Ally flags table headers that exist but contain no visible text.</figcaption>
@@ -1807,107 +1815,305 @@ Acrobat)</li>
 <p><strong>Tool gap: empty table headers.</strong> Ally is the only tool that detects table headers with missing content. The Microsoft Accessibility Checker and Acrobat verify that a header row is designated but do not check whether the header cells actually contain text. A table with blank <code>&lt;th&gt;</code> cells passes both tools. A screen reader will announce "column header: blank" or silently skip the header association, leaving the student without context for the data that follows.</p>
 </div>
 <h3 id="broken-examples-tables">Broken Examples and How to Fix Them</h3>
-<h4 id="scenario-missing-table-headers">Scenario: Missing table headers</h4>
-<p><strong>The broken state.</strong> A data table has no designated header row. Every cell is treated as data, and a screen reader provides no column or row context when navigating the table.</p>
-<p><strong>Detected by:</strong> 🔴 Ally · 🔴 MS Checker · 🔴 Acrobat</p>
-<!-- Scenario: Data table missing header row | Error ID: E9 -->
-<table class="lab-compare">
-  <thead>
-    <tr><th scope="col">Broken</th><th scope="col">Corrected</th></tr>
-  </thead>
-  <tbody>
+<h4 id="scenario-1-missing-table-headers">Scenario 1: Missing table headers (Ally catches)</h4>
+<div class="example-block example-broken">
+  <h5>Broken</h5>
+  <table>
     <tr>
-      <td><!-- E9: Data table missing header row -->
-        <table>
-          <tr><td>Section 1</td><td>85</td><td>82</td></tr>
-          <tr><td>Section 2</td><td>83</td><td>81</td></tr>
-          <tr><td>Section 3</td><td>85</td><td>82</td></tr>
-        </table>
-        <p><strong>What happens:</strong> Screen reader reads raw cells with no column/row context; student hears "85" without knowing what it means.</p>
-      </td>
-      <td><!-- E9: Corrected artifact (right) -->
-        <table>
-          <thead><tr><th scope="col">Section</th><th scope="col">Quiz 1</th><th scope="col">Quiz 2</th></tr></thead>
-          <tbody>
-            <tr><td>Section 1</td><td>85</td><td>82</td></tr>
-            <tr><td>Section 2</td><td>83</td><td>81</td></tr>
-            <tr><td>Section 3</td><td>85</td><td>82</td></tr>
-          </tbody>
-        </table>
-        <p><strong>What happens:</strong> Screen reader associates each cell with its header; student hears "Quiz 1: 85" and gets full context.</p>
-      </td>
+      <td style="background:#d9d9d9; font-weight:700;" id="t1-date">Date</td>
+      <td style="background:#d9d9d9; font-weight:700;" id="t1-event">Event</td>
+      <td style="background:#d9d9d9; font-weight:700;" id="t1-venue">Venue</td>
     </tr>
-  </tbody>
-</table>
-<!-- Detection: Ally, Microsoft Accessibility Checker, Acrobat -->
-<p><strong>How to fix in Word:</strong></p>
-<ol type="1">
-<li>Click anywhere inside the table.</li>
-<li>Go to the <strong>Table Design</strong> tab on the ribbon.</li>
-<li>In the <strong>Table Style Options</strong> group, check <strong>Header Row</strong>.</li>
-<li>Verify the first row contains descriptive text for each column.</li>
-</ol>
-<p><strong>How to fix in PowerPoint:</strong></p>
-<ol type="1">
-<li>Click anywhere inside the table.</li>
-<li>Go to the <strong>Table Design</strong> tab on the ribbon.</li>
-<li>In the <strong>Table Style Options</strong> group, check <strong>Header Row</strong>.</li>
-<li>Verify the first row contains descriptive text for each column.</li>
-</ol>
-<p><strong>How to fix in Canvas:</strong></p>
-<ol type="1">
-<li>Click inside the table in the Rich Content Editor.</li>
-<li>Click the <strong>table icon</strong> in the toolbar and select <strong>Table properties</strong>.</li>
-<li>Under <strong>Header</strong>, select <strong>Header row</strong> (or <strong>Header column</strong> if the table uses row headers).</li>
-<li>Click <strong>Save</strong>.</li>
-</ol>
-<p><strong>How to fix in PDF (Acrobat Pro):</strong></p>
-<ol type="1">
-<li>Open the <strong>Tags</strong> panel (View &gt; Show/Hide &gt; Navigation Panes &gt; Tags).</li>
-<li>Locate the <code>&lt;Table&gt;</code> tag.</li>
-<li>Expand the first <code>&lt;TR&gt;</code> (table row).</li>
-<li>If the cells are tagged as <code>&lt;TD&gt;</code>, right-click each and select <strong>Properties</strong>.</li>
-<li>Change the <strong>Type</strong> from <code>&lt;TD&gt;</code> to <code>&lt;TH&gt;</code>.</li>
-<li>Set the <strong>Scope</strong> attribute to "Column" (or "Row" for row headers).</li>
-</ol>
-<hr />
-<h4 id="scenario-empty-table-headers">Scenario: Empty table headers</h4>
-<p><strong>The broken state.</strong> A table has a designated header row, but the header cells are empty. The <code>&lt;th&gt;</code> elements contain no visible text. This commonly occurs when a table's first row is used for spacing, when header content is conveyed through formatting (bold, color) in data cells instead, or when a layout table is incorrectly given header markup.</p>
-<p><strong>Detected by:</strong> 🔴 Ally · 🟡 MS Checker · 🟡 Acrobat</p>
-<!-- Scenario: Empty table headers | Error ID: E10 -->
-<table class="lab-compare">
-  <thead>
-    <tr><th scope="col">Broken</th><th scope="col">Corrected</th></tr>
-  </thead>
-  <tbody>
+    <tr><td headers="t1-date">12 February</td><td headers="t1-event">Waltz with Strauss</td><td headers="t1-venue">Main Hall</td></tr>
+    <tr><td headers="t1-date">24 March</td><td headers="t1-event">The Obelisks</td><td headers="t1-venue">West Wing</td></tr>
+    <tr><td headers="t1-date">14 April</td><td headers="t1-event">The What</td><td headers="t1-venue">Main Hall</td></tr>
+  </table>
+  <p>This table looks identical to the corrected version. The first row is styled to appear as a header, but uses <code>&lt;td&gt;</code> instead of <code>&lt;th&gt;</code>. The data cells reference those cells via the <code>headers</code> attribute, but because the referenced cells are <code>&lt;td&gt;</code> not <code>&lt;th&gt;</code>, the association is invalid. Axe flags this as a <code>td-headers-attr</code> violation (WCAG 1.3.1).</p>
+</div>
+<div class="example-block example-fixed">
+  <h5>Corrected</h5>
+  <table>
+    <thead><tr><th scope="col">Date</th><th scope="col">Event</th><th scope="col">Venue</th></tr></thead>
+    <tbody>
+      <tr><td>12 February</td><td>Waltz with Strauss</td><td>Main Hall</td></tr>
+      <tr><td>24 March</td><td>The Obelisks</td><td>West Wing</td></tr>
+      <tr><td>14 April</td><td>The What</td><td>Main Hall</td></tr>
+    </tbody>
+  </table>
+  <p>The first row is designated as a header row using <code>&lt;th scope="col"&gt;</code> for each column. The screen reader announces the header with each cell (e.g., "Venue: Main Hall"), giving the student full context.</p>
+</div>
+<h5>How to fix in Microsoft Word</h5>
+<p>[Placeholder: step-by-step instructions for designating a header row in Word.]</p>
+<p>[Placeholder: screenshot of Word Table Design tab showing Header Row checkbox checked.]</p>
+<h5>How to fix in Ally</h5>
+<p>[Placeholder: explanation of Ally's error message and guidance for this scenario.]</p>
+<p>[Placeholder: screenshot of Ally feedback panel for missing table headers.]</p>
+<h4 id="scenario-2-missing-row-headers">Scenario 2: Table with column and row headers (Ally doesn't catch)</h4>
+<p>The following table has content that should be column headers and content that should be row headers per the visual affordances. But only the column headers are marked up programmatically. No automated tool catches this.</p>
+<div class="example-block example-broken">
+  <h5>Broken</h5>
+  <table>
+    <thead>
+      <tr><th scope="col">Time</th><th scope="col">Monday</th><th scope="col">Wednesday</th><th scope="col">Friday</th></tr>
+    </thead>
+    <tbody>
+      <tr><td style="font-weight:700; background:#d9d9d9;">8:00 – 9:00 AM</td><td>Closed</td><td>Open</td><td>Open</td></tr>
+      <tr><td style="font-weight:700; background:#d9d9d9;">9:00 – 10:00 AM</td><td>Open</td><td>Closed</td><td>Open</td></tr>
+      <tr><td style="font-weight:700; background:#d9d9d9;">10:00 – 11:00 AM</td><td>Open</td><td>Open</td><td>Closed</td></tr>
+    </tbody>
+  </table>
+  <p>The column headers are correctly marked up as <code>&lt;th scope="col"&gt;</code>. But the time slots in the first column are styled to look like row headers and function as row headers visually, yet are marked as <code>&lt;td&gt;</code>. A screen reader has no way to associate each row with its time slot. No automated tool detects this.</p>
+</div>
+<div class="example-block example-fixed">
+  <h5>Corrected</h5>
+  <table>
+    <thead>
+      <tr><th scope="col">Time</th><th scope="col">Monday</th><th scope="col">Wednesday</th><th scope="col">Friday</th></tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row" style="font-weight:700; text-align:left; background:#d9d9d9; color:inherit;">8:00 – 9:00 AM</th><td>Closed</td><td>Open</td><td>Open</td></tr>
+      <tr><th scope="row" style="font-weight:700; text-align:left; background:#d9d9d9; color:inherit;">9:00 – 10:00 AM</th><td>Open</td><td>Closed</td><td>Open</td></tr>
+      <tr><th scope="row" style="font-weight:700; text-align:left; background:#d9d9d9; color:inherit;">10:00 – 11:00 AM</th><td>Open</td><td>Open</td><td>Closed</td></tr>
+    </tbody>
+  </table>
+  <p>The first column cells are changed to <code>&lt;th scope="row"&gt;</code>. A screen reader now announces both the column and row header for each cell (e.g., "Monday, 9:00 – 10:00 AM: Open"), giving the student full context.</p>
+</div>
+<h5>How to fix in Microsoft Word</h5>
+<p>[Placeholder: step-by-step instructions for marking a first column as row headers in Word.]</p>
+<p>[Placeholder: screenshot of Word table properties or Table Design tab showing the First Column checkbox checked.]</p>
+<h5>How to fix in Ally</h5>
+<p>[Placeholder: explanation of how Ally surfaces this issue or guidance on remediating it within Ally's feedback panel.]</p>
+<p>[Placeholder: screenshot of Ally feedback panel for this scenario.]</p>
+<h4 id="scenario-3-irregular-table">Scenario 3: Irregular table with merged headers (Ally doesn't catch)</h4>
+<p>This table uses <code>colspan</code> to group columns under two planet headers. No automated tool flags it, but a screen reader cannot reliably associate each data cell with both its column group header ("Mars" or "Venus") and its sub-header ("Produced" or "Sold"). The fix is to simplify: split the table into two smaller, straightforward tables.</p>
+<div class="example-block example-broken">
+  <h5>Broken</h5>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col" rowspan="2"></th>
+        <th scope="colgroup" colspan="2">Mars</th>
+        <th scope="colgroup" colspan="2">Venus</th>
+      </tr>
+      <tr>
+        <th scope="col">Produced</th>
+        <th scope="col">Sold</th>
+        <th scope="col">Produced</th>
+        <th scope="col">Sold</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Teddy Bears</th>
+        <td>50,000</td><td>30,000</td><td>100,000</td><td>80,000</td>
+      </tr>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Board Games</th>
+        <td>10,000</td><td>5,000</td><td>12,000</td><td>9,000</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>The table uses <code>colspan</code> to span "Mars" and "Venus" across two sub-columns each. Even with <code>scope="colgroup"</code>, screen readers handle multi-level column headers inconsistently. No automated tool detects the navigation problem.</p>
+</div>
+<div class="example-block example-fixed">
+  <h5>Corrected</h5>
+  <p>Split the complex table into two simple tables, each covering one planet. A two-column layout places them side by side visually.</p>
+  <div style="display:flex; gap:2em; flex-wrap:wrap; align-items:flex-start;">
+    <div>
+      <p style="font-style:italic; margin:0 0 0.4em 0;">Mars</p>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Produced</th>
+            <th scope="col">Sold</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" style="background:#d9d9d9; color:inherit;">Teddy Bears</th>
+            <td>50,000</td><td>30,000</td>
+          </tr>
+          <tr>
+            <th scope="row" style="background:#d9d9d9; color:inherit;">Board Games</th>
+            <td>10,000</td><td>5,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <p style="font-style:italic; margin:0 0 0.4em 0;">Venus</p>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Produced</th>
+            <th scope="col">Sold</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" style="background:#d9d9d9; color:inherit;">Teddy Bears</th>
+            <td>100,000</td><td>80,000</td>
+          </tr>
+          <tr>
+            <th scope="row" style="background:#d9d9d9; color:inherit;">Board Games</th>
+            <td>12,000</td><td>9,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <p>Each table has a single header row and a single header column. A screen reader announces each cell cleanly (for example, "Mars, Produced, Teddy Bears: 50,000"), with no ambiguity about which group a value belongs to.</p>
+</div>
+<h5>How to fix in Microsoft Word</h5>
+<p>Word does not provide a control for marking cells as column-group headers. The best remediation is to split the merged table into two separate Word tables, one per group, placed side by side using a two-column section layout or a borderless layout table. Each split table should have its Header Row checkbox checked on the Table Design tab.</p>
+<h5>How to fix in Ally</h5>
+<p>Ally does not detect irregular or multi-level header tables. The document may score 100% while the table remains inaccessible. Remediation requires restructuring the table manually, either in the source document or in HTML for Canvas pages. This is a manual-review-only gap.</p>
+<h4 id="scenario-4-multiple-headers">Scenario 4: Table with repeated header rows (Ally doesn't catch)</h4>
+<p>This table combines two logical data sets into one table by repeating the header row mid-table. Visually it looks organized, but a screen reader cannot associate the second set of column headers with the rows below them. No automated tool detects this.</p>
+<div class="example-block example-broken">
+  <h5>Broken</h5>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Details</th>
+        <th scope="col">Example 2 Ltd</th>
+        <th scope="col">Example 2 Co</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Contact</th>
+        <td>James Phillips</td><td>Marie Beauchamp</td>
+      </tr>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Position</th>
+        <td>Sales Director</td><td>Sales Manager</td>
+      </tr>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Email</th>
+        <td>jp@1ltd.example.com</td><td>marie@2co.example.com</td>
+      </tr>
+      <tr>
+        <td style="background:#d9d9d9; font-weight:700;">Details</td>
+        <td style="background:#d9d9d9; font-weight:700;">Example 3 Ltd</td>
+        <td style="background:#d9d9d9; font-weight:700;">Example 4 Inc</td>
+      </tr>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Contact</th>
+        <td>Suzette Jones</td><td>Alex Howe</td>
+      </tr>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Position</th>
+        <td>Sales Officer</td><td>Sales Director</td>
+      </tr>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Email</th>
+        <td>Suz@ltd3.example.com</td><td>howe@4inc.example.com</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>The first section's column headers are in <code>&lt;thead&gt;</code> and work correctly. The second section's header row is in <code>&lt;tbody&gt;</code> using <code>&lt;td&gt;</code> elements styled to look like headers. A screen reader has no way to associate "Example 3 Ltd" or "Example 4 Inc" with the rows below them. No automated tool detects this problem.</p>
+</div>
+<div class="example-block example-fixed">
+  <h5>Corrected</h5>
+  <p>Split the stacked table into two separate tables, each covering one set of companies.</p>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Details</th>
+        <th scope="col">Example 2 Ltd</th>
+        <th scope="col">Example 2 Co</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Contact</th>
+        <td>James Phillips</td><td>Marie Beauchamp</td>
+      </tr>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Position</th>
+        <td>Sales Director</td><td>Sales Manager</td>
+      </tr>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Email</th>
+        <td>jp@1ltd.example.com</td><td>marie@2co.example.com</td>
+      </tr>
+    </tbody>
+  </table>
+  <table style="margin-top:1em;">
+    <thead>
+      <tr>
+        <th scope="col">Details</th>
+        <th scope="col">Example 3 Ltd</th>
+        <th scope="col">Example 4 Inc</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Contact</th>
+        <td>Suzette Jones</td><td>Alex Howe</td>
+      </tr>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Position</th>
+        <td>Sales Officer</td><td>Sales Director</td>
+      </tr>
+      <tr>
+        <th scope="row" style="background:#d9d9d9; color:inherit;">Email</th>
+        <td>Suz@ltd3.example.com</td><td>howe@4inc.example.com</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Each table has its own <code>&lt;thead&gt;</code> with proper <code>&lt;th scope="col"&gt;</code> headers. A screen reader now correctly associates each data row with both its column header and its row header (for example, "Example 3 Ltd, Contact: Suzette Jones").</p>
+</div>
+<h5>How to fix in Microsoft Word</h5>
+<p>In Word, the merged table must be split into two separate tables. Place the cursor in the row where the second section begins, then use Table Tools to split the table. Designate the first row of each new table as a header row using the Header Row checkbox on the Table Design tab. If a side-by-side layout is needed, place the two tables in a two-column section or in a borderless layout table.</p>
+<h5>How to fix in Ally</h5>
+<p>Ally does not detect repeated mid-table header rows. A document with this structure may score 100% while remaining inaccessible. Remediation requires restructuring the source document. There is no automated fix available in Ally's feedback panel for this issue.</p>
+<h4 id="scenario-5-layout-table">Scenario 5: Table used for layout (Ally doesn't catch)</h4>
+<p>Tables are for data, not for positioning content on a page. A table used purely for visual layout carries false semantic meaning: a screen reader announces row and column counts, navigates cell by cell, and may announce "row 1, column 1" for content that has no tabular relationship. No automated tool reliably detects layout tables.</p>
+<div class="example-block example-broken">
+  <h5>Broken</h5>
+  <table style="border-collapse:collapse; font-size:0.9rem; margin:0.5rem 0; width:auto;">
     <tr>
-      <td><!-- E10: Empty table headers -->
-        <table>
-          <thead><tr><th></th><th></th><th></th></tr></thead>
-          <tbody>
-            <tr><td>Section 1</td><td>85</td><td>82</td></tr>
-            <tr><td>Section 2</td><td>83</td><td>81</td></tr>
-            <tr><td>Section 3</td><td>85</td><td>82</td></tr>
-          </tbody>
-        </table>
-        <p><strong>What happens:</strong> Screen reader announces "column header: blank" or provides no header association. Student hears data without context, same as having no headers at all.</p>
-      </td>
-      <td><!-- E10: Corrected artifact (right) -->
-        <table>
-          <thead><tr><th scope="col">Section</th><th scope="col">Quiz 1</th><th scope="col">Quiz 2</th></tr></thead>
-          <tbody>
-            <tr><td>Section 1</td><td>85</td><td>82</td></tr>
-            <tr><td>Section 2</td><td>83</td><td>81</td></tr>
-            <tr><td>Section 3</td><td>85</td><td>82</td></tr>
-          </tbody>
-        </table>
-        <p><strong>What happens:</strong> Screen reader associates each data cell with its header text. Student hears "Quiz 1: 85."</p>
-      </td>
+      <th scope="row" style="border:none; padding:0.125em 1.5em 0.125em 0; font-weight:700; background:transparent; color:inherit; text-align:left; white-space:nowrap;">First name</th>
+      <td style="border:none; padding:0.125em 0; background:transparent;">Damian</td>
     </tr>
-  </tbody>
-</table>
-<!-- Detection: Ally only -->
-<p><strong>How to fix:</strong> Open the table and type descriptive text into each header cell. Every table header element should have visible text that describes the purpose of the row or column. If the table does not need headers because it is a layout table, remove the header designation entirely (or replace the table with semantic layout).</p>
+    <tr>
+      <th scope="row" style="border:none; padding:0.125em 1.5em 0.125em 0; font-weight:700; background:transparent; color:inherit; text-align:left; white-space:nowrap;">Last name</th>
+      <td style="border:none; padding:0.125em 0; background:transparent;">Sian</td>
+    </tr>
+    <tr>
+      <th scope="row" style="border:none; padding:0.125em 1.5em 0.125em 0; font-weight:700; background:transparent; color:inherit; text-align:left; white-space:nowrap;">Title</th>
+      <td style="border:none; padding:0.125em 0; background:transparent;">Adjunct professor</td>
+    </tr>
+    <tr>
+      <th scope="row" style="border:none; padding:0.125em 1.5em 0.125em 0; font-weight:700; background:transparent; color:inherit; text-align:left; white-space:nowrap;">Department</th>
+      <td style="border:none; padding:0.125em 0; background:transparent;">School of Communication and Information</td>
+    </tr>
+    <tr>
+      <th scope="row" style="border:none; padding:0.125em 1.5em 0.125em 0; font-weight:700; background:transparent; color:inherit; text-align:left; white-space:nowrap;">Group</th>
+      <td style="border:none; padding:0.125em 0; background:transparent;">Library Sciences</td>
+    </tr>
+  </table>
+  <p>The first column uses <code>&lt;th scope="row"&gt;</code>, which satisfies automated accessibility checkers. Ally reports no error. But the table is being used purely for visual layout: the labels and values have no genuine tabular relationship, and a screen reader still announces "table with 5 rows and 2 columns" and navigates cell by cell. No automated tool detects that a table is being misused for positioning.</p>
+</div>
+<div class="example-block example-fixed">
+  <h5>Corrected</h5>
+  <dl style="font-size:0.9rem; display:grid; grid-template-columns:max-content 1fr; gap:0.25em 1.5em; margin:0.5rem 0;">
+    <dt style="font-weight:700;">First name</dt><dd style="margin:0;">Damian</dd>
+    <dt style="font-weight:700;">Last name</dt><dd style="margin:0;">Sian</dd>
+    <dt style="font-weight:700;">Title</dt><dd style="margin:0;">Adjunct professor</dd>
+    <dt style="font-weight:700;">Department</dt><dd style="margin:0;">School of Communication and Information</dd>
+    <dt style="font-weight:700;">Group</dt><dd style="margin:0;">Library Sciences</dd>
+  </dl>
+  <p>A <code>&lt;dl&gt;</code> (description list) conveys the label/value relationship semantically without implying a table structure. A screen reader reads each term and its description in sequence with no false row or column announcements.</p>
+</div>
+<h5>How to fix in Microsoft Word</h5>
+<p>Use tab stops instead of a table. In the ruler, set a left tab stop at the position where values should begin (for example, 1.5 inches). Type the label, press Tab, then type the value. Repeat for each row. This creates the same two-column visual appearance using paragraph formatting rather than a table, so no tabular semantics are applied.</p>
+<h5>How to fix in Ally</h5>
+<p>Ally does not detect layout tables. A document using tables for positioning may score 100% while creating unnecessary navigation overhead for screen reader users. Remediation requires restructuring the content in the source document. There is no automated fix available in Ally's feedback panel for this issue.</p>
 <h3 id="what-requires-manual-review-3">What requires manual review</h3>
 <ul>
 <li><strong>Layout tables.</strong> Tables used for visual alignment
@@ -1922,34 +2128,6 @@ data cell with its headers.</li>
 would be more accessible as lists or paragraphs. A “table” with one
 column and one row per item is really a list.</li>
 </ul>
-<!-- Scenario: Layout table used for positioning | Error ID: E8 -->
-<table class="lab-compare">
-  <thead>
-    <tr><th scope="col">Broken</th><th scope="col">Corrected</th></tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><!-- E8: Layout table used for positioning -->
-        <table>
-          <tr>
-            <td><img src="assets/sidebar.png" alt="sidebar image"></td>
-            <td><p>This paragraph is laid out using a table for positioning instead of semantic structure.</p></td>
-          </tr>
-        </table>
-        <p><strong>What happens:</strong> Screen reader encounters table structure with no data relationship; confusing for navigation.</p>
-      </td>
-      <td><!-- E8: Corrected artifact (right) -->
-        <div class="two-column-layout">
-          <aside><img src="assets/sidebar.png" alt="Descriptive sidebar image"></aside>
-          <main><p>This paragraph is structured semantically as article content (no layout table).</p></main>
-        </div>
-        <p><strong>What happens:</strong> Semantic structure allows screen reader to understand layout and content roles.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<!-- Detection: Manual only -->
-<!-- E9 scenario moved to "Broken Examples and How to Fix Them" section above -->
 <div class="summary">
 <p><strong>Automated vs. Manual Summary</strong></p>
 <ul>
@@ -1970,6 +2148,12 @@ lists</li>
 a screen reader?</li>
 <li>Would any table be clearer as a list or structured text?</li>
 </ul>
+</div>
+<h2 id="table-captions">Known False Positive: Table Captions</h2>
+<p>The Canvas Rich Content Editor flags tables without captions as accessibility errors. However, this flag does not appear in the Accessibility Dashboard and does not affect the document's accessibility score. More importantly, table captions are not required by WCAG. The relevant success criterion, <a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html">WCAG 1.3.1 Info and Relationships</a>, requires that structural relationships be programmatically determinable, but a <code>&lt;caption&gt;</code> element is not part of that requirement for basic data tables. The Canvas RCE is applying a stricter standard than WCAG demands.</p>
+<p><strong>How to handle:</strong> You may add a caption if it genuinely helps users understand the table's purpose, particularly for complex tables where the surrounding context does not make the subject clear. For simple tables in a well-structured document, a caption is not necessary. Do not add captions solely to clear the Canvas RCE warning.</p>
+<div class="callout">
+<p><strong>Key point.</strong> The Canvas Rich Content Editor flags missing table captions, but this warning does not appear in the Accessibility Dashboard and has no effect on the document's accessibility score or WCAG conformance. It is a best practice recommendation, not a WCAG requirement.</p>
 </div>
 <h2 id="language">Language</h2>
 <p><strong><a href="https://www.w3.org/WAI/WCAG22/Understanding/language-of-page.html">WCAG 3.1.1 Language of Page</a> (Level A).</strong> The default
@@ -2111,6 +2295,20 @@ element can trigger a photosensitive seizure.</p>
 <p>Ally checks for rapid flashing in <strong>image files only</strong>
 (primarily animated GIFs). This is the only file type where seizure risk
 is evaluated.</p>
+<div style="display: flex; gap: 1.5em; flex-wrap: wrap; margin: 1em 0;">
+  <figure style="flex: 1; min-width: 200px; margin: 0;">
+    <img src="assets/ally-seizure-dashboard.png"
+         alt="Ally accessibility score dialog for bright_red_fast_strobe.gif showing 0%, red banner stating 'This image can induce seizures' and 'Potentially very harmful', with options to keep or remove the image."
+         style="width: 100%; height: auto;" class="screenshot" />
+    <figcaption>Ally flags a flashing GIF with a 0% score and recommends removal.</figcaption>
+  </figure>
+  <figure style="flex: 1; min-width: 200px; margin: 0;">
+    <img src="assets/seizure-warning-bypass.png"
+         alt="Warning screen: red circle with lightning bolt icon, text 'Potentially seizure-inducing', and 'Show image anyway' button."
+         style="width: 100%; height: auto;" class="screenshot" />
+    <figcaption>Warning shown before displaying seizure-inducing content, with option to bypass.</figcaption>
+  </figure>
+</div>
 <div class="callout">
 <p><strong>Note.</strong> This document cannot show actual flashing content
 because it could cause direct harm (photosensitive seizure) to readers. The
