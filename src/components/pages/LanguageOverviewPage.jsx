@@ -192,6 +192,13 @@ export default function LanguageOverviewPage() {
         severity="Minor"
         wcag="3.1.2 Language of Parts (Level AA)"
       />
+      <P>
+        <strong>Note on severity:</strong> Ally assigns different severity
+        levels depending on file type. Document formats (Word, PDF) are flagged
+        as Minor. Canvas HTML content is flagged as Severe, reflecting the
+        higher reliability of detection in HTML. PowerPoint is also flagged as
+        Severe.
+      </P>
       <div style={{
         padding: "16px 22px", borderRadius: 10,
         backgroundColor: t.surfaceAlt, border: `1px solid ${t.border}`,
@@ -442,7 +449,7 @@ export default function LanguageOverviewPage() {
       <SH id="quick-ref">Quick Reference</SH>
       <RefTable rows={[
         ["Ally checks", "2 checks (missing language, incorrect language)"],
-        ["Ally severity", "Minor"],
+        ["Ally severity", "Minor (Word, PDF) / Severe (Canvas, PowerPoint)"],
         ["WCAG criteria", "3.1.1 Language of Page (A) / 3.1.2 Language of Parts (AA)"],
         ["Likelihood", "3 / 5"],
         ["Impact", "3 / 5 \u2014 garbled pronunciation for screen reader users"],
