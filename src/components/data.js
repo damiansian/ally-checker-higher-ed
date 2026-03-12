@@ -66,6 +66,27 @@ export const categories = [
     wcag: "1.3.1 / 2.4.1 / 2.4.6",
   },
   {
+    id: "lists",
+    name: "Lists",
+    slug: "lists",
+    description:
+      "Content that looks like a list but uses typed characters instead of list styles is inaccessible. Screen readers need real list markup to announce list type and item count.",
+    likelihood: 4,
+    impact: 3,
+    fileTypes: {
+      docx: "checked",
+      pptx: "checked",
+      pdf: "checked",
+      canvas: "checked",
+      image: "na",
+    },
+    allyChecks: 1,
+    allyCatches: "Faked lists: lines using typed bullets, dashes, or numbers instead of list styles",
+    allyMisses:
+      "Whether a list should be ordered vs. unordered, correct nesting of multi-level lists, whether content would be clearer as a list",
+    wcag: "1.3.1",
+  },
+  {
     id: "tables",
     name: "Tables",
     slug: "tables",
