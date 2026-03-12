@@ -49,7 +49,7 @@ export default function SeizureRiskImagePage() {
     <ContentPageLayout
       categorySlug="seizure-risk"
       fileTypeSlug="image"
-      title="DRAFT - Seizure Risk"
+      title="Seizure Risk"
       subtitle="Image (e.g. animated GIF)"
     >
       <SH id="ally-error">The Ally Error</SH>

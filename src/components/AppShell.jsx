@@ -29,6 +29,10 @@ import TablesPowerPointPage from "./pages/TablesPowerPointPage.jsx";
 import TablesPdfPage from "./pages/TablesPdfPage.jsx";
 import TablesCanvasPage from "./pages/TablesCanvasPage.jsx";
 import ListsOverviewPage from "./pages/ListsOverviewPage.jsx";
+import ListsWordPage from "./pages/ListsWordPage.jsx";
+import ListsPowerPointPage from "./pages/ListsPowerPointPage.jsx";
+import ListsPdfPage from "./pages/ListsPdfPage.jsx";
+import ListsCanvasPage from "./pages/ListsCanvasPage.jsx";
 import SeizureRiskOverviewPage from "./pages/SeizureRiskOverviewPage.jsx";
 import SeizureRiskImagePage from "./pages/SeizureRiskImagePage.jsx";
 import GuidePage from "./pages/GuidePage.jsx";
@@ -62,6 +66,10 @@ const pages = {
   "tables-pdf": TablesPdfPage,
   "tables-canvas": TablesCanvasPage,
   "lists-overview": ListsOverviewPage,
+  "lists-word": ListsWordPage,
+  "lists-powerpoint": ListsPowerPointPage,
+  "lists-pdf": ListsPdfPage,
+  "lists-canvas": ListsCanvasPage,
   "seizure-risk-overview": SeizureRiskOverviewPage,
   "seizure-risk-image": SeizureRiskImagePage,
   guide: GuidePage,

@@ -295,9 +295,10 @@ export function SideNav({ activeCategorySlug, menuOpen, setMenuOpen }) {
     fontWeight: active ? 600 : 500,
     color: active ? t.accent : t.textSecondary,
     backgroundColor: active ? t.accentBg : "transparent",
+    border: active ? `2px solid ${t.accent}` : "2px solid transparent",
     textDecoration: "none",
     fontFamily: "var(--font-display)",
-    transition: "background-color 0.15s ease",
+    transition: "background-color 0.15s ease, border-color 0.15s ease",
   });
 
   return (

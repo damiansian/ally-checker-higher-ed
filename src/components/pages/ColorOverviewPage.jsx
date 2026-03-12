@@ -380,28 +380,38 @@ export default function ColorOverviewPage() {
         <li>A schedule where color-coded categories have no legend or text equivalent</li>
       </ul>
       <H3>Color as sole means: Bar chart example</H3>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5em", margin: "1em 0", alignItems: "start" }}>
-        <figure style={{ margin: 0 }}>
-          <img
-            src="/assets/color-sole-means-default.png"
-            alt="Bar chart titled Performance Status showing four teams. Team A scores 72, Team B scores 95, Team C scores 95, Team D scores 65. Red bars represent below target and green bars represent above target, but no text labels or patterns distinguish the categories. Color is the only indicator of status."
-            style={{ width: "100%", height: "auto" }}
-          />
-          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
-            <strong>Broken.</strong> Color alone distinguishes above-target (green) from below-target (red). No text labels, no patterns, no data values on bars.
-          </figcaption>
-        </figure>
-        <figure style={{ margin: 0 }}>
-          <img
-            src="/assets/color-sole-means-remediated.png"
-            alt="Bar chart titled Performance Status showing four teams with data labels. Team A: 75, Below target. Team B: 95, Above target. Team C: 95, Above target. Team D: 65, Below target. Each bar has a score and a text label indicating above or below target, so meaning does not depend on color alone."
-            style={{ width: "100%", height: "auto" }}
-          />
-          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
-            <strong>Corrected.</strong> Data labels (75, 95, 95, 65) and text labels (&ldquo;Above target&rdquo; / &ldquo;Below target&rdquo;) added to each bar. Meaning is preserved with or without color.
-          </figcaption>
-        </figure>
-      </div>
+      <table style={{ width: "100%", borderCollapse: "collapse", margin: "1em 0", fontSize: "var(--fs-base)", fontFamily: "var(--font-body)" }} aria-label="Color as sole means bar chart comparison: broken vs corrected">
+        <thead>
+          <tr>
+            <th scope="col" style={{ padding: "10px 16px", backgroundColor: t.accentBg, color: t.accent, fontSize: "var(--fs-xs)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", fontFamily: "var(--font-display)", textAlign: "left", width: "50%" }}>Broken</th>
+            <th scope="col" style={{ padding: "10px 16px", backgroundColor: t.greenBg, color: t.green, fontSize: "var(--fs-xs)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", fontFamily: "var(--font-display)", textAlign: "left", width: "50%" }}>Corrected</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style={{ borderBottom: `1px solid ${t.border}` }}>
+            <td style={{ padding: "14px 16px", verticalAlign: "top" }}>
+              <img
+                src="/assets/color-sole-means-default.png"
+                alt="Bar chart titled Performance Status showing four teams. Team A scores 72, Team B scores 95, Team C scores 95, Team D scores 65. Red bars represent below target and green bars represent above target, but no text labels or patterns distinguish the categories. Color is the only indicator of status."
+                style={{ width: "100%", height: "auto" }}
+              />
+              <p style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)", margin: "8px 0 0" }}>
+                Color alone distinguishes above-target (green) from below-target (red). No text labels, no patterns, no data values on bars.
+              </p>
+            </td>
+            <td style={{ padding: "14px 16px", verticalAlign: "top" }}>
+              <img
+                src="/assets/color-sole-means-remediated.png"
+                alt="Bar chart titled Performance Status showing four teams with data labels. Team A: 75, Below target. Team B: 95, Above target. Team C: 95, Above target. Team D: 65, Below target. Each bar has a score and a text label indicating above or below target, so meaning does not depend on color alone."
+                style={{ width: "100%", height: "auto" }}
+              />
+              <p style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)", margin: "8px 0 0" }}>
+                Data labels (75, 95, 95, 65) and text labels (&ldquo;Above target&rdquo; / &ldquo;Below target&rdquo;) added to each bar. Meaning is preserved with or without color.
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
       <H3>Color vision simulation</H3>
       <P>
         The following simulations show how the broken and corrected charts
@@ -417,51 +427,71 @@ export default function ColorOverviewPage() {
         is lost.
       </P>
       <H3>Deuteranopia (red-green color blindness)</H3>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5em", margin: "1em 0", alignItems: "start" }}>
-        <figure style={{ margin: 0 }}>
-          <img
-            src="/assets/color-sole-means-default-deuteranopia.png"
-            alt="Deuteranopia simulation of the broken chart. All four bars appear as similar olive and dark gold tones. Without the red-green distinction, the bars are nearly indistinguishable. No text labels are present, so the student cannot determine which teams are above or below target."
-            style={{ width: "100%", height: "auto" }}
-          />
-          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
-            Red and green collapse to similar olive tones. A student with deuteranopia sees four bars of nearly the same color and has no way to determine status.
-          </figcaption>
-        </figure>
-        <figure style={{ margin: 0 }}>
-          <img
-            src="/assets/color-sole-means-remediated-deuteranopia.png"
-            alt="Deuteranopia simulation of the corrected chart. Bars appear in similar olive and dark gold tones, but each bar has a data label and text label: Team A 75 Below target, Team B 95 Above target, Team C 95 Above target, Team D 65 Below target. The text labels preserve the meaning despite the color shift."
-            style={{ width: "100%", height: "auto" }}
-          />
-          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
-            Same color shift, but the text labels make color irrelevant. The student reads &ldquo;75, Below target&rdquo; and &ldquo;95, Above target&rdquo; directly from the chart.
-          </figcaption>
-        </figure>
-      </div>
+      <table style={{ width: "100%", borderCollapse: "collapse", margin: "1em 0", fontSize: "var(--fs-base)", fontFamily: "var(--font-body)" }} aria-label="Deuteranopia simulation comparison: broken vs corrected">
+        <thead>
+          <tr>
+            <th scope="col" style={{ padding: "10px 16px", backgroundColor: t.accentBg, color: t.accent, fontSize: "var(--fs-xs)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", fontFamily: "var(--font-display)", textAlign: "left", width: "50%" }}>Broken</th>
+            <th scope="col" style={{ padding: "10px 16px", backgroundColor: t.greenBg, color: t.green, fontSize: "var(--fs-xs)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", fontFamily: "var(--font-display)", textAlign: "left", width: "50%" }}>Corrected</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style={{ borderBottom: `1px solid ${t.border}` }}>
+            <td style={{ padding: "14px 16px", verticalAlign: "top" }}>
+              <img
+                src="/assets/color-sole-means-default-deuteranopia.png"
+                alt="Deuteranopia simulation of the broken chart. All four bars appear as similar olive and dark gold tones. Without the red-green distinction, the bars are nearly indistinguishable. No text labels are present, so the student cannot determine which teams are above or below target."
+                style={{ width: "100%", height: "auto" }}
+              />
+              <p style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)", margin: "8px 0 0" }}>
+                Red and green collapse to similar olive tones. A student with deuteranopia sees four bars of nearly the same color and has no way to determine status.
+              </p>
+            </td>
+            <td style={{ padding: "14px 16px", verticalAlign: "top" }}>
+              <img
+                src="/assets/color-sole-means-remediated-deuteranopia.png"
+                alt="Deuteranopia simulation of the corrected chart. Bars appear in similar olive and dark gold tones, but each bar has a data label and text label: Team A 75 Below target, Team B 95 Above target, Team C 95 Above target, Team D 65 Below target. The text labels preserve the meaning despite the color shift."
+                style={{ width: "100%", height: "auto" }}
+              />
+              <p style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)", margin: "8px 0 0" }}>
+                Same color shift, but the text labels make color irrelevant. The student reads &ldquo;75, Below target&rdquo; and &ldquo;95, Above target&rdquo; directly from the chart.
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
       <H3>Achromatopsia (total color blindness)</H3>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5em", margin: "1em 0", alignItems: "start" }}>
-        <figure style={{ margin: 0 }}>
-          <img
-            src="/assets/color-sole-means-default-achromatopsia.png"
-            alt="Achromatopsia simulation of the broken chart. All four bars appear as similar medium gray tones. Without any color distinction and no text labels, the student cannot determine which teams are above or below target. All information encoded in color is completely lost."
-            style={{ width: "100%", height: "auto" }}
-          />
-          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
-            Total color loss. Four gray bars of similar brightness. A student with achromatopsia, or anyone viewing a grayscale printout, receives zero status information from this chart.
-          </figcaption>
-        </figure>
-        <figure style={{ margin: 0 }}>
-          <img
-            src="/assets/color-sole-means-remediated-achromatopsia.png"
-            alt="Achromatopsia simulation of the corrected chart. All four bars appear as similar gray tones, but each bar has a data label and text label: Team A 75 Below target, Team B 95 Above target, Team C 95 Above target, Team D 65 Below target. Despite total color loss, the text labels preserve the full meaning."
-            style={{ width: "100%", height: "auto" }}
-          />
-          <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
-            Same grayscale view, but the text labels are unaffected by color loss. &ldquo;75, Below target&rdquo; and &ldquo;95, Above target&rdquo; are as legible in grayscale as in full color.
-          </figcaption>
-        </figure>
-      </div>
+      <table style={{ width: "100%", borderCollapse: "collapse", margin: "1em 0", fontSize: "var(--fs-base)", fontFamily: "var(--font-body)" }} aria-label="Achromatopsia simulation comparison: broken vs corrected">
+        <thead>
+          <tr>
+            <th scope="col" style={{ padding: "10px 16px", backgroundColor: t.accentBg, color: t.accent, fontSize: "var(--fs-xs)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", fontFamily: "var(--font-display)", textAlign: "left", width: "50%" }}>Broken</th>
+            <th scope="col" style={{ padding: "10px 16px", backgroundColor: t.greenBg, color: t.green, fontSize: "var(--fs-xs)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", fontFamily: "var(--font-display)", textAlign: "left", width: "50%" }}>Corrected</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style={{ borderBottom: `1px solid ${t.border}` }}>
+            <td style={{ padding: "14px 16px", verticalAlign: "top" }}>
+              <img
+                src="/assets/color-sole-means-default-achromatopsia.png"
+                alt="Achromatopsia simulation of the broken chart. All four bars appear as similar medium gray tones. Without any color distinction and no text labels, the student cannot determine which teams are above or below target. All information encoded in color is completely lost."
+                style={{ width: "100%", height: "auto" }}
+              />
+              <p style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)", margin: "8px 0 0" }}>
+                Total color loss. Four gray bars of similar brightness. A student with achromatopsia, or anyone viewing a grayscale printout, receives zero status information from this chart.
+              </p>
+            </td>
+            <td style={{ padding: "14px 16px", verticalAlign: "top" }}>
+              <img
+                src="/assets/color-sole-means-remediated-achromatopsia.png"
+                alt="Achromatopsia simulation of the corrected chart. All four bars appear as similar gray tones, but each bar has a data label and text label: Team A 75 Below target, Team B 95 Above target, Team C 95 Above target, Team D 65 Below target. Despite total color loss, the text labels preserve the full meaning."
+                style={{ width: "100%", height: "auto" }}
+              />
+              <p style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)", margin: "8px 0 0" }}>
+                Same grayscale view, but the text labels are unaffected by color loss. &ldquo;75, Below target&rdquo; and &ldquo;95, Above target&rdquo; are as legible in grayscale as in full color.
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
       <H3>What to look for</H3>
       <P>
         Any place where removing color would cause a loss of information. The

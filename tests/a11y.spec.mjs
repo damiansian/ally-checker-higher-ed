@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { test, expect } from "@playwright/test";
 import { AxeBuilder } from "@axe-core/playwright";
+import { isExpectedViolationRoute } from "./utils/expected-violations.mjs";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 const pagesDir = join(__dirname, "..", "src", "pages");
@@ -31,13 +32,6 @@ const routes = discoverRoutes(pagesDir);
 
 const WCAG_TAGS = ["wcag2a", "wcag2aa", "wcag22aa"];
 
-/**
- * The /color overview page contains intentional contrast failures used as
- * educational demos (WCAG 1.4.3). These are marked with
- * data-a11y-demo="intentional-contrast-fail" and excluded from axe scans
- * so the test suite passes without disabling the color-contrast rule globally.
- */
-const DEMO_CONTRAST_EXCLUDE = ['[data-a11y-demo="intentional-contrast-fail"]'];
 const VIEWPORTS = [
   { name: "default viewport", size: null },
   { name: "200% zoom proxy (640px)", size: { width: 640, height: 960 } },
@@ -62,13 +56,10 @@ const FORCED_COLORS_VARIANTS = [
   { name: "forced colors active", forcedColors: "active" },
 ];
 
-async function runAxeAndAssertNoViolations(page, routeLabel, disabledRules = [], excludeSelectors = []) {
+async function runAxeAndAssertNoViolations(page, routeLabel, disabledRules = []) {
   let axe = new AxeBuilder({ page }).withTags(WCAG_TAGS);
   if (disabledRules.length > 0) {
     axe = axe.disableRules(disabledRules);
-  }
-  for (const sel of excludeSelectors) {
-    axe = axe.exclude(sel);
   }
   const results = await axe.analyze();
   const violations = results.violations ?? [];
@@ -87,7 +78,8 @@ async function runAxeAndAssertNoViolations(page, routeLabel, disabledRules = [],
 }
 
 test.describe("Accessibility (WCAG 2.2 AA)", () => {
-  for (const pathname of routes) {
+  const strictRoutes = routes.filter((pathname) => !isExpectedViolationRoute(pathname));
+  for (const pathname of strictRoutes) {
     for (const viewport of VIEWPORTS) {
       for (const spacing of TEXT_SPACING_VARIANTS) {
         for (const colors of FORCED_COLORS_VARIANTS) {
@@ -104,15 +96,10 @@ test.describe("Accessibility (WCAG 2.2 AA)", () => {
               }
               const disabledRules =
                 colors.forcedColors === "active" ? ["color-contrast"] : [];
-              const excludeSelectors =
-                pathname === "/color" || pathname === "/color/"
-                  ? DEMO_CONTRAST_EXCLUDE
-                  : [];
               await runAxeAndAssertNoViolations(
                 page,
                 `${pathname} (${viewport.name}, ${spacing.name}, ${colors.name})`,
-                disabledRules,
-                excludeSelectors
+                disabledRules
               );
             }
           );

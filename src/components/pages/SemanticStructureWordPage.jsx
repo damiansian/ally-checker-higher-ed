@@ -49,7 +49,7 @@ export default function SemanticStructureWordPage() {
     <ContentPageLayout
       categorySlug="semantic-structure"
       fileTypeSlug="word"
-      title="DRAFT - Semantic Structure"
+      title="Semantic Structure"
       subtitle="Word Documents"
     >
       <SH id="ally-error">The Ally Error</SH>

@@ -1,9 +1,6 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const BASE_PORT = 4322;
-const port = process.env.PW_PORT
-  ? Number(process.env.PW_PORT)
-  : BASE_PORT + Math.floor(Math.random() * 100);
+const port = Number(process.env.PW_PORT) || 4322;
 
 export default defineConfig({
   testDir: "tests",
@@ -27,7 +24,7 @@ export default defineConfig({
   webServer: {
     command: `npm run build && npx astro preview --host 127.0.0.1 --port ${port}`,
     url: `http://localhost:${port}`,
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
     timeout: 180_000,
   },
   timeout: 30_000,

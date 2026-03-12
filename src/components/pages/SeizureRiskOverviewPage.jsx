@@ -5,6 +5,7 @@ import {
   CompareBoxes,
   RefTable,
   Callout,
+  ResourceLink,
 } from "@/components/content.jsx";
 
 function SH({ id, children }) {
@@ -36,7 +37,7 @@ export default function SeizureRiskOverviewPage() {
     <ContentPageLayout
       categorySlug="seizure-risk"
       fileTypeSlug="overview"
-      title="DRAFT - Seizure Risk"
+      title="Seizure Risk"
       subtitle="Overview"
     >
       <SH id="overview">Overview</SH>
@@ -109,6 +110,18 @@ export default function SeizureRiskOverviewPage() {
         ["File types checked", "Image only"],
         ["File types not checked", "Word, PowerPoint, PDF, Canvas"],
       ]} />
+
+      <SH id="resources">Resources</SH>
+      <ResourceLink
+        title="Photosensitive Epilepsy Analysis Tool (PEAT)"
+        href="https://trace.umd.edu/peat/"
+        description="Free tool from the Trace R&D Center for testing video and animation content for seizure risk. Analyzes flash rate and luminance changes against the Harding test thresholds."
+      />
+      <ResourceLink
+        title="W3C: Understanding Three Flashes or Below Threshold"
+        href="https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold.html"
+        description="WCAG 2.3.1 explained: what counts as a flash, the thresholds, and how to apply them to web and document content."
+      />
     </ContentPageLayout>
   );
 }

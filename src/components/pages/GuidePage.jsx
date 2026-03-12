@@ -315,6 +315,14 @@ export default function GuidePage() {
           <li><strong>Listening to language.</strong> If a document contains passages in another language, a screen reader test reveals whether pronunciation switches correctly.</li>
           <li><strong>Reviewing color use.</strong> If color is used to indicate status or meaning, verify that a non-color indicator is also present.</li>
         </UL>
+        <P>
+          Manual review also extends to whether the content is instructionally
+          clear enough to be usable by all students. A technically accessible
+          document can still be inaccessible in practice if it is poorly
+          organized, ambiguously written, or assumes visual context that is
+          never stated in text. Accessibility and instructional clarity are not
+          separate concerns.
+        </P>
 
         <SH id="tools">Tool Comparison</SH>
         <P>

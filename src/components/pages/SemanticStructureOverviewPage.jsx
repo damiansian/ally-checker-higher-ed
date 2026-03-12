@@ -35,7 +35,7 @@ export default function SemanticStructureOverviewPage() {
     <ContentPageLayout
       categorySlug="semantic-structure"
       fileTypeSlug="overview"
-      title="DRAFT - Semantic Structure"
+      title="Semantic Structure"
       subtitle="Overview"
     >
       <SH id="overview">Overview</SH>
@@ -88,22 +88,50 @@ export default function SemanticStructureOverviewPage() {
 
       <SH id="lists">Lists</SH>
       <P>
-        Lists must be programmatically determinable so screen readers can
-        announce list type and item count. In <strong>Word</strong> and{" "}
-        <strong>PowerPoint</strong>, use the Bullets or Numbering commands
-        (list styles), not typed characters. In <strong>HTML</strong> (e.g.
-        Canvas), use <code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, and{" "}
-        <code>&lt;li&gt;</code>. Microsoft Accessibility Checker and Acrobat
-        often do not flag faked lists; Ally does in Word, PowerPoint, PDF,
-        and Canvas. In Canvas, the list error may appear in the editor
-        Accessibility Checker but not on the Course Dashboard.
+        Bulleted and numbered content must use real list markup so screen
+        readers can announce list type and item count (e.g., &ldquo;List of
+        5 items&rdquo;) and allow list-based navigation. A{" "}
+        <strong>faked list</strong> is content that looks like a list (lines
+        prefixed with a typed dash, bullet character, or &ldquo;1.&rdquo;{" "}
+        &ldquo;2.&rdquo;) but is not marked up as a list.
       </P>
       <P>
-        <strong>Quick check:</strong> Use list tools instead of typing
-        bullets or numbers. Confirm a screen reader announces &quot;List of
-        X items.&quot; If you only use Microsoft or Acrobat checkers, also
-        verify in Ally.
+        In <strong>Word</strong> and <strong>PowerPoint</strong>, use the
+        Bullets or Numbering commands on the Home tab, not typed characters.
+        In <strong>Canvas</strong> HTML, use <code>&lt;ul&gt;</code>,{" "}
+        <code>&lt;ol&gt;</code>, and <code>&lt;li&gt;</code> via the RCE
+        toolbar, not plain paragraphs. The Microsoft Accessibility Checker
+        and Acrobat typically do not flag faked lists. Ally is the primary
+        tool that catches this issue in Word, PowerPoint, PDF, and Canvas.
       </P>
+      <P>
+        In Canvas, the &ldquo;Lists should be formatted as lists&rdquo; issue
+        may appear in the <strong>Rich Content Editor (RCE)</strong>{" "}
+        Accessibility Checker but not on the Course Dashboard. Fix faked
+        lists when the editor flags them.
+      </P>
+      <div style={{ display: "flex", gap: 12, flexWrap: "wrap", margin: "4px 0 20px" }}>
+        {[
+          { label: "Lists in Word", href: "/lists/word" },
+          { label: "Lists in PowerPoint", href: "/lists/powerpoint" },
+          { label: "Lists in PDF", href: "/lists/pdf" },
+          { label: "Lists in Canvas", href: "/lists/canvas" },
+        ].map(({ label, href }) => (
+          <a
+            key={href}
+            href={href}
+            style={{
+              fontSize: "var(--fs-sm)", fontWeight: 600,
+              fontFamily: "var(--font-display)",
+              color: "inherit",
+              textDecoration: "underline",
+              textUnderlineOffset: 3,
+            }}
+          >
+            {label} &rarr;
+          </a>
+        ))}
+      </div>
 
       <SH id="ally-catches">What Ally Catches</SH>
       <CompareBoxes
@@ -131,12 +159,11 @@ export default function SemanticStructureOverviewPage() {
 
       <SH id="quick-ref">Quick Reference</SH>
       <RefTable rows={[
-        ["Ally checks", "8 checks"],
+        ["Ally checks", "5 checks (headings, titles, lists)"],
         ["WCAG criteria", "1.3.1 / 2.4.1 / 2.4.6"],
         ["Likelihood", "5 / 5"],
         ["Impact", "4 / 5"],
         ["File types", "Word, PowerPoint, PDF, Canvas"],
-        ["Lists", "Use list tools, not typed bullets/numbers; verify in Ally"],
       ]} />
     </ContentPageLayout>
   );

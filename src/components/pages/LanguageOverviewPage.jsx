@@ -146,6 +146,21 @@ export default function LanguageOverviewPage() {
         Word and PDF. The pages in this section walk through each file type
         with testing results, screenshots, and audio examples.
       </P>
+      <P>
+        Language metadata issues are more common than the 3/5 likelihood rating
+        might suggest at institutions with multilingual content. Foreign language
+        courses routinely include passages, exercises, and readings in the target
+        language. Courses in literature, history, and cultural studies frequently
+        cite primary sources in their original language. Course catalogs and
+        student-facing materials at institutions serving multilingual populations
+        may include Spanish, Mandarin, Arabic, or other languages alongside
+        English. In each case, the language-of-parts requirement (WCAG 3.1.2)
+        applies: every passage in a language other than the document&rsquo;s
+        default needs its own <code>lang</code> attribute, or a screen reader will
+        mispronounce it. Institutions with significant multilingual content should
+        treat language metadata as a higher priority than the general rating
+        suggests.
+      </P>
       <Callout type="warning">
         <div style={{
           fontWeight: 600, fontFamily: "var(--font-display)",

@@ -46,13 +46,13 @@
 
 ## Concurrency and Port Handling
 
-Each Playwright run selects a random preview-server port (range 4322-4421) so overlapping local runs do not collide. The port can also be pinned via the `PW_PORT` environment variable:
+Playwright defaults to port **4322** for the preview server. To run a second instance concurrently, set `PW_PORT` to a different port:
 
 ```bash
 PW_PORT=4500 npm run test:a11y
 ```
 
-`reuseExistingServer` is set to `false` unconditionally, so every run builds and launches its own preview server. This avoids silently testing against a stale build from a prior run.
+`reuseExistingServer` is `false`, so Playwright **fails fast** if another process already occupies the port instead of silently reusing a stale server. Workers are fixed at 2 for preview-server stability.
 
 CI is unaffected: each GitHub Actions job runs in an isolated container with no port contention.
 

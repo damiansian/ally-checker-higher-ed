@@ -48,7 +48,7 @@ export const categories = [
     name: "Semantic Structure",
     slug: "semantic-structure",
     description:
-      "Headings, titles, and document structure let students navigate and understand content organization. Without them, a 20-page document is a wall of text with no way to jump to the section a student needs.",
+      "Headings, titles, lists, and document structure let students navigate and understand content organization. Without them, a 20-page document is a wall of text with no way to jump to a section or hear list structure.",
     likelihood: 5,
     impact: 4,
     fileTypes: {
@@ -58,11 +58,11 @@ export const categories = [
       canvas: "checked",
       image: "na",
     },
-    allyChecks: 4,
+    allyChecks: 5,
     allyCatches:
-      "Missing headings, skipped levels, missing slide/page titles, untagged PDFs",
+      "Missing headings, skipped levels, missing slide/page titles, untagged PDFs, faked lists",
     allyMisses:
-      "Whether heading text is meaningful, logical content order, reading sequence in PowerPoint and PDF",
+      "Whether heading text is meaningful, logical content order, reading sequence in PowerPoint and PDF, correct nesting of multi-level lists",
     wcag: "1.3.1 / 2.4.1 / 2.4.6",
   },
   {
@@ -84,28 +84,6 @@ export const categories = [
     allyCatches: "Tables without designated header rows; table headers with empty content",
     allyMisses:
       "Layout tables misused for formatting, row headers not designated, overly complex structures, whether a table is the right format at all",
-    wcag: "1.3.1",
-  },
-  {
-    id: "lists",
-    name: "Lists",
-    slug: "lists",
-    description:
-      "Bulleted and numbered content must use real list markup so screen readers announce list type and item count. Faked lists (typed dashes, bullets, or numbers) are invisible to assistive technology.",
-    likelihood: 4,
-    impact: 3,
-    fileTypes: {
-      docx: "checked",
-      pptx: "checked",
-      pdf: "checked",
-      canvas: "checked",
-      image: "na",
-    },
-    allyChecks: 1,
-    allyCatches:
-      "Faked lists: content that visually appears as a list but lacks proper list markup",
-    allyMisses:
-      "Correct nesting of multi-level lists, whether content should be a list vs paragraphs. Microsoft checker and Acrobat typically do not flag faked lists.",
     wcag: "1.3.1",
   },
   {
@@ -141,10 +119,10 @@ export const categories = [
     likelihood: 1,
     impact: 5,
     fileTypes: {
-      docx: "gap",
-      pptx: "gap",
-      pdf: "gap",
-      canvas: "gap",
+      docx: "na",
+      pptx: "na",
+      pdf: "na",
+      canvas: "na",
       image: "checked",
     },
     allyChecks: 1,

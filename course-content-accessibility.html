@@ -176,25 +176,51 @@ img.screenshot { border: 1px solid #000; }
 <body>
 <div class="content-wrap">
 <h1 id="course-content-accessibility">Course Content Accessibility</h1>
+<section aria-labelledby="how-to-use">
+<h2 id="how-to-use">How to Use This Reference</h2>
+<p>This reference covers the accessibility issues most common in course content authored for higher education. Each section follows a consistent structure:</p>
+<ol>
+<li><strong>What it is.</strong> The WCAG success criterion, why it matters, and how frequently it appears.</li>
+<li><strong>What automated tools detect.</strong> A detection table showing what Ally, the Microsoft Accessibility Checker, and Acrobat catch (and what they miss).</li>
+<li><strong>What requires manual review.</strong> The issues that pass every automated check but still create barriers.</li>
+<li><strong>Broken examples and how to fix them.</strong> Side-by-side comparisons with platform-specific remediation steps.</li>
+<li><strong>Quick Check.</strong> A short checklist for verifying each category.</li>
+</ol>
+<p>For a quick lookup, use the table of contents to jump to a specific category. For a summary of what each tool catches across all categories, see the <a href="#tool-coverage-summary">Tool Coverage Summary</a> table below.</p>
+</section>
 <nav id="TOC" aria-label="Table of contents">
 <ul>
 <li><a href="#overview">Overview</a></li>
 <li><a href="#impact-on-students">Impact on Students</a></li>
 <li><a href="#shared-responsibility">Shared Responsibility</a></li>
 <li><a href="#two-types-of-accessibility-issues">Two Types of Accessibility Issues</a></li>
+<li><a href="#known-false-positives">Known False Positives</a></li>
 <li><a href="#automated-testing">Automated Testing</a></li>
 <li><a href="#manual-testing">Manual Testing</a></li>
 <li><a href="#microsoft-accessibility-checker">Microsoft Accessibility Checker</a></li>
 <li><a href="#acrobat-accessibility-checker">Acrobat Accessibility Checker</a></li>
-<li><a href="#text-alternatives">Text Alternatives</a></li>
-<li><a href="#color-contrast">Color Contrast</a></li>
-<li><a href="#color-contrast-false-positive">Known False Positive: Image Contrast in Photographs</a></li>
-<li><a href="#known-false-positive">Known False Positive: Alt Text of 120 Characters</a></li>
+<li><a href="#text-alternatives">Text Alternatives</a>
+  <ul>
+    <li><a href="#known-false-positive">Known False Positive: Alt Text of 120 Characters</a></li>
+  </ul>
+</li>
+<li><a href="#color-contrast">Color Contrast</a>
+  <ul>
+    <li><a href="#color-contrast-false-positive">Known False Positive: Image Contrast in Photographs</a></li>
+  </ul>
+</li>
 <li><a href="#color-as-sole-means-of-communication">Color as Sole Means of Communication</a></li>
-<li><a href="#headings">Headings</a></li>
-<li><a href="#tables">Tables</a></li>
-<li><a href="#table-captions">Known False Positive: Table Captions</a></li>
-<li><a href="#lists">Lists</a></li>
+<li><a href="#semantic-structure">Semantic Structure</a>
+  <ul>
+    <li><a href="#headings">Headings</a></li>
+    <li><a href="#lists">Lists</a></li>
+  </ul>
+</li>
+<li><a href="#tables">Tables</a>
+  <ul>
+    <li><a href="#table-captions">Known False Positive: Table Captions</a></li>
+  </ul>
+</li>
 <li><a href="#language">Language</a></li>
 <li><a href="#seizure-risk">Seizure Risk</a></li>
 </ul>
@@ -230,12 +256,9 @@ pronounce this passage correctly?</p>
 <p><strong>Getting to 100% in Ally is the starting line, not the
 finish.</strong> A perfect Ally score means the content has passed the
 checks Ally can run. It does not mean the content is free of barriers to
-access for individuals with disabilities. Automated tools detect the
-presence of accessibility features (an alt text field that is not empty,
-a heading tag that exists, a contrast ratio above a threshold) but they
-cannot evaluate whether those features are meaningful. The remaining
-barriers, the ones that determine whether a student can actually use the
-content, require human inspection and manual testing.</p>
+access for individuals with disabilities. The distinction between what
+automated tools can detect and what requires human judgment is the
+organizing principle of this reference. See <a href="#two-types-of-accessibility-issues">Two Types of Accessibility Issues</a> for the full framework.</p>
 <p>This reference covers the accessibility issues most common in course
 content, organized around eight areas drawn from WCAG success criteria.
 For each, this reference describes what automated tools detect, what
@@ -270,10 +293,16 @@ manually.</p>
 <td>4 / 5</td>
 </tr>
 <tr>
-<td>Semantic Structure (Headings &amp; Lists)</td>
+<td>Headings</td>
 <td>1.3.1, 2.4.1, 2.4.6</td>
 <td>5 / 5</td>
 <td>4 / 5</td>
+</tr>
+<tr>
+<td>Lists</td>
+<td>1.3.1</td>
+<td>4 / 5</td>
+<td>3 / 5</td>
 </tr>
 <tr>
 <td>Tables</td>
@@ -298,6 +327,42 @@ manually.</p>
 <p><strong>Likelihood</strong> reflects how frequently the issue appears
 in typical course content. <strong>Impact</strong> reflects how severely
 the barrier affects students who rely on assistive technology.</p>
+<h3 id="tool-coverage-summary">Tool Coverage Summary</h3>
+<p>The following table summarizes what each automated tool reliably detects across all accessibility categories covered in this reference. "Checked" means the tool runs the check and reports results. "Gap" means the issue can exist but the tool does not check for it. "Unreliable" means the check exists but produces inconsistent results.</p>
+<table>
+<thead>
+<tr>
+<th scope="col">Issue</th>
+<th scope="col">Ally</th>
+<th scope="col">MS Accessibility Checker</th>
+<th scope="col">Acrobat</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Missing alt text</td><td>Checked</td><td>Checked</td><td>Checked</td></tr>
+<tr><td>AI-generated alt text</td><td>Gap</td><td>Checked</td><td>Gap</td></tr>
+<tr><td>File name as alt text</td><td>Checked</td><td>Checked</td><td>Gap</td></tr>
+<tr><td>Alt text quality (vague, placeholder, gibberish)</td><td>Gap</td><td>Gap</td><td>Gap</td></tr>
+<tr><td>Decorative image not marked</td><td>Gap</td><td>Gap</td><td>Gap</td></tr>
+<tr><td>Text contrast (foreground/background)</td><td>Checked</td><td>Checked</td><td>Gap</td></tr>
+<tr><td>Non-text contrast (chart elements, icons)</td><td>Gap</td><td>Gap</td><td>Gap</td></tr>
+<tr><td>Color as sole means of communication</td><td>Gap</td><td>Gap</td><td>Gap</td></tr>
+<tr><td>Missing headings</td><td>Checked</td><td>Checked</td><td>Checked</td></tr>
+<tr><td>Skipped heading levels</td><td>Checked (inconsistent)</td><td>Checked</td><td>Checked</td></tr>
+<tr><td>Heading text quality</td><td>Gap</td><td>Gap</td><td>Gap</td></tr>
+<tr><td>Missing slide titles</td><td>Checked</td><td>Checked</td><td>N/A</td></tr>
+<tr><td>Faked lists</td><td>Checked</td><td>Gap</td><td>Gap</td></tr>
+<tr><td>Tables without header row</td><td>Checked</td><td>Checked</td><td>Checked</td></tr>
+<tr><td>Table headers with empty content</td><td>Checked</td><td>Gap</td><td>Gap</td></tr>
+<tr><td>Layout tables</td><td>Gap</td><td>Gap</td><td>Gap</td></tr>
+<tr><td>Complex tables (merged cells)</td><td>Gap</td><td>Gap</td><td>Gap</td></tr>
+<tr><td>Document language (Canvas HTML)</td><td>Checked</td><td>Gap</td><td>Checked (missing only)</td></tr>
+<tr><td>Document language (Word/PPT)</td><td>Unreliable</td><td>Gap</td><td>N/A</td></tr>
+<tr><td>Language of parts</td><td>Gap</td><td>Gap</td><td>Gap</td></tr>
+<tr><td>Seizure risk (GIF)</td><td>Checked</td><td>Gap</td><td>Gap</td></tr>
+<tr><td>Seizure risk (video, animations)</td><td>Gap</td><td>Gap</td><td>Gap</td></tr>
+</tbody>
+</table>
 <h2 id="impact-on-students">Impact on Students</h2>
 <p>Behind every accessibility guideline is a student trying to learn.
 The technical language of WCAG and the metrics of automated checkers can
@@ -388,11 +453,7 @@ baseline expectation for participation in a shared learning
 environment.</p>
 <h2 id="two-types-of-accessibility-issues">Two Types of Accessibility
 Issues</h2>
-<p>Clearing every issue in Anthology Ally is a great place to start for
-access and inclusion in the classroom. Unfortunately, it is nowhere near
-the full scope of accessible course materials. Ally performs automated
-tests that lack context and are not yet refined enough to catch major
-issues where human review is required.</p>
+<p>This reference distinguishes two categories of accessibility issues, and every section that follows is organized around them.</p>
 <p><strong>Automated testing failures</strong> are issues that tools
 like Ally can detect programmatically: a missing alt text attribute,
 text contrast below 4.5:1, an improperly nested heading tag, a table
@@ -419,6 +480,13 @@ language attribute. That document would score 100% in Ally.</p>
 category, it describes what automated tools detect (the first type) and
 what requires manual review (the second type). Both are necessary.
 Neither is sufficient alone.</p>
+<h2 id="known-false-positives">Known False Positives</h2>
+<p>Automated tools occasionally flag content that is not actually an accessibility barrier. The following are confirmed false positives in the tools covered by this reference. Each is documented in detail within its parent section.</p>
+<ul>
+<li><strong>Alt text over ~120 characters (Canvas).</strong> Ally flags alt text exceeding approximately 120 characters in the Canvas Rich Content Editor. There is no WCAG basis for a character limit on alt text. Do not shorten accurate descriptions to clear this flag. See <a href="#known-false-positive">Text Alternatives &gt; Known False Positive: Alt Text of 120 Characters</a>.</li>
+<li><strong>Image contrast in photographs (Ally).</strong> Ally flags contrast issues within uploaded photographs, but it cannot distinguish text from non-text content or determine the applicable WCAG threshold. These flags are not actionable. See <a href="#color-contrast-false-positive">Color Contrast &gt; Known False Positive: Image Contrast in Photographs</a>.</li>
+<li><strong>Table captions (Canvas RCE).</strong> The Canvas Rich Content Editor flags tables without <code>&lt;caption&gt;</code> elements. Table captions are not required by WCAG 1.3.1. This warning does not appear on the Accessibility Dashboard and does not affect the accessibility score. See <a href="#table-captions">Tables &gt; Known False Positive: Table Captions</a>.</li>
+</ul>
 <h2 id="automated-testing">Automated Testing</h2>
 <p>Automated accessibility testing tools scan content against a set of
 programmatic rules. They are fast, consistent, and essential, but they
@@ -545,13 +613,10 @@ type</li>
 </ul>
 <p>The most important limitation of any automated tool is that it checks
 for <strong>presence</strong>, not <strong>quality</strong>. Ally will
-pass an image whose alt text is “asdf” because alt text exists. It will
-pass a document whose every paragraph is tagged as Heading 1 because
-headings exist. <strong>[TODO: Verify this claim by testing a document
-with all paragraphs set to Heading 1 in Ally.]</strong> Reaching a 100%
-Ally score means the content has passed the checks Ally can run. It does
-not mean the content is free of barriers to access for individuals with
-disabilities.</p>
+pass an image whose alt text is “asdf” because alt text exists. Reaching
+a 100% Ally score means the content has passed the checks Ally can run.
+It does not mean the content is free of barriers to access for
+individuals with disabilities.</p>
 <h2 id="manual-testing">Manual Testing</h2>
 <p>Manual testing fills the gaps that automated tools cannot reach. At
 minimum, an accessibility review of course content should include:</p>
@@ -1224,13 +1289,13 @@ image, or link to a separate long description.</li>
 </ol>
 <p>This ensures the image is not skipped by screen readers and the full
 information is available in context.</p>
-<h2 id="known-false-positive">Known False Positive: Alt Text of 120 Characters</h2>
+<h3 id="known-false-positive">Known False Positive: Alt Text of 120 Characters</h3>
 <p>In the Canvas Rich Content Editor, Ally flags alt text exceeding
 approximately 120 characters. There is no WCAG basis for a character
 limit on alt text. Do not shorten a description that needs to be long to
 be accurate.</p>
 <p><img class="screenshot" src="assets/canvas-ally-alt-text-length-warning.png" alt="Screenshot of the Canvas Accessibility Checker showing Issue 1 of 1: 'Alt attribute text should not contain more than 120 characters.' The Change alt text field displays a grouped bar graph description that exceeds the limit. Prev, Next, and Apply buttons appear at the bottom."></p>
-<p><strong>How to handle:</strong> Keep the description as written. Note the Ally flag but do not treat it as a real issue. It will not affect your overall score in the Accessibility Dashboard. For very long descriptions (multiple paragraphs), provide a brief identifying alt text on the image and include the full description in the body text immediately below it, or link to a separate long description.</p>
+<p><strong>How to handle:</strong> Keep the description as written. Note the Ally flag but do not treat it as a real issue. It will not affect the file's overall score in the Accessibility Dashboard. For very long descriptions (multiple paragraphs), provide a brief identifying alt text on the image and include the full description in the body text immediately below it, or link to a separate long description.</p>
 <div class="callout">
 <p><strong>Key point.</strong> Ally checks that alt text
 <em>exists</em>. It does not check that alt text is <em>accurate</em>,
@@ -1439,7 +1504,7 @@ it reaches Canvas.</p>
 clicking a suggested color applies the fix immediately. For contrast
 issues discovered before upload to the LMS, this is the most efficient
 fix workflow.</p>
-<h2 id="color-contrast-false-positive">Known False Positive: Image Contrast in Photographs</h2>
+<h3 id="color-contrast-false-positive">Known False Positive: Image Contrast in Photographs</h3>
 <p>Ally claims to evaluate contrast
 within image files, but this feature is not working as advertised. When
 a photograph is uploaded (for example, a student's profile photo posted
@@ -1601,6 +1666,11 @@ version, the answer is no. For the corrected version, it is yes.</p>
 feedback indicators, schedules where categories are distinguished only
 by color, and any visual element where a student who cannot perceive
 color would lose information.</p>
+<h3 id="color-sole-means-how-to-fix">How to fix by platform</h3>
+<p><strong>Word and PowerPoint charts.</strong> After creating a chart, right-click a data series and select "Add Data Labels" to display values on each bar or point. To add patterns, right-click a data series, select "Format Data Series," and under "Fill" choose "Pattern Fill." In the legend, add text labels that do not depend on color alone (e.g., "Above target" and "Below target" rather than relying on green vs. red).</p>
+<p><strong>Canvas pages.</strong> When building charts or color-coded content in the Rich Content Editor, add explicit text labels or symbols alongside color indicators. For tables or rubrics that use color coding, include a text column or inline label (e.g., "Meets expectations" rather than a green cell with no text).</p>
+<p><strong>PDF.</strong> If the source document uses color as the sole means, fix it in the source (Word or PowerPoint) and re-export. Remediating color-only meaning in Acrobat after export is impractical because it requires adding text content to the tag tree manually.</p>
+<p><strong>General principle.</strong> The test is simple: print it in grayscale (or view it in a grayscale simulation). If any information is lost, add a non-color indicator.</p>
 <div class="callout">
 <p><strong>Key point.</strong> No automated tool checks for color as the
 sole means of communication. This issue is invisible to Ally, the
@@ -1672,13 +1742,14 @@ panel (Acrobat).</li>
 sidebars, and multi-column layouts in Word and PowerPoint may not read
 in the intended order.</li>
 </ul>
-<h3 id="lists">Lists</h3>
-<p><strong><a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html">WCAG 1.3.1 Info and Relationships</a> (Level A).</strong> When
+<h3 id=”lists”>Lists</h3>
+<p><strong><a href=”https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html”>WCAG 1.3.1 Info and Relationships</a> (Level A).</strong> When
 content is presented as a list, the list structure must be
 programmatically determinable so that screen readers can announce list
 type and item count (e.g., “List of 5 items”) and allow list-based
 navigation.</p>
-<p>Lists are very common in course content (likelihood 4/5). A
+<p>Lists are common in course content (likelihood 4/5) with moderate impact (3/5). The impact is lower than headings because a faked list degrades navigation efficiency rather than blocking access entirely, but it still removes structural information that screen reader users depend on.</p>
+<p>A
 <strong>faked list</strong> is content that looks like a list — lines
 prefixed with a dash, bullet character, or “1.” “2.” typed by hand — but
 is not marked up as a list. In Word, that means using the Bullets or
@@ -1697,15 +1768,15 @@ fix (e.g., “Lists should be formatted as lists,” with an option to
 “Format as a list”). For <strong>Canvas pages and content edited in the
 Rich Content Editor (RCE)</strong>, the list error often appears in the
 RCE’s Accessibility Checker but may not appear on the Course Dashboard.
-If you see the issue in the editor, fix it there; do not assume the
+If the issue appears in the editor, fix it there; do not assume the
 Dashboard will surface it for the same content.</li>
 <li><strong>Microsoft Accessibility Checker</strong> and <strong>Adobe
 Acrobat’s Accessibility Check</strong> do not routinely flag faked
 lists. They may report missing or incorrect list tagging in some
 contexts (e.g., PDF tag tree), but they do not perform the same “looks
-like a list but isn’t marked as one” check that Ally does. If you rely
-only on the Microsoft checker or Acrobat, faked lists can pass
-undetected.</li>
+like a list but isn’t marked as one” check that Ally does. Instructors relying
+only on the Microsoft checker or Acrobat may miss faked lists
+that create barriers for screen reader users.</li>
 </ul>
 <div class="callout">
 <p><strong>Tool gap.</strong> Ally catches faked lists; the other common
@@ -1716,7 +1787,7 @@ create barriers for screen reader users.</p>
 <div class="callout">
 <p><strong>Where Ally shows the list error.</strong> For Canvas content,
 the “Lists should be formatted as lists” issue may show up in the
-<strong>Rich Content Editor</strong> (when you run the Accessibility
+<strong>Rich Content Editor</strong> (when running the Accessibility
 Checker from the editor) but not on the <strong>Course Dashboard</strong>.
 Fix faked lists when the editor flags them; the Dashboard may not list
 this issue for the same page.</p>
@@ -2149,9 +2220,9 @@ a screen reader?</li>
 <li>Would any table be clearer as a list or structured text?</li>
 </ul>
 </div>
-<h2 id="table-captions">Known False Positive: Table Captions</h2>
+<h3 id="table-captions">Known False Positive: Table Captions</h3>
 <p>The Canvas Rich Content Editor flags tables without captions as accessibility errors. However, this flag does not appear in the Accessibility Dashboard and does not affect the document's accessibility score. More importantly, table captions are not required by WCAG. The relevant success criterion, <a href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html">WCAG 1.3.1 Info and Relationships</a>, requires that structural relationships be programmatically determinable, but a <code>&lt;caption&gt;</code> element is not part of that requirement for basic data tables. The Canvas RCE is applying a stricter standard than WCAG demands.</p>
-<p><strong>How to handle:</strong> You may add a caption if it genuinely helps users understand the table's purpose, particularly for complex tables where the surrounding context does not make the subject clear. For simple tables in a well-structured document, a caption is not necessary. Do not add captions solely to clear the Canvas RCE warning.</p>
+<p><strong>How to handle:</strong> A caption may be added if it genuinely helps users understand the table's purpose, particularly for complex tables where the surrounding context does not make the subject clear. For simple tables in a well-structured document, a caption is not necessary. Do not add captions solely to clear the Canvas RCE warning.</p>
 <div class="callout">
 <p><strong>Key point.</strong> The Canvas Rich Content Editor flags missing table captions, but this warning does not appear in the Accessibility Dashboard and has no effect on the document's accessibility score or WCAG conformance. It is a best practice recommendation, not a WCAG requirement.</p>
 </div>
@@ -2184,6 +2255,8 @@ Spanish passage, for example, renders the text incomprehensible.</p>
   </tbody>
 </table>
 <!-- Detection: Canvas (HTML reliable), Manual -->
+<h3 id="language-prevalence">Prevalence in higher education</h3>
+<p>Language metadata issues are more common than the 3/5 likelihood rating might suggest at institutions with multilingual content. Foreign language courses routinely include passages, exercises, and readings in the target language. Courses in literature, history, and cultural studies frequently cite primary sources in their original language. Course catalogs and student-facing materials at institutions serving multilingual populations may include Spanish, Mandarin, Arabic, or other languages alongside English. In each case, the language-of-parts requirement (WCAG 3.1.2) applies: every passage in a language other than the document's default language needs its own <code>lang</code> attribute, or a screen reader will mispronounce it. Institutions with significant multilingual content should treat language metadata as a higher priority than the general rating suggests.</p>
 <h3 id="automated-tool-reliability-by-file-type">Automated tool
 reliability by file type</h3>
 <table>
@@ -2309,12 +2382,8 @@ is evaluated.</p>
     <figcaption>Warning shown before displaying seizure-inducing content, with option to bypass.</figcaption>
   </figure>
 </div>
-<div class="callout">
-<p><strong>Note.</strong> This document cannot show actual flashing content
-because it could cause direct harm (photosensitive seizure) to readers. The
-illustration below represents the concept of flashing content; in real
-course materials, a rapidly flashing GIF or animation would appear in the
-“Broken” column.</p>
+<div class=”callout”>
+<p><strong>Note.</strong> The example below uses a static illustration because displaying actual flashing content would create the risk this section describes.</p>
 </div>
 <!-- Scenario: Flashing GIF (seizure risk) | Error ID: E13 -->
 <table class="lab-compare">
@@ -2409,15 +2478,7 @@ strobing?</li>
 <li>Has auto-playing media been avoided or reviewed?</li>
 </ul>
 </div>
-<hr />
-<div id="presenter-notes" aria-hidden="true" style="display:none;">
-  <ol>
-    <li>E1, E2, E3, E10 (Run Microsoft Accessibility Checker) </li>
-    <li>Export PDF &amp; run Acrobat fixes (E6 artifact tagging, reading order) </li>
-    <li>Upload to Canvas &amp; review Ally (E7 false positive, E9 verification)</li>
-    <li>Manual review &amp; screen reader checks (E4, E5, E8, E11, E12, E13)</li>
-  </ol>
-</div>
+
 <section id="footnotes" class="footnotes footnotes-end-of-document"
 role="doc-endnotes">
 <hr />

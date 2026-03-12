@@ -45,8 +45,36 @@ function P({ children }) {
   );
 }
 
-function SampleTable({ headers, rows, caption, highlightHeaders = false }) {
+/**
+ * SampleTable renders an accessible or intentionally broken table for demo purposes.
+ *
+ * Props:
+ *   headers         – Array of header label strings shown in the first row.
+ *   rows            – 2-D array of cell content.
+ *   caption         – Visible caption text (also used as aria-label).
+ *   highlightHeaders – When true, renders the header row with green styling (correct version).
+ *   broken          – When true, the "header" row uses <td> cells inside <tbody> with no
+ *                     <thead> — visually identical to the highlighted version but
+ *                     programmatically incorrect (no <th> or scope attributes).
+ */
+function SampleTable({ headers, rows, caption, highlightHeaders = false, broken = false }) {
   const { t } = useTheme();
+
+  const headerCellStyle = {
+    padding: "10px 16px",
+    fontWeight: 700,
+    color: t.green,
+    textAlign: "left",
+    fontFamily: "var(--font-display)",
+    backgroundColor: t.greenBg,
+  };
+
+  const dataCellStyle = {
+    padding: "10px 16px",
+    color: t.text,
+    verticalAlign: "top",
+  };
+
   return (
     <figure style={{ margin: "24px 0" }}>
       <div
@@ -76,44 +104,56 @@ function SampleTable({ headers, rows, caption, highlightHeaders = false }) {
               {caption}
             </caption>
           )}
-          <thead>
-            <tr style={{ borderBottom: `2px solid ${t.border}` }}>
-              {headers.map((h, i) => (
-                <th
-                  key={i}
-                  scope="col"
-                  style={{
-                    padding: "10px 16px",
-                    fontWeight: 700,
-                    color: highlightHeaders ? t.green : t.textSecondary,
-                    textAlign: "left",
-                    fontFamily: "var(--font-display)",
-                    backgroundColor: highlightHeaders ? t.greenBg : "transparent",
-                  }}
-                >
-                  {h}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((row, i) => (
-              <tr key={i} style={{ borderBottom: `1px solid ${t.borderLight}` }}>
-                {row.map((cell, j) => (
-                  <td
-                    key={j}
-                    style={{
-                      padding: "10px 16px",
-                      color: t.text,
-                      verticalAlign: "top",
-                    }}
-                  >
-                    {cell}
-                  </td>
+
+          {broken ? (
+            /* Broken: the "header" row is plain <td> cells inside <tbody>.
+               No <thead>, no <th>, no scope attribute.
+               Looks identical to the corrected version but has zero semantic header markup. */
+            <tbody>
+              <tr style={{ borderBottom: `2px solid ${t.border}` }}>
+                {headers.map((h, i) => (
+                  <td key={i} style={headerCellStyle}>{h}</td>
                 ))}
               </tr>
-            ))}
-          </tbody>
+              {rows.map((row, i) => (
+                <tr key={i} style={{ borderBottom: `1px solid ${t.borderLight}` }}>
+                  {row.map((cell, j) => (
+                    <td key={j} style={dataCellStyle}>{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          ) : (
+            /* Correct: proper <thead> with <th scope="col"> for each column header. */
+            <>
+              <thead>
+                <tr style={{ borderBottom: `2px solid ${t.border}` }}>
+                  {headers.map((h, i) => (
+                    <th
+                      key={i}
+                      scope="col"
+                      style={{
+                        ...headerCellStyle,
+                        color: highlightHeaders ? t.green : t.textSecondary,
+                        backgroundColor: highlightHeaders ? t.greenBg : "transparent",
+                      }}
+                    >
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((row, i) => (
+                  <tr key={i} style={{ borderBottom: `1px solid ${t.borderLight}` }}>
+                    {row.map((cell, j) => (
+                      <td key={j} style={dataCellStyle}>{cell}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </>
+          )}
         </table>
       </div>
     </figure>
@@ -149,12 +189,13 @@ export default function TablesWordPage() {
       </P>
       <SampleTable
         caption="Events table without designated column headers"
-        headers={["", "", ""]}
+        headers={["Date", "Event", "Venue"]}
         rows={[
           ["12 February", "Waltz with Strauss", "Main Hall"],
           ["24 March", "The Obelisks", "West Wing"],
           ["14 April", "The What", "Main Hall"],
         ]}
+        broken
       />
       <CheckerComparisonTable
         caption="Detection results for a table missing column headers"

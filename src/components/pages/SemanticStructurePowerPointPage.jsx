@@ -49,7 +49,7 @@ export default function SemanticStructurePowerPointPage() {
     <ContentPageLayout
       categorySlug="semantic-structure"
       fileTypeSlug="powerpoint"
-      title="DRAFT - Semantic Structure"
+      title="Semantic Structure"
       subtitle="PowerPoint Presentations"
     >
       <SH id="ally-error">The Ally Error</SH>

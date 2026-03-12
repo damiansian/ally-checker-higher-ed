@@ -142,6 +142,14 @@ export default function TablesOverviewPage() {
           { testType: "Complex table (merged cells, multiple headers)", ally: "Not detected", msOffice: "Not detected", acrobat: "Not detected" },
         ]}
       />
+      <RefTable
+        rows={[
+          ["Scenario 1: Missing header row", "Ally · MS · Acrobat all flag"],
+          ["Scenario 2: Empty header cells", "Ally flags; MS and Acrobat pass"],
+          ["Scenario 3: Missing row headers (schedule)", "All pass; manual verification required"],
+          ["Scenario 4: Layout table", "All pass; manual verification required"],
+        ]}
+      />
       <Callout type="warning">
         <strong>Tool gap: empty table headers.</strong> Ally is the only tool
         that detects table headers with missing content. The Microsoft
@@ -168,9 +176,12 @@ export default function TablesOverviewPage() {
       </P>
       <P>
         <strong>Complex tables.</strong> Merged cells, multiple header rows,
-        and nested tables require manual verification. The{" "}
-        <code>scope</code> attribute (HTML) or tagged structure (PDF) must
-        correctly associate each data cell with its headers.
+        and nested tables require manual verification. For tables with both
+        column headers (top row) and row headers (first column), use{" "}
+        <code>&lt;th scope=&quot;col&quot;&gt;</code> for the top row and{" "}
+        <code>&lt;th scope=&quot;row&quot;&gt;</code> for the first column.
+        The <code>scope</code> attribute (HTML) or tagged structure (PDF)
+        must correctly associate each data cell with its headers.
       </P>
       <P>
         <strong>Row headers.</strong> When a table has both column headers
@@ -185,6 +196,76 @@ export default function TablesOverviewPage() {
         with one column and one row per item is really a list. This is a
         design question Ally does not address.
       </P>
+
+      <SH id="complex-scenarios">Complex Table Scenarios</SH>
+      <P>
+        The following scenarios all produce a table that passes Ally with a
+        100% score. Each is genuinely inaccessible.
+      </P>
+
+      {[
+        {
+          title: "Column and row headers",
+          detail: "A schedule table with course names in the first column and days of the week across the top row. The top row is marked as the header row, but the first column is not marked with row header scope. A screen reader announces cell values without associating them to the row label. Fix: mark the first column cells with scope=\"row\" (HTML) or configure the column as a header column in Word or PowerPoint.",
+        },
+        {
+          title: "Merged cells and spanning headers",
+          detail: "A grade breakdown table where a single cell spans three columns to label a group (e.g., \"Quizzes\" spanning Q1, Q2, Q3). No automated tool detects that the spanning header requires proper association for screen readers to announce the grouping correctly. Fix: use explicit id and headers attributes in HTML, or restructure the table to avoid nested header groups.",
+        },
+        {
+          title: "Repeated header rows",
+          detail: "A long table where the header row is manually typed again mid-table to help sighted readers. The repeated row lacks header markup, so screen readers either skip it or read it as data. Fix: remove repeated header rows and rely on the properly marked header row at the top.",
+        },
+        {
+          title: "Layout table used for visual alignment",
+          detail: "A table used to place two content blocks side by side. Screen readers read the table as if it were data, announcing row and column context that does not apply. Fix: use columns, flexbox, or side-by-side frames in the application; do not use tables for layout.",
+        },
+      ].map((item, i) => (
+        <div key={i} style={{
+          padding: "18px 22px", borderRadius: 8,
+          border: `1px solid ${t.border}`,
+          backgroundColor: t.surfaceAlt,
+          marginBottom: 14,
+        }}>
+          <div style={{
+            fontSize: "var(--fs-base)", fontWeight: 700, color: t.text,
+            fontFamily: "var(--font-display)", marginBottom: 6,
+          }}>{item.title}</div>
+          <div style={{
+            fontSize: "var(--fs-base)", lineHeight: 1.7, color: t.textSecondary,
+            fontFamily: "var(--font-body)",
+          }}>{item.detail}</div>
+        </div>
+      ))}
+      <Callout type="warning">
+        <strong>These scenarios score 100% in Ally.</strong> The four complex
+        scenarios above all pass automated tools. Manual review (tab through the
+        table with a screen reader or use the keyboard navigation commands) is
+        the only reliable way to verify that header associations are
+        announced correctly.
+      </Callout>
+
+      <SH id="false-positive">False Positive: Table Captions</SH>
+      <P>
+        The Canvas Rich Content Editor (RCE) flags tables without a{" "}
+        <code>&lt;caption&gt;</code> element as an accessibility warning. This
+        warning does <strong>not</strong> appear on the Accessibility Dashboard
+        and has no effect on the document&apos;s accessibility score.
+      </P>
+      <P>
+        Table captions are not required by WCAG. The relevant criterion, WCAG
+        1.3.1, requires that structural relationships be programmatically
+        determinable, but a <code>&lt;caption&gt;</code> element is not part of
+        that requirement for basic data tables. The Canvas RCE is applying a
+        stricter standard than WCAG demands.
+      </P>
+      <Callout type="info">
+        A caption may be added when it genuinely helps users understand the
+        table&apos;s purpose, particularly for complex tables where surrounding
+        context does not make the subject clear. For simple tables in a
+        well-structured document, a caption is not necessary. Do not add
+        captions solely to clear the Canvas RCE warning.
+      </Callout>
 
       <SH id="quick-check">Quick Check</SH>
       <div style={{

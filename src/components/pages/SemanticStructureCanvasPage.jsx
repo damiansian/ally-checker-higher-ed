@@ -49,7 +49,7 @@ export default function SemanticStructureCanvasPage() {
     <ContentPageLayout
       categorySlug="semantic-structure"
       fileTypeSlug="canvas"
-      title="DRAFT - Semantic Structure"
+      title="Semantic Structure"
       subtitle="Canvas editor"
     >
       <SH id="ally-error">The Ally Error</SH>

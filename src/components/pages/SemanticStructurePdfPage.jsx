@@ -49,7 +49,7 @@ export default function SemanticStructurePdfPage() {
     <ContentPageLayout
       categorySlug="semantic-structure"
       fileTypeSlug="pdf"
-      title="DRAFT - Semantic Structure"
+      title="Semantic Structure"
       subtitle="PDF"
     >
       <SH id="ally-error">The Ally Error</SH>

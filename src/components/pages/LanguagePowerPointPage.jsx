@@ -49,7 +49,7 @@ export default function LanguagePowerPointPage() {
     <ContentPageLayout
       categorySlug="language"
       fileTypeSlug="powerpoint"
-      title="DRAFT - Language"
+      title="Language"
       subtitle="PowerPoint Presentations"
     >
       <SH id="ally-error">The Ally Error</SH>
