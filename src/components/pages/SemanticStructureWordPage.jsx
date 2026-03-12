@@ -6,7 +6,6 @@ import {
   CompareBoxes,
   RefTable,
   ResourceLink,
-  Placeholder,
 } from "@/components/content.jsx";
 
 function SH({ id, children }) {
@@ -79,7 +78,6 @@ export default function SemanticStructureWordPage() {
       <Step number="2">On the <strong>Home</strong> tab, open the <strong>Styles</strong> gallery and choose <strong>Heading 1</strong>, <strong>Heading 2</strong>, or <strong>Heading 3</strong> as appropriate.</Step>
       <Step number="3">Use Heading 1 for the main title, Heading 2 for major sections, Heading 3 for subsections. Do not skip levels (e.g. avoid going from Heading 1 to Heading 4).</Step>
       <Step number="4">Repeat for all section titles. Avoid using bold or font size alone instead of heading styles.</Step>
-      <Placeholder label="Screenshot: Word Styles gallery with Heading 1, 2, 3 applied" />
 
       <H3>Checking structure</H3>
       <P>
@@ -101,7 +99,6 @@ export default function SemanticStructureWordPage() {
       <Step number="1">Select the lines that should be a list (or place the cursor in the first line).</Step>
       <Step number="2">On the <strong>Home</strong> tab, click <strong>Bullets</strong> or <strong>Numbering</strong> in the Paragraph group. Do not type bullet characters or numbers manually.</Step>
       <Step number="3">For multi-level lists, use Increase/Decrease Indent with the list style applied so nesting is programmatically correct.</Step>
-      <Placeholder label="Screenshot: Word Home tab Bullets and Numbering buttons" />
 
       <SH id="ally-catches">What Ally Catches</SH>
       <CompareBoxes

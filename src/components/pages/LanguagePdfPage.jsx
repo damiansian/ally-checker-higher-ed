@@ -4,7 +4,6 @@ import {
   AllyErrorBox,
   Step,
   CompareBoxes,
-  Placeholder,
   RefTable,
   ResourceLink,
   Callout,
@@ -428,7 +427,6 @@ export default function LanguagePdfPage() {
         and apply the fix. Once applied, re-run Ally to confirm the issue is
         resolved.
       </P>
-      <Placeholder label="Screenshot: Ally fix workflow for adding or correcting language on a PDF" />
 
       {/* ── Sample PDFs to Test in Ally ── */}
       <SH id="sample-pdfs">Sample PDFs to Test in Ally</SH>

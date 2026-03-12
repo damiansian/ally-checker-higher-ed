@@ -6,7 +6,6 @@ import {
   CompareBoxes,
   RefTable,
   ResourceLink,
-  Placeholder,
 } from "@/components/content.jsx";
 
 function SH({ id, children }) {
@@ -78,7 +77,6 @@ export default function SemanticStructurePowerPointPage() {
       <Step number="2">If the slide layout has no title placeholder, switch to a layout that includes one: <strong>Home → Layout</strong> and choose a layout with a title area.</Step>
       <Step number="3">Do not leave the title blank or use a text box for the main title instead of the placeholder; Ally and screen readers rely on the placeholder.</Step>
       <Step number="4">Use unique, meaningful titles so the slide list is useful for navigation.</Step>
-      <Placeholder label="Screenshot: PowerPoint slide with title placeholder filled and Layout menu" />
 
       <SH id="lists">Lists</SH>
       <P>

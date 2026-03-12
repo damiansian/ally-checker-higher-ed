@@ -6,7 +6,6 @@ import {
   CompareBoxes,
   RefTable,
   ResourceLink,
-  Placeholder,
 } from "@/components/content.jsx";
 
 function SH({ id, children }) {
@@ -79,7 +78,6 @@ export default function SemanticStructureCanvasPage() {
       <Step number="2">In the RCE toolbar, open the <strong>Paragraph format</strong> or <strong>Format</strong> dropdown (often labeled &quot;Paragraph&quot; or shows &quot;Normal&quot;).</Step>
       <Step number="3">Choose <strong>Heading 1</strong> for the main title, <strong>Heading 2</strong> for major sections, <strong>Heading 3</strong> for subsections. Do not skip levels.</Step>
       <Step number="4">Avoid using bold or font size instead of heading styles.</Step>
-      <Placeholder label="Screenshot: Canvas RCE Paragraph/Format dropdown with Heading 1, 2, 3" />
 
       <SH id="lists">Lists</SH>
       <P>

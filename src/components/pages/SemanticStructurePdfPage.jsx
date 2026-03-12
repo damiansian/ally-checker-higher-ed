@@ -6,7 +6,6 @@ import {
   CompareBoxes,
   RefTable,
   ResourceLink,
-  Placeholder,
 } from "@/components/content.jsx";
 
 function SH({ id, children }) {
@@ -90,7 +89,6 @@ export default function SemanticStructurePdfPage() {
         panel. This is more involved and may be needed when the source is
         not available.
       </P>
-      <Placeholder label="Screenshot: Acrobat Pro Tags panel or Accessibility checker showing heading tags" />
 
       <SH id="lists">Lists</SH>
       <P>

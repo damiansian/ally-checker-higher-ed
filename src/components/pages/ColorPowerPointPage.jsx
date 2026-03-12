@@ -6,7 +6,6 @@ import {
   CompareBoxes,
   RefTable,
   ResourceLink,
-  Placeholder,
 } from "@/components/content.jsx";
 
 function SH({ id, children }) {
@@ -79,7 +78,6 @@ export default function ColorPowerPointPage() {
       <Step number="2">Use <strong>Home → Font Color</strong> to choose a color that meets 4.5:1 against the slide background (e.g. dark gray or black on white).</Step>
       <Step number="3">If the slide background is dark, use light or white text and ensure 4.5:1.</Step>
       <Step number="4">For title and body placeholders, consider updating the slide master so new slides inherit accessible colors.</Step>
-      <Placeholder label="Screenshot: PowerPoint Font Color and slide with contrast-safe text" />
 
       <H3>Branded templates</H3>
       <P>

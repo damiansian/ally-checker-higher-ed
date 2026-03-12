@@ -6,7 +6,6 @@ import {
   CompareBoxes,
   RefTable,
   ResourceLink,
-  Placeholder,
 } from "@/components/content.jsx";
 
 function SH({ id, children }) {
@@ -90,7 +89,6 @@ export default function ColorPdfPage() {
         but editing contrast in a finished PDF is limited and can
         affect tagging. Prefer fixing the source.
       </P>
-      <Placeholder label="Screenshot: PDF with contrast issue and Acrobat accessibility tools (if applicable)" />
 
       <SH id="color-as-sole-means">Color as Sole Means (1.4.1)</SH>
       <P>
