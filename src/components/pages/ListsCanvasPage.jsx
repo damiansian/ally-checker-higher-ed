@@ -140,6 +140,11 @@ export default function ListsCanvasPage() {
         href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html"
         description="WCAG 1.3.1 explained with examples including lists."
       />
+      <ResourceLink
+        title="WebAIM: HTML Lists"
+        href="https://webaim.org/techniques/semanticstructure/#lists"
+        description="Semantic list structure for web content including Canvas pages"
+      />
     </ContentPageLayout>
   );
 }

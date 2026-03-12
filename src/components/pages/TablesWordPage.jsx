@@ -319,6 +319,11 @@ export default function TablesWordPage() {
         href="https://support.microsoft.com/en-us/office/create-accessible-tables-in-word-a0633bd2-ecb3-4e0a-9f6e-bf6a96c0358f"
         description="Word table accessibility"
       />
+      <ResourceLink
+        title="WebAIM: Creating Accessible Tables"
+        href="https://webaim.org/techniques/tables/data.htm"
+        description="Data table accessibility techniques applicable to Word and HTML"
+      />
     </ContentPageLayout>
   );
 }

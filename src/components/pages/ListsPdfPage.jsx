@@ -133,6 +133,16 @@ export default function ListsPdfPage() {
         href="https://webaim.org/techniques/acrobat/"
         description="Comprehensive guide to accessible PDFs including list structure."
       />
+      <ResourceLink
+        title="W3C: Understanding Info and Relationships"
+        href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html"
+        description="WCAG 1.3.1 explained with examples including lists."
+      />
+      <ResourceLink
+        title="PAC: PDF Accessibility Checker"
+        href="https://pdfua.foundation/en/pdf-accessibility-checker-pac/"
+        description="Free tool for checking PDF/UA conformance including list tags"
+      />
     </ContentPageLayout>
   );
 }

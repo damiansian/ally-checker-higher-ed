@@ -132,6 +132,16 @@ export default function TablesPdfPage() {
         href="https://helpx.adobe.com/acrobat/using/creating-accessible-pdfs.html"
         description="Acrobat accessibility including table tagging"
       />
+      <ResourceLink
+        title="WebAIM: PDF Accessibility"
+        href="https://webaim.org/techniques/acrobat/"
+        description="Techniques for creating accessible PDFs including table structure"
+      />
+      <ResourceLink
+        title="PAC: PDF Accessibility Checker"
+        href="https://pdfua.foundation/en/pdf-accessibility-checker-pac/"
+        description="Free tool for checking PDF/UA conformance including table tags"
+      />
     </ContentPageLayout>
   );
 }

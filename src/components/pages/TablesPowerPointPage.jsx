@@ -236,9 +236,14 @@ export default function TablesPowerPointPage() {
         description="WCAG 1.3.1 and tables"
       />
       <ResourceLink
-        title="Microsoft: Make slides accessible"
+        title="Microsoft: Make your PowerPoint presentations accessible"
         href="https://support.microsoft.com/en-us/office/make-your-powerpoint-presentations-accessible-to-people-with-disabilities-6f7772b2-2a33-4bd2-8ca7-dae3b2b3ef25"
-        description="PowerPoint accessibility including table headers"
+        description="PowerPoint accessibility including table headers and reading order"
+      />
+      <ResourceLink
+        title="WebAIM: Creating Accessible Tables"
+        href="https://webaim.org/techniques/tables/data.htm"
+        description="Data table accessibility principles applicable to PowerPoint tables"
       />
     </ContentPageLayout>
   );

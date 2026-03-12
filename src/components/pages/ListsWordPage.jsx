@@ -127,6 +127,11 @@ export default function ListsWordPage() {
         href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html"
         description="WCAG 1.3.1 explained with examples including lists."
       />
+      <ResourceLink
+        title="WebAIM: Microsoft Word"
+        href="https://webaim.org/techniques/word/"
+        description="Comprehensive guide to creating accessible Word documents including list structure"
+      />
     </ContentPageLayout>
   );
 }

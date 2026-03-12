@@ -190,6 +190,11 @@ export default function ColorCanvasPage() {
         href="https://wave.webaim.org/"
         description="Browser extension and web tool for evaluating accessibility of published pages"
       />
+      <ResourceLink
+        title="Colour Contrast Analyser (CCA)"
+        href="https://www.tpgi.com/color-contrast-checker/"
+        description="Free desktop tool for checking exact contrast ratios before publishing"
+      />
     </ContentPageLayout>
   );
 }

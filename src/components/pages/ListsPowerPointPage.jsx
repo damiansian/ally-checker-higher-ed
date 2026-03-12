@@ -123,6 +123,11 @@ export default function ListsPowerPointPage() {
         href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html"
         description="WCAG 1.3.1 explained with examples including lists."
       />
+      <ResourceLink
+        title="WebAIM: PowerPoint Accessibility"
+        href="https://webaim.org/techniques/powerpoint/"
+        description="Techniques for creating accessible PowerPoint presentations including list structure"
+      />
     </ContentPageLayout>
   );
 }
