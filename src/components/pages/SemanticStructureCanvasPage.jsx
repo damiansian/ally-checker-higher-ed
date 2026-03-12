@@ -71,6 +71,14 @@ export default function SemanticStructureCanvasPage() {
         between them. Bold or large text that is not marked as a heading
         does not provide that structure.
       </P>
+      <P>
+        A Canvas assignment page with five sections separated by bold text
+        instead of headings looks organized visually but is a flat block of
+        text to a screen reader user. They cannot jump to &ldquo;Grading
+        Criteria&rdquo; or &ldquo;Submission Instructions&rdquo; without
+        reading every word above it. The Paragraph/Format dropdown in the
+        RCE makes adding proper headings a ten-second fix.
+      </P>
 
       <SH id="how-to-fix">How to Fix It</SH>
       <H3>Adding headings in the RCE</H3>
@@ -104,6 +112,25 @@ export default function SemanticStructureCanvasPage() {
         may need manual verification.
       </P>
 
+      <SH id="check-tools">Check It With Other Tools</SH>
+      <H3>Canvas built-in Accessibility Checker</H3>
+      <P>
+        The Canvas RCE includes an Accessibility Checker (the person icon
+        in the toolbar). It flags pages with no heading structure and pages
+        where heading levels are skipped. Run it before saving and
+        publishing any Canvas page.
+      </P>
+      <H3>axe DevTools and WAVE</H3>
+      <P>
+        Browser extensions{" "}
+        <a href="https://www.deque.com/axe/devtools/" target="_blank" rel="noopener noreferrer">axe DevTools</a>{" "}
+        and{" "}
+        <a href="https://wave.webaim.org/" target="_blank" rel="noopener noreferrer">WAVE</a>{" "}
+        can scan a published Canvas page and verify heading structure,
+        including empty headings and incorrect nesting that the RCE checker
+        may not surface.
+      </P>
+
       <SH id="student-side">The Student Side</SH>
       <P>
         Students write papers, reports, and wiki pages. If they use bold text
@@ -127,6 +154,16 @@ export default function SemanticStructureCanvasPage() {
         title="W3C: Understanding Info and Relationships"
         href="https://www.w3.org/WAI/WCAG22/Understanding/info-and-relationships.html"
         description="WCAG 1.3.1 explained"
+      />
+      <ResourceLink
+        title="axe DevTools browser extension"
+        href="https://www.deque.com/axe/devtools/"
+        description="Browser extension for automated accessibility testing including heading structure"
+      />
+      <ResourceLink
+        title="WAVE Web Accessibility Evaluation Tool"
+        href="https://wave.webaim.org/"
+        description="Browser extension and web tool for evaluating accessibility of published pages"
       />
     </ContentPageLayout>
   );

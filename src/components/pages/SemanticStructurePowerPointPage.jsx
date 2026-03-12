@@ -65,10 +65,18 @@ export default function SemanticStructurePowerPointPage() {
 
       <SH id="why-matters">Why This Matters</SH>
       <P>
-        Slide titles act as headings for the presentation. Without them,
-        users cannot jump from slide to slide by name or get a quick
-        overview of the deck. Export to PDF or upload to an LMS preserves
-        this need.
+        Slide titles are the equivalent of headings in a Word document.
+        Without them, users cannot jump from slide to slide by name or get
+        a quick overview of the deck. A screen reader user navigating a
+        40-slide presentation with no titles has no way to skip to the
+        relevant section without reading every slide in sequence.
+      </P>
+      <P>
+        The title placeholder is also how PowerPoint communicates slide
+        identity in exported formats. When PDFs are generated from a
+        presentation, slide titles become bookmark entries. When slides are
+        uploaded to an LMS, the title determines what the thumbnail or file
+        entry is labeled.
       </P>
 
       <SH id="how-to-fix">How to Fix It</SH>
@@ -102,6 +110,22 @@ export default function SemanticStructurePowerPointPage() {
         boxes or overlapping content.
       </P>
 
+      <SH id="check-tools">Check It With Other Tools</SH>
+      <H3>Outline View</H3>
+      <P>
+        Use <strong>View → Outline View</strong> to audit the slide title
+        structure. Only text in the title placeholder appears at the top
+        indentation level. If slides show no text at that level, the title
+        placeholder is missing or empty. Outline View also reveals reading
+        order for body content on each slide.
+      </P>
+      <H3>Microsoft Accessibility Checker</H3>
+      <P>
+        PowerPoint&apos;s built-in checker (<strong>Review → Check
+        Accessibility</strong>) flags missing titles and other issues such
+        as missing alt text and reading order problems.
+      </P>
+
       <SH id="quick-ref">Quick Reference</SH>
       <RefTable rows={[
         ["Ally errors", "No slide titles; lists should be formatted as lists"],
@@ -117,9 +141,14 @@ export default function SemanticStructurePowerPointPage() {
         description="WCAG 1.3.1 explained"
       />
       <ResourceLink
-        title="Microsoft: Make slides more accessible"
+        title="Microsoft: Make your PowerPoint presentations accessible"
         href="https://support.microsoft.com/en-us/office/make-your-powerpoint-presentations-accessible-to-people-with-disabilities-6f7772b2-2a33-4bd2-8ca7-dae3b2b3ef25"
-        description="PowerPoint accessibility"
+        description="Comprehensive guide to PowerPoint accessibility including slide titles and reading order"
+      />
+      <ResourceLink
+        title="WebAIM: PowerPoint Accessibility"
+        href="https://webaim.org/techniques/powerpoint/"
+        description="Techniques for creating accessible PowerPoint presentations"
       />
     </ContentPageLayout>
   );

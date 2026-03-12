@@ -70,6 +70,14 @@ export default function SemanticStructurePdfPage() {
         image-only PDFs appear as one block of content or as images,
         making navigation impossible.
       </P>
+      <P>
+        Many PDFs circulating in higher education are untagged: scanned
+        syllabi, downloaded journal articles, exported handouts from
+        presentation software with no structure. The fix-at-source approach
+        (using Word or PowerPoint with correct heading styles before
+        exporting) is almost always faster than remediating a finished PDF
+        in Acrobat.
+      </P>
 
       <SH id="how-to-fix">How to Fix It</SH>
       <H3>Fix in the source document</H3>
@@ -114,6 +122,23 @@ export default function SemanticStructurePdfPage() {
         need manual review.
       </P>
 
+      <SH id="check-tools">Check It With Other Tools</SH>
+      <H3>Acrobat Tags panel</H3>
+      <P>
+        In Adobe Acrobat Pro, open the Tags panel (View → Show/Hide →
+        Navigation Panes → Tags) to verify the heading tag structure. Properly
+        tagged headings appear as H1, H2, H3 etc. in the tree. If the tree
+        is flat (all &lt;P&gt; tags) or empty, the PDF lacks heading structure.
+      </P>
+      <H3>PAC (PDF Accessibility Checker)</H3>
+      <P>
+        <a href="https://pdfua.foundation/en/pdf-accessibility-checker-pac/" target="_blank" rel="noopener noreferrer">PAC</a>{" "}
+        is a free tool that checks PDF/UA conformance including heading
+        structure. Its Screen Reader Preview shows how a screen reader
+        would experience the document, making it easy to spot missing or
+        incorrect heading levels.
+      </P>
+
       <SH id="quick-ref">Quick Reference</SH>
       <RefTable rows={[
         ["Ally errors", "No headings; lists should be formatted as lists"],
@@ -130,7 +155,17 @@ export default function SemanticStructurePdfPage() {
       <ResourceLink
         title="Adobe: Creating accessible PDFs"
         href="https://helpx.adobe.com/acrobat/using/creating-accessible-pdfs.html"
-        description="Acrobat accessibility"
+        description="Acrobat accessibility workflow and tagging tools"
+      />
+      <ResourceLink
+        title="PAC: PDF Accessibility Checker"
+        href="https://pdfua.foundation/en/pdf-accessibility-checker-pac/"
+        description="Free tool for checking PDF/UA conformance including heading structure"
+      />
+      <ResourceLink
+        title="WebAIM: PDF Accessibility"
+        href="https://webaim.org/techniques/acrobat/"
+        description="Techniques for creating and remediating accessible PDFs"
       />
     </ContentPageLayout>
   );

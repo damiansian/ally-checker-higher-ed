@@ -71,6 +71,16 @@ export default function SemanticStructureWordPage() {
         that looks like a heading but is not styled as a heading is
         invisible to that navigation.
       </P>
+      <P>
+        A 30-page course reader with no heading styles is a wall of text to
+        a screen reader user. They cannot jump to &ldquo;Week 3&rdquo; or
+        &ldquo;Assignment Instructions&rdquo; because those section titles
+        are just bold text, not Heading 2. Every navigation attempt reads
+        the entire document from the top. For a sighted student, a quick
+        scan of the visual layout communicates structure in seconds. For a
+        screen reader user without headings, equivalent access requires
+        patience that no student should have to expend.
+      </P>
 
       <SH id="how-to-fix">How to Fix It</SH>
       <H3>Adding and styling headings</H3>
@@ -113,6 +123,24 @@ export default function SemanticStructureWordPage() {
         order-of-content issue in multi-column or text-box layouts.
       </P>
 
+      <SH id="check-tools">Check It With Other Tools</SH>
+      <H3>Microsoft Accessibility Checker</H3>
+      <P>
+        Word&apos;s built-in checker (<strong>Review → Check
+        Accessibility</strong>) detects missing headings. It will flag a
+        document where all text uses Normal style and suggest adding heading
+        structure.
+      </P>
+      <H3>NVDA heading navigation</H3>
+      <P>
+        To verify heading structure with a screen reader, open the document
+        in Word with NVDA running. Press <strong>H</strong> to jump by
+        heading. If nothing happens, the document has no heading structure.
+        Press <strong>1&ndash;6</strong> to jump to specific heading levels.
+        This test is quick and reveals gaps that automated checkers miss,
+        such as headings that skip levels or repeat inappropriately.
+      </P>
+
       <SH id="student-side">The Student Side</SH>
       <P>
         Students write papers, reports, and wiki pages. If they use bold text
@@ -142,6 +170,16 @@ export default function SemanticStructureWordPage() {
         title="Microsoft: Add a heading"
         href="https://support.microsoft.com/en-us/office/add-a-heading-3eb8b917-56dc-4a17-891a-a026b2c790f2"
         description="Word heading styles"
+      />
+      <ResourceLink
+        title="WebAIM: Microsoft Word"
+        href="https://webaim.org/techniques/word/"
+        description="Comprehensive guide to creating accessible Word documents"
+      />
+      <ResourceLink
+        title="ADOD: Word 2016 (Windows)"
+        href="https://adod.idrc.ocadu.ca/word2016win.html"
+        description="Authoring accessible documents in Word from the ADOD project"
       />
     </ContentPageLayout>
   );
