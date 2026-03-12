@@ -119,6 +119,17 @@ export default function ColorCanvasPage() {
         review for critical content.
       </P>
 
+      <SH id="student-side">The Student Side</SH>
+      <P>
+        Students create content with color too, in discussion posts,
+        presentations, and group projects. If a student uses light gray text on
+        white or relies on red and green to convey meaning, their peers may not
+        be able to read or interpret it. Consider noting in assignment
+        instructions: &ldquo;Use high-contrast text colors. If you use color to
+        convey meaning, add a text label or icon so the information is clear
+        without color.&rdquo;
+      </P>
+
       <SH id="quick-ref">Quick Reference</SH>
       <RefTable rows={[
         ["Ally error", "Text must have sufficient color contrast"],

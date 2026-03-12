@@ -290,6 +290,15 @@ export default function TablesWordPage() {
         misses="Layout tables misused for formatting, row headers not designated, complex tables with merged cells, whether a table is the right format for the content"
       />
 
+      <SH id="student-side">The Student Side</SH>
+      <P>
+        Students build tables in reports, lab write-ups, and discussion posts.
+        A table without a header row is just a grid of unlabeled values to a
+        screen reader user. Consider noting in assignment instructions:
+        &ldquo;If your submission includes a table, designate the first row as
+        a header row so each column has a label.&rdquo;
+      </P>
+
       <SH id="quick-ref">Quick Reference</SH>
       <RefTable rows={[
         ["Ally error", "This document contains tables that are missing headers"],

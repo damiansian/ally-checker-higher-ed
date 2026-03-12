@@ -291,6 +291,15 @@ export default function TablesCanvasPage() {
         misses="Layout tables, complex tables with merged cells, correct scope for multi-level headers, row headers not designated"
       />
 
+      <SH id="student-side">The Student Side</SH>
+      <P>
+        Students build tables in reports, lab write-ups, and discussion posts.
+        A table without a header row is just a grid of unlabeled values to a
+        screen reader user. Consider noting in assignment instructions:
+        &ldquo;If your submission includes a table, designate the first row as
+        a header row so each column has a label.&rdquo;
+      </P>
+
       <SH id="quick-ref">Quick Reference</SH>
       <RefTable rows={[
         ["Ally error (missing)", "Table cells (3x3+) must have associated headers"],

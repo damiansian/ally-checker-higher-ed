@@ -104,6 +104,16 @@ export default function SemanticStructureCanvasPage() {
         may need manual verification.
       </P>
 
+      <SH id="student-side">The Student Side</SH>
+      <P>
+        Students write papers, reports, and wiki pages. If they use bold text
+        instead of heading styles, their documents lack navigable structure for
+        classmates who use screen readers. Consider noting in assignment
+        instructions: &ldquo;Use Heading 1, 2, 3 styles for your section titles
+        instead of bold or large text. This makes your document navigable for
+        all readers.&rdquo;
+      </P>
+
       <SH id="quick-ref">Quick Reference</SH>
       <RefTable rows={[
         ["Ally errors", "Headings should be present; lists should be formatted as lists"],
