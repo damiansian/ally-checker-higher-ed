@@ -324,8 +324,12 @@ export default function TextAlternativesOverviewPage() {
           { testType: "Placeholder (image)", ally: "Not checked", msOffice: "Not checked", acrobat: "Not checked" },
         ]}
       />
+      <P>
+        For a broader comparison across all categories and tools, see the{" "}
+        <a href="/guide#tools">Accessibility Guide</a>.
+      </P>
 
-      {/* \u2500\u2500 False Positive \u2500\u2500 */}
+      {/*\u2500\u2500 False Positive \u2500\u2500 */}
       <SH id="false-positive">False Positive</SH>
       <Callout type="warning">
         <div style={{

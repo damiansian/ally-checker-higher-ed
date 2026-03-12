@@ -404,6 +404,10 @@ export default function LanguageOverviewPage() {
 
       {/* ── What Ally Misses ── */}
       <SH id="ally-misses">What Ally Misses</SH>
+      <P>
+        For a broader comparison across all categories and tools, see the{" "}
+        <a href="/guide#tools">Accessibility Guide</a>.
+      </P>
       <CompareBoxes
         catches="Missing document-level language attribute (when the check fires). In Canvas, reliably detects missing lang attribute via axe-core."
         misses="Wrong document language, wrong or missing language of parts, whether the declared language matches the content. Detection is unreliable for Word and PDF."

@@ -138,6 +138,10 @@ export default function SemanticStructureOverviewPage() {
         catches="Missing headings, skipped levels, missing slide/page titles, untagged PDFs, faked lists (manual bullets/numbers instead of list styles)"
         misses="Whether heading text is meaningful, logical content order, reading sequence, correct nesting of multi-level lists, whether content should be a list vs paragraphs"
       />
+      <P>
+        For a broader comparison across all categories and tools, see the{" "}
+        <a href="/guide#tools">Accessibility Guide</a>.
+      </P>
 
       <SH id="ally-misses">What Ally Misses</SH>
       <P>

@@ -253,6 +253,10 @@ export default function ColorOverviewPage() {
         ]}
       />
       <P>
+        For a broader comparison across all categories and tools, see the{" "}
+        <a href="/guide#tools">Accessibility Guide</a>.
+      </P>
+      <P>
         In Canvas, the Rich Content Editor&apos;s built-in Accessibility
         Checker flags text contrast issues and provides a color picker to fix
         them in place. Contrast issues also appear on the Ally Accessibility

@@ -364,6 +364,14 @@ export default function GuidePage() {
           source document. Fixing issues at the source is almost always more
           efficient than remediating in Acrobat after export.
         </Callout>
+        <P>
+          For category-specific detection details, see the overview pages:{" "}
+          <a href="/text-alternatives/">Text Alternatives</a>,{" "}
+          <a href="/color/">Color</a>,{" "}
+          <a href="/semantic-structure/">Semantic Structure</a>,{" "}
+          <a href="/tables/">Tables</a>,{" "}
+          <a href="/language/">Language</a>.
+        </P>
         </main>
 
         <footer style={s.footer}>

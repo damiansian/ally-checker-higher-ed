@@ -160,6 +160,10 @@ export default function TablesOverviewPage() {
         the header association, leaving the student without context for the
         data that follows.
       </Callout>
+      <P>
+        For a broader comparison across all categories and tools, see the{" "}
+        <a href="/guide#tools">Accessibility Guide</a>.
+      </P>
 
       <SH id="ally-catches">What Ally Catches</SH>
       <CompareBoxes
