@@ -502,7 +502,7 @@ export default function HomePage() {
           fontSize: "var(--fs-base)", lineHeight: 1.6, color: t.textSecondary,
           fontFamily: "var(--font-body)",
         }}>
-          Getting to 100% in Ally is the starting line, not the finish. Automated tools catch roughly 57% of accessibility issues. The rest requires human judgment. This reference covers what Ally finds, what it misses, and what to do about both.
+          Getting to 100% in Ally is the starting line, not the finish. Automated tools catch only a fraction of accessibility issues (<a href="https://www.deque.com/blog/automated-testing-study-identifies-57-percent-of-digital-accessibility-issues/" target="_blank" rel="noopener noreferrer" style={{ color: "inherit" }}>roughly 57%, per Deque research</a>). The rest requires human judgment. This reference covers what Ally finds, what it misses, and what to do about both.
         </div>
         </main>
 
