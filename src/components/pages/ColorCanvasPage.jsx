@@ -70,6 +70,14 @@ export default function ColorCanvasPage() {
         with a wide range of vision. Low-contrast text excludes those who
         need clear separation between text and background.
       </P>
+      <P>
+        Content pasted from Word, email, or the web often brings along inline
+        styles with low-contrast colors. A student copying text from a branded
+        department email into a discussion post may unknowingly publish
+        unreadable text. Even the default Canvas color picker includes colors
+        that fail WCAG AA, so selecting a &ldquo;nice-looking&rdquo; color
+        from the RCE palette is not a guarantee of accessibility.
+      </P>
 
       <SH id="how-to-fix">How to Fix It</SH>
       <H3>Changing text color in the RCE</H3>
@@ -95,14 +103,37 @@ export default function ColorCanvasPage() {
         re-apply a high-contrast color from the RCE toolbar.
       </P>
 
+      <SH id="check-tools">Check It With Other Tools</SH>
+      <H3>Canvas built-in Accessibility Checker</H3>
+      <P>
+        The Canvas RCE includes an Accessibility Checker (the icon in the
+        toolbar that looks like a person). It flags text contrast issues
+        and provides a color picker to fix them in place. Run it before
+        publishing any Canvas page.
+      </P>
+      <H3>axe DevTools and WAVE</H3>
+      <P>
+        Browser extensions{" "}
+        <a href="https://www.deque.com/axe/devtools/" target="_blank" rel="noopener noreferrer">axe DevTools</a>{" "}
+        and{" "}
+        <a href="https://wave.webaim.org/" target="_blank" rel="noopener noreferrer">WAVE</a>{" "}
+        can scan a published Canvas page and catch contrast issues that the
+        RCE checker may miss, including contrast in embedded HTML and
+        custom CSS.
+      </P>
+
       <SH id="color-as-sole-means">Color as Sole Means (1.4.1)</SH>
       <P>
         Ally does not flag when color alone conveys meaning in Canvas
-        content (e.g. &quot;see the red items&quot; with no other cue).
-        <a href="https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html" target="_blank" rel="noopener noreferrer">WCAG 1.4.1</a> requires text, icons, or patterns in addition to color.
-        When highlighting important or required items, add a label, icon, or
-        bold text so the content is clear without color. Use the Canvas
-        Accessibility Checker and manual review for critical content.
+        content.{" "}
+        <a href="https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html" target="_blank" rel="noopener noreferrer">WCAG 1.4.1</a>{" "}
+        requires text, icons, or patterns in addition to color.
+      </P>
+      <P>
+        In Canvas discussions and wiki pages, instructors sometimes highlight
+        required items in red with no other indicator. Add text like
+        &ldquo;(required)&rdquo; or a bold label alongside the color so
+        students do not have to distinguish colors to understand the content.
       </P>
 
       <SH id="ally-catches">What Ally Catches</SH>
@@ -147,7 +178,17 @@ export default function ColorCanvasPage() {
       <ResourceLink
         title="WebAIM: Contrast Checker"
         href="https://webaim.org/resources/contrastchecker/"
-        description="Check color combinations"
+        description="Check color combinations against WCAG thresholds"
+      />
+      <ResourceLink
+        title="axe DevTools browser extension"
+        href="https://www.deque.com/axe/devtools/"
+        description="Browser extension for automated accessibility testing including contrast"
+      />
+      <ResourceLink
+        title="WAVE Web Accessibility Evaluation Tool"
+        href="https://wave.webaim.org/"
+        description="Browser extension and web tool for evaluating accessibility of published pages"
       />
     </ContentPageLayout>
   );

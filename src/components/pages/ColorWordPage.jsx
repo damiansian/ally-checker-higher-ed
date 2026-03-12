@@ -69,8 +69,18 @@ export default function ColorWordPage() {
         Insufficient contrast makes content exhausting or impossible to read
         for many users. Relying on light gray text on white, or colored text
         on a similar background, excludes students who rely on clear
-        distinction between text and background.         <a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html" target="_blank" rel="noopener noreferrer">WCAG 1.4.3</a> is Level AA
+        distinction between text and background.{" "}
+        <a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html" target="_blank" rel="noopener noreferrer">WCAG 1.4.3</a> is Level AA
         because of its broad impact.
+      </P>
+      <P>
+        Common Word patterns that fail contrast: a rubric table using light
+        gray text on white to mark lower-scoring rows, a syllabus with
+        colored headings (teal, maroon, or gold from a brand palette) that do
+        not meet 4.5:1, or a schedule where event types are distinguished by
+        red versus blue text with no other label. Each of these fails for
+        students with low vision or color vision differences, and each has a
+        straightforward fix in the source document.
       </P>
 
       <SH id="how-to-fix">How to Fix It</SH>
@@ -80,13 +90,31 @@ export default function ColorWordPage() {
       <Step number="3">Avoid using the default &quot;Automatic&quot; or very light grays on white; aim for black or dark gray (#333 or darker) on white for body text.</Step>
       <Step number="4">If you use highlighting, ensure the combination of highlight + text still meets 4.5:1.</Step>
 
-      <H3>Using the Accessibility Checker</H3>
+      <H3>Using the Microsoft Accessibility Checker</H3>
       <P>
         Word&apos;s built-in <strong>Review → Check Accessibility</strong>
         reports contrast issues and can help you locate problem passages
-        before uploading to your LMS. For exact contrast ratios, use a free
-        desktop tool such as the Colour Contrast Analyser (CCA).
+        before uploading to your LMS.
       </P>
+
+      <H3>Verifying with the Colour Contrast Analyser</H3>
+      <P>
+        Before uploading, use the free{" "}
+        <a href="https://www.tpgi.com/color-contrast-checker/" target="_blank" rel="noopener noreferrer">Colour Contrast Analyser (CCA)</a>{" "}
+        to confirm exact ratios. Use the eyedropper to sample your text color
+        and background color, and CCA will show whether the combination
+        passes WCAG AA (4.5:1 normal, 3:1 large) and AAA (7:1 / 4.5:1).
+      </P>
+      <figure style={{ margin: "16px 0" }}>
+        <img
+          src="/assets/cca-contrast-check-91bfe1.png"
+          alt="Screenshot of the Colour Contrast Analyser showing a foreground color of #91BFE1 and a background of white, with a contrast ratio of 2.12:1, failing both WCAG AA and AAA thresholds for normal text."
+          style={{ width: "100%", maxWidth: 480, height: "auto" }}
+        />
+        <figcaption style={{ fontSize: "var(--fs-base)", color: "inherit", marginTop: 8, fontFamily: "var(--font-body)" }}>
+          CCA flags a light blue text color failing WCAG AA against a white background.
+        </figcaption>
+      </figure>
       <div style={{ display: "flex", flexDirection: "column", gap: "1.5em", margin: "1em 0" }}>
         <figure style={{ margin: 0 }}>
           <img
@@ -112,13 +140,19 @@ export default function ColorWordPage() {
 
       <SH id="color-as-sole-means">Color as Sole Means (1.4.1)</SH>
       <P>
-        Ally does not flag when <strong>color alone</strong> conveys meaning
-        (e.g. &quot;items in red are required&quot; with no other cue).
-        <a href="https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html" target="_blank" rel="noopener noreferrer">WCAG 1.4.1</a> requires that information not rely on color only. Ask:
-        would meaning be lost if the document were printed in grayscale? In
-        Word, add text labels, icons, or patterns alongside color - for
-        example, in rubrics use &quot;Needs work&quot; or a symbol in
-        addition to red.
+        Ally does not flag when <strong>color alone</strong> conveys meaning.{" "}
+        <a href="https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html" target="_blank" rel="noopener noreferrer">WCAG 1.4.1</a>{" "}
+        requires that information not rely on color only. Ask: would meaning
+        be lost if the document were printed in grayscale?
+      </P>
+      <P>
+        A common Word pattern: a rubric table where row shading indicates
+        performance levels (red = Needs Improvement, yellow = Developing,
+        green = Meets Expectations) with no text labels. A student with
+        deuteranopia (red-green color blindness) sees all three rows as
+        similar shades of gray. Fix: add a &ldquo;Status&rdquo; column with
+        text values, or include the label inside the cell (e.g.,
+        &ldquo;Needs Improvement&rdquo;) alongside the color.
       </P>
 
       <SH id="ally-catches">What Ally Catches</SH>
@@ -170,6 +204,11 @@ export default function ColorWordPage() {
         title="Microsoft: Improve accessibility with the Accessibility Checker"
         href="https://support.microsoft.com/en-us/office/improve-accessibility-with-the-accessibility-checker-a16f6de0-2f39-4a2b-8bd8-5ad3274267a2"
         description="Use Word's built-in checker"
+      />
+      <ResourceLink
+        title="Colour Contrast Analyser (CCA)"
+        href="https://www.tpgi.com/color-contrast-checker/"
+        description="Free desktop tool for checking exact contrast ratios against WCAG thresholds"
       />
     </ContentPageLayout>
   );

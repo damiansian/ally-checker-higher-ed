@@ -66,10 +66,17 @@ export default function ColorPdfPage() {
 
       <SH id="why-matters">Why This Matters</SH>
       <P>
-        Students who rely on high contrast to read effectively cannot
-        access content that fails this check. Fixing contrast in the
-        source document before exporting to PDF is the most reliable
-        approach.
+        PDFs inherit contrast problems from their source documents. A
+        syllabus exported from a branded Word template carries the same
+        light-gray body text into the PDF. Students reading the PDF on a
+        phone or tablet in bright light may not be able to read it at all.
+        Unlike Word or PowerPoint files, PDFs often cannot be easily edited
+        after the fact, which is why fixing at the source is critical.
+      </P>
+      <P>
+        Students who rely on high contrast to read effectively cannot access
+        content that fails this check. Fixing contrast in the source document
+        before exporting to PDF is the most reliable approach.
       </P>
 
       <SH id="how-to-fix">How to Fix It</SH>
@@ -90,13 +97,41 @@ export default function ColorPdfPage() {
         affect tagging. Prefer fixing the source.
       </P>
 
+      <SH id="check-tools">Check It With Other Tools</SH>
+      <H3>PAC (PDF Accessibility Checker)</H3>
+      <P>
+        <a href="https://pdfua.foundation/en/pdf-accessibility-checker-pac/" target="_blank" rel="noopener noreferrer">PAC</a>{" "}
+        is a free tool for checking PDF accessibility. Its checks focus
+        primarily on tagging and structure; contrast checking in PAC is
+        limited. Use a dedicated contrast tool such as the{" "}
+        <a href="https://www.tpgi.com/color-contrast-checker/" target="_blank" rel="noopener noreferrer">Colour Contrast Analyser</a>{" "}
+        to verify text colors before exporting.
+      </P>
+      <H3>Acrobat Pro Accessibility Check</H3>
+      <P>
+        Acrobat Pro&apos;s built-in Accessibility Check
+        (<strong>All tools → Prepare for accessibility → Check for
+        accessibility</strong>) does not reliably flag contrast failures.
+        {/* TODO: Verify Acrobat contrast detection through direct testing */}
+        Prefer fixing contrast in the source document rather than relying on
+        Acrobat to catch it post-export.
+      </P>
+
       <SH id="color-as-sole-means">Color as Sole Means (1.4.1)</SH>
       <P>
-        Ally does not flag when color alone conveys information in a PDF.
-        <a href="https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html" target="_blank" rel="noopener noreferrer">WCAG 1.4.1</a> requires other cues. Fix in the source document: add text
-        labels, legends, or patterns so that charts, rubrics, and
-        color-coded content are understandable in grayscale or without
-        relying on color. Then re-export to PDF.
+        Ally does not flag when color alone conveys information in a PDF.{" "}
+        <a href="https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html" target="_blank" rel="noopener noreferrer">WCAG 1.4.1</a>{" "}
+        requires other cues. Fix in the source document: add text labels,
+        legends, or patterns so that charts, rubrics, and color-coded content
+        are understandable in grayscale or without relying on color. Then
+        re-export to PDF.
+      </P>
+      <P>
+        Journal articles and third-party PDFs commonly use color-only figure
+        legends. When you link a PDF you did not author, check its charts and
+        figures for color-only information. If you cannot fix the source,
+        provide a text description of the figure in your Canvas page or
+        course notes.
       </P>
 
       <SH id="ally-catches">What Ally Catches</SH>
@@ -130,7 +165,22 @@ export default function ColorPdfPage() {
       <ResourceLink
         title="WebAIM: Contrast Checker"
         href="https://webaim.org/resources/contrastchecker/"
-        description="Check color combinations"
+        description="Check color combinations against WCAG thresholds"
+      />
+      <ResourceLink
+        title="PAC: PDF Accessibility Checker"
+        href="https://pdfua.foundation/en/pdf-accessibility-checker-pac/"
+        description="Free tool for checking PDF structure and tagging"
+      />
+      <ResourceLink
+        title="WebAIM: PDF Accessibility"
+        href="https://webaim.org/techniques/acrobat/"
+        description="Overview of PDF accessibility best practices and tools"
+      />
+      <ResourceLink
+        title="Colour Contrast Analyser (CCA)"
+        href="https://www.tpgi.com/color-contrast-checker/"
+        description="Free desktop tool for checking exact contrast ratios"
       />
     </ContentPageLayout>
   );
