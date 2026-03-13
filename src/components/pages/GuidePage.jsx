@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "@/components/theme.jsx";
-import { SideNav, MobileHeader } from "@/components/layout.jsx";
+import { SideNav, MobileHeader, WidthToggle, WIDTH_MODES } from "@/components/layout.jsx";
 import { Callout } from "@/components/content.jsx";
 
 function guideStyles(t) {
@@ -138,6 +138,18 @@ function CheckerTable() {
 export default function GuidePage() {
   const { t } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [widthMode, setWidthModeRaw] = useState("narrow");
+
+  useEffect(() => {
+    const saved = localStorage.getItem("contentWidth");
+    if (saved && WIDTH_MODES[saved]) setWidthModeRaw(saved);
+  }, []);
+
+  function setWidthMode(mode) {
+    setWidthModeRaw(mode);
+    localStorage.setItem("contentWidth", mode);
+  }
+
   const s = guideStyles(t);
 
   return (
@@ -161,8 +173,11 @@ export default function GuidePage() {
         <main
           id="main-content"
           tabIndex={-1}
-          style={{ maxWidth: 860, padding: "40px 48px 80px" }}
+          style={{ maxWidth: WIDTH_MODES[widthMode].maxWidth, padding: "40px 48px 80px" }}
         >
+        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 24 }}>
+          <WidthToggle mode={widthMode} setMode={setWidthMode} />
+        </div>
         <h1 style={s.pageTitle}>
           Accessibility Guide
         </h1>

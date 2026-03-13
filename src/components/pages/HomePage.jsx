@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "@/components/theme.jsx";
-import { SideNav, MobileHeader } from "@/components/layout.jsx";
+import { SideNav, MobileHeader, WidthToggle, WIDTH_MODES } from "@/components/layout.jsx";
 import { categories, fileTypeMeta, stateInfo } from "@/components/data";
 
 // ── Metric Bar ──────────────────────────────────────────────
@@ -343,6 +343,17 @@ export default function HomePage() {
   const { t } = useTheme();
   const [sortBy, setSortBy] = useState("impact");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [widthMode, setWidthModeRaw] = useState("narrow");
+
+  useEffect(() => {
+    const saved = localStorage.getItem("contentWidth");
+    if (saved && WIDTH_MODES[saved]) setWidthModeRaw(saved);
+  }, []);
+
+  function setWidthMode(mode) {
+    setWidthModeRaw(mode);
+    localStorage.setItem("contentWidth", mode);
+  }
 
   const sorted = [...categories].sort((a, b) =>
     sortBy === "impact"
@@ -372,8 +383,11 @@ export default function HomePage() {
           id="main-content"
           className="home-main"
           tabIndex={-1}
-          style={{ maxWidth: 960, padding: "40px 48px 80px" }}
+          style={{ maxWidth: WIDTH_MODES[widthMode].maxWidth, padding: "40px 48px 80px" }}
         >
+        <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: 24 }}>
+          <WidthToggle mode={widthMode} setMode={setWidthMode} />
+        </div>
         {/* Title */}
         <h1 className="home-title" style={{
           fontSize: "var(--fs-4xl)", fontWeight: 800, color: t.text,

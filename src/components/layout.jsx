@@ -353,6 +353,96 @@ export function SideNav({ activeCategorySlug, menuOpen, setMenuOpen }) {
   );
 }
 
+// ── Width Toggle ─────────────────────────────────────────────
+const TOC_WIDTH = "240px";
+const WIDTH_MODES = {
+  narrow:  { label: "Narrow",  maxWidth: 960,    gridCols: `1fr ${TOC_WIDTH}` },
+  medium:  { label: "Medium",  maxWidth: 1280,   gridCols: `1fr ${TOC_WIDTH}` },
+  full:    { label: "Full",    maxWidth: "none", gridCols: `1fr ${TOC_WIDTH}` },
+};
+
+export function WidthToggle({ mode, setMode }) {
+  const { t } = useTheme();
+
+  const icons = {
+    narrow: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <rect x="4" y="2" width="8" height="12" rx="1.5" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+      </svg>
+    ),
+    medium: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <rect x="2" y="2" width="12" height="12" rx="1.5" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+        <line x1="5" y1="2" x2="5" y2="14" stroke="currentColor" strokeWidth="1" opacity="0.4"/>
+        <line x1="11" y1="2" x2="11" y2="14" stroke="currentColor" strokeWidth="1" opacity="0.4"/>
+      </svg>
+    ),
+    full: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <rect x="1" y="2" width="14" height="12" rx="1.5" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+        <line x1="4" y1="2" x2="4" y2="14" stroke="currentColor" strokeWidth="1" opacity="0.4"/>
+        <line x1="12" y1="2" x2="12" y2="14" stroke="currentColor" strokeWidth="1" opacity="0.4"/>
+      </svg>
+    ),
+  };
+
+  return (
+    <div style={{ marginBottom: 20 }}>
+      <div
+        style={{
+          fontSize: "var(--fs-xs)",
+          fontWeight: 700,
+          textTransform: "uppercase",
+          letterSpacing: "0.1em",
+          color: t.textTertiary,
+          marginBottom: 8,
+          fontFamily: "var(--font-display)",
+        }}
+      >
+        Width: {WIDTH_MODES[mode].label}
+      </div>
+      <div
+        style={{
+          display: "flex",
+          gap: 4,
+          padding: "6px",
+          backgroundColor: t.surfaceAlt,
+          borderRadius: 8,
+          border: `1px solid ${t.border}`,
+        }}
+      >
+        {Object.entries(WIDTH_MODES).map(([key, cfg]) => {
+          const active = mode === key;
+          return (
+            <button
+              key={key}
+              type="button"
+              aria-label={`${cfg.label} content width`}
+              aria-pressed={active}
+              onClick={() => setMode(key)}
+              style={{
+                flex: 1,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "5px 6px",
+                borderRadius: 5,
+                border: "none",
+                cursor: "pointer",
+                backgroundColor: active ? t.accent : "transparent",
+                color: active ? t.accentContrast : t.textTertiary,
+                transition: "background-color 0.15s ease, color 0.15s ease",
+              }}
+            >
+              {icons[key]}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ── Content Page Layout ─────────────────────────────────────
 export function ContentPageLayout({
   categorySlug,
@@ -363,6 +453,19 @@ export function ContentPageLayout({
 }) {
   const { t } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [widthMode, setWidthModeRaw] = useState("narrow");
+
+  useEffect(() => {
+    const saved = localStorage.getItem("contentWidth");
+    if (saved && WIDTH_MODES[saved]) setWidthModeRaw(saved);
+  }, []);
+
+  function setWidthMode(mode) {
+    setWidthModeRaw(mode);
+    localStorage.setItem("contentWidth", mode);
+  }
+
+  const widthCfg = WIDTH_MODES[widthMode];
   const cat = categories.find((c) => c.slug === categorySlug);
   const ftMeta = Object.values(fileTypeMeta).find((m) => m.slug === fileTypeSlug);
   const isOverview = fileTypeSlug === "overview";
@@ -400,10 +503,10 @@ export function ContentPageLayout({
         <div
           className="content-layout-grid"
           style={{
-            maxWidth: 960,
+            maxWidth: widthCfg.maxWidth,
             padding: "32px 48px 80px",
             display: "grid",
-            gridTemplateColumns: "1fr 200px",
+            gridTemplateColumns: widthCfg.gridCols,
             gap: 48,
           }}
         >
@@ -449,6 +552,7 @@ export function ContentPageLayout({
           </main>
 
           <aside className="content-layout-toc" style={{ minWidth: 0 }}>
+            <WidthToggle mode={widthMode} setMode={setWidthMode} />
             <TableOfContents />
           </aside>
         </div>
