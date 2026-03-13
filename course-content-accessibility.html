@@ -1891,15 +1891,15 @@ Acrobat)</li>
   <h5>Broken</h5>
   <table>
     <tr>
-      <td style="background:#d9d9d9; font-weight:700;" id="t1-date">Date</td>
-      <td style="background:#d9d9d9; font-weight:700;" id="t1-event">Event</td>
-      <td style="background:#d9d9d9; font-weight:700;" id="t1-venue">Venue</td>
+      <td style="background:#d9d9d9; font-weight:700;">Date</td>
+      <td style="background:#d9d9d9; font-weight:700;">Event</td>
+      <td style="background:#d9d9d9; font-weight:700;">Venue</td>
     </tr>
-    <tr><td headers="t1-date">12 February</td><td headers="t1-event">Waltz with Strauss</td><td headers="t1-venue">Main Hall</td></tr>
-    <tr><td headers="t1-date">24 March</td><td headers="t1-event">The Obelisks</td><td headers="t1-venue">West Wing</td></tr>
-    <tr><td headers="t1-date">14 April</td><td headers="t1-event">The What</td><td headers="t1-venue">Main Hall</td></tr>
+    <tr><td>12 February</td><td>Waltz with Strauss</td><td>Main Hall</td></tr>
+    <tr><td>24 March</td><td>The Obelisks</td><td>West Wing</td></tr>
+    <tr><td>14 April</td><td>The What</td><td>Main Hall</td></tr>
   </table>
-  <p>This table looks identical to the corrected version. The first row is styled to appear as a header, but uses <code>&lt;td&gt;</code> instead of <code>&lt;th&gt;</code>. The data cells reference those cells via the <code>headers</code> attribute, but because the referenced cells are <code>&lt;td&gt;</code> not <code>&lt;th&gt;</code>, the association is invalid. Axe flags this as a <code>td-headers-attr</code> violation (WCAG 1.3.1).</p>
+  <p>This table looks identical to the corrected version. The first row is styled to appear as a header, but uses <code>&lt;td&gt;</code> instead of <code>&lt;th&gt;</code>. Without proper <code>&lt;thead&gt;</code> structure or <code>&lt;th&gt;</code> elements, screen readers cannot identify the header row. Axe flags this as a missing table headers violation (WCAG 1.3.1).</p>
 </div>
 <div class="example-block example-fixed">
   <h5>Corrected</h5>

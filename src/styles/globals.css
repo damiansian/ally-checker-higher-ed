@@ -24,7 +24,7 @@ body {
   --font-body: "Source Serif 4", serif;
   --font-mono: "JetBrains Mono", monospace;
 
-  --fs-xs: 0.8125rem;
+  --fs-xs: 0.875rem;
   --fs-sm: 0.9375rem;
   --fs-base: 1.125rem;
   --fs-md: 1.1875rem;
@@ -157,6 +157,10 @@ a {
   }
 
   .content-layout-toc {
+    display: none !important;
+  }
+
+  .width-toggle {
     display: none !important;
   }
 
