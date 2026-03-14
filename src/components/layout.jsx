@@ -355,7 +355,7 @@ export function SideNav({ activeCategorySlug, menuOpen, setMenuOpen }) {
 
 // ── Width Toggle ─────────────────────────────────────────────
 const TOC_WIDTH = "240px";
-const WIDTH_MODES = {
+export const WIDTH_MODES = {
   narrow:  { label: "Narrow",  maxWidth: 960,    gridCols: `1fr ${TOC_WIDTH}` },
   medium:  { label: "Medium",  maxWidth: 1280,   gridCols: `1fr ${TOC_WIDTH}` },
   full:    { label: "Full",    maxWidth: "none", gridCols: `1fr ${TOC_WIDTH}` },
